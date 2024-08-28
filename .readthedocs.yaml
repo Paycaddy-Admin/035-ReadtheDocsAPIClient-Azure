@@ -8,4 +8,4 @@ build:
     python: "3.12"
 
 mkdocs:
-  configuration: mkdocs.yml
+  configuration: ./my-project/mkdocs.yml
