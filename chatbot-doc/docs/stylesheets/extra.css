@@ -1,0 +1,44 @@
+h2{
+    color: black;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.md-logo img{
+    min-height: 50px;
+    width: auto;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.highlighted{
+    font-weight: 500;
+    border-left: 5px solid black;
+    padding-left: 10px;
+    height: auto;
+    width: 25rem;
+    line-height: 1.3rem;
+}
+
+.img{
+    width: 500px;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.img-thin {
+    width: 300px;
+    height: auto;
+    margin-left: 20%;
+    margin-right: 20%;
+}

@@ -8,4 +8,4 @@ build:
     python: "3.12"
 
 mkdocs:
-  configuration: ./my-project/mkdocs.yml
+  configuration: ./chatbot-doc/mkdocs.yml

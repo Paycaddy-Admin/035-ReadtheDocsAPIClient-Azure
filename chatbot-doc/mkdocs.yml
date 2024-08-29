@@ -1,0 +1,30 @@
+site_name: PayCaddy
+nav:
+  - API: api.md
+  - ChatBOT: chatbot.md
+  - Whitelabel: whitelabel.md
+  - Endpoints:
+    - card/card.md
+    - wallet/wallet.md
+    - user/user.md
+theme: 
+  name: material
+  logo: assets/imgs/logo.svg
+  favicon: assets/imgs/logo.svg
+  palette:
+    scheme: default
+    primary: white
+    accent: deep orange
+  
+  font:
+    text: Montserrat
+    code: Montserrat
+
+  
+  language: en
+
+markdown_extensions:
+  - attr_list
+
+extra_css:
+  - stylesheets/extra.css
