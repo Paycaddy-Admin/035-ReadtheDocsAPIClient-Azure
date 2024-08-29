@@ -9,3 +9,7 @@ build:
 
 mkdocs:
   configuration: ./chatbot-doc/mkdocs.yml
+
+python:
+  install:
+    - requirements: requirements.txt
