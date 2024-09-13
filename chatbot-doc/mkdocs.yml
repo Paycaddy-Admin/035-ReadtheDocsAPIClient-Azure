@@ -1,6 +1,6 @@
 site_name: PayCaddy
 nav:
-  - API: api.md
+  - API: api/api.md
   - ChatBOT: chatbot.md
   - Whitelabel: whitelabel.md
   - Endpoints:
@@ -28,3 +28,15 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/extra.css
+
+plugins:
+  - i18n:
+      docs_structure: suffix
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: es
+          name: Español
+          build: true

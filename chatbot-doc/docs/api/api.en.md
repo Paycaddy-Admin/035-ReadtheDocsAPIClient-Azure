@@ -10,7 +10,7 @@ From this point on and using this documentation as a guide, you should be able t
 - Creating natural and legal type users. (Check **[Users](#users)**)
 - Creating wallets for each user you create. This option will be useful if you are going to integrate pre-funded credit type cards or if you want to manage more than one wallet per user. (Check **[Wallets](#wallets)**)
 - Managing balances of wallets created through PayIns, PayOuts, and transfers between wallets. (Check **[Wallet Operations](#wallet-operations)**)
-- Creating cards linked to the created wallets. (Check **[Cards](cards)**)
+- Creating cards linked to the created wallets. (Check **[Cards](#card-flow)**)
 - Managing created cards. (Check **[Card Operations](#card-operations)**)
 
 <div class="highlighted">
@@ -33,7 +33,7 @@ With the integration credentials, you will be able to make calls to the NeoBank 
 
 The NeoBank API has 3 fundamental entities with which you will interact each time you consume an endpoint to complete the various available flows. These entities identify the end users of the card issuance service, the wallets or virtual containers for money, and the cards associated with them.
 
-![entity_diagram](assets/imgs/entitys.png){class="img"}
+![entity_diagram](../assets/imgs/entitys.png){class="img"}
 
 **UserID:** ‍Uniquely identifies an EndUser or MerchantUser interchangeably. The UserID is the primary entity of the NeoBank API. The process of creating an EndUser or MerchantUser always results in the creation of a UserID and, in turn, an associated WalletID.
 
@@ -48,7 +48,7 @@ The NeoBank API has 3 fundamental entities with which you will interact each tim
 ## <h2><strong>Flow Overview</strong></h2>
 
 The flows for using the NeoBank API are categorized based on the main entity they register, modify, or query. At a high level, the flows are correlated as explained bellow:
-![entity_diagram](assets/imgs/flow_entitys.png){class="img img-thin"}
+![entity_diagram](../assets/imgs/flow_entitys.png){class="img img-thin"}
 
 ---
 
@@ -65,7 +65,7 @@ It is important to note that there are separate endpoints for creating EndUsers 
 During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
 </div>
 
-![entity_diagram](assets/imgs/user_flow.png){class="img"}
+![entity_diagram](../assets/imgs/user_flow.png){class="img"}
 
 ---
 
@@ -82,7 +82,7 @@ It is important to consider the type of user for which the card has been paramet
 
 Once you have been granted a card creation code, you can begin testing card creation in the test environment.
 
-![entity_diagram](assets/imgs/card_flow.png)
+![entity_diagram](../assets/imgs/card_flow.png)
 
 ---
 ## <h2><strong>Credit Flow</strong></h2>
@@ -93,4 +93,9 @@ If the cards are prepaid credit, please see the <strong>wallet POST</strong> end
 </div>
 The credit operation follows the flow below and uses the endpoints detailed in this section.
 
-![entity_diagram](assets/imgs/credit_flow.png){class = ".img"}
+![entity_diagram](../assets/imgs/credit_flow.png){class = ".img"}
+
+## <h2><strong>Wallet Operations</strong></h2>
+
+
+## <h2><strong>Card Operations</strong></h2>

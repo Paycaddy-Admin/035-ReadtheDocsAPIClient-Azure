@@ -1,0 +1,1 @@
+Se trata de una prueba de traducción lingüística;
