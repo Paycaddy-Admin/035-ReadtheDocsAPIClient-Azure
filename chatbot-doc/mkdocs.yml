@@ -30,6 +30,8 @@ extra_css:
   - stylesheets/extra.css
 
 plugins:
+  - search:
+      enabled: true
   - i18n:
       docs_structure: suffix
       languages:
