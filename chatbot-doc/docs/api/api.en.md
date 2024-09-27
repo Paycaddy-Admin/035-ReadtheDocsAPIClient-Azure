@@ -93,7 +93,70 @@ If the cards are prepaid credit, please see the <strong>wallet POST</strong> end
 </div>
 The credit operation follows the flow below and uses the endpoints detailed in this section.
 
-![entity_diagram](../assets/imgs/credit_flow.png){class = ".img"}
+![entity_diagram](../assets/imgs/credit_flow.png)
+
+--- 
+
+<a>EndUser - Natural Person</a>
+### <h2><strong>endUser</strong></h2>
+
+<p>Request URL: <strong>https://api.paycaddy.dev/v1/endUsers</strong></p>
+
+‍The creation of a new user for a natural person begins with a POST call in which an endpoint is consumed for sending the user's basic information:
+
+=== "Request"
+    ```json
+        {
+            "email": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "occupation": "string",
+            "placeofwork": "string",
+            "pep": "bool",
+            "salary": "integer",
+            "telephone": "string",
+            "address": {
+            "addressLine1": "string",
+            "addressLine2": "string",
+            "homeNumber": "string",
+            "city": "string",
+            "region": "string",
+            "postalCode": "string",
+            "country": "string"
+            }
+        }
+    ```
+=== "Response"
+    ```json
+        {
+            "id": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "email": "string",
+            "telephone": "string",
+            "placeOfWork": "string",
+            "pep": true,
+            "salary": 0,
+            "address": {
+            "addressLine1": "string",
+            "addressLine2": "string",
+            "homeNumber": "string",
+            "city": "string",
+            "region": "string",
+            "postalCode": "string",
+            "country": "string"
+            },
+            "isActive": false,
+            "walletId": "string",
+            "kycUrl": "string",
+            "creationDate": "2022-07-13T21:07:21.166Z"
+        }
+
+    ```
+
+
+
+
 
 ## <h2><strong>Wallet Operations</strong></h2>
 

@@ -7,7 +7,7 @@ Nuestra API está construida como una interfaz REST. El principal beneficio es q
 
 A partir de este punto y utilizando esta documentación como guía, deberías poder integrar y probar llamadas para:
 
-- Crear usuarios de tipo natural y jurídico. (Consulta **[Usuarios](#usuarios)**)
+- Crear usuarios de tipo natural y jurídico. (Consulta **[Usuarios](#enduser)**)
 - Crear billeteras para cada usuario que crees. Esta opción será útil si vas a integrar tarjetas de crédito prefinanciadas o si deseas gestionar más de una billetera por usuario. (Consulta **[Billeteras](#billeteras)**)
 - Gestionar saldos de billeteras creadas a través de PayIns, PayOuts y transferencias entre billeteras. (Consulta **[Operaciones de Billetera](#operaciones-de-billetera)**)
 - Crear tarjetas vinculadas a las billeteras creadas. (Consulta **[Tarjetas](#flujo-de-tarjetas)**)
@@ -94,6 +94,66 @@ Si las tarjetas son de crédito prepago, por favor consulta el endpoint <strong>
 La operación de crédito sigue el flujo a continuación y utiliza los endpoints detallados en esta sección.
 
 ![entity_diagram](../assets/imgs/credit_flow.png){class = ".img"}
+---
+
+<a>EndUser - Persona Física</a>
+
+## <h2><strong>endUser</strong></h2>
+<p>URL de solicitud: <strong>https://api.paycaddy.dev/v1/endUsers</strong></p>
+‍La creación de un nuevo usuario para una persona física comienza con una llamada POST en la que se consume un endpoint para enviar la información básica del usuario:
+
+
+=== "Request"
+    ```json
+        {
+            "email": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "occupation": "string",
+            "placeofwork": "string",
+            "pep": "bool",
+            "salary": "integer",
+            "telephone": "string",
+            "address": {
+            "addressLine1": "string",
+            "addressLine2": "string",
+            "homeNumber": "string",
+            "city": "string",
+            "region": "string",
+            "postalCode": "string",
+            "country": "string"
+            }
+        }
+    ```
+=== "Response"
+    ```json
+        {
+            "id": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "email": "string",
+            "telephone": "string",
+            "placeOfWork": "string",
+            "pep": true,
+            "salary": 0,
+            "address": {
+            "addressLine1": "string",
+            "addressLine2": "string",
+            "homeNumber": "string",
+            "city": "string",
+            "region": "string",
+            "postalCode": "string",
+            "country": "string"
+            },
+            "isActive": false,
+            "walletId": "string",
+            "kycUrl": "string",
+            "creationDate": "2022-07-13T21:07:21.166Z"
+        }
+
+    ```
+
+
 
 ## <h2><strong>Operaciones de Billetera</strong></h2>
 ## <h2><strong>Operaciones de Tarjeta</strong></h2>

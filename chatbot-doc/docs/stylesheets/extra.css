@@ -1,5 +1,5 @@
-h2{
-    color: black;
+html{
+    scroll-behavior: smooth;
 }
 
 a{
@@ -7,18 +7,14 @@ a{
     color: black;
 }
 
-a:hover{
+/* a:hover{
     text-decoration: none;
     color: black;
-}
+} */
 
 .md-logo img{
     min-height: 50px;
     width: auto;
-}
-
-html{
-    scroll-behavior: smooth;
 }
 
 .highlighted{
@@ -36,9 +32,18 @@ html{
     margin-left: 10%;
     margin-right: 10%;
 }
+
 .img-thin {
     width: 300px;
     height: auto;
     margin-left: 20%;
     margin-right: 20%;
 }
+
+.endpoint-descrip{
+    font-size: small;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+

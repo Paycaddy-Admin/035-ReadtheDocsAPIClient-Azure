@@ -1,4 +1,5 @@
 site_name: PayCaddy
+
 nav:
   - API: api/api.md
   - ChatBOT: chatbot.md
@@ -9,25 +10,33 @@ nav:
     - user/user.md
 theme: 
   name: material
+  custom_dir: overrides
   logo: assets/imgs/logo.svg
   favicon: assets/imgs/logo.svg
   palette:
-    scheme: default
-    primary: white
-    accent: deep orange
-  
+     # Palette toggle for light mode
+    - scheme: default
+      primary: white
+      accent: black
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: black
+      accent: white
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+
+  features:
+    - content.code.copy
+    - content.tabs.link
   font:
     text: Montserrat
     code: Montserrat
-
-  
   language: en
-
-markdown_extensions:
-  - attr_list
-
-extra_css:
-  - stylesheets/extra.css
 
 plugins:
   - search:
@@ -42,3 +51,20 @@ plugins:
         - locale: es
           name: Español
           build: true
+  
+markdown_extensions:
+  - attr_list
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+extra_css:
+  - stylesheets/extra.css
+
