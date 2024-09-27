@@ -1,7 +1,7 @@
 site_name: PayCaddy
-
 nav:
-  - API: api/api.md
+  - Home: index.en.md
+  - API: api/api.en.md
   - ChatBOT: chatbot.md
   - Whitelabel: whitelabel.md
   - Endpoints:
