@@ -1,7 +1,7 @@
 site_name: PayCaddy
 nav:
-  - Home: index.en.md
-  - API: api/api.en.md
+  - Home: index.md
+  - API: api/api.md
   - ChatBOT: chatbot.md
   - Whitelabel: whitelabel.md
   - Endpoints:
@@ -33,6 +33,7 @@ theme:
   features:
     - content.code.copy
     - content.tabs.link
+
   font:
     text: Montserrat
     code: Montserrat
