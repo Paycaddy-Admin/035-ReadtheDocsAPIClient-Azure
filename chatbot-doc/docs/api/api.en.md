@@ -7,7 +7,7 @@ Our API is built as a REST interface. The main benefit is that it accepts form-e
 
 From this point on and using this documentation as a guide, you should be able to integrate and test calls for:
 
-- Creating natural and legal type users. (Check **[Users](#users)**)
+- Creating natural and legal type users. (Check **[Users](#enduser)**)
 - Creating wallets for each user you create. This option will be useful if you are going to integrate pre-funded credit type cards or if you want to manage more than one wallet per user. (Check **[Wallets](#wallets)**)
 - Managing balances of wallets created through PayIns, PayOuts, and transfers between wallets. (Check **[Wallet Operations](#wallet-operations)**)
 - Creating cards linked to the created wallets. (Check **[Cards](#card-flow)**)
@@ -98,8 +98,8 @@ The credit operation follows the flow below and uses the endpoints detailed in t
 --- 
 
 <a>EndUser - Natural Person</a>
-### <h2><strong>endUser</strong></h2>
 
+### <h2><strong>endUser</strong></h2>
 <p>Request URL: <strong>https://api.paycaddy.dev/v1/endUsers</strong></p>
 
 ‍The creation of a new user for a natural person begins with a POST call in which an endpoint is consumed for sending the user's basic information:
