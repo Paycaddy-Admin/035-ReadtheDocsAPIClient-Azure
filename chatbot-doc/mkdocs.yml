@@ -1,23 +1,23 @@
-site_name: PayCaddy
+site_name: ""
 nav:
   - Home: index.md
   - Flows: flow.md
   - API:
-    - Users: user.md
-    - Wallets: 
-      - Overview: wallet.md
-      - Wallet Operations: wallet_op.md
-    - Credit Core: creditCore.md
-    - Cards:
-      - Overview: card.md
-      - Card Operations: card_operations.md
-    - Transactions: transaction.md
-    - Webhooks: webhooks.md
+      - Users: user.md
+      - Wallets:
+          - Overview: wallet.md
+          - Wallet Operations: wallet_op.md
+      - Credit Core: creditCore.md
+      - Cards:
+          - Overview: card.md
+          - Card Operations: card_operations.md
+      - Transactions: transaction.md
+      - Webhooks: webhooks.md
   # - ChatBOT: chatbot.md
   # - Whitelabel: whitelabel.md
 
-theme: 
-  name: material  
+theme:
+  name: material
   logo: assets/imgs/logo.svg
   favicon: assets/imgs/logo.svg
   icon:
@@ -28,7 +28,7 @@ theme:
       danger: octicons/zap-16
 
   palette:
-     # Palette toggle for light mode
+    # Palette toggle for light mode
     - scheme: default
       primary: white
       toggle:
@@ -62,11 +62,11 @@ plugins:
           default: true
           name: English
           build: true
-          
+
         - locale: es
           name: Español
           build: true
-  
+
 markdown_extensions:
   - attr_list
   - admonition
@@ -85,4 +85,3 @@ extra_css:
 # Footer config
 extra:
   generator: false
-

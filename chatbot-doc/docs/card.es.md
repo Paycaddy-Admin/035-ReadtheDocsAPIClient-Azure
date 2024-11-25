@@ -5,14 +5,14 @@
 ‍Este metodo permite la creación de una Tarjeta de Débito y sigue la siguiente estructura:
 
 === "Request"
-    ```json
-    {
-        "userId": "string",
-        "walletId": "string",
-        "physicalCard": true,
-        "code": "string"
-    }
-    ```
+	```json
+	{
+		"userId": "string",
+		"walletId": "string",
+	    "physicalCard": true,
+	    "code": "string"
+	}
+	```
 === "Response"
     ```json
     {

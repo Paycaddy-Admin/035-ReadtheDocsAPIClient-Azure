@@ -5,7 +5,7 @@
 ‍This call enables the creation of a Debit Card and follows the following structure:
 
 === "Request"
-    ```json
+	```json
     {
         "userId": "string",
         "walletId": "string",
@@ -14,7 +14,7 @@
     }
     ```
 === "Response"
-    ```json
+	```json
     {
         "id": "string",
         "userId": "string",
