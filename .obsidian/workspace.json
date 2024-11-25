@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "chatbot-doc/docs/index.md",
+                "file": "chatbot-doc/docs/card.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "card.en"
             }
           }
         ]
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "chatbot-doc/docs/index.md",
+                "file": "chatbot-doc/docs/card.en.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for index"
+              "title": "Backlinks for card.en"
             }
           },
           {
@@ -112,12 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "chatbot-doc/docs/index.md",
+                "file": "chatbot-doc/docs/card.en.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from index"
+              "title": "Outgoing links from card.en"
             }
           },
           {
@@ -139,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "chatbot-doc/docs/index.md"
+                "file": "chatbot-doc/docs/card.en.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of card.en"
             }
           },
           {
@@ -173,10 +173,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4a82a21b726942dd",
+  "active": "c56024682b18ad71",
   "lastOpenFiles": [
-    "chatbot-doc/docs/index.es.md",
     "chatbot-doc/docs/index.md",
+    "chatbot-doc/docs/index.es.md",
     "chatbot-doc/docs/whitelabel.md",
     "chatbot-doc/docs/card.es.md",
     "chatbot-doc/docs/card.en.md",
