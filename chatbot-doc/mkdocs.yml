@@ -14,7 +14,7 @@ nav:
       - Transactions: transaction.md
       - Webhooks: webhooks.md
   - Changelog: changelog.md
-  # - ChatBOT: chatbot.md
+  - ChatBOT: chatbot.md
   # - Whitelabel: whitelabel.md
 
 theme:
