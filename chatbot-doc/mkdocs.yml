@@ -13,6 +13,7 @@ nav:
           - Card Operations: card_operations.md
       - Transactions: transaction.md
       - Webhooks: webhooks.md
+  - Changelog: changelog.md
   # - ChatBOT: chatbot.md
   # - Whitelabel: whitelabel.md
 
