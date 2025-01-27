@@ -3,6 +3,8 @@ name: Generate Changelog
 on:
   release:
     types: [published]
+permissions:
+  contents: write
 
 jobs:
   generate_changelog:
