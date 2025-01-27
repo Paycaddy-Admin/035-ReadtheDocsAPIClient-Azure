@@ -8,15 +8,26 @@ jobs:
   generate_changelog:
     runs-on: ubuntu-latest
     steps:
+      # Checkout do código
       - name: Check out code
         uses: actions/checkout@v3
 
+      # Buscar todas as branches
+      - name: Fetch all branches
+        run: git fetch --all
+
+      # Garantir que estamos na branch principal
+      - name: Checkout main branch
+        run: git checkout main
+
+      # Gerar o arquivo de changelog
       - name: Generate Changelog File
         run: |
           echo "## Changelog da Versão ${GITHUB_REF##*/}" > changelog.md
           echo "" >> changelog.md
           echo "$(gh release view ${GITHUB_REF##*/} --json body --jq '.body')" >> changelog.md
 
+      # Configurar o Git e realizar o commit
       - name: Commit and Push Changelog
         run: |
           git config user.name "github-actions[bot]"
