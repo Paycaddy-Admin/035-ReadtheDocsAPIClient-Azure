@@ -10,10 +10,10 @@
 
 Below is a table containing the standard messages used in your chatbot. Please review each message and fill in your custom version if needed, or leave it as is to use the standard message.
 
-| Cabeçalho 1 | Cabeçalho 2 | Cabeçalho 3 |
-|-------------|-------------|-------------|
-| Linha 1 Celula 1 | Linha 1 Celula 2 | Linha 1 Celula 3 |
-| Linha 2 Celula 1 | Linha 2 Celula 2 | Linha 2 Celula 3 |
+| Cabeçalho 1 | Cabeçalho 2 |
+|-------------|-------------|
+| Linha 1 Celula 1 | Linha 1 Celula 2 |
+| Linha 2 Celula 1 | Linha 2 Celula 2 |
 
 ### Step 3: Set Up Your WhatsApp Business Profile
 

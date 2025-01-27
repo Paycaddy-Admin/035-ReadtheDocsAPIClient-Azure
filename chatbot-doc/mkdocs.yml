@@ -1,42 +1,56 @@
-site_name: PayCaddy
+site_name: ""
 nav:
   - Home: index.md
-  - API: api/api.md
-  - ChatBOT: chatbot.md
-  - Whitelabel: whitelabel.md
-  - Endpoints:
-    - card/card.md
-    - wallet/wallet.md
-    - user/user.md
-theme: 
+  - Flows: flow.md
+  - API:
+      - Users: user.md
+      - Wallets:
+          - Overview: wallet.md
+          - Wallet Operations: wallet_op.md
+      - Credit Core: creditCore.md
+      - Cards:
+          - Overview: card.md
+          - Card Operations: card_operations.md
+      - Transactions: transaction.md
+      - Webhooks: webhooks.md
+  - Changelog: changelog.md
+  # - ChatBOT: chatbot.md
+  # - Whitelabel: whitelabel.md
+
+theme:
   name: material
-  custom_dir: overrides
   logo: assets/imgs/logo.svg
   favicon: assets/imgs/logo.svg
+  icon:
+    admonition:
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      warning: octicons/alert-16
+      danger: octicons/zap-16
+
   palette:
-     # Palette toggle for light mode
+    # Palette toggle for light mode
     - scheme: default
       primary: white
-      accent: black
       toggle:
         icon: material/lightbulb
         name: Switch to dark mode
 
     # Palette toggle for dark mode
     - scheme: slate
-      primary: black
-      accent: white
+      primary: blue grey
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
 
   features:
+    - navigation.footer
     - content.code.copy
     - content.tabs.link
-
+    - navigation.sections
+  collapse: false
   font:
     text: Montserrat
-    code: Montserrat
   language: en
 
 plugins:
@@ -49,23 +63,26 @@ plugins:
           default: true
           name: English
           build: true
+
         - locale: es
           name: Español
           build: true
-  
+
 markdown_extensions:
   - attr_list
+  - admonition
   - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-
 extra_css:
   - stylesheets/extra.css
 
+# Footer config
+extra:
+  generator: false
