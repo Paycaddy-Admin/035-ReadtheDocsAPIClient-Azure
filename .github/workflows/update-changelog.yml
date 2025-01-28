@@ -21,7 +21,6 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      # Drafts your next Release notes as Pull Requests are merged into "master"
       - uses: release-drafter/release-drafter@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,11 +41,14 @@ jobs:
           cat "$CHANGELOG_PATH" >> changelog-new.md
           mv changelog-new.md "$CHANGELOG_PATH"
 
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
       # Faz commit das alterações
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ./chatbot-doc/docs/CHANGELOG.md
-          git commit -m "chore: update CHANGELOG.md with latest release notes"
+          git add ./chatbot-doc/docs/changelog.md
+          git commit -m "chore: update changelog.md with latest release notes"
           git push
