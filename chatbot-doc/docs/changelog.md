@@ -8,4 +8,3 @@ All notable changes in our API documentation, such as releases, deprecations and
 * 
 #### Deprecated
 * 
----
