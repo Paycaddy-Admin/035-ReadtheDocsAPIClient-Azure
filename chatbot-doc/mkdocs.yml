@@ -15,7 +15,7 @@ nav:
       - Webhooks: webhooks.md
   - Chatbot: chatbot.md
   - Changelog: changelog.md
-  - Whitelabel: whitelabel.md
+  #- Whitelabel: whitelabel.md
 
 theme:
   name: material

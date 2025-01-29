@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "fae4e9ddafa2cfe5",
+        "id": "f83918b40507c9e4",
         "type": "tabs",
         "children": [
           {
-            "id": "056802ee8d06d84c",
+            "id": "20c245fddd31204c",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -173,10 +173,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "056802ee8d06d84c",
+  "active": "20c245fddd31204c",
   "lastOpenFiles": [
-    "chatbot-doc/docs/whitelabel.md",
     "chatbot-doc/docs/changelog.md",
+    "chatbot-doc/docs/whitelabel.md",
     "chatbot-doc/docs/card.es.md",
     "conflict-files-obsidian-git.md",
     "chatbot-doc/docs/card.en.md",
