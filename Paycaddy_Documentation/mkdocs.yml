@@ -1,6 +1,6 @@
-site_name: "NeoBank API Documentation"
+site_name: "NeoBank API"
 nav:
-  - Home: index.md
+  - Introduction: index.md
 
   - Flows:
       - User Creation Flow: userFlow.md

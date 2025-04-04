@@ -1,5 +1,3 @@
-## **Intro**
-
 Welcome to the Paycaddy API documentation, a comprehensive and flexible platform designed to enable businesses and developers to easily integrate banking and financial services into their applications and systems.
 
 Our API is built as a REST interface. The main benefit is that it accepts form-encoded request bodies and returns JSON-encoded responses, using standard HTTP response codes which should make our API familiar to anyone with previous experience using APIs.
@@ -13,7 +11,7 @@ From this point on and using this documentation as a guide, you should be able t
 - Managing created cards. (Check **[Card Operations](card_operations.en.md)**)
 
 
-> It is important to highlight that the creation cards has different endpoints for debit, credit, and prepaid cards.  
+> It is important to highlight that the creation cards has different endpoints for debit, credit, and prepaid cards.
 
 > In the initial exploration, our commercial team must have assigned you the specific details of the profiles of your card program, which will define to which endpoint(s) you should make calls for the creation of your cards, as well as a unique code for your assigned profile that should be included in the card creation calls.
 
@@ -27,7 +25,7 @@ Handling the keys is of great importance and it is the responsibility of the key
 
 Authentication to the API should be performed via X-API Key. It is necessary to provide the API Key as the basic user value, without the need to provide a password.‍
 
-All calls must be made via HTTPS; any call made via HTTP or without authentication will fail‍. 
+All calls must be made via HTTPS; any call made via HTTP or without authentication will fail‍.
 
 With the integration credentials, you will be able to make calls to the NeoBank API testing environment directly. Our team will provide tools to test the endpoints as you develop your code towards our environments (you can choose between Swagger or Postman).
 
