@@ -79,8 +79,7 @@ plugins:
         - locale: es
           name: Español
           build: true
-  - mermaid2:
-    enabled: true
+  - mermaid2
 
 markdown_extensions:
   - attr_list
