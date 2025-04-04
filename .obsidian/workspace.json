@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/kyc.en.md",
+                "file": "Paycaddy_Documentation/docs/index.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "kyc.en"
+              "title": "index.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/kyc.en.md",
+                "file": "Paycaddy_Documentation/docs/index.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of kyc.en"
+              "title": "Outline of index.en"
             }
           }
         ],
@@ -170,6 +170,7 @@
   },
   "active": "20c245fddd31204c",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/kyc.en.md",
     "Paycaddy_Documentation/docs/changelog.es.md",
     "Paycaddy_Documentation/docs/changelog.en.md",
     "Paycaddy_Documentation/docs/chatbot.es.md",
@@ -195,7 +196,6 @@
     "Paycaddy_Documentation/docs/wallet.en.md",
     "Paycaddy_Documentation/docs/userFlow.en.md",
     "Paycaddy_Documentation/docs/wallet_ops.en.md",
-    "Paycaddy_Documentation/docs/index.md",
     "chatbot-doc/docs/assets/imgs/card_flow.png",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
