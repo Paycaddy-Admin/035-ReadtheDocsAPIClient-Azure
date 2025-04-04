@@ -1,20 +1,30 @@
-site_name: ""
+site_name: "NeoBank API Documentation"
 nav:
   - Home: index.md
-  - Flows: flow.md
-  - API:
+  - Flows:
+      - Prefunded Flow: prefunded.md
+      - Just In Time Funding Flow: JIT.md
+      - Integrated KYC: integratedKYC.md
+      - Delegated KYC: delegatedKYC.md
+  - Card Issuing API:
       - Users: user.md
       - Wallets:
-          - Overview: wallet.md
+          - Intro: introwallet.md
+          - Creation and Retrieval: createwallet.md
           - Wallet Operations: wallet_op.md
-      - Credit Core: creditCore.md
       - Cards:
-          - Overview: card.md
+          - Creation and Retrieval: card.md
           - Card Operations: card_operations.md
-      - Transactions: transaction.md
-      - Webhooks: webhooks.md
-  # - ChatBOT: chatbot.md
-  # - Whitelabel: whitelabel.md
+      - Transactions:
+          - Prefunded Transaction Types: prefundedTrx.md
+          - Just In Time Funding: JITtrx.md
+          - Retrieval: TransactionsRetrieval.md
+      - Webhook Notifications:
+          - Transaction Notifications: trxWebhooks.md
+          - Integrated KYC Notifications: kycWebhooks.md
+  - Credit Core: creditCore.md
+  - WhatsApp Chatbot: chatbot.md
+  - CPM Backoffice: backoffice.md
 
 theme:
   name: material
@@ -73,6 +83,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.mermaid
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:

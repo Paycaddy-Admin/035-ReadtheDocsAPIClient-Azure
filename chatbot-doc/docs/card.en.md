@@ -30,6 +30,8 @@
 
 Each request includes the **userId** to whom the card should be associated and the **walletId** whose balance the card will be transacting with.
 
+
+
 The **physicalCard** field indicates whether it is a card that needs to be printed physically **(true)** or, alternatively, an exclusively digital card **(false)**.
 
 The card printing data is extracted from the fields stored in the user creation, so it is important to note that the cards are printed taking into account the **FirstName** and **LastName** fields in the case of natural persons and the **RegisteredName** field in the case of legal entities. It is essential to ensure the integrity of these fields in the user creation flow, including character limitations, since it affects the subsequent card creation flow.

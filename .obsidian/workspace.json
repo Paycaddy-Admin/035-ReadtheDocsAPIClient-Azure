@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "chatbot-doc/docs/card.en.md",
+                "file": "chatbot-doc/docs/flow.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "card.en"
+              "title": "flow.en"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -93,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "chatbot-doc/docs/card.en.md",
+                "file": "chatbot-doc/docs/card.es.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for card.en"
+              "title": "Backlinks for card.es"
             }
           },
           {
@@ -112,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "chatbot-doc/docs/card.en.md",
+                "file": "chatbot-doc/docs/card.es.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from card.en"
+              "title": "Outgoing links from card.es"
             }
           },
           {
@@ -139,10 +140,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "chatbot-doc/docs/card.en.md"
+                "file": "chatbot-doc/docs/card.es.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of card.en"
+              "title": "Outline of card.es"
             }
           },
           {
@@ -160,7 +161,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -175,17 +177,24 @@
   },
   "active": "c56024682b18ad71",
   "lastOpenFiles": [
-    "chatbot-doc/docs/index.md",
-    "chatbot-doc/docs/index.es.md",
-    "chatbot-doc/docs/whitelabel.md",
     "chatbot-doc/docs/card.es.md",
-    "chatbot-doc/docs/card.en.md",
-    "chatbot-doc/docs/user.es.md",
-    "chatbot-doc/docs/user.en.md",
+    "chatbot-doc/README.md",
+    "README.md",
+    "chatbot-doc/docs/index.es.md",
+    "chatbot-doc/docs/index.md",
+    "chatbot-doc/docs/creditCore.en.md",
+    "chatbot-doc/docs/chatbot.md",
     "chatbot-doc/docs/card_operations.en.md",
+    "chatbot-doc/docs/whitelabel.md",
+    "chatbot-doc/docs/user.en.md",
+    "chatbot-doc/docs/user.es.md",
+    "chatbot-doc/docs/wallet_op.en.md",
+    "chatbot-doc/docs/transaction.es.md",
+    "chatbot-doc/docs/transaction.en.md",
+    "chatbot-doc/docs/card.en.md",
+    "chatbot-doc/docs/assets/imgs/logo.svg",
     "chatbot-doc/docs/card_operations.es.md",
     "chatbot-doc/docs/assets/imgs/card_flow.png",
-    "README.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/WHEEL",
@@ -204,7 +213,6 @@
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs/themes/mkdocs/img/grid.png",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_get_deps-0.2.0.dist-info/licenses/LICENSE.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/Markdown-3.7.dist-info/LICENSE.md",
-    "chatbot-doc/node_modules/python/README.md",
-    "chatbot-doc/README.md"
+    "chatbot-doc/node_modules/python/README.md"
   ]
 }
