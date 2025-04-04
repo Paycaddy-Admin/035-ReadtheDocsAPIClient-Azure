@@ -8,7 +8,7 @@ build:
     python: "3.12"
 
 mkdocs:
-  configuration: ./chatbot-doc/mkdocs.yml
+  configuration: ./Paycaddy_Documentation/mkdocs.yml
 
 python:
   install:

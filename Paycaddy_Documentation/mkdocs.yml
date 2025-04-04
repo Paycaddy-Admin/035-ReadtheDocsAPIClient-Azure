@@ -1,20 +1,32 @@
-site_name: ""
+site_name: "NeoBank API Documentation"
 nav:
   - Home: index.md
-  - Flows: flow.md
-  - API:
-      - Users: user.md
+
+  - Flows:
+      - User Creation Flow: userFlow.md
+      - Card Creation Flow: cardFlow.md
+      - Prefunded Flow: prefundedFlow.md
+      - Just-In-Time Funding Flow: JITflow.md
+
+  - Card Issuing API:
+      - Users:
+          - Creation & Retrieval: user.md
+          - KYC Verification: kyc.md
       - Wallets:
-          - Overview: wallet.md
+          - Create & Retrieve: wallet.md
           - Wallet Operations: wallet_op.md
-      - Credit Core: creditCore.md
       - Cards:
-          - Overview: card.md
+          - Create & Retrieve: card.md
           - Card Operations: card_operations.md
-      - Transactions: transaction.md
-      - Webhooks: webhooks.md
-  #- Chatbot: chatbot.md
-  #- Whitelabel: whitelabel.md
+      - Card Transactions:
+          - Prefunded: trxNotification.md
+          - Just-In-Time Funding: JITtrxs.md
+          - Settlement: settlement.md
+          - Retrieval: transactionLists.md
+      - Webhooks: notificationsEnlist.md
+  - Credit Core: creditCore.md
+  - WhatsApp Chatbot: chatbot.md
+  - CPM Backoffice: backoffice.md
   - Changelog: changelog.md
 
 theme:
