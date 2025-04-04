@@ -1,14 +1,14 @@
-html{
+html {
     scroll-behavior: smooth;
 }
 
-.md-logo img{
+.md-logo img {
     min-height: 50px;
     width: auto;
 }
 
-.img{
-    width: 500px;
+.img {
+    width: auto;
     height: auto;
     margin-left: 10%;
     margin-right: 10%;
@@ -21,10 +21,9 @@ html{
     margin-right: 20%;
 }
 
-.endpoint-descrip{
+.endpoint-descrip {
     font-size: small;
     margin: 0;
     padding: 0;
     line-height: 0;
 }
-
