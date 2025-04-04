@@ -1,12 +1,12 @@
-site_name: "NeoBank API"
+site_name: "PayCaddy API"
 nav:
   - Introduction: index.md
 
   - Flows:
-      - User Creation Flow: userFlow.md #
-      - Card Creation Flow: cardFlow.md #
-      - Prefunded Flow: prefundedFlow.md #
-      - Just-In-Time Funding Flow: JITflow.md #
+      - User Creation: userFlow.md #
+      - Card Creation: cardFlow.md #
+      - Prefunded Transactions: prefundedFlow.md #
+      - Just-In-Time Funding: JITflow.md #
 
   - Card Issuing API:
       - Users:
@@ -18,11 +18,11 @@ nav:
       - Cards:
           - Create & Retrieve: card.md #
           - Card Operations: card_ops.md #
-      - Card Transactions:
+      - Transactions:
           - Prefunded: trxNotification.md
           - Just-In-Time Funding: JITtrxs.md
           - Settlement: settlement.md
-          - Retrieval: transactionLists.md
+          - Transaction Data Retrieval: transactionLists.md
       - Webhooks: notificationsEnlist.md
   - Credit Core:
       - Credit Flows: creditFlows.md
