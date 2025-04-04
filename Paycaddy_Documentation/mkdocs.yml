@@ -10,13 +10,13 @@ nav:
 
   - Card Issuing API:
       - Users:
-          - Creation & Retrieval: user.md #
+          - User Creation & Retrieval: user.md #
           - KYC Verification: kyc.md #
       - Wallets:
-          - Create & Retrieve: wallet.md #
+          - Wallet Creation & Retrieval: wallet.md #
           - Wallet Operations: wallet_ops.md #
       - Cards:
-          - Create & Retrieve: card.md #
+          - Card Creation & Retrieval: card.md #
           - Card Operations: card_ops.md #
       - Transactions:
           - Prefunded: trxNotification.md
