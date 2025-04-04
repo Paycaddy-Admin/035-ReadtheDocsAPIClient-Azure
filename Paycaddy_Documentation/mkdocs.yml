@@ -79,6 +79,8 @@ plugins:
         - locale: es
           name: Español
           build: true
+  - mermaid2:
+    enabled: true
 
 markdown_extensions:
   - attr_list
@@ -86,7 +88,6 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.mermaid
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:
