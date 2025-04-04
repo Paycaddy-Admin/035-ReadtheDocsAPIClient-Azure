@@ -54,7 +54,7 @@ theme:
 
     # Palette toggle for dark mode
     - scheme: slate
-      primary: blue grey
+      primary: black
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
