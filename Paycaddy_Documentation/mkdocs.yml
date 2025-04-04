@@ -3,7 +3,7 @@ nav:
   - Introduction: index.md
 
   - Flows:
-      - Overview: overviewFlow.md
+      - Flow Overview: overviewFlow.md
       - User Creation: userFlow.md #
       - Card Creation: cardFlow.md #
       - Prefunded Transactions: prefundedFlow.md #
