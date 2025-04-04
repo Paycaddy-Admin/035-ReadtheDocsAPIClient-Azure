@@ -3,6 +3,7 @@ nav:
   - Introduction: index.md
 
   - Flows:
+      - Overview: overviewFlow.md
       - User Creation: userFlow.md #
       - Card Creation: cardFlow.md #
       - Prefunded Transactions: prefundedFlow.md #
@@ -20,7 +21,7 @@ nav:
           - Card Operations: card_ops.md #
       - Transactions:
           - Prefunded: trxNotification.md
-          - Just-In-Time Funding: JITtrxs.md
+          - Just-In-Time Funding: JITtrx.md
           - Settlement: settlement.md
           - Transaction Data Retrieval: transactionLists.md
       - Webhooks: notificationsEnlist.md

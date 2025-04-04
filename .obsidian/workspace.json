@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/kyc.en.md",
+                "file": "Paycaddy_Documentation/docs/JITflow.es.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "kyc.en"
+              "title": "JITflow.es"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/kyc.en.md",
+                "file": "Paycaddy_Documentation/docs/JITflow.es.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of kyc.en"
+              "title": "Outline of JITflow.es"
             }
           }
         ],
@@ -170,15 +170,25 @@
   },
   "active": "20c245fddd31204c",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/index.en.md",
-    "Paycaddy_Documentation/docs/index.md",
-    "Paycaddy_Documentation/docs/kyc.en.md",
-    "Paycaddy_Documentation/docs/changelog.es.md",
-    "Paycaddy_Documentation/docs/changelog.en.md",
-    "Paycaddy_Documentation/docs/chatbot.es.md",
-    "Paycaddy_Documentation/docs/chatbot.en.md",
+    "Paycaddy_Documentation/docs/JITflow.en.md",
+    "Paycaddy_Documentation/docs/JITtrx.es.md",
+    "Paycaddy_Documentation/docs/JITtrx.en.md",
+    "Paycaddy_Documentation/docs/card_ops.es.md",
+    "Paycaddy_Documentation/docs/card_ops.en.md",
     "Paycaddy_Documentation/docs/backoffice.es.md",
     "Paycaddy_Documentation/docs/backoffice.en.md",
+    "Paycaddy_Documentation/docs/card.es.md",
+    "Paycaddy_Documentation/docs/overviewFlow.es.md",
+    "Paycaddy_Documentation/docs/changelog.en.md",
+    "Paycaddy_Documentation/docs/cardFlow.es.md",
+    "Paycaddy_Documentation/docs/overviewFlow.en.md",
+    "Paycaddy_Documentation/docs/cardFlow.en.md",
+    "Paycaddy_Documentation/docs/chatbot.en.md",
+    "Paycaddy_Documentation/docs/kyc.en.md",
+    "Paycaddy_Documentation/docs/index.en.md",
+    "Paycaddy_Documentation/docs/index.md",
+    "Paycaddy_Documentation/docs/changelog.es.md",
+    "Paycaddy_Documentation/docs/chatbot.es.md",
     "Paycaddy_Documentation/docs/creditFlow.es.md",
     "Paycaddy_Documentation/docs/creditFlow.en.md",
     "Paycaddy_Documentation/docs/creditCore.en.md",
@@ -186,16 +196,6 @@
     "Paycaddy_Documentation/docs/transactionLists.es.md",
     "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/transactionLists.en.md",
-    "Paycaddy_Documentation/docs/JITflow.es.md",
-    "Paycaddy_Documentation/docs/JITflow.en.md",
-    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
-    "Paycaddy_Documentation/docs/settlement.es.md",
-    "Paycaddy_Documentation/docs/settlement.en.md",
-    "Paycaddy_Documentation/docs/JITtrx.en.md",
-    "Paycaddy_Documentation/docs/JITtrx.es.md",
-    "Paycaddy_Documentation/docs/trxNotification.en.md",
-    "Paycaddy_Documentation/docs/trxNotification.es.md",
-    "Paycaddy_Documentation/docs/wallet.en.md",
     "chatbot-doc/docs/assets/imgs/card_flow.png",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
