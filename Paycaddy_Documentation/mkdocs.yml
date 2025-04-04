@@ -3,30 +3,33 @@ nav:
   - Introduction: index.md
 
   - Flows:
-      - User Creation Flow: userFlow.md
-      - Card Creation Flow: flow.md
-      - Prefunded Flow: prefundedFlow.md
-      - Just-In-Time Funding Flow: JITflow.md
+      - User Creation Flow: userFlow.md #
+      - Card Creation Flow: cardFlow.md #
+      - Prefunded Flow: prefundedFlow.md #
+      - Just-In-Time Funding Flow: JITflow.md #
 
   - Card Issuing API:
       - Users:
-          - Creation & Retrieval: user.md
-          - KYC Verification: kyc.md
+          - Creation & Retrieval: user.md #
+          - KYC Verification: kyc.md #
       - Wallets:
-          - Create & Retrieve: wallet.md
-          - Wallet Operations: wallet_op.md
+          - Create & Retrieve: wallet.md #
+          - Wallet Operations: wallet_ops.md #
       - Cards:
-          - Create & Retrieve: card.md
-          - Card Operations: card_operations.md
+          - Create & Retrieve: card.md #
+          - Card Operations: card_ops.md #
       - Card Transactions:
           - Prefunded: trxNotification.md
           - Just-In-Time Funding: JITtrxs.md
           - Settlement: settlement.md
           - Retrieval: transactionLists.md
       - Webhooks: notificationsEnlist.md
-  - Credit Core: creditCore.md
-  - WhatsApp Chatbot: chatbot.md
-  - CPM Backoffice: backoffice.md
+  - Credit Core:
+      - Credit Flows: creditFlows.md
+      - Credit Core API: creditCore.md
+  - Interfaces:
+      - WhatsApp Chatbot: chatbot.md
+      - CPM Backoffice: backoffice.md
   - Changelog: changelog.md
 
 theme:

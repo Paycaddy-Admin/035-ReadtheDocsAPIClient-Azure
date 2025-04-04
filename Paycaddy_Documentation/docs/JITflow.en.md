@@ -32,35 +32,6 @@ The creation of a card starts with the post debitCard POST, creditCard POST or p
 
 Once you have been granted a card creation code, you can begin testing card creation in the test environment.
 
-```mermaid
 
-flowchart TB
-    A([Start]) --> B{clientCode: OK<br>userId: OK<br>isActive: true?}
-    B -- "No" --> X([Card cannot be created<br>4XX Error])
-    B -- "Yes" --> D{Which endpoint?<br>credit / debit / prepaid}
-
-    D -- "Debit" --> E{Wallet type == 0?}
-    D -- "Prepaid" --> E
-    D -- "Credit" --> F{Wallet type == 1?}
-
-    E -- "No" --> X
-    E -- "Yes" --> G([Invoke Card<br>API call])
-
-    F -- "No" --> X
-    F -- "Yes" --> G
-
-    G --> H{API returns<br>200 OK?}
-    H -- "No" --> X
-    H -- "Yes" --> I[Card Created<br>cardId]
-
-    I --> J{Physical<br>or Virtual?}
-    J -- "Virtual" --> K[isActive = true<br>status = Active]
-    J -- "Physical" --> L[isActive = false<br>status = PendingAck]
-
-    L --> M([Card in Hands check<br>+ ackReception POST])
-    M --> N[Physical Card<br>isActive = true<br>status = Active]
-
-
-```
 
 ---
