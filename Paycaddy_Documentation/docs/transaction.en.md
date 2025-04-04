@@ -37,7 +37,7 @@ This POST call retrieves all transactions of a particular cardId provided.
 
     ```
 
-The structure of the data shared in each transaction follow the same format as all transaction notifications. (See [Transaction Webhooks](webhooks.en.md)).
+The structure of the data shared in each transaction follow the same format as all transaction notifications. (See [Transaction Webhooks](trxNotification.en.md)).
 
 ---
 
@@ -155,4 +155,4 @@ This endpoint allows marking a specific transaction associated with a card to be
         "ChargeBackStatus": "string"
     }
     ```
-Once the transaction is marked, the state and updates of the chargeback will be notified to clients through the chargeback webhook. (See [Webhooks](webhooks.en.md))
+Once the transaction is marked, the state and updates of the chargeback will be notified to clients through the chargeback webhook. (See [Webhooks](trxNotification.en.md))

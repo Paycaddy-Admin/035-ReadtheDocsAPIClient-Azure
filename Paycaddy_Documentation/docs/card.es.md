@@ -35,16 +35,16 @@ El campo **tarjeta física** indica si se trata de una tarjeta que debe imprimir
 Los datos de impresión de las tarjetas se extraen de los campos almacenados en la creación de usuarios, por lo que es importante tener en cuenta que las tarjetas se imprimen teniendo en cuenta los campos **Nombre** y **Apellido** en el caso de personas físicas y el campo **NombreRegistrado** en el caso de personas jurídicas. Es fundamental garantizar la integridad de estos campos en el flujo de creación de usuarios, incluyendo la limitación de caracteres, ya que afecta al posterior flujo de creación de tarjetas.
 El **"código"** enviado en la llamada debe ser proporcionado por el equipo de PayCaddy para cada tipo y variación de tarjeta incluida en el proyecto de habilitación. Es decir, para un proyecto que habilite la emisión de una tarjeta de débito virtual o física para personas físicas, se proporcionarían dos códigos diferentes, uno para usuario final físico y otro para usuario final virtual. Es responsabilidad del cliente invocar correctamente las llamadas teniendo en cuenta el tipo de usuario y la condición de impresión asociada al código proporcionado.
 
-La respuesta satisfactoria de la llamada de creación de tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe utilizarse en todas las llamadas de operación de tarjeta **(véase [cardOperations](card_operations.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
+La respuesta satisfactoria de la llamada de creación de tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe utilizarse en todas las llamadas de operación de tarjeta **(véase [cardOperations](card_ops.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
 
 A continuación se detallan los posibles estados:
 
-- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_operations.es.md#ack-reception-post))
-- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_operations.es.md#unblock-card-post))
-- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_operations.es.md#block-card-post))
+- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_ops.es.md#ack-reception-post))
+- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_ops.es.md#unblock-card-post))
+- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_ops.es.md#block-card-post))
 - **Active** - Para tarjetas activas
 
-Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_operations.es.md#check-pan-post)** y **[checkCvv POST](card_operations.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
+Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_ops.es.md#check-pan-post)** y **[checkCvv POST](card_ops.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
 
 La fecha de expiración de la tarjeta se presenta en la respuesta exitosa de la llamada de creación de la tarjeta en el campo "dueDate" siguiendo el formato YYYYMM.
 
@@ -128,16 +128,16 @@ El campo **tarjeta física** indica si se trata de una tarjeta que debe imprimir
 Los datos de impresión de las tarjetas se extraen de los campos almacenados en la creación de usuarios, por lo que es importante tener en cuenta que las tarjetas se imprimen teniendo en cuenta los campos **Nombre** y **Apellido** en el caso de personas físicas y el campo **NombreRegistrado** en el caso de personas jurídicas. Es fundamental garantizar la integridad de estos campos en el flujo de creación de usuarios, incluyendo la limitación de caracteres, ya que afecta al posterior flujo de creación de tarjetas.
 El **"código"** enviado en la llamada debe ser proporcionado por el equipo de PayCaddy para cada tipo y variación de tarjeta incluida en el proyecto de habilitación. Es decir, para un proyecto que habilite la emisión de una tarjeta de débito virtual o física para personas físicas, se proporcionarían dos códigos diferentes, uno para usuario final físico y otro para usuario final virtual. Es responsabilidad del cliente invocar correctamente las llamadas teniendo en cuenta el tipo de usuario y la condición de impresión asociada al código proporcionado.
 
-La respuesta satisfactoria de la llamada de creación de tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe utilizarse en todas las llamadas de operación de tarjeta **(véase [cardOperations](card_operations.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
+La respuesta satisfactoria de la llamada de creación de tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe utilizarse en todas las llamadas de operación de tarjeta **(véase [cardOperations](card_ops.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
 
 A continuación se detallan los posibles estados:
 
-- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_operations.es.md#ack-reception-post))
-- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_operations.es.md#unblock-card-post))
-- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_operations.es.md#block-card-post))
+- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_ops.es.md#ack-reception-post))
+- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_ops.es.md#unblock-card-post))
+- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_ops.es.md#block-card-post))
 - **Active** - Para tarjetas activas
 
-Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_operations.es.md#check-pan-post)** y **[checkCvv POST](card_operations.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
+Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_ops.es.md#check-pan-post)** y **[checkCvv POST](card_ops.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
 
 La fecha de expiración de la tarjeta se presenta en la respuesta exitosa de la llamada de creación de la tarjeta en el campo "dueDate" siguiendo el formato YYYYMM.
 
@@ -224,16 +224,16 @@ Los datos de impresión de la tarjeta se extraen de los campos almacenados en la
 
 El **"código"** enviado en la llamada debe ser provisto por el equipo de PayCaddy para cada tipo y variación de tarjeta incluida en el proyecto de habilitación. Es decir, para un proyecto que habilita la emisión de una tarjeta de débito virtual o física para personas físicas, se proporcionarían dos códigos diferentes, uno para endUser physical y otro para endUser virtual. Es responsabilidad del cliente invocar correctamente las llamadas teniendo en cuenta el tipo de usuario y la condición de impresión asociada al código provisto.
 
-La respuesta exitosa de la llamada de creación de la tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe usarse en todas las llamadas de operación de la tarjeta **(ver [cardOperations](card_operations.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
+La respuesta exitosa de la llamada de creación de la tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe usarse en todas las llamadas de operación de la tarjeta **(ver [cardOperations](card_ops.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
 
 Los posibles estados se detallan a continuación:
 
-- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_operations.es.md#ack-reception-post))
-- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_operations.es.md#unblock-card-post))
-- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_operations.es.md#block-card-post))
+- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_ops.es.md#ack-reception-post))
+- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_ops.es.md#unblock-card-post))
+- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_ops.es.md#block-card-post))
 - **Active** - Para tarjetas activas
 
-Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_operations.es.md#check-pan-post)** y **[checkCvv POST](card_operations.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
+Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_ops.es.md#check-pan-post)** y **[checkCvv POST](card_ops.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
 
 La fecha de vencimiento de la tarjeta se presenta en la respuesta exitosa de la llamada de creación de la tarjeta en el campo "dueDate" siguiendo el formato AAAAMM.
 

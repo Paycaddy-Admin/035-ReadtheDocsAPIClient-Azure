@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "chatbot-doc/docs/changelog.md",
+                "file": "Paycaddy_Documentation/docs/changelog.es.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "changelog"
+              "title": "changelog.es"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -139,28 +140,22 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "chatbot-doc/docs/changelog.md"
+                "file": "Paycaddy_Documentation/docs/changelog.es.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of changelog"
-            }
-          },
-          {
-            "id": "4a82a21b726942dd",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "title": "Outline of changelog.es"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 503.5
+    "width": 503.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -175,19 +170,33 @@
   },
   "active": "20c245fddd31204c",
   "lastOpenFiles": [
-    "chatbot-doc/docs/changelog.md",
-    "chatbot-doc/docs/whitelabel.md",
-    "chatbot-doc/docs/card.es.md",
-    "conflict-files-obsidian-git.md",
-    "chatbot-doc/docs/card.en.md",
-    "chatbot-doc/docs/index.md",
-    "chatbot-doc/docs/index.es.md",
-    "chatbot-doc/docs/user.es.md",
-    "chatbot-doc/docs/user.en.md",
-    "chatbot-doc/docs/card_operations.en.md",
-    "chatbot-doc/docs/card_operations.es.md",
+    "Paycaddy_Documentation/docs/changelog.en.md",
+    "Paycaddy_Documentation/docs/chatbot.es.md",
+    "Paycaddy_Documentation/docs/changelog.es.md",
+    "Paycaddy_Documentation/docs/chatbot.en.md",
+    "Paycaddy_Documentation/docs/backoffice.es.md",
+    "Paycaddy_Documentation/docs/backoffice.en.md",
+    "Paycaddy_Documentation/docs/creditFlow.es.md",
+    "Paycaddy_Documentation/docs/creditFlow.en.md",
+    "Paycaddy_Documentation/docs/creditCore.en.md",
+    "Paycaddy_Documentation/docs/notificationEnlist.es.md",
+    "Paycaddy_Documentation/docs/transactionLists.es.md",
+    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
+    "Paycaddy_Documentation/docs/transactionLists.en.md",
+    "Paycaddy_Documentation/docs/JITflow.es.md",
+    "Paycaddy_Documentation/docs/JITflow.en.md",
+    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
+    "Paycaddy_Documentation/docs/settlement.es.md",
+    "Paycaddy_Documentation/docs/settlement.en.md",
+    "Paycaddy_Documentation/docs/JITtrx.en.md",
+    "Paycaddy_Documentation/docs/JITtrx.es.md",
+    "Paycaddy_Documentation/docs/trxNotification.en.md",
+    "Paycaddy_Documentation/docs/trxNotification.es.md",
+    "Paycaddy_Documentation/docs/wallet.en.md",
+    "Paycaddy_Documentation/docs/userFlow.en.md",
+    "Paycaddy_Documentation/docs/wallet_ops.en.md",
+    "Paycaddy_Documentation/docs/index.md",
     "chatbot-doc/docs/assets/imgs/card_flow.png",
-    "README.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/WHEEL",
@@ -199,14 +208,7 @@
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n/__pycache__/__init__.cpython-313.pyc",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/material/templates/assets/images/favicon.png",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/idna-3.10.dist-info/LICENSE.md",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_material_extensions-1.3.1.dist-info/licenses/LICENSE.md",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/pymdown_extensions-10.12.dist-info/licenses/LICENSE.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs/themes/readthedocs/css/fonts/fontawesome-webfont.svg",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs/themes/mkdocs/img/grid.png",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_get_deps-0.2.0.dist-info/licenses/LICENSE.md",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/Markdown-3.7.dist-info/LICENSE.md",
-    "chatbot-doc/node_modules/python/README.md",
-    "chatbot-doc/README.md"
+    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs/themes/mkdocs/img/grid.png"
   ]
 }

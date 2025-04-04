@@ -6,9 +6,9 @@ From this point on and using this documentation as a guide, you should be able t
 
 - Creating natural and legal type users. (Check **[Users](user.en.md)**)
 - Creating wallets for each user you create. This option will be useful if you are going to integrate pre-funded credit type cards or if you want to manage more than one wallet per user. (Check **[Wallets](wallet.en.md)**)
-- Managing balances of wallets created through PayIns, PayOuts, and transfers between wallets. (Check **[Wallet Operations](wallet_op.en.md)**)
+- Managing balances of wallets created through PayIns, PayOuts, and transfers between wallets. (Check **[Wallet Operations](wallet_ops.en.md)**)
 - Creating cards linked to the created wallets. (Check **[Cards](card.en.md)**)
-- Managing created cards. (Check **[Card Operations](card_operations.en.md)**)
+- Managing created cards. (Check **[Card Operations](card_ops.en.md)**)
 
 
 > It is important to highlight that the creation cards has different endpoints for debit, credit, and prepaid cards.

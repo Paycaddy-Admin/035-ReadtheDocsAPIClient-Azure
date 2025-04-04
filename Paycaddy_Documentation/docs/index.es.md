@@ -1,5 +1,3 @@
-## **Intro**
-
 Bienvenido a la documentación de la API de Paycaddy, una plataforma integral y flexible diseñada para permitir a empresas y desarrolladores integrar fácilmente servicios bancarios y financieros en sus aplicaciones y sistemas.
 
 Nuestra API está construida como una interfaz REST. El principal beneficio es que acepta cuerpos de solicitud codificados en formularios y devuelve respuestas codificadas en JSON, utilizando códigos de respuesta HTTP estándar, lo que debería hacer que nuestra API sea familiar para cualquier persona con experiencia previa en el uso de APIs.
@@ -8,9 +6,9 @@ A partir de este punto y utilizando esta documentación como guía, deberías po
 
 - Crear usuarios de tipo natural y jurídico. (Consulta **[Usuarios](user.es.md)**)
 - Crear billeteras para cada usuario que crees. Esta opción será útil si vas a integrar tarjetas de crédito prefinanciadas o si deseas gestionar más de una billetera por usuario. (Consulta **[Billeteras](wallet.es.md)**)
-- Gestionar saldos de billeteras creadas a través de PayIns, PayOuts y transferencias entre billeteras. (Consulta **[Operaciones de Billetera](wallet_op.es.md)**)
+- Gestionar saldos de billeteras creadas a través de PayIns, PayOuts y transferencias entre billeteras. (Consulta **[Operaciones de Billetera](wallet_ops.es.md)**)
 - Crear tarjetas vinculadas a las billeteras creadas. (Consulta **[Tarjetas](card.es.md)**)
-- Gestionar las tarjetas creadas. (Consulta **[Operaciones de Tarjetas](card_operations.es.md)**)
+- Gestionar las tarjetas creadas. (Consulta **[Operaciones de Tarjetas](card_ops.es.md)**)
 
 
 >Es importante destacar que la creación de tarjetas tiene diferentes endpoints para tarjetas de débito, crédito y prepago.

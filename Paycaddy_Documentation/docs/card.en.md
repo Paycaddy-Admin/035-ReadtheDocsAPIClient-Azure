@@ -36,19 +36,19 @@ The card printing data is extracted from the fields stored in the user creation,
 
 The **"code"** sent in the call must be provided by the PayCaddy team for each type and variation of card included in the enablement project. That is, for a project that enables the issuance of a virtual or physical debit card for natural persons, two different codes would be provided, one for endUser physical and one for endUser virtual. It is the client's responsibility to correctly invoke the calls taking into consideration the type of user and the printing condition associated with the provided code.
 
-The successful response of the debit card creation call returns a 200 message that carries the unique identifier of the card that must be used in all card operation calls **(see [cardOperations](card_operations.en.md))**. In addition to the **cardId**, the 200 response also provides a boolean indicating whether the card is operational or not, and a status field describing the card's status.
+The successful response of the debit card creation call returns a 200 message that carries the unique identifier of the card that must be used in all card operation calls **(see [cardOperations](card_ops.en.md))**. In addition to the **cardId**, the 200 response also provides a boolean indicating whether the card is operational or not, and a status field describing the card's status.
 
 The possible statuses are detailed below:
 
-- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_operations.en.md#ack-reception-post))
+- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_ops.en.md#ack-reception-post))
 
-- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_operations.en.md#unblock-card-post))
+- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_ops.en.md#unblock-card-post))
 
-- **Cancel** - For canceled cards (see [CancelCard POST](card_operations.en.md#block-card-post))
+- **Cancel** - For canceled cards (see [CancelCard POST](card_ops.en.md#block-card-post))
 
 - **Active** - For active cards
 
-The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_operations.en.md#check-pan-post)** and **[checkCvv POST](card_operations.en.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
+The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_ops.en.md#check-pan-post)** and **[checkCvv POST](card_ops.en.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
 
 The card's expiration date is presented in the successful response of the card creation call in the "dueDate" field following the format YYYYMM.
 
@@ -133,15 +133,15 @@ The **"code"** sent in the call must be provided by the PayCaddy team for each t
 
 The possible statuses are detailed below:
 
-- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_operations.en.md#ack-reception-post))
+- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_ops.en.md#ack-reception-post))
 
-- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_operations.en.md#unblock-card-post))
+- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_ops.en.md#unblock-card-post))
 
-- **Cancel** - For canceled cards (see [CancelCard POST](card_operations.en.md#block-card-post))
+- **Cancel** - For canceled cards (see [CancelCard POST](card_ops.en.md#block-card-post))
 
 - **Active** - For active cards
 
-The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_operations.en.md#check-pan-post)** and **[checkCvv POST](card_operations.en.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
+The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_ops.en.md#check-pan-post)** and **[checkCvv POST](card_ops.en.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
 
 The card's expiration date is presented in the successful response of the card creation call in the "dueDate" field following the format YYYYMM.
 
@@ -228,19 +228,19 @@ The card printing data is extracted from the fields stored in the user creation,
 
 The **"code"** sent in the call must be provided by the PayCaddy team for each type and variation of card included in the enablement project. That is, for a project that enables the issuance of a virtual or physical debit card for natural persons, two different codes would be provided, one for endUser physical and one for endUser virtual. It is the client's responsibility to correctly invoke the calls taking into consideration the type of user and the printing condition associated with the provided code.
 
-The successful response of the debit card creation call returns a 200 message that carries the unique identifier of the card that must be used in all card operation calls **(see [cardOperations](card_operations.en.md))**. In addition to the **cardId**, the 200 response also provides a boolean indicating whether the card is operational or not, and a status field describing the card's status.
+The successful response of the debit card creation call returns a 200 message that carries the unique identifier of the card that must be used in all card operation calls **(see [cardOperations](card_ops.en.md))**. In addition to the **cardId**, the 200 response also provides a boolean indicating whether the card is operational or not, and a status field describing the card's status.
 
 The possible statuses are detailed below:
 
-- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_operations.en.md#ack-reception-post))
+- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_ops.en.md#ack-reception-post))
 
-- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_operations.en.md#unblock-card-post))
+- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_ops.en.md#unblock-card-post))
 
-- **Cancel** - For canceled cards (see [CancelCard POST](card_operations.en.md#block-card-post))
+- **Cancel** - For canceled cards (see [CancelCard POST](card_ops.en.md#block-card-post))
 
 - **Active** - For active cards
 
-The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_operations.en.md#check-pan-post)** and **[checkCvv POST](card_operations.en.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
+The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_ops.en.md#check-pan-post)** and **[checkCvv POST](card_ops.en.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
 
 The card's expiration date is presented in the successful response of the card creation call in the "dueDate" field following the format YYYYMM.
 
