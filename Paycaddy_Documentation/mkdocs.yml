@@ -4,7 +4,7 @@ nav:
 
   - Flows:
       - User Creation Flow: userFlow.md
-      - Card Creation Flow: cardFlow.md
+      - Card Creation Flow: flow.md
       - Prefunded Flow: prefundedFlow.md
       - Just-In-Time Funding Flow: JITflow.md
 
@@ -86,6 +86,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.mermaid
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:

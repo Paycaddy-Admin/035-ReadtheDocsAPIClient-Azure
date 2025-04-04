@@ -9,7 +9,7 @@ Los flujos para el uso de la API de NeoBank están categorizados según la entid
 
 La creación de nuevos UserIDs en la API de NeoBank sigue dos flujos separados según el tipo de persona que se va a ingresar en el sistema.
 
-EndUser se refiere a los usuarios creados para personas físicas.  
+EndUser se refiere a los usuarios creados para personas físicas.
 MerchantUser se refiere a los usuarios creados para entidades jurídicas.
 
 
@@ -35,15 +35,35 @@ La creación de una tarjeta comienza con la llamada post debitCard POST, creditC
 
 Una vez que se te haya otorgado un código de creación de tarjetas, podrás comenzar a probar la creación de tarjetas en el entorno de pruebas.
 
-![entity_diagram](./assets/imgs/card_flow.png)
+```mermaid
+
+flowchart TB
+    A([Start]) --> B{clientCode: OK<br>userId: OK<br>isActive: true?}
+    B -- "No" --> X([Card cannot be created<br>4XX Error])
+    B -- "Yes" --> D{Which endpoint?<br>credit / debit / prepaid}
+
+    D -- "Debit" --> E{Wallet type == 0?}
+    D -- "Prepaid" --> E
+    D -- "Credit" --> F{Wallet type == 1?}
+
+    E -- "No" --> X
+    E -- "Yes" --> G([Invoke Card<br>API call])
+
+    F -- "No" --> X
+    F -- "Yes" --> G
+
+    G --> H{API returns<br>200 OK?}
+    H -- "No" --> X
+    H -- "Yes" --> I[Card Created<br>cardId]
+
+    I --> J{Physical<br>or Virtual?}
+    J -- "Virtual" --> K[isActive = true<br>status = Active]
+    J -- "Physical" --> L[isActive = false<br>status = PendingAck]
+
+    L --> M([Card in Hands check<br>+ ackReception POST])
+    M --> N[Physical Card<br>isActive = true<br>status = Active]
+
+
+```
 
 ---
-
-## **Flujo de Crédito**
-Para los programas de emisión de tarjetas de crédito que utilizan líneas de crédito, se usarán los endpoints a continuación para gestionar los fondos disponibles en las billeteras asociadas a cada línea de crédito.
-
->Si las tarjetas son de crédito prepago, por favor consulta el endpoint **wallet POST** para crear billeteras que tengan la capacidad de crear tarjetas de crédito.
-
-La operación de crédito sigue el flujo a continuación y utiliza los endpoints detallados en esta sección.
-
-![entity_diagram](./assets/imgs/credit_flow.png){class = ".img"}
