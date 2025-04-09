@@ -1,4 +1,16 @@
-## **Notification Enlist <font color="green">POST</font>**
+
+
+
+PayCaddy sends webhooks to your callback URLs for the following notifications:
+	•	**TRXs Notifications**, enlisted via Notification Enlist POST
+	•	**Credit Movements Notifications**, also enlisted via Notification Enlist POST
+	•	**Integrated KYC Notifications**, enlisted manually by our onboarding team during integration.
+
+
+
+---
+
+## Notification Enlist <font color="green">POST</font>
 
 **Request URL:** https://api.paycaddy.dev/v1/NotificationEnlist
 

@@ -123,7 +123,7 @@ El campo denominado **amountToCapital** determina el monto que el usuario está 
 
 El campo **currency** corresponde a la moneda de la billetera. El campo **statement** se utilizará para dejar una breve descripción de la operación realizada.
 
-En caso de ser exitosa, se generará el reporte de pago con los datos especificados, y la llamada retornará un HTTP 200 detallando la fecha en la que se realizó el reporte, así como el monto del límite de la billetera y el saldo disponible. También se envía una notificación de webhook **(ver [notificationEnlist](trxNotification.es.md#notification-enlist-post))** para informar el reporte y sus efectos.
+En caso de ser exitosa, se generará el reporte de pago con los datos especificados, y la llamada retornará un HTTP 200 detallando la fecha en la que se realizó el reporte, así como el monto del límite de la billetera y el saldo disponible. También se envía una notificación de webhook **(ver [notificationEnlist](prefundedTRX.es.md#notification-enlist-post))** para informar el reporte y sus efectos.
 
 En caso contrario, la API de NeoBank responderá con un error HTTP 422. Los errores más comunes pueden incluir:
 
@@ -165,7 +165,7 @@ El campo **currency** corresponde a la moneda de la billetera.
 
 El campo **statement** se utilizará para dejar una breve descripción de la operación realizada.
 
-En caso de ser exitosa, se generará el reporte del pago con los datos especificados, y la llamada retornará un HTTP 200 detallando la fecha en la que se realizó el reporte, así como los valores del límite de la tarjeta y el saldo disponible. También se envía una notificación de webhook **(ver [notificationEnlist](trxNotification.es.md#notification-enlist-post))** para informar el reporte y sus efectos.
+En caso de ser exitosa, se generará el reporte del pago con los datos especificados, y la llamada retornará un HTTP 200 detallando la fecha en la que se realizó el reporte, así como los valores del límite de la tarjeta y el saldo disponible. También se envía una notificación de webhook **(ver [notificationEnlist](prefundedTRX.es.md#notification-enlist-post))** para informar el reporte y sus efectos.
 
 En caso contrario, la API de NeoBank responderá con un error HTTP 422. Los errores más comunes pueden incluir:
 

@@ -121,7 +121,7 @@ The reported value for amountToCapital will be used to pay off the debtor and no
 The field called **amountToCapital** determines the amount that the user is reporting, which will have an impact on the available amount, by the user within the credit line.
 The **currency** field corresponds to the currency of the wallet. The **statement** field will be used to leave a brief description of the operation performed.
 
-If successful, the payment report will be generated with the specified data, and the call will return a HTTP 200 detailing the date on which the report was made, as well as the amount of the wallet’s limit and the available balance. Also a webhook notification is send **(see [notificationEnlist](trxNotification.en.md#notification-enlist-post))** to inform the report and its effects. 
+If successful, the payment report will be generated with the specified data, and the call will return a HTTP 200 detailing the date on which the report was made, as well as the amount of the wallet’s limit and the available balance. Also a webhook notification is send **(see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post))** to inform the report and its effects. 
 
 Otherwise, the NeoBank API will respond with a HTTP 422 error. The most common errors may include:
 
@@ -163,7 +163,7 @@ The **currency** field corresponds to the currency of the wallet.
 
 The **statement** field will be used to leave a brief description of the operation performed.
 
-If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the values of the card limit and the available balance. Also a webhook notification is send **((see [notificationEnlist](trxNotification.en.md#notification-enlist-post)))** to inform the report and its effects.
+If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the values of the card limit and the available balance. Also a webhook notification is send **((see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post)))** to inform the report and its effects.
 
 Otherwise, the NeoBank API will respond with a HTTP 422 error. The most common errors may include:
 

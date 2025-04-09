@@ -8,7 +8,7 @@ Enables the registration and KYC verification of new users associated to a parti
 >*Delegated KYC* flows enable regulated financial entities to lead KYC data capture and register users that are created active by default
 
 
-[**Card Creation Flow**](card.en.md)
+[**Card Creation Flow**](cardFlow.en.md)
 Enables the creation of Prepaid, Debit or Credit cards associated to a particular user, wallet and card product specification. This flow also encompasses the initial activation of physical cards.
 
 

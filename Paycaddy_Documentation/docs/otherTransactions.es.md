@@ -38,7 +38,7 @@ Esta llamada POST recupera todas las transacciones de un cardId particular propo
 
     ```
 
-La estructura de los datos compartidos en cada transacción sigue el mismo formato que todas las notificaciones de transacciones (consulte [Webhooks de transacciones](trxNotification.es.md)).
+La estructura de los datos compartidos en cada transacción sigue el mismo formato que todas las notificaciones de transacciones (consulte [Webhooks de transacciones](prefundedTRX.es.md)).
 
 ---
 
@@ -155,4 +155,4 @@ Este endpoint permite marcar una transacción específica asociada a una tarjeta
     }
     ```
 
-Una vez marcada la transacción, el estado y las actualizaciones del contracargo se notificarán a los clientes a través del webhook de contracargo. (Ver [Webhooks](trxNotification.es.md))   
+Una vez marcada la transacción, el estado y las actualizaciones del contracargo se notificarán a los clientes a través del webhook de contracargo. (Ver [Webhooks](prefundedTRX.es.md))   
