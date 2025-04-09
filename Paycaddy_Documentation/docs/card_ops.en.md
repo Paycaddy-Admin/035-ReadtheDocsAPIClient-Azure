@@ -116,6 +116,7 @@ This call allows for permanently canceling a previously created card. This call 
         "cardId": "string",
         "isActive": "false"
     }
+    ```
 
 The PayCaddy API could respond with a descriptive HTTP 400 error if it is an attempt to cancel a card that has already been canceled.
 
@@ -133,6 +134,7 @@ It requires a cardId as an input and carries the following structure:
 !!!Warning
     The responses to this call should not be stored in databases for security reasons.
 
+
 === "Request"
     ```json
     {
@@ -147,6 +149,7 @@ It requires a cardId as an input and carries the following structure:
         "expDate": 0
     }
     ```
+
 Unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
 In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.

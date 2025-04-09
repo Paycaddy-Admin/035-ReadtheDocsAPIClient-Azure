@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/prefundedFlow.en.md",
+                "file": "Paycaddy_Documentation/docs/cardFlow.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "prefundedFlow.en"
+              "title": "cardFlow.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/prefundedFlow.en.md",
+                "file": "Paycaddy_Documentation/docs/cardFlow.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of prefundedFlow.en"
+              "title": "Outline of cardFlow.en"
             }
           }
         ],
@@ -169,13 +169,20 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/assets/imgs/cardFlow.svg",
+    "Paycaddy_Documentation/docs/card.en.md",
+    "Paycaddy_Documentation/docs/cardFlow.en.md",
+    "Paycaddy_Documentation/docs/index.md",
+    "Paycaddy_Documentation/docs/card_ops.en.md",
+    "Paycaddy_Documentation/docs/wallet.en.md",
+    "Paycaddy_Documentation/docs/otherTransactions.en.md",
+    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
+    "Paycaddy_Documentation/docs/kyc.en.md",
+    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/payindirect.svg",
     "Paycaddy_Documentation/docs/assets/imgs/payincentral.svg",
     "Paycaddy_Documentation/docs/assets/imgs/prefundedflow.svg",
-    "Paycaddy_Documentation/docs/otherTransactions.en.md",
-    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "Paycaddy_Documentation/docs/prefundedTRX.en.md",
-    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/wallet_ops.en.md",
     "Paycaddy_Documentation/docs/user.en.md",
     "Paycaddy_Documentation/docs/transactionLists.es.md",
@@ -187,10 +194,8 @@
     "Paycaddy_Documentation/docs/otherTransactions.es.md",
     "Paycaddy_Documentation/docs/prefundedTRX.es.md",
     "Paycaddy_Documentation/docs/overviewFlow.en.md",
-    "Paycaddy_Documentation/docs/index.md",
     "Paycaddy_Documentation/docs/JITflow.en.md",
     "Paycaddy_Documentation/docs/JITflow.es.md",
-    "Paycaddy_Documentation/docs/kyc.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg.svg",
     "Paycaddy_Documentation/docs/JITtrx.es.md",
@@ -199,13 +204,8 @@
     "Paycaddy_Documentation/docs/assets/imgs/generaluserflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/merchantuser.svg",
     "Paycaddy_Documentation/docs/assets/imgs/EndUserSR.svg",
-    "Paycaddy_Documentation/docs/assets/imgs/enduser.svg",
     "userSR.en.md",
-    "docs/user.en.md",
     "docs",
-    "Paycaddy_Documentation/docs/index.es.md",
-    "().md",
-    "Paycaddy_Documentation/docs/card_ops.en.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/WHEEL",
