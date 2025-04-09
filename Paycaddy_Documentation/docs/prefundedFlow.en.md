@@ -50,7 +50,7 @@ A wallet must have sufficient funds to cover transactions. Funds can be placed i
 
 ---
 
-The details on how to utilize the PayIn method are found on our [Wallet Operations](wallet_ops.en) chapter.
+The details on how to utilize the PayIn method are found on our [Wallet Operations](wallet_ops.en.md) chapter.
 
 ---
 

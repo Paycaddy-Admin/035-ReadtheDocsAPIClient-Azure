@@ -1,47 +1,48 @@
-Bienvenido a la documentación de la API de Paycaddy, una plataforma integral y flexible diseñada para permitir a empresas y desarrolladores integrar fácilmente servicios bancarios y financieros en sus aplicaciones y sistemas.
+Welcome to PayCaddy's API documentation, a comprehensive and flexible platform designed to enable businesses and developers to easily integrate banking and financial services into their applications and systems.
 
-Nuestra API está construida como una interfaz REST. El principal beneficio es que acepta cuerpos de solicitud codificados en formularios y devuelve respuestas codificadas en JSON, utilizando códigos de respuesta HTTP estándar, lo que debería hacer que nuestra API sea familiar para cualquier persona con experiencia previa en el uso de APIs.
+Our API is built as a REST interface. The main benefit is that it accepts form-encoded request bodies and returns JSON-encoded responses, using standard HTTP response codes which should make our API familiar to anyone with previous experience using APIs.
 
-A partir de este punto y utilizando esta documentación como guía, deberías poder integrar y probar llamadas para:
+Use this documentation as a guide to execute tasks such as:
 
-- Crear usuarios de tipo natural y jurídico. (Consulta **[Usuarios](user.es.md)**)
-- Crear billeteras para cada usuario que crees. Esta opción será útil si vas a integrar tarjetas de crédito prefinanciadas o si deseas gestionar más de una billetera por usuario. (Consulta **[Billeteras](wallet.es.md)**)
-- Gestionar saldos de billeteras creadas a través de PayIns, PayOuts y transferencias entre billeteras. (Consulta **[Operaciones de Billetera](wallet_ops.es.md)**)
-- Crear tarjetas vinculadas a las billeteras creadas. (Consulta **[Tarjetas](card.es.md)**)
-- Gestionar las tarjetas creadas. (Consulta **[Operaciones de Tarjetas](card_ops.es.md)**)
+- Creating natural and legal type users. (Check **[Users](user.es.md)**)
+- Creating wallets for each user you create. This option will be useful if you are going to integrate pre-funded credit type cards or if you want to manage more than one wallet per user. (Check **[Wallets](wallet.es.md)**)
+- Managing balances of wallets created through PayIns, PayOuts, and Transfers between wallets. (Check **[Wallet Operations](wallet_ops.es.md)**)
+- Creating cards linked to the created wallets. (Check **[Cards](card.es.md)**)
+- Managing created cards. (Check **[Card Operations](card_ops.es.md)**)
+- Registering a Callback URLs for event notifications (Check [**Notifications Enlist**](notificationsEnlist.es.md))
+- Retrieving transactional data. (Check [**Transaction Data Retrieval**](transactionLists.es.md))
 
 
->Es importante destacar que la creación de tarjetas tiene diferentes endpoints para tarjetas de débito, crédito y prepago.
+> Card creation is done through different endpoints for debit, credit, and prepaid cards.
 
->En la exploración inicial, nuestro equipo comercial te debe haber asignado los detalles específicos de los perfiles de tu programa de tarjetas, lo que definirá a qué endpoint(s) debes hacer llamadas para la creación de tus tarjetas, así como un código único para tu perfil asignado que debe incluirse en las llamadas de creación de tarjetas.
-
----
-
-## **Acceso a Sandbox y Autenticación**
-
-Para comenzar un proceso de integración, primero debes solicitar las claves de API de integración contactando (correo electrónico para este propósito). Las claves de API se entregarán por correo electrónico a la persona responsable técnica.
-
-Manejar las claves es de gran importancia y es responsabilidad del receptor de las claves mantenerlas seguras. Las claves secretas no deben compartirse en ningún sitio accesible públicamente como GitHub, código del lado del cliente, etc.
-
-La autenticación a la API debe realizarse mediante la clave X-API. Es necesario proporcionar la clave API como el valor de usuario básico, sin necesidad de proporcionar una contraseña.‍
-
-Todas las llamadas deben realizarse a través de HTTPS; cualquier llamada realizada a través de HTTP o sin autenticación fallará‍.
-
-Con las credenciales de integración, podrás realizar llamadas al entorno de pruebas de la API de NeoBank directamente. Nuestro equipo proporcionará herramientas para probar los endpoints mientras desarrollas tu código hacia nuestros entornos (puedes elegir entre Swagger o Postman).
+> In the initial product exploration, our commercial team will gather the specifications of the *card product* to be issued. Our integration team will provide a related `clientCode` for each *card product* required, this is a unique code for your assigned card profile that should be included in the card creation calls.
 
 ---
 
-## **Estructura de Entidades**
+## **Sandbox Access and Authentication**
 
-La API de NeoBank tiene 3 entidades fundamentales con las que interactuarás cada vez que consumas un endpoint para completar los diversos flujos disponibles. Estas entidades identifican a los usuarios finales del servicio de emisión de tarjetas, las billeteras o contenedores virtuales de dinero, y las tarjetas asociadas a ellos.
+To start an integration process, you must first request integration API Keys by contacting info@paycaddy.com. After initial scoping and onboarding processes, sandbox API keys will be delivered via email to the technical responsible party.
 
-![entity_diagram](./assets/imgs/entitys.png){class="img"}
+Handling the keys is of great importance and it is the responsibility of the key recipient to keep them safe. Secret keys must not be shared on any publicly accessible site such as GitHub, client-side code, etc.
 
-**UserID:** ‍Identifica de manera única a un EndUser o MerchantUser indistintamente. El UserID es la entidad principal de la API de NeoBank. El proceso de creación de un EndUser o MerchantUser siempre da como resultado la creación de un UserID y, a su vez, de un WalletID asociado.
+Authentication to the API should be performed via X-API Key. It is necessary to provide the API Key as the basic user value, without the need to provide a password.‍
 
-‍
-‍**WalletID:** El WalletID es el identificador del contenedor de dinero electrónico al cual se acreditan y debitan fondos a través de PayIns, PayOuts y/o transacciones de las tarjetas asociadas a él. Un UserID siempre estará asociado con al menos un WalletID; sin embargo, puede contener múltiples WalletIDs si lo requiere la solución del cliente.
-‍
+All calls must be made via HTTPS; any call made via HTTP or without authentication will fail‍.
 
-**‍CardID:** ‍Son los identificadores únicos de la tarjeta que también sirven como una abstracción del PAN de las tarjetas emitidas, evitando la necesidad de almacenar información sensible de las tarjetas.
+With the integration credentials, you will be able to make calls to PayCaddy API testing environment directly.
 
+Utilize our [Sandbox Swagger Interface](https://api.api-sandbox.paycaddy.dev/openapi/index.html) to test each of the endpoints of our API as you develop your code.
+
+----
+## **Entity Structure**
+
+PayCaddy API has 3 fundamental entities with which you will interact each time you consume an endpoint to complete the various available flows. These entities identify the end users of the card issuance service, the wallets or virtual containers for money, and the cards associated with them.
+
+![entity_diagram](./assets/imgs/entityRelationship.svg)
+{class="img"}
+
+- **UserID:** ‍Uniquely identifies an EndUser or MerchantUser interchangeably. The UserID is the primary entity of the NeoBank API. The process of creating an EndUser or MerchantUser always results in the creation of a UserID and, in turn, an associated WalletID.
+
+- **WalletID:** The WalletID is the identifier of the electronic money container to which funds are credited and debited through PayIns, PayOuts, and/or transactions of the card(s) associated with it. A UserID will always be associated with at least one WalletID; however, it may contain multiple WalletIDs if required by the client's solution.
+
+- **‍CardID:** ‍These are the unique identifiers of the card that also serve as an abstraction of the PAN of the issued cards, avoiding the need for storing sensitive card information.

@@ -31,11 +31,14 @@ The KYC (Know Your Customer) Validation webhook is a notification sent to custom
     }
 ```
 
-### **Verif. States and Descript.**
+### **Verification States and Descriptions**
 
 The webhook flow for a validation follows the diagram described below.
 
-![entity_diagram](./assets/imgs/states_descriptions.png){class="img"}
+
+
+![kycflow](./assets/imgs/kycflow.svg)
+{class="img"}
 
 Following this process flow, below are the webhooks corresponding to each state.
 Each of these webhooks provide a description of the corresponding state, including rejection reasons in case of failed verifications. The corresponding descriptions are detailed below for your reference.

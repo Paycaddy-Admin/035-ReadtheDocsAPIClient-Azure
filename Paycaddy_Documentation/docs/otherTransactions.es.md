@@ -1,158 +1,68 @@
-# Transactions
+There are 9 additional types of transactions that you will receive online through the enlisted URL. It should be noted that these types do not affect balance and are merely informative of the card usage and describe the cause for rejected transactions.
 
-## **Transaction Detail List <font color="green">POST</font>**
+## Rejection Notifications
 
-**URL:**  https://api.paycaddy.dev/v1/TransactionDetailList
+These types will be seen as values in the **"c1Tipo"** field of the webhook notification:
 
-Esta llamada POST recupera todas las transacciones de un cardId particular proporcionado.
+1. **DENEGADA:** The transaction was declined for an unspecified reason.
+2. **DENEGADA. PIN INCORRECTO:** The transaction was declined because the entered PIN is incorrect.
+3. **DENEGADA. INTENTOS PIN EXCEDID:** The transaction was declined because the maximum number of PIN entry attempts has been exceeded.
+4. **DENEGADA. TARJETA NO EFECTIVA:** The transaction was declined because the card is not valid or not active.
+5. **DENEGADA. INCORRECTO CVV2:** The transaction was declined because an incorrect CVV2 was entered.
+6. **IMPORTE SUPERA LIMITE:** The transaction was declined because the transaction amount exceeds the allowed limit for the card.
+7. **NO HAY FONDOS:** The transaction was declined because the account associated with the card does not have sufficient funds.
+8. **EXCEDIDO NUMERO DE OPERACION DIARIO:** The transaction was declined because the maximum number of daily operations allowed for the card has been exceeded.
+9. **FECHA CADUCIDAD ERRONEO:** The transaction was declined because an incorrect expiration date was entered.
+10. **NotificacionDenegacion:** These won't typically be seen in received webhooks but instead will be found when using the **TransactionDetailList** endpoint. They represent a transaction that has been declined due to insufficient funds.
 
-
-=== "Request"
-    ```json
-    {
-        "cardId": "904ee16a-db84-4120-9714-0180892341b3",
-        "startDate": "2023-01-23T18:21:02.157Z"
-    }
-
-    ```
-
-=== "Response"
-    ```json
-    {
-        "transactionListJson": 
-        "[{
-            \"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTransaccion\":\"116\",\"c7FechaHoraTransaccion\":\"20230203194512\",\"c11NumeroIdentificativoTransaccion\":\"000088058\",\"c18CodigoActividadEstablecimiento\":\"4111\",\"c19CodigoPaisAdquiren
-            te\":\"724\",\"c38NumeroAutorizacion\":\"169\",\"c41TerminalId
-            \":\"00004001\",\"c42Comercio\":\"000000047219191\",\"c43Ident
-            ificadorComercio\":\"TRANVIA DE MURCIA        CHURRA-MURCIA  
-            \"},{\"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTrans
-            accion\":\"2266\",\"c7FechaHoraTransaccion\":\"20230317135513\
-            ",\"c11NumeroIdentificativoTransaccion\":\"000099870\",\"c18Co
-            digoActividadEstablecimiento\":\"5813\",\"c19CodigoPaisAdquire
-            nte\":\"724\",\"c38NumeroAutorizacion\":\"171\",\"c41TerminalI
-            d\":\"90315259\",\"c42Comercio\":\"000000175240563\",\"c43Iden
-            tificadorComercio\":\"BULEVAR CAFE EL RANERO   MURCIA
-            \"
-        }]"
-    }
-
-    ```
-
-La estructura de los datos compartidos en cada transacción sigue el mismo formato que todas las notificaciones de transacciones (consulte [Webhooks de transacciones](prefundedTRX.es.md)).
-
----
-
-## **TDL By Wallet <font color="green">POST</font>**
-
-**URL:**  https://api.paycaddy.dev/v1/TransactionDetailListByWallet
-
-El punto de conexión **TransactionDetailListByWallet** ofrece una vista detallada de todas las transacciones vinculadas a una billetera específica. Esto incluye transacciones específicas de la billetera, como ingresos, pagos y transferencias, así como transacciones con tarjeta vinculadas a la ID de billetera especificada.
-
-=== "Request"
-    ```json
-    {
-        "walletId": "string",
-        "startDate": "Start Date in ISO Format",
-        "toDate": "End Date in ISO Format",
-        "maxTransactions": "Maximum Number of Transactions",
-        "offset": "Number of Transactions to Skip",
-        "c43IdentificadorComercio": "Optional Merchant Identifier Filter"
-    }
-    ```
-=== "Response"
-    ```json
-    {
-        "transactionListJson": "[{transaction1},{transaction2},...,{transactionN}]",
-        "totalItems": "Total number of transactions within the requested date range",
-        "currentPage": "Current page number indicator",
-        "totalPages": "Total number of pages available"
-    }
-    ```
-
-Cada transacción de tarjeta en la carga de respuesta será una versión en cadena de los webhooks de notificación de transacciones, aumentada con tres campos adicionales:
+In the schema of the JSON sent in these most of these additional types of notifications, the fields **"c38NumeroAutorizacion"** and **"c11NumeroIdentificativoTransaccion"** are present for customer convenience, however, it is important to mention that these fields will not always contain information and, therefore, will be presented as empty strings ("").
 
 ```json
     {
-        "c1Tipo": "string",
-        "c2CardId": "string",
-        "c3CodigoProceso": "string",
-        "c4ImporteTransaccion": "string",
-        "c7FechaHoraTransaccion": "string",
-        "c11NumeroIdentificativoTransaccion": "string",
-        "c18CodigoActividadEstablecimiento": "string",
-        "c19CodigoPaisAdquirente": "string",
-        "c38NumeroAutorizacion": "string",
-        "c41TerminalId": "string",
-        "c42Comercio": "string",
-        "c43IdentificadorComercio": "string",
-        "c51MonedaImporteTransaccion": "string",
-        "c6ImporteMonedaTransaccion": "string",
-        "isSettled": "true"
+        "password": password,
+        "c1Tipo": "DENEGADA. INCORRECTO CVV2",
+        "c2CardId": cardId,
+        "c3CodigoProceso": "000000",
+        "c4ImporteTransaccion": "000000001617",
+        "c7FechaHoraTransaccion": "20220429052901",
+        "c11NumeroIdentificativoTransaccion": "",
+        "c18CodigoActividadEstablecimiento": "5999",
+        "c19CodigoPaisAdquirente": "442",
+        "c38NumeroAutorizacion": "",
+        "c41TerminalId": "00227759",
+        "c42Comercio": "227759000156182",
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
     }
 ```
 
-- **c51MonedaImporteTransaccion:** Representa la moneda utilizada para la transacción en el POS.
-- **c6ImporteMonedaTransaccion:** Indica el monto de la transacción en la moneda utilizada en el POS.
-- **isSettled:** Indica el estado de liquidación de una transacción. Un valor de "false" significa transacciones que no se han liquidado o que están en tránsito, mientras que "true" indica transacciones que se han liquidado.
-
-Dado que PayCaddy abstrae el proceso de liquidación para sus clientes, este campo es particularmente pertinente para casos de uso específicos como reversiones y cancelaciones fuera de línea.
-
-La lista de transacciones recuperada incluirá todas las transacciones con tipos de transacción "c1tipo" que afecten el saldo de la billetera. No se incluirán "c1tipo" adicionales, como las transacciones rechazadas.
-
-Las transacciones del proceso por lotes con valores "c1tipo" de "transaccionCorregidaNegativa" y "transaccionCorregidaPositiva" se incorporarán a la lista recuperada, alineándose con la lógica esperada en los webhooks.
-
-Cada transacción de billetera se presentará en su carga útil de respuesta estándar 200:
-
-**Explicación de parámetros:**
-
-| **Campo** | **Descripción** |
-| ------------- | ------------- |
-| **walletId** | El ID único de la billetera, esencial para obtener las transacciones asociadas. |
-| **startDate & toDate** | Establece el rango de fechas para la recuperación de transacciones. Para obtener y paginar todas las transacciones, utiliza la fecha actual para ambos campos. |
-| **maxTransactions** | Determina la cantidad máxima de transacciones que se devolverán. Si existen más transacciones dentro del rango de fechas, se excluirán. |
-| **offset** | Establece el punto de inicio de las transacciones, que se obtienen en orden cronológico inverso, lo que facilita la paginación. |
-| **c43IdentificadorComercio** | Un filtro opcional basado en un comerciante específico. Por ejemplo, "UBER" obtiene todas las transacciones con "UBER" en su identificador de comerciante. |
-
-**Response**
-
-| **Campo** | **Descripción** |
-| ------------- | ------------- |
-| **transactionListJson** | Contiene un JSON en formato de cadena de todas las transacciones solicitadas en orden cronológico inverso. |
-| **totalItems** | Especifica el total de transacciones en **transactionListJson**. |
-| **currentPage:** | Indica la página actual en función de **totalItems** y el **offset** de la solicitud. |
-| **totalPages:** | Muestra el total de páginas en función de **totalItems** y el **maxTransactions** de la solicitud. |
-
-### **Pagination**
-
-Para administrar la paginación, ajuste los parámetros **maxTransactions** y **offset** en su solicitud. Esto garantiza una exploración controlada de las transacciones históricas, manteniendo un rendimiento rápido de la experiencia de usuario y la interfaz de usuario.
-
-Los parámetros **currentPage** y **totalPages** se incluyen en cada respuesta para mayor comodidad, ambos calculados en función de los parámetros **totalItems** y offset.
-
-Por ejemplo, con un **totalItems** de "25" y un **offset** de "125", el **currentPage** sería "6", mostrando las transacciones numeradas del 126 al 150 del rango de fechas en orden cronológico inverso.
-
 ---
 
-## **Chargeback Operation <font color="green">POST</font>**
+## MoneySend Transactions
 
-**URL:**  https://api.paycaddy.dev/v1/ChargeBackOperation
+To stay informed about the specifics of an initiated MoneySend transaction, PayCaddy provides webhook notifications. These webhooks follow the same structure and travel through the same URL as other transaction notifications. However, MoneySend transactions can be identified by the **c3CodigoProceso** value of **"820000"**.
 
-Este endpoint permite marcar una transacción específica asociada a una tarjeta para que sea estudiada por un equipo de especialistas en contracargos. Al solicitar el análisis de un contracargo, el equipo evaluará si la transacción puede revertirse y los fondos pueden ser devueltos al titular de la tarjeta.
-
-=== "Request"
-    ```json
+```json
     {
-        "numeroidentificativoTransaction": "string",
-        "cardId": "string"
+        "password": "password",
+        "c1Tipo": "PeticionAutorizacion",
+        "c2CardId": "cardId",
+        "c3CodigoProceso": "820000",
+        "c4ImporteTransaccion": "000000001617",
+        "c7FechaHoraTransaccion": "20220429052901",
+        "c11NumeroIdentificativoTransaccion": "000004339",
+        "c18CodigoActividadEstablecimiento": "5999",
+        "c19CodigoPaisAdquirente": "442",
+        "c38NumeroAutorizacion": "040031",
+        "c41TerminalId": "00227759",
+        "c42Comercio": "227759000156182",
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
     }
-    
-    ```
-=== "Response"
-    ```json
-    {
-        "TransactionId": "3fa85f64-xxxx-xxxx-xxx-2c963f66afa6",
-        "IsChargeBack": true,
-        "ChargeBackStatus": "string"
-    }
-    ```
+```
 
-Una vez marcada la transacción, el estado y las actualizaciones del contracargo se notificarán a los clientes a través del webhook de contracargo. (Ver [Webhooks](prefundedTRX.es.md))   
+When handling MoneySend webhook notifications, store them like any other transaction notification. The main difference is in how you process the transaction.
+
+>MoneySend transactions with **c1Tipo** equals to **“PeticionAutorizacion”** must be handled as **positive** transactions by adding funds to the recipient's wallet balance instead of deducting funds.
+
+>MoneySend transactions with **c1Tipo** equals to **“ComunicacionAnulacion”** must be handled as **negative** transactions by subtracting funds from the recipient's wallet balance instead of deducting funds.
+
+When enlisting card or wallet transactions on the front-end, this should be reflected by showcasing the amount of said transactions as inputs to the wallets funds instead of charges.

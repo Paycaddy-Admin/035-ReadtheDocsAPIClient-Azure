@@ -2,9 +2,9 @@
 
 ## **ACK Reception <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/ackReception
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/ackReception
 
-Como medida de seguridad en el proceso logístico de entrega de plásticos físicos, por defecto todas las tarjetas físicas creadas en la API de NeoBank nacen inactivas. Esto se refleja en los campos “isActive” y “status” de las respuestas exitosas para la creación de estas tarjetas, así como al realizar una llamada GET para todo tipo de tarjetas, como se ve en el siguiente ejemplo:
+As a security measure in the logistical process of delivering physical plastics, by default, all physical cards created in the NeoBank API are born inactive. This is reflected in the "isActive" and "status" fields of successful responses for the creation of these cards, as well as when making a GET call for all types of cards, such as seen in the example below:
 
 ```json
     {
@@ -20,13 +20,13 @@ Como medida de seguridad en el proceso logístico de entrega de plásticos físi
     }
 ```
 
-Una vez al día, a una hora de corte específica, todas las tarjetas físicas creadas en el ciclo se envían a la instalación de impresión. La llamada **ackReception POST** no devolverá una respuesta exitosa hasta que se haya impreso la tarjeta solicitada, por lo que es una llamada que solo debe realizarse cuando la tarjeta impresa esté en la mano o 48 horas después de una respuesta exitosa para la creación de la tarjeta.
+Once a day, at a specific cut-off time, all physical cards created in the cycle are sent to the printing facility. The **ackReception POST** call will not return a successful response until the requested card has been printed, so it's a call that should only be made when the printed card is in hand or 48 hours after a successful response for card creation.
 
-El propósito de esta llamada es permitir que la tarjeta se entregue al titular de la tarjeta en un estado inactivo, a la espera de la validación de recepción por parte del titular de la tarjeta una vez que tenga la tarjeta en la mano.
+The purpose of this call is to allow the card to be delivered to the cardholder in an inactive state, waiting for validation of receipt from the cardholder once they have the card in hand.
 
-La validación de la tarjeta en la mano debe gestionarse comparando los datos ingresados ​​por el titular de la tarjeta (como un rango del PAN o el CVV) con los resultados de las llamadas realizadas para obtener dichos datos sensibles (consulte **[checkPan POST](#check-pan-post)** y **[checkCvv POST](#check-cvv-post)**). Si los datos ingresados ​​coinciden, se puede realizar la llamada ackReception POST para activar la tarjeta por primera vez, simplemente enviando el cardId de la tarjeta que se activará en la llamada.
+The card-in-hand validation should be managed by comparing data entered by the cardholder (such as a range of the PAN or the CVV) with the results of calls made to obtain such sensitive data (see **[checkPan POST](#check-pan-post)** and **[checkCvv POST](#check-cvv-post)**). If the entered data matches, the ackReception POST call can be made to activate the card for the first time, simply by sending the cardId of the card to be activated in the call.
 
-La respuesta exitosa a la llamada simplemente replica el **cardId** ingresado. En caso de encontrar un error 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+The successful response to the call simply replicates the entered **cardId**. In case of encountering a 500 error, contact PayCaddy support team with the details of the case.
 
 === "Request"
     ```json
@@ -45,9 +45,9 @@ La respuesta exitosa a la llamada simplemente replica el **cardId** ingresado. E
 
 ## **Block Card <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/blockCard
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/blockCard
 
-Esta llamada permite el cambio autogestionado del estado de actividad de la tarjeta. Esta llamada afecta directamente al booleano **"isActive"** transformándolo en **"false"** en función de una llamada simple que solo lleva el **cardId**.
+‍This call allows for self-managed change of the card's activity status. This call directly affects the **"isActive"** boolean by transforming it to **"false"** based on a simple call that only carries the **cardId**.
 
 === "Request"
     ```json
@@ -63,17 +63,17 @@ Esta llamada permite el cambio autogestionado del estado de actividad de la tarj
     }
     ```
 
-La API podría responder con un error HTTP 400 descriptivo si se trata de un intento de bloquear una tarjeta que ya se ha bloqueado anteriormente. En el caso de las tarjetas activas, a menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
+The API could respond with a descriptive HTTP 400 error if it is an attempt to block a card that has already been previously blocked. For active cards, unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Unblock Card <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/unblockCard
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/unblockCard
 
-Esta llamada permite el cambio autogestionado del estado de actividad de la tarjeta. Esta llamada afecta directamente al booleano "isActive" transformándolo en **"true"** en función de una llamada simple que solo lleva el cardId.
+‍This call allows for self-managed change of the card's activity status. This call directly affects the "isActive" boolean by transforming it to **"true"** based on a simple call that only carries the cardId.
 
 === "Request"
     ```json
@@ -89,20 +89,20 @@ Esta llamada permite el cambio autogestionado del estado de actividad de la tarj
     }
     ```
 
-La API podría responder con un error HTTP 400 descriptivo si se trata de un intento de desbloquear una tarjeta activa. En el caso de las tarjetas bloqueadas previamente que actualmente están inactivas, a menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
+The API could respond with a descriptive HTTP 400 error if it is an attempt to unblock an active card. For previously blocked cards that are currently inactive, unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Cancel Card <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/cancelCard
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/cancelCard
 
 !!!Danger
-    Los resultados que se producen con la acción de este método son irreversibles. No se debe utilizar a la ligera si produce efectos contables.
+    The results caused by the action of this method is unreversible. It shall not be use lightly once it results in countable effects
 
-Esta llamada permite cancelar de forma permanente una tarjeta creada previamente. Esta llamada afecta directamente al booleano **"isActive"**, cambiándolo a **"false"**, así como al campo **"status"**, cambiándolo a **"Cancel"** a partir de una llamada que simplemente carga el **cardId**.
+This call allows for permanently canceling a previously created card. This call directly affects the **"isActive"** boolean, changing it to **"false"**, as well as the **"status"** field changing it to **"Cancel"** from a call that simply loads the **cardId**.
 
 === "Request"
     ```json
@@ -118,20 +118,22 @@ Esta llamada permite cancelar de forma permanente una tarjeta creada previamente
     }
     ```
 
-La API de PayCaddy podría responder con un error HTTP 400 descriptivo si se trata de un intento de cancelar una tarjeta que ya ha sido cancelada.
+The PayCaddy API could respond with a descriptive HTTP 400 error if it is an attempt to cancel a card that has already been canceled.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Check PAN <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/checkPan
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkPan
 
-Esta llamada permite acceder a datos confidenciales como el número de tarjeta y la fecha de vencimiento. Requiere un cardId como entrada y tiene la siguiente estructura:
+‍This call allows access to sensitive data such as the card number and expiration date.
+It requires a cardId as an input and carries the following structure:
 
 !!!Warning
-    Las respuestas a esta convocatoria no deben almacenarse en bases de datos por razones de seguridad.
+    The responses to this call should not be stored in databases for security reasons.
+
 
 === "Request"
     ```json
@@ -148,20 +150,21 @@ Esta llamada permite acceder a datos confidenciales como el número de tarjeta y
     }
     ```
 
-A menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
+Unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Check CVV <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/checkCvv
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkCvv
 
-Esta llamada permite acceder a datos confidenciales como el CVV (valor de verificación de la tarjeta) de la tarjeta. Requiere un ID de cardId como entrada y tiene la siguiente estructura:
+This call allows access to sensitive data such as the card's CVV (Card Verification Value).
+It requires a cardId as an input and carries the following structure:
 
 !!!Warning
-    Las respuestas a esta convocatoria no deben almacenarse en bases de datos por razones de seguridad.
+    The responses to this call should not be stored in databases for security reasons.
 
 === "Request"
     ```json
@@ -177,20 +180,21 @@ Esta llamada permite acceder a datos confidenciales como el CVV (valor de verifi
     }
     ```
 
-A menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
+Unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Check Exp. Date <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/checkDueDate
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkDueDate
 
-Esta llamada permite acceder a la fecha de caducidad de la tarjet. Requiere una cardId como entrada y lleva la siguiente estructura:
+This call allows access the expiration date from the card.
+It requires a cardId as an input and carries the following structure:
 
 !!!Warning
-        Las respuestas a esta convocatoria no deben almacenarse en bases de datos por razones de seguridad.
+    The responses to this call should not be stored in databases for security reasons.
 
 === "Request"
     ```json
@@ -205,21 +209,20 @@ Esta llamada permite acceder a la fecha de caducidad de la tarjet. Requiere una 
         "dueDate": "string"
     }
     ```
+Unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-A menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
-
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Check PIN <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/checkPin
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkPin
 
-Esta llamada permite acceder a los datos sensibles del PIN de la tarjeta, necesario para todos los retiros en cajeros automáticos y para las transacciones en puntos de venta de algunas regiones geográficas.
+This call allows access to the sensitive PIN data of the card, required for all ATM withdrawals and for some geographic regions' POS transactions.
 
 !!!Warning
-    Las respuestas de esta convocatoria no deben almacenarse en bases de datos por razones de seguridad.
+    Responses from this call should not be stored in databases for security reasons.
 
 === "Request"
     ```json
@@ -235,20 +238,20 @@ Esta llamada permite acceder a los datos sensibles del PIN de la tarjeta, necesa
     }
     ```
 
-A menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
+Unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Unblock PIN <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/unblockPin
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/unblockPin
 
-Esta llamada permite reactivar el PIN de una tarjeta luego de que se produzca un bloqueo de seguridad debido a tres intentos incorrectos. El número total de intentos incorrectos aceptables antes del bloqueo de seguridad es un parámetro que se puede discutir durante la fase de definición del alcance del proyecto, específicamente para perfiles de tarjetas personalizados.
+This call allows the reactivation of a card's PIN after a security block occurs due to three incorrect attempts. The total number of acceptable incorrect attempts before the security block is a parameter that can be discussed during the project's scope definition phase, specifically for customized card profiles.
 
 !!!Warning
-    Las respuestas de esta convocatoria no deben almacenarse en bases de datos por razones de seguridad.
+    Responses from this call should not be stored in databases for security reasons.
 
 === "Request"
     ```json
@@ -264,20 +267,20 @@ Esta llamada permite reactivar el PIN de una tarjeta luego de que se produzca un
     }
     ```
 
-A menos que se ingrese un ID de tarjeta incorrecto, la API responderá con un mensaje HTTP 200 exitoso.
+Unless an incorrect cardId is inputted, then the API will reply with a successful HTTP 200 message.
 
-En caso de encontrar un error HTTP 500, comuníquese con el equipo de soporte de PayCaddy con los detalles del caso.
+In case of encountering an HTTP 500 error, contact the PayCaddy support team with the details of the case.
 
 ---
 
 ## **Change PIN <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/cardOperations/changePin
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/changePin
 
-Esta llamada permite gestionar los datos sensibles del PIN de la tarjeta, necesarios para todas las extracciones en cajeros automáticos y para algunas zonas geográficas en los dispositivos de punto de venta. La llamada está diseñada para asignar un PIN de 4 dígitos especificado por el usuario. Las respuestas a esta llamada no deben almacenarse en bases de datos por razones de seguridad.
-
+This call allows managing the sensitive PIN data of the card, which is required for all ATM withdrawals and for some geographic areas in point-of-sale devices. The call is designed to assign a 4-digit PIN specified by the user. The responses to this call should not be stored in databases for security reasons.
+‍
 !!!Warning
-    Las respuestas de esta convocatoria no deben almacenarse en bases de datos por razones de seguridad.
+    Responses from this call should not be stored in databases for security reasons.
 
 === "Request"
     ```json
@@ -294,4 +297,56 @@ Esta llamada permite gestionar los datos sensibles del PIN de la tarjeta, necesa
     ```
 
 
+## **Change Internal Card Limit <font color="green">POST</font>**
 
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/ChangeLimitIWL
+
+Each card generated by PayCaddy's API has a series of properties that are used when conducting transactions. One of these is the limit assigned by clients to control the spending of their users. The value of the limit will determine the amount that can be transacted and may vary for each user. Only clients can make changes and updates to the limit value.
+
+The limits are reset at the beginning of each month, and each transaction is approved according to the current limit at the time.
+
+=== "Request"
+    ```json
+    {
+        "cardId": "string",
+        "limit": 0
+    }
+    ```
+=== "Response"
+    ```json
+    {
+        "cardId": "string",
+        "limit": 0
+    }
+    ```
+
+The API will respond with a HTTP 422 Error "card not found" if the provided cardId has no match for the authenticated client.
+
+---
+
+## **Change Internal Card Limit <font color="sky-blue">GET</font>**
+
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/ChangeLimitIWL/
+
+To retrieve the current limit of a particular card the GET method for the Internal Wallet Limit must be used.
+
+The request must be made with the particular **cardId** that is to be consulted. In the example below, the cardId is highlighted in the request URL.
+
+=== "Request"
+    ```json
+    https://api.paycaddy.dev/v1/ChangeLimitIWL/{CARD_ID}
+    ```
+=== "Response"
+    ```json
+    {
+        "cardId": "string",
+        "limit": 0
+    }
+    ```
+
+In case the Limit is 0 or has not been previously set, the response will carry a message of **“No stablish internal limit”** as the limit attribute.
+
+The API will respond with a HTTP 422 Error **"card not found"** if the provided cardId has no match for the authenticated client.
+
+
+---

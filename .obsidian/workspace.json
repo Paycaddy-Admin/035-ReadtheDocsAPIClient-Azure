@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/prefundedFlow.en.md",
+                "file": "Paycaddy_Documentation/docs/wallet.es.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "prefundedFlow.en"
+              "title": "wallet.es"
             }
           }
         ]
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "chatbot-doc/docs/card.en.md",
+                "file": "Paycaddy_Documentation/docs/wallet.es.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from card.en"
+              "title": "Outgoing links from wallet.es"
             }
           },
           {
@@ -140,17 +140,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/prefundedFlow.en.md",
+                "file": "Paycaddy_Documentation/docs/wallet.es.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of prefundedFlow.en"
+              "title": "Outline of wallet.es"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -169,32 +169,33 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/prefundedFlow.es.md",
-    "Paycaddy_Documentation/docs/prefundedTRX.en.md",
-    "Paycaddy_Documentation/docs/JITflow.en.md",
-    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
-    "Paycaddy_Documentation/docs/chatbot.en.md",
-    "Paycaddy_Documentation/docs/overviewFlow.en.md",
-    "Paycaddy_Documentation/docs/index.md",
-    "Paycaddy_Documentation/docs/transactionLists.en.md",
     "Paycaddy_Documentation/docs/wallet.en.md",
-    "Paycaddy_Documentation/docs/wallet_ops.en.md",
-    "Paycaddy_Documentation/docs/transactionLists.es.md",
-    "Paycaddy_Documentation/docs/settlement.en.md",
-    "Paycaddy_Documentation/docs/user.en.md",
-    "Paycaddy_Documentation/docs/card_ops.en.md",
     "Paycaddy_Documentation/docs/wallet_ops.es.md",
+    "Paycaddy_Documentation/docs/wallet_ops.en.md",
+    "Paycaddy_Documentation/docs/userFlow.en.md",
+    "Paycaddy_Documentation/docs/userFlow.es.md",
     "Paycaddy_Documentation/docs/user.es.md",
-    "Paycaddy_Documentation/docs/otherTransactions.en.md",
-    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
+    "Paycaddy_Documentation/docs/user.en.md",
+    "Paycaddy_Documentation/docs/transactionLists.en.md",
+    "Paycaddy_Documentation/docs/transactionLists.es.md",
+    "Paycaddy_Documentation/docs/settlement.es.md",
+    "Paycaddy_Documentation/docs/prefundedTRX.es.md",
+    "Paycaddy_Documentation/docs/prefundedFlow.es.md",
+    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
+    "Paycaddy_Documentation/docs/overviewFlow.es.md",
     "Paycaddy_Documentation/docs/otherTransactions.es.md",
+    "Paycaddy_Documentation/docs/notificationsEnlist.es.md",
+    "Paycaddy_Documentation/docs/kyc.es.md",
+    "Paycaddy_Documentation/docs/JITtrx.es.md",
+    "Paycaddy_Documentation/docs/kyc.en.md",
+    "Paycaddy_Documentation/docs/assets/imgs/kycflow.svg",
+    "Paycaddy_Documentation/docs/JITflow.es.md",
+    "Paycaddy_Documentation/docs/JITtrx.en.md",
+    "Paycaddy_Documentation/docs/index.es.md",
     "Paycaddy_Documentation/docs/card.en.md",
-    "Paycaddy_Documentation/docs/changelog.en.md",
-    "Paycaddy_Documentation/docs/creditCore.en.md",
-    "Paycaddy_Documentation/docs/backoffice.en.md",
-    "Paycaddy_Documentation/docs/cardFlow.en.md",
-    "Paycaddy_Documentation/docs/card.es.md",
-    "Paycaddy_Documentation/docs/cardFlow.es.md",
+    "Paycaddy_Documentation/docs/creditFlow.es.md",
+    "Paycaddy_Documentation/docs/creditCore.es.md",
+    "Paycaddy_Documentation/docs/chatbot.es.md",
     "Paycaddy_Documentation/docs/assets/imgs/cardFlow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/payindirect.svg",
     "Paycaddy_Documentation/docs/assets/imgs/payincentral.svg",
@@ -204,7 +205,6 @@
     "Paycaddy_Documentation/docs/assets/imgs/settlement.svg",
     "Paycaddy_Documentation/docs/assets/imgs/generalFlow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/generaluserflow.svg",
-    "Paycaddy_Documentation/docs/assets/imgs/merchantuser.svg",
     "docs",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",

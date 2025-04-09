@@ -1,69 +1,31 @@
-## **Visión General de los Flujos**
+There are several achievable functional flows in our PayCaddy API. They can be categorized by the affected entity or the functional outcome. Essentially all Card Programs require a combination of these flows described below:
 
-Los flujos para el uso de la API de NeoBank están categorizados según la entidad principal que registran, modifican o consultan. A un alto nivel, los flujos se correlacionan como se explica a continuación:
-![entity_diagram](./assets/imgs/flow_entitys.png){class="img img-thin"}
+[**User Creation Flow**](userFlow.es.md)
+Enables the registration and KYC verification of new users associated to a particular Card Program. Users can be Natural Persons or Businesses and the KYC verification can be either *Integrated*, or *Delegated*.
+
+>*Integrated KYC* flows utilize PayCaddy's solution for KYC data capture and user activation is conditional to programatic verification through a 3rd party identity verification provider.
+
+>*Delegated KYC* flows enable regulated financial entities to lead KYC data capture and register users that are created active by default
+
+
+[**Card Creation Flow**](cardFlow.es.md)
+Enables the creation of Prepaid, Debit or Credit cards associated to a particular user, wallet and card product specification. This flow also encompasses the initial activation of physical cards.
+
+
+[**Prefunded Transactions Flow**](prefundedFlow.es.md)
+This flow encompasses the funding of wallets through [wallet operations](wallet_ops.es.md), the approval of open-loop transactions, the enlisting of a Callback URL and the notifications sent via webhook to said address.
+
+[**Just-In-Time Funding Transactions Flow**](JITflow.es.md)
+Enables external authorization of card transactions. This flow describes the requirements and specifications for the authorization webservice that needs to be made available, as well as the authorization request schemas and consequential transaction event notifications.
 
 ---
 
-## **Flujo de Usuarios**
+At a high level, the beginning-to-end from the creation of a user to the reception of transaction notifications can be seen in the diagram below (Prefunded Logic Depicted):
 
-La creación de nuevos UserIDs en la API de NeoBank sigue dos flujos separados según el tipo de persona que se va a ingresar en el sistema.
+![generalFlow](./assets/imgs/generalFlow.svg){class="img"}
 
-EndUser se refiere a los usuarios creados para personas físicas.
-MerchantUser se refiere a los usuarios creados para entidades jurídicas.
-
-
->Es importante tener en cuenta que hay endpoints separados para la creación de EndUsers y MerchantUsers.
-
->Durante la exploración inicial, nuestro equipo de ventas debería haberte asignado los detalles específicos de los perfiles de tu programa de tarjetas, lo que definirá qué endpoint(s) debes llamar para la creación de usuarios y las obligaciones KYC pertinentes.
-
-![entity_diagram](./assets/imgs/user_flow.png){class="img"}
-
----
-
-## **Flujo de Tarjetas**
-
-La API de NeoBank tiene llamadas diferenciadas para la creación de tarjetas de débito, crédito y prepago. A través de estas llamadas, es posible crear una tarjeta física o virtual para un UserID existente vinculado al saldo disponible en un WalletID específico de ese usuario.
-
-Todas las tarjetas se crean utilizando un código de parametrización único para cada producto de tarjeta, que debe ser solicitado previamente al equipo de integración de PayCaddy.
-
-La creación de una tarjeta comienza con la llamada post debitCard POST, creditCard POST o prepaidCard POST, dependiendo del servicio de emisión adquirido.
+>For Just-In-Time Funding programs, PayIns won't be utilized and the transaction approval flow will follow a distinct path. For more details see [**JIT Flow**](JITflow.es.md)
 
 
-> Es importante considerar el tipo de usuario para el cual se ha parametrizado la tarjeta. Las tarjetas parametrizadas para personas físicas solo pueden crearse asociándolas con UserIDs que representen EndUsers, mientras que aquellas parametrizadas para entidades jurídicas solo pueden crearse asociándolas con MerchantUsers.
-
-
-Una vez que se te haya otorgado un código de creación de tarjetas, podrás comenzar a probar la creación de tarjetas en el entorno de pruebas.
-
-```mermaid
-
-flowchart TB
-    A([Start]) --> B{clientCode: OK<br>userId: OK<br>isActive: true?}
-    B -- "No" --> X([Card cannot be created<br>4XX Error])
-    B -- "Yes" --> D{Which endpoint?<br>credit / debit / prepaid}
-
-    D -- "Debit" --> E{Wallet type == 0?}
-    D -- "Prepaid" --> E
-    D -- "Credit" --> F{Wallet type == 1?}
-
-    E -- "No" --> X
-    E -- "Yes" --> G([Invoke Card<br>API call])
-
-    F -- "No" --> X
-    F -- "Yes" --> G
-
-    G --> H{API returns<br>200 OK?}
-    H -- "No" --> X
-    H -- "Yes" --> I[Card Created<br>cardId]
-
-    I --> J{Physical<br>or Virtual?}
-    J -- "Virtual" --> K[isActive = true<br>status = Active]
-    J -- "Physical" --> L[isActive = false<br>status = PendingAck]
-
-    L --> M([Card in Hands check<br>+ ackReception POST])
-    M --> N[Physical Card<br>isActive = true<br>status = Active]
-
-
-```
 
 ---

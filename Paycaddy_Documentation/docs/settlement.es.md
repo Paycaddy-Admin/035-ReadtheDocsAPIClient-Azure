@@ -1,66 +1,98 @@
-## **Flow Overview**
+In order to handle the completion of a transaction's lifecycle, we utilize a Batch Process to update and finalizes the lifecycle of each approved transaction, enabling fast visibility over actual settlement data of each individual transaction in you card issuing program.
 
-The flows for using the NeoBank API are categorized based on the main entity they register, modify, or query. At a high level, the flows are correlated as explained bellow:
-![entity_diagram](./assets/imgs/flow_entitys.png){class="img img-thin"}
+PayCaddy leverages this batch processing to deliver notifications through the conventional transactional webhook route (see NotificationEnlist POST) as part of a daily process to confirm and-or adjust the amount previously approved for each transaction.
 
----
+Our system utilizes three key types of webhook notifications to manage various transaction outcomes:
 
-## **User Flow**
-
-The creation of new UserIDs in the NeoBank API follows two separate flows depending on the type of person to be entered into the system.
-
-EndUser refers to the users created for natural persons.
-MerchantUser refers to the users created for legal entities.
-
->It is important to note that there are separate endpoints for creating EndUsers and MerchantUsers.
-
->During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
-
-![entity_diagram](./assets/imgs/user_flow.png){class="img"}
-
----
-
-## **Card Flow**
-
-The NeoBank API has differentiated calls for the creation of debit, credit, and prepaid cards. Through these calls, it is possible to create a physical or virtual card for an existing UserID linked to the available balance in a specific WalletID of that user.
-
-All cards are created using a unique parameterization code for each card product, which must be previously requested from the PayCaddy integration team.
-
-The creation of a card starts with the post debitCard POST, creditCard POST or prepaidCard POST call, depending on the acquired issuance service.
-
->It is important to consider the type of user for which the card has been parameterized. Cards parameterized for natural persons can only be created by associating them with UserIDs representing EndUsers, while those parameterized for legal entities can only be created by associating them with MerchantUsers.
-
-Once you have been granted a card creation code, you can begin testing card creation in the test environment.
-
-```mermaid
-
-flowchart TB
-    A([Start]) --> B{clientCode: OK<br>userId: OK<br>isActive: true?}
-    B -- "No" --> X([Card cannot be created<br>4XX Error])
-    B -- "Yes" --> D{Which endpoint?<br>credit / debit / prepaid}
-
-    D -- "Debit" --> E{Wallet type == 0?}
-    D -- "Prepaid" --> E
-    D -- "Credit" --> F{Wallet type == 1?}
-
-    E -- "No" --> X
-    E -- "Yes" --> G([Invoke Card<br>API call])
-
-    F -- "No" --> X
-    F -- "Yes" --> G
-
-    G --> H{API returns<br>200 OK?}
-    H -- "No" --> X
-    H -- "Yes" --> I[Card Created<br>cardId]
-
-    I --> J{Physical<br>or Virtual?}
-    J -- "Virtual" --> K[isActive = true<br>status = Active]
-    J -- "Physical" --> L[isActive = false<br>status = PendingAck]
-
-    L --> M([Card in Hands check<br>+ ackReception POST])
-    M --> N[Physical Card<br>isActive = true<br>status = Active]
+1. **TransaccionCorregidaPositiva:** Issued when the final settlement results in a positive adjustment to the initially authorized amount, thereby adding funds to the user’s wallet.
+2. **TransaccionCorregidaNegativa:** Issued when the final settlement results in a negative adjustment, thereby deducting funds from the user's wallet.
+3. **TransaccionConfirmada:** Introduced to confirm that the transaction has settled exactly at the amount authorized initially, providing clear and precise confirmation of the transaction outcome.
 
 
-```
+![settlement](./assets/imgs/settlement.svg)
+
+
+
+## Amount Correction Use Cases
+
+A couple of examples of transactions that could be corrected through a batch process are:
+
+1. **Car rental:** When a customer rents a car, the rental company usually authorizes an initial amount on the customer's card to cover the cost of the rental and any possible damage. However, the final amount could vary depending on the actual use of the vehicle and other factors, such as the distance traveled or the cost of fuel. In these cases, the corrective message "TransaccionCorregidaPositiva" or "TransaccionCorregidaNegativa" could be used to adjust the final amount charged to the customer's card, once the vehicle has been returned and the final calculation has been made.
+2. **Hotel bookings:** When a customer reserves a hotel room, the hotel usually blocks an amount on the customer's card to cover the cost of the stay and possible additional charges, such as the minibar or room service. At the end of the stay, the final amount may be different from the initially blocked amount, depending on the actual use of these additional services. In these cases, the corrective message "TransaccionCorregidaPositiva" or "TransaccionCorregidaNegativa" could be used to adjust the final amount charged to the customer's card, once the final charges have been calculated.
+
+Batch processing streamlines the handling of deferred transactions and ensures proper settlement, reducing discrepancies and the need for manual reconciliation. These webhooks improve transaction handling, minimize errors, and optimize overall management.
+
+>The majority of webhooks related to these corrective transactions will be sent during the same period overnight. This is because our webhook generation process is a batch process that runs overnight to consolidate and notify if there were changes to the day's transactions.
+
+Whenever possible, it is recommended to match the corrected transaction with the original transaction for UI purposes. This way, cardholders will have a better understanding of how and why their balance has been modified.
+
+## Webhook Schemas
+
+Settlement of transactions will be notified through a webhook that carries one of the following schemas:
+
+=== "TransaccionCorregidaPositiva"
+    ```json
+    {
+        "password": "password",
+        "c1Tipo": "TransaccionCorregidaPositiva",
+        "c2CardId": "cardId",
+        "c3CodigoProceso": "000000",
+        "c4ImporteTransaccion": "000000001617",
+        "c7FechaHoraTransaccion": "20220429052901",
+        "c11NumeroIdentificativoTransaccion": "000004339",
+        "c18CodigoActividadEstablecimiento": "5999",
+        "c19CodigoPaisAdquirente": "442",
+        "c38NumeroAutorizacion": "040031",
+        "c41TerminalId": "00227759",
+        "c42Comercio": "227759000156182",
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+    }
+    ```
+=== "TransaccionCorregidaNegativa"
+    ```json
+    {
+        "password": "password",
+        "c1Tipo": "TransaccionCorregidaNegativa",
+        "c2CardId": "cardId",
+        "c3CodigoProceso": "000000",
+        "c4ImporteTransaccion": "000000001617",
+        "c7FechaHoraTransaccion": "20220429052901",
+        "c11NumeroIdentificativoTransaccion": "000004339",
+        "c18CodigoActividadEstablecimiento": "5999",
+        "c19CodigoPaisAdquirente": "442",
+        "c38NumeroAutorizacion": "040031",
+        "c41TerminalId": "00227759",
+        "c42Comercio": "227759000156182",
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+    }
+    ```
+=== "TransaccionConfirmada"
+    ```json
+    {
+        "password": "password",
+        "c1Tipo": "TransaccionConfirmada",
+        "c2CardId": "cardId",
+        "c3CodigoProceso": "000000",
+        "c4ImporteTransaccion": "000000001617",
+        "c7FechaHoraTransaccion": "20220429052901",
+        "c11NumeroIdentificativoTransaccion": "000004339",
+        "c18CodigoActividadEstablecimiento": "5999",
+        "c19CodigoPaisAdquirente": "442",
+        "c38NumeroAutorizacion": "040031",
+        "c41TerminalId": "00227759",
+        "c42Comercio": "227759000156182",
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+    }
+    ```
+
+
+## Transaction Matching and Funds Capture
+
+- **Matching Transactions:** Each transaction includes a unique identifier `c11NumeroIdentificativoTransaccion`, which is crucial for matching the corrected or confirmed settlement with its initial authorization. This matching process is essential for maintaining transaction integrity and provides cardholders with a clear understanding of how and why their balances were adjusted.
+- **Notifications Details:** Settlement webhook notifications contain information about the transaction, including the transaction amount, the identifier, and the type of adjustment or confirmation.
+
+> Once a transaction has been modified, it will not be modified again.
+
+>Although it is less common, it can also occur that a charge arrives only in the batch process and not online. If this is the case, the webhook may arrive with less information. It should be noted that this information is according to the network's protocol for handles these confirmations and does not depend on PayCaddy.
 
 ---

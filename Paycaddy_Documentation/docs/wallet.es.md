@@ -1,9 +1,8 @@
 ## **Wallets <font color="green">POST</font>** 
 
-**URL:** https://api.paycaddy.dev/v1/wallets
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/wallets
 
-‍La creación de un monedero se realiza a través de una llamada POST que lleva la siguiente estructura:
-
+‍The creation of a wallet is done through a POST call that carries the following structure:
 
 === "Request"
     ```json
@@ -27,27 +26,27 @@
         }
     ```
 
-Esta llamada debe realizarse asociándola a un userId activo previamente creado.
+This call must be made by associating it with a previously created active userId.
 
-El campo de moneda debe considerar los códigos de la norma ISO 4217. (por ejemplo, los dólares estadounidenses se introducirían con el código «USD»).
+The currency field must consider the codes of ISO 4217. (e.g. US Dollars would be entered with the code "USD").
 
-El campo descripción se crea para dar nombre al monedero creado según el uso previsto.
+The description field is created to name the wallet created according to the intended use.
 
-El campo "walletType" define si el monedero puede o no asociarse a una tarjeta de crédito (ver POST creditCard). Este booleano debe mantenerse como «0» para todos los monederos creados para tarjetas de débito, tarjetas prepago o para la gestión de fondos y transferencias. Para los monederos creados para tarjetas de crédito de tipo prepago, el "walletType" debe definirse como "1".
+The "walletType" field defines whether the wallet can or cannot be associated with a credit card (see creditCard POST). This boolean must be kept as "0" for all wallets created for debit cards, prepaid cards, or for fund and transfer management. For wallets created for prefunded credit type cards, the "walletType" must be defined as "1".
 
-> Las **"Carteras principales"** creadas automáticamente en el flujo de creación de usuarios mantienen un **"walletType"** de **"0"**.
+> The **"Main Wallets"** created automatically in the user creation flow maintain a **"walletType"** of **"0"**.
 
 ---
 
 ## **Wallets <font color="sky-blue">GET</font>** 
 
-**URL:** https://api.paycaddy.dev/v1/wallets
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/wallets
 
-El metodo GET para monederos permite recuperar la información asociada al walletId consultado. Esta llamada es especialmente importante para comprobar el saldo disponible en un monedero y el saldo retenido debido a transacciones pendientes.
+The GET call for wallets allows you to retrieve the information associated with the queried walletId. This call is particularly important for checking the available balance in a wallet and the balance withheld due to pending transactions.
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/wallets/{WALLET_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/wallets/{WALLET_ID}
     
     ```
 === "Response"
@@ -63,11 +62,11 @@ El metodo GET para monederos permite recuperar la información asociada al walle
         } 
     ```
 
-El saldo total se refleja en el campo «saldo» de la respuesta 200 satisfactoria a esta llamada, mientras que el saldo retenido se refleja en el campo "importeRetenido".
+The total balance is reflected in the "balance" field of the successful 200 response to this call, while the balance withheld is reflected in the "amountWithheld" field.
 
-Todas las cantidades se reflejan en céntimos, lo que significa que 1.000,00 USD se representarían como 100000.
+All amounts are reflected in cents, meaning USD 1,000.00 would be represented as 100000.
 
-La llamada puede fallar si se proporciona un walletId incorrecto, en cuyo caso la API de NeoBank respondería con un error HTTP 400.
+The call may fail if an incorrect walletId is provided, in which case the NeoBank API would respond with a HTTP 400 error.
 
 ```json
     {
@@ -83,9 +82,9 @@ La llamada puede fallar si se proporciona un walletId incorrecto, en cuyo caso l
 
 ## **Wallet Per User ID <font color="green">POST</font>** 
 
-**URL:** https://api.paycaddy.dev/v1/WalletsPerUserIds
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/WalletsPerUserIds
 
-‍Este endpoint permite recuperar todos los monederos asociados a un ID de usuario.Realizando una petición POST con el ID del usuario, el sistema devuelve una lista con los identificadores de los diferentes monederos que tiene el usuario.
+‍This endpoint allows retrieving all the wallets associated with a user ID.By making a POST request with the user's ID, the system returns a list of the identifiers of the different wallets that the user has.
 
 === "Request"
     ```json
@@ -99,64 +98,10 @@ La llamada puede fallar si se proporciona un walletId incorrecto, en cuyo caso l
         "walletsJson": "[
         ‍{\"Id\":\"216fa217-6826-48b8-ab5b-0180891cef30\",\"BDateUtcCreate\":\"2022-05-03T08:50:16.4959966\",\"BTimestamp\":\"AAAAAAAb6Pk=\",
         \"ClientId\":\"1c5a29f5-b018-40c7-a6d4-017efe423d42\",\"UserId\":\"qa2c3b2a-23f6-49be-b882-0180891cef30\",\"Currency\":\"USD\",\"Description\":\"Main wallet\",\"AmountAvailable\":38574,\"AmountWithheld\":1110756},
-
-        {\"Id\":\"d6928675-a4fe-4752-8e7e-018099d30fe1\",\"BDateUtcCreate\":\"2022-05-06T14:43:07.7804616\",\"BTimestamp\":\"AAAAAAAbv6Q=\",
+        {
+        \"Id\":\"d6928675-a4fe-4752-8e7e-018099d30fe1\",\"BDateUtcCreate\":\"2022-05-06T14:43:07.7804616\",\"BTimestamp\":\"AAAAAAAbv6Q=\",
         \"ClientId\":\"1c5a29f5-b018-40c7-a6d4-017efe423d42\",\"UserId\":\"ea2c3b2a-23f6-49be-b882-0180891cef30\",\"Currency\":\"USD\",\"Description\":\"SecondaryWallet\",\"AmountAvailable\":381599,\"AmountWithheld\":29253372}]"
-    }
-    ```
+    }```
 
-La respuesta a esta llamada lleva toda la información de las múltiples carteras asociadas al mismo UserId en un formato de cadena que mantiene la misma estructura que la respuesta de la llamada Wallet GET.
-
----
-
-## **Change Internal Card Limit <font color="green">POST</font>**
-
-**URL:** https://api.paycaddy.dev/v1/ChangeLimitIWL
-
-Cada tarjeta generada por la API de PayCaddy tiene una serie de propiedades que se utilizan a la hora de realizar transacciones. Una de ellas es el límite asignado por los clientes para controlar el gasto de sus usuarios. El valor del límite determinará la cantidad que se puede transaccionar y puede variar para cada usuario. Sólo los clientes pueden realizar cambios y actualizaciones en el valor del límite.
-
-Los límites se restablecen a principios de cada mes, y cada transacción se aprueba según el límite vigente en ese momento.
-
-=== "Request"
-    ```json
-    {
-        "cardId": "string",
-        "limit": 0
-    }
-    ```
-=== "Response"
-    ```json
-    {
-        "cardId": "string",
-        "limit": 0
-    }
-    ```
-
-La API responderá con un error HTTP 422 "tarjeta no encontrada" si el cardId proporcionado no coincide con el del cliente autenticado.
-
----
-
-## **Change Internal Card Limit <font color="sky-blue">GET</font>**
-
-**URL:** https://api.paycaddy.dev/v1/ChangeLimitIWL/
-
-Para recuperar el límite actual de una tarjeta en particular se debe utilizar el método GET para el Límite Interno de Cartera.
-
-La solicitud debe realizarse con el **cardId** concreto que se desea consultar. En el ejemplo siguiente, el cardId aparece resaltado en la URL de la solicitud.
-
-=== "Request"
-    ```json
-    https://api.paycaddy.dev/v1/ChangeLimitIWL/{CARD_ID}
-    ```
-=== "Response"
-    ```json
-    {
-        "cardId": "string",
-        "limit": 0
-    }
-    ```
-
-En caso de que el límite sea 0 o no se haya establecido previamente, la respuesta llevará un mensaje de **"No stablish internal limit** como atributo de límite.
-
-La API responderá con un error HTTP 422 **"tarjeta no encontrada"** si el cardId proporcionado no coincide con el del cliente autenticado.
+The response to this call carries all the information from the multiple wallets associated to the same UserId in a string format that maintains the same structure as the response of the Wallet GET call.
 

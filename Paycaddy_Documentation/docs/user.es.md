@@ -1,8 +1,8 @@
 ## **End User <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/endUsers
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/endUsers
 
-‍La creación de un nuevo usuario para una persona física comienza con una llamada POST en la que se consume un endpoint para enviar la información básica del usuario:
+‍The creation of a new user for a natural person begins with a POST call in which an endpoint is consumed for sending the user's basic information:
 
 === "Request"
     ```json
@@ -52,28 +52,25 @@
             "creationDate": "2022-07-13T21:07:21.166Z"
         }
     ```
+It should be noted that the responsibility for validating the accuracy and format of the entered data falls on the PayCaddy client, meaning that our API will return a successful response as long as the following parameters are met, regardless of the accuracy of the information or duplication of the shared data:
 
-Cabe señalar que la responsabilidad de validar la exactitud y el formato de los datos ingresados recae sobre el cliente de PayCaddy, lo que significa que nuestra API devolverá una respuesta exitosa siempre que se cumplan los siguientes parámetros, independientemente de la precisión de la información o duplicación de los datos compartidos:
+1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the [ITU-T50](https://www.itu.int/rec/T-REC-T.50/en) range, which is a slightly more restrictive subset of ASCII.
+2. None of the fields should be sent as NULL.
+3. The email field must follow a standard email format.
 
-1. Los campos de Nombre y Apellido deben sumar un total máximo de 22 caracteres y deben enviarse en un formato depurado, eliminando caracteres especiales y limitándose al rango ASCII.
-2. Ninguno de los campos debe enviarse como NULL.
-3. El campo de correo electrónico debe seguir un formato estándar de correo electrónico.
+In addition to the format verifications, it is important to highlight the responsibility of the client to consistently send the remaining fields with correct information:
 
+- The **"salary"** field should include the user's monthly salary in USD.
+- The **"pep"** field indicates whether the natural person for whom the user is being created is politically exposed.
+  - **PEP**: Someone who has been entrusted with a prominent public responsibility. Typically, a PEP presents a higher risk of potential involvement in bribery and corruption by virtue of their position and influence.
 
-Además de las verificaciones de formato, es importante destacar la responsabilidad del cliente de enviar consistentemente el resto de los campos con la información correcta:
+The control over user duplication must be managed by the PayCaddy client. Our API will generate multiple distinct **userIds** regardless of whether the shared data is identical in duplicate calls.
 
-- El campo **"salario"** debe incluir el salario mensual del usuario en USD.
-- El campo **"pep"** indica si la persona natural para la que se está creando el usuario es una persona políticamente expuesta.
-- **PEP:** Alguien que ha sido confiado con una responsabilidad pública prominente. Típicamente, una PEP presenta un mayor riesgo de posible implicación en soborno y corrupción debido a su posición e influencia.
+If this event does not generate errors, the system will respond with an **HTTP 200 OK** message. The successful response replicates the entered data and adds information about the **isActive** parameters and the initial **walletId** associated with the userId, as well as loading a timestamp of the creation date of said user.
 
->El control sobre la duplicación de usuarios debe ser gestionado por el cliente de PayCaddy. Nuestra API generará múltiples **userIds** distintos, independientemente de si los datos compartidos son idénticos en llamadas duplicadas.
+If there is an error, the system will respond with one of the following error messages with status code 400:
 
-Si este evento no genera errores, el sistema responderá con un mensaje **HTTP 200 OK**. La respuesta exitosa replica los datos ingresados y agrega información sobre los parámetros **isActive** y el **walletId** inicial asociado con el userId, así como una marca de tiempo de la fecha de creación de dicho usuario.
-
-Si ocurre un error, el sistema responderá con uno de los siguientes mensajes de error con código de estado 400:
-
-
-=== "Campos pendientes"
+=== "Missing fields"
     ```json
     {
         "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
@@ -87,7 +84,7 @@ Si ocurre un error, el sistema responderá con uno de los siguientes mensajes de
         }
     }
     ```
-=== "Limite de caracteres"
+=== "Character Limit"
     ```json
     {
         "type": "",
@@ -97,7 +94,7 @@ Si ocurre un error, el sistema responderá con uno de los siguientes mensajes de
         "instance": ""
     }
     ```
-=== "Formato de correo electronico"
+=== "Email Format"
     ```json
     {
         "type": "",
@@ -107,13 +104,11 @@ Si ocurre un error, el sistema responderá con uno de los siguientes mensajes de
         "instance": ""
     }
     ```
+>In case you encounter an error message 500, this could indicate an internal server error in the system. If you face this situation, we ask that you inform the PayCaddy team so that we can investigate and solve the problem efficiently.
 
-> En caso de que encuentres un mensaje de error 500, esto podría indicar un error interno del servidor en el sistema. Si te enfrentas a esta situación, te pedimos que informes al equipo de PayCaddy para que podamos investigar y resolver el problema de manera eficiente.
+Once the user and wallet identifiers have been assigned, the end-user must complete the KYC verification in order to complete the profile creation procedure. Until this verification is completed, the "isActive" control field will remain assigned as false, disabling any procedures.
 
-Una vez que se hayan asignado los identificadores de usuario y billetera, el usuario final deberá completar la verificación KYC para finalizar el procedimiento de creación del perfil. Hasta que se complete esta verificación, el campo de control "isActive" permanecerá asignado como falso, deshabilitando cualquier procedimiento.
-
-En la respuesta de creación de usuario (EndUser POST), se presenta un enlace a la validación de identidad asociada con el userId en Metamap en el campo **kycUrl**, donde se presentarán las instrucciones y los pasos que el usuario final debe seguir para completar la verificación.
-
+In the user creation response (EndUser POST), a link to the identity validation associated with the userId in Metamap is presented at the field **kycUrl**, where the instructions and steps to follow will be presented to the end-user to complete the verification.
 ```json
     {
         "kycUrl": "https%3a%2f%2fsignup.getmati.com%2f%3fmerchantToken%
@@ -123,27 +118,26 @@ En la respuesta de creación de usuario (EndUser POST), se presenta un enlace a 
     }
 ```
 
-Es importante considerar que el kycURL se comparte aplicando codificación de URL, lo que permite el envío de metadatos (userId) que vinculan la validación con el usuario creado. Para asegurar la activación del usuario al completar exitosamente la verificación, es necesario que la URL a la cual se redirige al usuario desde la interfaz front-end cargue la siguiente estructura:
+It is important to consider that the kycURL is shared by applying URL encoding that allows the sending of metadata (userId) that links the validation with the created user. To ensure the activation of the user upon successfully completing the validation, it is necessary to ensure that the URL to which the user is redirected from the front-end interface loads the following structure:
 
 >https://signup.getmati.com/?merchantToken=6046cc2a54816f001dedd641&
-flowId=6046cc2a54816f001bedd640&metadata={"userid":"a955ea0f-34f3-4254-b10a-0181f30729kd"}
+>flowId=6046cc2a54816f001bedd640&metadata={"userid":"a955ea0f-34f3-4254-b10a-0181f30729kd"}
 
-Para obtener información completa sobre KYC, puedes consultar el capítulo detallado de KYC en esta documentación.
+For complete information on KYC, please find detailed information on this documentation's KYC chapter.
 
 ---
 
-## **End User <font color="sky-blue">GET</font>**
+## **End User <font color="sky-blue">GET</font>** 
 
-**URL:** https://api.paycaddy.dev/v1/endUsers/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/endUsers/
 
-El metodo GET para un endUser permite conocer los datos almacenados de un userId concreto, especialmente el walletId de su monedero inicial y el estado de actividad de este usuario en el campo "isActive". Ambos datos son cruciales para las demás llamadas a la API de NeoBank.
+‍The GET call for an endUser allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
-Esta llamada puede utilizarse para verificar el estado del usuario en cualquier punto del flujo.
-
+This call can be used to verify the user's status at any point in the flow.
 
 === "Request"
     ```
-     https://api.paycaddy.dev/v1/endUsers/${USER_ID}
+     https://api.api-sandbox.paycaddy.dev/v1/endUsers/${USER_ID}
     ```
 === "Response"
     ```json
@@ -176,10 +170,9 @@ Esta llamada puede utilizarse para verificar el estado del usuario en cualquier 
 
 ## **Merchant User <font color="green">POST</font>** 
 
-**URL:** https://api.paycaddy.dev/v1/merchantUsers
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/merchantUsers
 
-La creación de un nuevo usuario para una persona jurídica comienza con una llamada POST en la que se consume un endpoint para el envío de los datos básicos de la persona jurídica.
-
+The creation of a new user for a legal entity begins with a POST call in which an endpoint is consumed for sending the basic data of the legal entity.
 
 === "Request"
     ```json
@@ -202,9 +195,8 @@ La creación de un nuevo usuario para una persona jurídica comienza con una lla
         }
 
     ```
-
 === "Response"
-    ```json
+    ```json```
     {
         "id": "string",
         "email": "string",
@@ -228,24 +220,23 @@ La creación de un nuevo usuario para una persona jurídica comienza con una lla
     }
     ```
 
-Cabe señalar que la responsabilidad de validar la exactitud y el formato de los datos ingresados recae sobre el cliente de PayCaddy, lo que significa que nuestra API devolverá una respuesta exitosa siempre que se cumplan los siguientes parámetros, independientemente de la precisión de la información o duplicación de los datos compartidos:
+It should be noted that the responsibility for validating the accuracy and format of the entered data falls on the PayCaddy client, meaning that our API will return a successful response as long as the following parameters are met, regardless of the accuracy of the information or duplication of the shared data:
 
-1. Los campos de Nombre y Apellido deben sumar un total máximo de 22 caracteres y deben enviarse en un formato depurado, eliminando caracteres especiales y limitándose al rango ASCII.
-2. Ninguno de los campos debe enviarse como NULL.
-3. El campo de correo electrónico debe seguir un formato estándar de correo electrónico.
+1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the [ITU-T50](https://www.itu.int/rec/T-REC-T.50/en) range, which is a slightly more restrictive subset of ASCII.
+2. None of the fields should be sent as NULL.
+3. The email field must follow a standard email format.
 
+In addition to the format verifications, it is important to highlight the responsibility of the client to consistently send the remaining fields with correct information:
 
-Además de las verificaciones de formato, es importante destacar la responsabilidad del cliente de enviar consistentemente el resto de los campos con la información correcta:
+1. The field **"RUC"** must include the number of the Unique Taxpayer Registry or its international counterpart for tax identification such as VATIN, CUIT, CNPJ, NIT, or RUT.
+2. The **"numOfRegistration"** field must include the registration number of the legal entity as determined by the institution. This field can replicate the data from "RUC" in case the information is not applicable in your jurisdiction.
+3. The **"kindOfBusiness"** field should enter a brief description of the economic activity performed by the legal entity. The NeoBank API does not validate the detailed information provided in this field; however, it is crucial to ensure the submission of accurate information as it will be used by the compliance team in evaluating the user.
 
-- El campo **"salario"** debe incluir el salario mensual del usuario en USD.
-- El campo **"pep"** indica si la persona natural para la que se está creando el usuario es una persona políticamente expuesta.
-- **PEP:** Alguien que ha sido confiado con una responsabilidad pública prominente. Típicamente, una PEP presenta un mayor riesgo de posible implicación en soborno y corrupción debido a su posición e influencia.
+If this event does not generate errors, the system will respond with an HTTP 200 OK message. The successful response replicates the entered data and adds information about the isActive parameters and the initial walletId associated with the userId, as well as loading a timestamp of the creation date of said user.
 
->El control sobre la duplicación de usuarios debe ser gestionado por el cliente de PayCaddy. Nuestra API generará múltiples **userIds** distintos, independientemente de si los datos compartidos son idénticos en llamadas duplicadas.
+>Controls for user duplication must be managed by integrating partners. Our API will generate multiple distinct userIds, regardless of whether the shared data is identical in duplicate calls.
 
-Si este evento no genera errores, el sistema responderá con un mensaje **HTTP 200 OK**. La respuesta exitosa replica los datos ingresados y agrega información sobre los parámetros **isActive** y el **walletId** inicial asociado con el userId, así como una marca de tiempo de la fecha de creación de dicho usuario.
-
-Si ocurre un error, el sistema responderá con uno de los siguientes mensajes de error con código de estado 400:
+If there is an error, the system will respond with one of the following error messages with status code 400:
 
 === "Missing fields"
     ```json
@@ -282,21 +273,21 @@ Si ocurre un error, el sistema responderá con uno de los siguientes mensajes de
     }
     ```
 
-> En caso de que encuentres un mensaje de error 500, esto podría indicar un error interno del servidor en el sistema. Si te enfrentas a esta situación, te pedimos que informes al equipo de PayCaddy para que podamos investigar y resolver el problema de manera eficiente.
+>In case you encounter an error message 500, this could indicate an internal server error in the system. If you face this situation, we ask that you inform the PayCaddy team so that we can investigate and solve the problem efficiently.
 
 ---
 
 ## **Merchant User <font color="sky-blue">GET</font>**
 
-**URL:** https://api.paycaddy.dev/v1/merchantUsers/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/merchantUsers/
 
-El metodo GET para un merchantUser permite conocer los datos almacenados de un userId concreto, especialmente el walletId de su monedero inicial y el estado de actividad de este usuario en el campo «isActive». Ambos datos son cruciales para las demás llamadas a la API de NeoBank.
+The GET call for a merchantUser allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
-Esta llamada puede utilizarse para verificar el estado del usuario en cualquier punto del flujo.
+This call can be used to verify the user's status at any point in the flow.
 
 === "Request"
     ```
-     https://api.paycaddy.dev/v1/merchantUsers/{MERCHANT_ID}
+     https://api.api-sandbox.paycaddy.dev/v1/merchantUsers/{MERCHANT_ID}
     ```
 === "Response"
     ```json
@@ -324,14 +315,14 @@ Esta llamada puede utilizarse para verificar el estado del usuario en cualquier 
         "creationDate": "2023-03-22T19:13:46.178Z"
     }
     ```
+
 ---
 
 ## **End User SR <font color="green">POST</font>** 
 
-**URL:**  https://api.paycaddy.dev/v1/SR/endUserSRs/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/SR/EndUserSRs
 
-La creación de un nuevo usuario para una persona física con un flujo KYC delegado comienza con una llamada POST en la que se consume un endpoint para el envío de los datos básicos del usuario:
-
+The creation of a new user for a natural person with a delegated KYC flow begins with a POST call in which an endpoint is consumed for sending the basic data of the user:
 
 === "Request"
     ```json
@@ -387,38 +378,38 @@ La creación de un nuevo usuario para una persona física con un flujo KYC deleg
     }
     ```
 
-Los campos "idUrlFront", "idUrlBack" y "residenceProofUrl" deben enviarse con URL únicas donde se almacenan las imágenes del anverso y reverso del documento nacional de identidad del usuario y una prueba de residencia. Los parámetros específicos para subir estos documentos deben haber sido acordados previamente con el departamento de cumplimiento de PayCaddy.
+The fields "idUrlFront", "idUrlBack", and "residenceProofUrl" must be sent with unique URLs where images of the front and back of the user's national identity card and a proof of residence are stored. The specific parameters for uploading these documents must have been previously agreed with the compliance department of PayCaddy.
 
-Los usuarios creados bajo este flujo nacen con un estado activo pero están sujetos a bloqueos en caso de que la información KYC enviada en la llamada de creación sea rechazada por el equipo de cumplimiento de PayCaddy.
+Users created under this flow are born with an active status but are subject to blockages in case the KYC information sent in the creation call is rejected by the compliance team of PayCaddy.
 
-Cabe señalar que la responsabilidad de validar la exactitud y el formato de los datos introducidos recae en el cliente de PayCaddy, lo que significa que nuestra API devolverá una respuesta correcta siempre y cuando se cumplan los siguientes parámetros, independientemente de la exactitud de la información o la duplicación de los datos compartidos:
+It should be noted that the responsibility for validating the accuracy and format of the entered data falls on the PayCaddy client, meaning that our API will return a successful response as long as the following parameters are met, regardless of the accuracy of the information or duplication of the shared data:
 
-1. Los campos Nombre y Apellidos deben sumar un total máximo de 22 caracteres que deben ser enviados de forma saneada, eliminando caracteres especiales y limitándose al rango ASCII.
-2. Ninguno de los campos debe enviarse como NULL.
-3. El campo email debe seguir un formato de email estándar.
+1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the ASCII range.
+2. None of the fields should be sent as NULL.
+3. The email field must follow a standard email format.
 
-Además de las verificaciones de formato, es importante destacar la responsabilidad del cliente de enviar consistentemente el resto de los campos con la información correcta:
+In addition to the format verifications, it is important to highlight the responsibility of the client to consistently send the remaining fields with correct information:
 
-- El campo **"salario"** debe incluir el salario mensual del usuario en USD.
-- El campo **"pep"** indica si la persona natural para la que se está creando el usuario es una persona políticamente expuesta.
-- **PEP:** Alguien que ha sido confiado con una responsabilidad pública prominente. Típicamente, una PEP presenta un mayor riesgo de posible implicación en soborno y corrupción debido a su posición e influencia.
+1. The "salary" field should include the user's monthly salary in USD.
+2. The "pep" field indicates whether the natural person for whom the user is being created is politically exposed.
 
->El control sobre la duplicación de usuarios debe ser gestionado por el cliente de PayCaddy. Nuestra API generará múltiples **userIds** distintos, independientemente de si los datos compartidos son idénticos en llamadas duplicadas.
+PEP: Someone who has been entrusted with a prominent public responsibility. Typically, a PEP presents a higher risk of potential involvement in bribery and corruption by virtue of their position and influence.
 
-Si este evento no genera errores, el sistema responderá con un mensaje HTTP 200 OK. La respuesta correcta replica los datos introducidos y añade información sobre los parámetros **isActive** y el **walletId** inicial asociado al **userId**, además de cargar una marca de tiempo de la fecha de creación de dicho usuario.
+>The control over user duplication must be managed by the PayCaddy client. Our API will generate multiple distinct userIds regardless of whether the shared data is identical in duplicate calls.
+
+If this event does not generate errors, the system will respond with an HTTP 200 OK message. The successful response replicates the entered data and adds information about the **isActive** parameters and the initial **walletId** associated with the **userId**, as well as loading a timestamp of the creation date of said user.
 
 ---
 
 ## **End User SR <font color="sky-blue">GET</font>** 
 
-**URL:** https://api.paycaddy.dev/v1/SR/endUserSRs/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/SR/EndUserSRs/
 
-El metodo GET a un EndUserSR permite conocer los datos almacenados de un userId concreto, especialmente el walletId de su monedero inicial y el estado de actividad de este usuario en el campo «isActive». Ambos datos son cruciales para las demás llamadas a la API de NeoBank.
-
+The GET call for an EndUserSR allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
 === "Request"
     ```
-     https://api.paycaddy.dev/v1/SR/EndUserSRs/{USER_ID}
+     https://api.api-sandbox.paycaddy.dev/v1/SR/EndUserSRs/{USER_ID}
     ```
 === "Response"
     ```json

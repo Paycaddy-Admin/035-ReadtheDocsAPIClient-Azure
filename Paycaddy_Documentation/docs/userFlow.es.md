@@ -1,69 +1,140 @@
-## **Visión General de los Flujos**
+This guide explains the logic and API interaction required to create and activate users in the PayCaddy ecosystem. Users can represent either individuals or businesses, and the process varies depending on the type of user and the KYC (Know Your Customer) flow in use.
 
-Los flujos para el uso de la API de NeoBank están categorizados según la entidad principal que registran, modifican o consultan. A un alto nivel, los flujos se correlacionan como se explica a continuación:
-![entity_diagram](./assets/imgs/flow_entitys.png){class="img img-thin"}
+### User Types
+
+There are **three types** of users in PayCaddy’s system:
+
+| User Type        | Description                            | KYC Flow                                                                |
+| ---------------- | -------------------------------------- | ----------------------------------------------------------------------- |
+| `EndUser`        | A natural person using Integrated KYC. | PayCaddy handles KYC via a hosted link.                                 |
+| `EndUserSR`      | A natural person using Delegated KYC.  | The client collects and verifies KYC, then sends verified data via API. |
+| `MerchantUser`   | A business entity.                     | Delegated KYB (Know Your Business), provided by the client.             |
+
+To determine the correct endpoint for a particular scenario, refer to the following flow. For more detailed information on each specific flow, please find the respective section in this chapter.
+
+![general_user_flow](./assets/imgs/generaluserflow.svg)
+{class="img"}
+
+### EndUser (Integrated KYC)
+
+This flow is used when PayCaddy is responsible for handling identity verification via our 3rd party KYC provider.
+
+**Steps:**
+
+1. **Create the user**
+    
+    - Payload schema is detailed in [EndUser POST](user.es.md)
+        
+    - PayCaddy returns a KYC verification session link (e.g., MetaMap URL).
+        
+2. **User completes KYC**
+    
+    - The user is redirected or sent the KYC link.
+        
+    - KYC & AML 3rd party solution (Metamap) handles the identity capture and verification.
+        
+3. **Verification callback**
+    
+    - Positive verification status webhook is sent to callback URL.
+        
+    - The user’s KYC status is updated to `approved`.
+        
+4. **User becomes active**
+    
+    - You can confirm the user's activation by querying [EndUser GET](user.es.md#end-user-get)
+
+A visualization of the above described steps can be seen in the following flow:
+
+
+![enduserflow](./assets/imgs/enduser.svg)
+
+
+>*** Based on the KYC notification webhook, you can decide whether to offer users a retry option, as per your UX/UI preferences. For pricing details related to integrated KYC verifications, consult our commercial team.
+
+---
+
+### EndUserSR (Delegated KYC)
+
+Used when your system (or your client’s) already handles the KYC process independently and sends verified data to PayCaddy.
+
+>This option is reserved to **regulated entities** within their country of jurisdiction. 
+>
+>Access to the creation of this type of user must be requested and approved by PayCaddy's compliance team during onboarding or upgrade cycles.
+
+**Steps:**
+
+1. **Verify user externally**
+    
+    - Use your KYC provider to collect documents and validate identity.
+        
+2. **Create the user**
+    
+    - Payload schema is detailed in [EndUserSR POST](user.es.md#end-user-sr-post)
+        
+    - Payload must include temporary* URLs to access the document files data.
+	    - Details regarding exact document files data capture parameters will be discussed with Compliance Team during onboarding.
+        
+3. **User becomes active immediately**
+    
+    - Since verification is delegated, no further KYC is needed from PayCaddy.
+    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.es.md)
+
+A visualization of the above described steps can be seen in the following flow:
+
+![endusersrflow](./assets/imgs/EndUserSR.svg)
+
+
+>** For specific periodicity details on scheduled KYC checks, consult with PayCaddy's compliance team during the integration phase.
 
 ---
 
-## **Flujo de Usuarios**
+### MerchantUser (Delegated KYB)
 
-La creación de nuevos UserIDs en la API de NeoBank sigue dos flujos separados según el tipo de persona que se va a ingresar en el sistema.
+This user type represents a business entity. KYB is fully delegated.
 
-EndUser se refiere a los usuarios creados para personas físicas.
-MerchantUser se refiere a los usuarios creados para entidades jurídicas.
+**Steps:**
 
+1. **Collect business documents**
+    
+    - Gather legal documents, beneficial owner info, tax IDs, etc.
+        
+2. **CONDITIONAL - Submit for pre-approval*** ***  
+    
+    - Some card programs require pre-approval of MerchantUsers prior to their creation.
+	    
+    - Failure to do so will incur in the blocking of non-approved users during scheduled checks.
+	    
+    - For particular card programs, this condition can be lifted during onboarding definitions.
+	    
+3. **Create the merchant**
+    
+    - Schema detailed in [MerchantUser POST](user.es.md#merchant-user-post)
+        
+4. **Merchant becomes active**
+    
+    - Since verification is delegated, no further KYC is needed from PayCaddy.
+    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.es.md)
 
->Es importante tener en cuenta que hay endpoints separados para la creación de EndUsers y MerchantUsers.
+>* For specifics on which verification checks are done, review with Compliance team during onboarding process.
+>
+>** For specific periodicity details on scheduled KYC checks, consult with PayCaddy's compliance team during the integration phase.
+>
+>*** All card programs for Merchant type users will undergo a definition process with PayCaddy’s compliance team to establish file formats and pre-approval conditions if applicable.
 
->Durante la exploración inicial, nuestro equipo de ventas debería haberte asignado los detalles específicos de los perfiles de tu programa de tarjetas, lo que definirá qué endpoint(s) debes llamar para la creación de usuarios y las obligaciones KYC pertinentes.
+A visualization of the above described steps can be seen in the following flow:
 
-![entity_diagram](./assets/imgs/user_flow.png){class="img"}
-
----
-
-## **Flujo de Tarjetas**
-
-La API de NeoBank tiene llamadas diferenciadas para la creación de tarjetas de débito, crédito y prepago. A través de estas llamadas, es posible crear una tarjeta física o virtual para un UserID existente vinculado al saldo disponible en un WalletID específico de ese usuario.
-
-Todas las tarjetas se crean utilizando un código de parametrización único para cada producto de tarjeta, que debe ser solicitado previamente al equipo de integración de PayCaddy.
-
-La creación de una tarjeta comienza con la llamada post debitCard POST, creditCard POST o prepaidCard POST, dependiendo del servicio de emisión adquirido.
-
-
-> Es importante considerar el tipo de usuario para el cual se ha parametrizado la tarjeta. Las tarjetas parametrizadas para personas físicas solo pueden crearse asociándolas con UserIDs que representen EndUsers, mientras que aquellas parametrizadas para entidades jurídicas solo pueden crearse asociándolas con MerchantUsers.
-
-
-Una vez que se te haya otorgado un código de creación de tarjetas, podrás comenzar a probar la creación de tarjetas en el entorno de pruebas.
-
-```mermaid
-
-flowchart TB
-    A([Start]) --> B{clientCode: OK<br>userId: OK<br>isActive: true?}
-    B -- "No" --> X([Card cannot be created<br>4XX Error])
-    B -- "Yes" --> D{Which endpoint?<br>credit / debit / prepaid}
-
-    D -- "Debit" --> E{Wallet type == 0?}
-    D -- "Prepaid" --> E
-    D -- "Credit" --> F{Wallet type == 1?}
-
-    E -- "No" --> X
-    E -- "Yes" --> G([Invoke Card<br>API call])
-
-    F -- "No" --> X
-    F -- "Yes" --> G
-
-    G --> H{API returns<br>200 OK?}
-    H -- "No" --> X
-    H -- "Yes" --> I[Card Created<br>cardId]
-
-    I --> J{Physical<br>or Virtual?}
-    J -- "Virtual" --> K[isActive = true<br>status = Active]
-    J -- "Physical" --> L[isActive = false<br>status = PendingAck]
-
-    L --> M([Card in Hands check<br>+ ackReception POST])
-    M --> N[Physical Card<br>isActive = true<br>status = Active]
-
-
-```
+![merchantuserflow](./assets/imgs/merchantuser.svg)
 
 ---
+
+###  Summary Table
+
+| User Type      | API Endpoint                                       | KYC Mode   | Activation Trigger       |
+| -------------- | -------------------------------------------------- | ---------- | ------------------------ |
+| `EndUser`      | [EndUser POST](user.es.md#end-user-post)           | Integrated | MetaMap webhook          |
+| `EndUserSR`    | [EndUserSR POST](user.es.md#end-user-sr-post)      | Delegated  | Immediate after creation |
+| `MerchantUser` | [MerchantUser POST](user.es.md#merchant-user-post) | Delegated  | After document approval  |
+
+>During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
+
+

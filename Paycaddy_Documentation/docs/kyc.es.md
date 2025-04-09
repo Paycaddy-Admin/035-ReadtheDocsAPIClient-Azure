@@ -1,22 +1,22 @@
 
-## **Notificaciones KYC integradas**
+## **Integrated KYC Notifications**
 
-Como parte de nuestro flujo KYC integrado para personas físicas, después de que los usuarios completen los pasos de verificación de identidad en la URL compartida en el campo **kycURL** (consulte el POST de usuario final)**, el sistema de nuestro proveedor de verificación de identidad procesa los datos enviados y los compara con listas negras y realiza verificaciones AML. Nuestra API aprovecha estas verificaciones y proporciona notificaciones de estado a través de webhook.
+As part of our Integrated KYC flow for Natural Persons, after users complete the identity verification steps at the URL shared in the **kycURL** field **(see EndUser POST)**, our identity verification provider's system processes the submitted data and compares it with blacklists and does AML checks. Our API leverages these verifications and provides status notifications via webhook.
 
-Para recibir correctamente las notificaciones de las verificaciones KYC, es necesario mantener una URL para recibir mensajes de la API de PayCaddy a través de webhook. Debe comunicarse con el equipo de integración de PayCaddy para configurar el envío de notificaciones a esa URL.
+To properly receive notifications of KYC verifications, it is necessary to maintain an URL for receiving messages from the PayCaddy API via webhook. You must contact the PayCaddy integration team to configure the sending of notifications to that URL.
 
-### **Webhooks de verificación KYC**
+### **KYC Verification Webhooks**
 
-El webhook de validación KYC (Know Your Customer) es una notificación que se envía a los clientes con información relevante sobre el estado del proceso de verificación KYC. La información se entrega en formato JSON y puede incluir diferentes estados y descripciones, según los casos de verificación.
+The KYC (Know Your Customer) Validation webhook is a notification sent to customers with relevant information about the status of the KYC verification process. The information is delivered in JSON format and may include different states and descriptions, depending on the verification cases.
 
-| **Campo** | **Descripción** |
+| **Field**      | **Description**      |
 | ------------- | ------------- |
-| **metadata** | Información crucial para identificar al usuario en forma de su **userId** |
-| **status** | El estado de la verificación KYC, que puede ser "verificado", "rechazado" o "revisión necesaria" |
-| **description** | Una descripción detallada del estado de la verificación. |
-| **fullName** | El nombre completo del usuario |
-| **age** | La edad del usuario |
-| **Timestamp** | La marca de tiempo ISO 8601 de la respuesta de los webhooks |
+| **metadata** | Crucial information to identify the user in the form of their **userId** |
+| **status** | The status of the KYC Verification, which can be "verified", "rejected" or "reviewNeeded" |
+| **description** | A detailed description of the verification status. |
+| **fullName** | The user's full name |
+| **age** | The user's age |
+| **timestamp** | The ISO 8601 timestamp of the webhooks response |
 
 ```json
     {
@@ -31,16 +31,19 @@ El webhook de validación KYC (Know Your Customer) es una notificación que se e
     }
 ```
 
-### **Estados de verificación y descripción.**
+### **Verification States and Descriptions**
 
-El flujo del webhook para una validación sigue el diagrama que se describe a continuación.
+The webhook flow for a validation follows the diagram described below.
 
-![entity_diagram](./assets/imgs/states_descriptions.png){class="img"}
 
-Siguiendo este flujo de proceso, a continuación se muestran los webhooks correspondientes a cada estado.
-Cada uno de estos webhooks proporciona una descripción del estado correspondiente, incluyendo los motivos de rechazo en caso de verificaciones fallidas. Las descripciones correspondientes se detallan a continuación para su referencia.
 
-**‍Entradas de verificación completadas:** Este estado indica que un usuario ha completado con éxito la captura de datos KYC a través de **kycURL** y tendrá la estructura y la información que se muestran a continuación:
+![kycflow](./assets/imgs/kycflow.svg)
+{class="img"}
+
+Following this process flow, below are the webhooks corresponding to each state.
+Each of these webhooks provide a description of the corresponding state, including rejection reasons in case of failed verifications. The corresponding descriptions are detailed below for your reference.
+
+**‍Verification Inputs Completed:** This state indicates that a user has successfully completed KYC data capture through the **kycURL** and will have the structure and information shown below:
 
 ```json
     {
@@ -55,7 +58,7 @@ Cada uno de estos webhooks proporciona una descripción del estado correspondien
     }
 ```
 
-**Verified:** Este estado se refiere a cuando un usuario ha pasado con éxito el proceso de verificación KYC. Esto indica que el usuario ha sido activado con éxito en nuestra base de datos y puede continuar con otros flujos de creación y operaciones de tarjetas. La respuesta del webhook tendrá la siguiente estructura e información:
+**Verified:** This state refers to when a user has successfully passed the KYC verification process. This indicates that the user has been successfully activated in our database and can proceed with other card creation and operations flows. The webhook response will have the following structure and information:
 
 ```json
     {
@@ -70,7 +73,7 @@ Cada uno de estos webhooks proporciona una descripción del estado correspondien
     }
 ```
 
-**Rejected:** Este estado se refiere a cuando un usuario no ha pasado el proceso de verificación KYC. A continuación se detallan los diferentes casos de rechazo.
+**Rejected:** This state refers to when a user has not passed the KYC verification process. The different rejection cases are detailed below.
 
 === "Input mismatch"
     ```json
@@ -156,7 +159,7 @@ Cada uno de estos webhooks proporciona una descripción del estado correspondien
     }
     ```
 
-**ReviewNeeded:** Este estado se refiere a cuando un usuario no ha pasado el proceso de verificación KYC. A continuación se detallan los diferentes casos de rechazo.
+**ReviewNeeded:** This state refers to when a user has not passed the KYC verification process. The different rejection cases are detailed below.
 
 === "Negligence"
     ```json

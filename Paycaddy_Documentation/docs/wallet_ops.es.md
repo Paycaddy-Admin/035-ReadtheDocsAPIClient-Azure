@@ -2,9 +2,9 @@
 
 ## **Pay In <font color="green">POST</font>**
 
-**URL:**  https://api.paycaddy.dev/v1/payIns
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payIns
 
-PayIn es el método de la API de PayCaddy para agregar fondos a una billetera específica. Es una llamada simple que carga la información del **'walletId'** al que se cargarán los fondos, el monto que se acreditará a la billetera en centavos, el código de la moneda según ISO 4217 y una descripción de la transacción.
+‍PayIn is PayCaddy API's method for adding funds to a specific wallet. It is a simple call that loads the information of the **'walletId'** to which funds are to be loaded, the amount to be credited to the wallet in cents, the code of the currency according to ISO 4217, and a description of the transaction.
 
 === "Request"
     ```json
@@ -27,9 +27,9 @@ PayIn es el método de la API de PayCaddy para agregar fondos a una billetera es
     }
     ```
 
-La respuesta exitosa de esta llamada, además de la información proporcionada, incluye un timestamp con la fecha de ejecución de la transacción y un identificador único de transacción que permite recuperar la información asociada a la llamada GET.
+The successful response of this call, in addition to the provided information, includes a timestamp with the execution date of the transaction and a unique transaction identifier that allows retrieving the associated information with the GET call.
 
-Si hay un problema con los datos proporcionados, la API de PayCaddy responderá con un error HTTP 400.
+If there is a problem with the data provided the PayCaddy API will respond with a HTTP 400 error.
 
 === "Wallet not found"
     ```json
@@ -56,13 +56,13 @@ Si hay un problema con los datos proporcionados, la API de PayCaddy responderá 
 
 ## **Pay In <font color="sky-blue">GET</font>**
 
-**URL:**  https://api.paycaddy.dev/v1/payIns/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payIns/
 
-El metodo GET para un PayIn permite acceder a información relacionada con un ID de transacción específico. La respuesta correcta de esta llamada carga la siguiente estructura:
+The GET call for a PayIn allows accessing information related to a specific transactionId. The successful response of this call loads the following structure:
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/payIns/{PAYIN_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/payIns/{PAYIN_ID}
     ```
 === "Response"
     ```json
@@ -78,17 +78,17 @@ El metodo GET para un PayIn permite acceder a información relacionada con un ID
     }
     ```
 
-La llamada puede fallar si se proporciona un walletId incorrecto, en cuyo caso la API de PayCaddy respondería con un error HTTP 400.
+The call may fail if an incorrect walletId is provided, in which case the PayCaddy API would respond with a HTTP 400 error.
 
 ---
 
 ## **Pay Out <font color="green">POST</font>**
 
-**URL:**  https://api.paycaddy.dev/v1/payOuts
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payOuts
 
-PayOut es un método para debitar fondos disponibles en una billetera específica. A diferencia de una transferencia, el uso de este método elimina la existencia de los fondos de la API de NeoBank. Este método debe estar asociado con una operación contable que requiera dicha llamada.
+PayOut is a method to debit funds available in a specific wallet. Unlike a transfer, using this method eliminates the existence of the funds from the NeoBank API. This method should be associated with an accounting operation that requires such a call.
 
-Al igual que PayIn, la respuesta exitosa devolverá los datos ingresados ​​acompañados de un identificador único de transacción y su marca de tiempo.
+Similar to PayIn, the successful response will return the entered data accompanied by a unique transaction identifier and its timestamp.
 
 === "Request"
     ```json
@@ -111,9 +111,9 @@ Al igual que PayIn, la respuesta exitosa devolverá los datos ingresados ​​a
     }
     ```
 
-Si hay un problema con los datos proporcionados, la API de PayCaddy responderá con un error HTTP 400.
+If there is a problem with the data provided the PayCaddy API will respond with a HTTP 400 error.
 
-=== "Billetera no encontrada"
+=== "Wallet not found"
     ```json
     {
         "type": "Decoding body",
@@ -123,7 +123,7 @@ Si hay un problema con los datos proporcionados, la API de PayCaddy responderá 
         "instance": ""
     }
     ```
-=== "Moneda Incorrecta"
+=== "Incorrect currency"
     ```json
     {
         "type": "",
@@ -133,7 +133,7 @@ Si hay un problema con los datos proporcionados, la API de PayCaddy responderá 
         "instance": ""
     }
     ```
-=== "Fondos Insuficientes"
+=== "Insufficient funds"
     ```json
         {
             "type": "",
@@ -148,14 +148,13 @@ Si hay un problema con los datos proporcionados, la API de PayCaddy responderá 
 
 ## **Pay Out <font color="sky-blue">GET</font>**
 
-**URL:**  https://api.paycaddy.dev/v1/payOuts/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payOuts/
 
-El metodo GET para un pago permite acceder a información relacionada con un **transactionId** específico. La respuesta correcta de esta llamada carga la siguiente estructura:
-
+The GET call for a PayOut allows access to information related to a specific **transactionId**. The successful response of this call loads the following structure:
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/payOuts/{PAYOUT_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/payOuts/{PAYOUT_ID}
     ```
 === "Response"
     ```json
@@ -171,15 +170,15 @@ El metodo GET para un pago permite acceder a información relacionada con un **t
     }
     ```
 
-La API responderá con un error HTTP 400 si se trata de un transactionId incorrecto o de un transactionId que no está relacionado con un PayOut.
+The API will respond with an HTTP 400 error if it is an incorrect transactionId or a transactionId that is not related to a PayOut.
 
 ---
 
 ## **Transfer <font color="green">POST</font>**
 
-**URL:**  https://api.paycaddy.dev/v1/transfers
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/transfers
 
-Para realizar transacciones dentro del entorno API de NeoBank entre dos wallets previamente creadas, se debe utilizar la llamada **Transfer POST**, la cual tiene la siguiente estructura:
+To carry out transactions within the NeoBank API environment between two previously created wallets, the **Transfer POST** call must be used, which has the following structure:
 
 === "Request"
     ```json
@@ -189,8 +188,7 @@ Para realizar transacciones dentro del entorno API de NeoBank entre dos wallets 
         "amount": 0,
         "currency": "string",
         "statement": "string"
-    }
-    ```
+    }```
 === "Response"
     ```json
     {
@@ -204,33 +202,33 @@ Para realizar transacciones dentro del entorno API de NeoBank entre dos wallets 
     }
     ```
 
-En esta llamada se debe especificar el **walletIdFrom** al cual se están enviando los fondos y el **walletIdTo** al cual se están enviando los fondos. El campo **"currency"** debe cargar el código de la moneda asociada a ambas billeteras siguiendo el estándar ISO 4217.
+In this call, you must specify the **walletIdFrom** which the funds are being sent and the **walletIdTo** which the funds are being sent. The **"currency"** field must load the code of the currency associated with both wallets following the ISO 4217 standard.
 
-La API de PayCaddy no gestiona conversiones de moneda, por lo que es necesario considerar que ambas billeteras deben estar configuradas bajo la misma moneda.
+The PayCaddy API does not manage currency conversions, so it is necessary to consider that both wallets must be configured under the same currency.
 
-El monto ingresado en el campo **"amount"** debe estar en centavos siguiendo el estándar de las otras llamadas a la API de PayCaddy.
+The amount entered in the **"amount"** field must be in cents following the standard of the other PayCaddy API calls.
 
-El campo **"statement"** permite ingresar una descripción de la transacción para referencia futura y visualización en el front-end.
+The **"statement"** field allows you to enter a description of the transaction for future reference and display on the front-end.
 
-La respuesta exitosa a esta llamada carga un identificador único de la transacción y el timestamp de su aceptación.
+The successful response to this call loads a unique transaction identifier and the timestamp of its acceptance.
 
-En caso de un error en la llamada, la API de NeoBank responderá con un error HTTP 400 descriptivo.
+In case of an error in the call, the NeoBank API will respond with a descriptive HTTP 400 error.
 
-Comúnmente, la llamada fallará si los walletIds involucrados en la transacción pertenecen a un userId inactivo, es decir, manteniendo su atributo "isActive" como "false".
+Commonly, the call will fail if the walletIds involved in the transaction belong to an inactive userId, that is, maintaining its "isActive" attribute as "false".
 
-De manera similar, la llamada siempre fallará si el **walletIdFrom** no mantiene el saldo adecuado para cubrir la transacción o cuando el código de moneda de ambos wallets no es el mismo que el de la llamada POST de transferencia.
+Similarly, the call will always fail if the **walletIdFrom** does not maintain the adequate balance to cover the transaction or when the currency code of both wallets is not the same as the transfer POST call.
 
 ---
 
 ## **Transfer <font color="sky-blue">GET</font>**
 
-**URL:**  https://api.paycaddy.dev/v1/transfers/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/transfers/
 
-El metodo GET para una transferencia entre billeteras permite acceder a la información relacionada con un transactionId específico y tiene la siguiente estructura:
+The GET call for a transfer between wallets allows access to information related to a specific transactionId and carries the following structure:
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/transfers/{TRANSFER_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/transfers/{TRANSFER_ID}
     ```
 === "Response"
     ```json
@@ -247,4 +245,4 @@ El metodo GET para una transferencia entre billeteras permite acceder a la infor
     }
     ```
 
-La API responderá con un error HTTP 400 descriptivo si se proporciona un ID de transacción incorrecto o si el ID de transacción no está relacionado con una transferencia.
+The API will respond with a descriptive HTTP 400 error if an incorrect transaction ID is provided or if the transaction ID is not related to a transfer.

@@ -1,20 +1,20 @@
 ## **Debit Card <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/debitCards
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/debitCards
 
-‍Este metodo permite la creación de una Tarjeta de Débito y sigue la siguiente estructura:
+‍This call enables the creation of a Debit Card and follows the following structure:
 
 === "Request"
 	```json
-	{
-		"userId": "string",
-		"walletId": "string",
-	    "physicalCard": true,
-	    "code": "string"
-	}
-	```
+    {
+        "userId": "string",
+        "walletId": "string",
+        "physicalCard": true,
+        "code": "string"
+    }
+    ```
 === "Response"
-    ```json
+	```json
     {
         "id": "string",
         "userId": "string",
@@ -28,42 +28,46 @@
     }
     ```
 
-Cada solicitud incluye el **userId** al que debe asociarse la tarjeta y el **walletId** con cuyo saldo se realizará la transacción.
+Each request includes the **userId** to whom the card should be associated and the **walletId** whose balance the card will be transacting with.
 
-El campo **tarjeta física** indica si se trata de una tarjeta que debe imprimirse físicamente **(verdadero)** o, por el contrario, de una tarjeta exclusivamente digital **(falso)**.
+The **physicalCard** field indicates whether it is a card that needs to be printed physically **(true)** or, alternatively, an exclusively digital card **(false)**.
 
-Los datos de impresión de las tarjetas se extraen de los campos almacenados en la creación de usuarios, por lo que es importante tener en cuenta que las tarjetas se imprimen teniendo en cuenta los campos **Nombre** y **Apellido** en el caso de personas físicas y el campo **NombreRegistrado** en el caso de personas jurídicas. Es fundamental garantizar la integridad de estos campos en el flujo de creación de usuarios, incluyendo la limitación de caracteres, ya que afecta al posterior flujo de creación de tarjetas.
-El **"código"** enviado en la llamada debe ser proporcionado por el equipo de PayCaddy para cada tipo y variación de tarjeta incluida en el proyecto de habilitación. Es decir, para un proyecto que habilite la emisión de una tarjeta de débito virtual o física para personas físicas, se proporcionarían dos códigos diferentes, uno para usuario final físico y otro para usuario final virtual. Es responsabilidad del cliente invocar correctamente las llamadas teniendo en cuenta el tipo de usuario y la condición de impresión asociada al código proporcionado.
+The card printing data is extracted from the fields stored in the user creation, so it is important to note that the cards are printed taking into account the **FirstName** and **LastName** fields in the case of natural persons and the **RegisteredName** field in the case of legal entities. It is essential to ensure the integrity of these fields in the user creation flow, including character limitations, since it affects the subsequent card creation flow.
 
-La respuesta satisfactoria de la llamada de creación de tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe utilizarse en todas las llamadas de operación de tarjeta **(véase [cardOperations](card_ops.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
+The **"code"** sent in the call must be provided by the PayCaddy team for each type and variation of card included in the enablement project. That is, for a project that enables the issuance of a virtual or physical debit card for natural persons, two different codes would be provided, one for endUser physical and one for endUser virtual. It is the client's responsibility to correctly invoke the calls taking into consideration the type of user and the printing condition associated with the provided code.
 
-A continuación se detallan los posibles estados:
+The successful response of the debit card creation call returns a 200 message that carries the unique identifier of the card that must be used in all card operation calls **(see [cardOperations](card_ops.es.md))**. In addition to the **cardId**, the 200 response also provides a boolean indicating whether the card is operational or not, and a status field describing the card's status.
 
-- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_ops.es.md#ack-reception-post))
-- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_ops.es.md#unblock-card-post))
-- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_ops.es.md#block-card-post))
-- **Active** - Para tarjetas activas
+The possible statuses are detailed below:
 
-Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_ops.es.md#check-pan-post)** y **[checkCvv POST](card_ops.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
+- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_ops.es.md#ack-reception-post))
 
-La fecha de expiración de la tarjeta se presenta en la respuesta exitosa de la llamada de creación de la tarjeta en el campo "dueDate" siguiendo el formato YYYYMM.
+- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_ops.es.md#unblock-card-post))
 
-En caso de cualquier error o inconsistencia con los datos proporcionados, la API responderá con un error descriptivo 400 de una de las razones más comunes posibles:
+- **Cancel** - For canceled cards (see [CancelCard POST](card_ops.es.md#block-card-post))
 
-1. El userId al cual se debe asociar la tarjeta no existe o está inactivo.
-2. El walletId al cual se debe asociar la tarjeta no existe o no pertenece al usuario ingresado.
-3. El código proporcionado en la llamada no coincide con el tipo de usuario al cual se debe asociar la tarjeta.
-4. El código proporcionado en la llamada no coincide con el tipo de tarjeta (virtual o física) que se intenta crear.
+- **Active** - For active cards
 
-> Es importante notar que los reintentos en caso de errores deben ser gestionados de forma responsable, es decir, creando límites de tiempo de al menos 5 segundos antes de un nuevo intento y limitando el número de reintentos a 3.
+The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_ops.es.md#check-pan-post)** and **[checkCvv POST](card_ops.es.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
+
+The card's expiration date is presented in the successful response of the card creation call in the "dueDate" field following the format YYYYMM.
+
+In case of any error or inconsistency with the provided data, the API will respond with a descriptive 400 error of one of the most common possible reasons:
+
+1. The userId to which the card is to be associated does not exist or is inactive.
+2. The walletId to which the card is to be associated does not exist or does not belong to the entered user.
+3. The code provided in the call does not match the type of user to which the card is to be associated.
+4. The code provided in the call does not match the type of card (virtual or physical) being attempted to create.
+
+> It is important to note that retries in case of errors must be managed responsibly, i.e., by creating time limits of at least 5 seconds before the retry and limiting the number of retries to 3.
 
 ---
 
 ## **Debit Card <font color="sky-blue">GET</font>**
 
-**URL:** https://api.paycaddy.dev/v1/debitCards/
- 
-El metodo GET para tarjetas de débito permite consultar los datos de una tarjeta a partir de un cardId.
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/debitCards/
+
+The GET call for debit cards allows you to query the data of a card based on a cardId.
 
 === "Request"
     ```json
@@ -84,18 +88,17 @@ El metodo GET para tarjetas de débito permite consultar los datos de una tarjet
         "dueDate": "string"
     }
     ```
- 
-Esta llamada es especialmente necesaria para gestionar el estado de la transacción de la tarjeta, ya que la respuesta correcta también incluye la actividad booleana **"isActive“** y el campo descriptivo **"status"**, además de los otros campos de la respuesta correcta de creación de tarjeta. En caso de que se envíe un cardId no válido, la API de PayCaddy responderá con un error HTTP 400.
+This call is especially necessary in managing the transaction status of the card, since the successful response also includes the **"isActive"** boolean activity and the descriptive **"status"** field, in addition to the other fields in the successful response of card creation.In case an invalid cardId is sent, the PayCaddy API will respond with an HTTP 400 error.
 
-Si se produce un error HTTP 500, comunique la incidencia al equipo de asistencia de PayCaddy.
+If there is a HTTP 500 error encountered, report the incident to the PayCaddy support team.
 
 ---
 
 ## **Prepaid Card <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/prepaidCards
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/prepaidCards
 
-Esta es la llamada utilizada para crear tarjetas prepago asociadas a un **userId** y **walletId** concretos, y lleva la siguiente estructura:
+This is the call used to create prepaid cards associated with a particular **userId** and **walletId**, and it carries the following structure:
 
 === "Request"
     ```json
@@ -120,41 +123,45 @@ Esta es la llamada utilizada para crear tarjetas prepago asociadas a un **userId
         "dueDate": "string"
     }
     ```
+Each request includes the **userId** to whom the card should be associated and the **walletId** whose balance the card will be transacting with.
 
-Cada solicitud incluye el **userId** al que debe asociarse la tarjeta y el **walletId** con cuyo saldo se realizará la transacción.
+The **physicalCard** field indicates whether it is a card that needs to be printed physically **(true)** or, alternatively, an exclusively digital card **(false)**.
 
-El campo **tarjeta física** indica si se trata de una tarjeta que debe imprimirse físicamente **(verdadero)** o, por el contrario, de una tarjeta exclusivamente digital **(falso)**.
+The card printing data is extracted from the fields stored in the user creation, so it is important to note that the cards are printed taking into account the **FirstName** and **LastName** fields in the case of natural persons and the **RegisteredName** field in the case of legal entities. It is essential to ensure the integrity of these fields in the user creation flow, including character limitations, since it affects the subsequent card creation flow.
 
-Los datos de impresión de las tarjetas se extraen de los campos almacenados en la creación de usuarios, por lo que es importante tener en cuenta que las tarjetas se imprimen teniendo en cuenta los campos **Nombre** y **Apellido** en el caso de personas físicas y el campo **NombreRegistrado** en el caso de personas jurídicas. Es fundamental garantizar la integridad de estos campos en el flujo de creación de usuarios, incluyendo la limitación de caracteres, ya que afecta al posterior flujo de creación de tarjetas.
-El **"código"** enviado en la llamada debe ser proporcionado por el equipo de PayCaddy para cada tipo y variación de tarjeta incluida en el proyecto de habilitación. Es decir, para un proyecto que habilite la emisión de una tarjeta de débito virtual o física para personas físicas, se proporcionarían dos códigos diferentes, uno para usuario final físico y otro para usuario final virtual. Es responsabilidad del cliente invocar correctamente las llamadas teniendo en cuenta el tipo de usuario y la condición de impresión asociada al código proporcionado.
+The **"code"** sent in the call must be provided by the PayCaddy team for each type and variation of card included in the enablement project. That is, for a project that enables the issuance of a virtual or physical debit card for natural persons, two different codes would be provided, one for endUser physical and one for endUser virtual. It is the client's responsibility to correctly invoke the calls taking into consideration the type of user and the printing condition associated with the provided code.
 
-La respuesta satisfactoria de la llamada de creación de tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe utilizarse en todas las llamadas de operación de tarjeta **(véase [cardOperations](card_ops.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
+The possible statuses are detailed below:
 
-A continuación se detallan los posibles estados:
+- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_ops.es.md#ack-reception-post))
 
-- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_ops.es.md#ack-reception-post))
-- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_ops.es.md#unblock-card-post))
-- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_ops.es.md#block-card-post))
-- **Active** - Para tarjetas activas
+- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_ops.es.md#unblock-card-post))
 
-Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_ops.es.md#check-pan-post)** y **[checkCvv POST](card_ops.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
+- **Cancel** - For canceled cards (see [CancelCard POST](card_ops.es.md#block-card-post))
 
-La fecha de expiración de la tarjeta se presenta en la respuesta exitosa de la llamada de creación de la tarjeta en el campo "dueDate" siguiendo el formato YYYYMM.
+- **Active** - For active cards
 
-En caso de cualquier error o inconsistencia con los datos proporcionados, la API responderá con un error descriptivo 400 de una de las razones más comunes posibles:
+The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_ops.es.md#check-pan-post)** and **[checkCvv POST](card_ops.es.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
 
-1. El userId al cual se debe asociar la tarjeta no existe o está inactivo.
-2. El walletId al cual se debe asociar la tarjeta no existe o no pertenece al usuario ingresado.
-3. El código proporcionado en la llamada no coincide con el tipo de usuario al cual se debe asociar la tarjeta.
-4. El código proporcionado en la llamada no coincide con el tipo de tarjeta (virtual o física) que se intenta crear.
+The card's expiration date is presented in the successful response of the card creation call in the "dueDate" field following the format YYYYMM.
 
-> Es importante notar que los reintentos en caso de errores deben ser gestionados de forma responsable, es decir, creando límites de tiempo de al menos 5 segundos antes de un nuevo intento y limitando el número de reintentos a 3.
+In case of any error or inconsistency with the provided data, the API will respond with a descriptive 400 error of one of the most common possible reasons:
+
+1. The userId to which the card is to be associated does not exist or is inactive.
+2. The walletId to which the card is to be associated does not exist or does not belong to the entered user.
+3. The code provided in the call does not match the type of user to which the card is to be associated.
+4. The code provided in the call does not match the type of card (virtual or physical) being attempted to create.
+
+> It is important to note that retries in case of errors must be managed responsibly, i.e., by creating time limits of at least 5 seconds before the retry and limiting the number of retries to 3.
+
+
+---
 
 ## **Prepaid Card <font color="sky-blue">GET</font>**
 
-**URL:** https://api.paycaddy.dev/v1/prepaidCards/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/prepaidCards/
 
-El metodo GET para tarjetas prepago permite consultar los datos de una tarjeta basándose en un cardId.
+The GET call for prepaid cards allows you to query the data of a card based on a cardId.
 
 === "Request"
     ```json
@@ -174,21 +181,18 @@ El metodo GET para tarjetas prepago permite consultar los datos de una tarjeta b
         "dueDate": "string"
     }
     ```
+This call is especially necessary in managing the transaction status of the card, since the successful response also includes the **"isActive"** boolean activity and the descriptive **"status"** field, in addition to the other fields in the successful response of card creation.In case an invalid cardId is sent, the PayCaddy API will respond with an HTTP 400 error.
 
-
-Esta llamada es especialmente necesaria para gestionar el estado de la transacción de la tarjeta, ya que la respuesta correcta también incluye la actividad booleana **"isActive“** y el campo descriptivo **"status"**, además de los otros campos de la respuesta correcta de creación de tarjeta. En caso de que se envíe un cardId no válido, la API de PayCaddy responderá con un error HTTP 400.
-
-Si se produce un error HTTP 500, comunique la incidencia al equipo de asistencia de PayCaddy.
+If there is a HTTP 500 error encountered, report the incident to the PayCaddy support team.
 
 ---
 
 ## **Credit Card <font color="green">POST</font>**
 
-**URL:** https://api.paycaddy.dev/v1/CreditCards
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/CreditCards
 
-Esta llamada permite la creación de una Tarjeta de Crédito asociada a un **userId** y **walletId** en particular. 
-
-Se debe mantener la siguiente estructura para enviar los datos pertinentes.
+This call enables the creation of a Credit Card associated to a particular **userId** and **walletId**.
+The following structure must be kept to send the relevant data.
 
 === "Request"
     ```json
@@ -214,45 +218,48 @@ Se debe mantener la siguiente estructura para enviar los datos pertinentes.
     }
     ```
 
-En cada llamada se incluye el **userId** al que se debe asociar la tarjeta y el walletId con cuyo saldo se transaccionará la tarjeta.
+In each call, the **userId** to which the card should be associated and the walletId with whose balance the card will be transacting are included.
 
-Para tarjetas de crédito, el **walletId** a asociar debe ser un wallet de crédito **(ver [WalletCredits](creditCore.es.md#wallet-credit-post))** o un wallet prepago con el atributo **"walletType"** igual a "1".
+For credit cards, the **walletId** to be associated must be a credit wallet **(see [WalletCredits](creditCore.es.md#wallet-credit-post))** or a prepaid wallet with the **"walletType"** attribute equal to "1".
 
-El campo **physicalCard** indica si se trata de una tarjeta que necesita ser impresa físicamente **(true)** o, alternativamente, una tarjeta exclusivamente digital **(false)**.
+The **physicalCard** field indicates whether it is a card that needs to be printed physically **(true)** or, alternatively, an exclusively digital card **(false)**.
 
-Los datos de impresión de la tarjeta se extraen de los campos almacenados en la creación del usuario, por lo que es importante tener en cuenta que las tarjetas se imprimen teniendo en cuenta los campos **FirstName** y **LastName** en el caso de personas físicas y el campo **RegisteredName** en el caso de personas jurídicas. Es fundamental asegurar la integridad de estos campos en el flujo de creación del usuario, incluyendo las limitaciones de caracteres, ya que afecta al flujo posterior de creación de la tarjeta.
+The card printing data is extracted from the fields stored in the user creation, so it is important to note that the cards are printed taking into account the **FirstName** and **LastName** fields in the case of natural persons and the **RegisteredName** field in the case of legal entities. It is essential to ensure the integrity of these fields in the user creation flow, including character limitations, since it affects the subsequent card creation flow.
 
-El **"código"** enviado en la llamada debe ser provisto por el equipo de PayCaddy para cada tipo y variación de tarjeta incluida en el proyecto de habilitación. Es decir, para un proyecto que habilita la emisión de una tarjeta de débito virtual o física para personas físicas, se proporcionarían dos códigos diferentes, uno para endUser physical y otro para endUser virtual. Es responsabilidad del cliente invocar correctamente las llamadas teniendo en cuenta el tipo de usuario y la condición de impresión asociada al código provisto.
+The **"code"** sent in the call must be provided by the PayCaddy team for each type and variation of card included in the enablement project. That is, for a project that enables the issuance of a virtual or physical debit card for natural persons, two different codes would be provided, one for endUser physical and one for endUser virtual. It is the client's responsibility to correctly invoke the calls taking into consideration the type of user and the printing condition associated with the provided code.
 
-La respuesta exitosa de la llamada de creación de la tarjeta de débito devuelve un mensaje 200 que lleva el identificador único de la tarjeta que debe usarse en todas las llamadas de operación de la tarjeta **(ver [cardOperations](card_ops.es.md))**. Además del **cardId**, la respuesta 200 también proporciona un booleano que indica si la tarjeta está operativa o no, y un campo de estado que describe el estado de la tarjeta.
+The successful response of the debit card creation call returns a 200 message that carries the unique identifier of the card that must be used in all card operation calls **(see [cardOperations](card_ops.es.md))**. In addition to the **cardId**, the 200 response also provides a boolean indicating whether the card is operational or not, and a status field describing the card's status.
 
-Los posibles estados se detallan a continuación:
+The possible statuses are detailed below:
 
-- **PendingAck** - Para tarjetas físicas recién creadas que no han sido activadas. (ver [AckReception POST](card_ops.es.md#ack-reception-post))
-- **Temporarilyblocked** - Para bloqueos autogestionables. (ver [UnblockCard POST](card_ops.es.md#unblock-card-post))
-- **Cancel** - Para tarjetas canceladas (ver [CancelCard POST](card_ops.es.md#block-card-post))
-- **Active** - Para tarjetas activas
+- **PendingAck** - For newly created physical cards that have not been activated. (see [AckReception POST](card_ops.es.md#ack-reception-post))
 
-Los datos sensibles de la tarjeta (PAN y CVV) pueden ser consultados utilizando las llamadas **[checkPan POST](card_ops.es.md#check-pan-post)** y **[checkCvv POST](card_ops.es.md#check-cvv-post)**. Sin embargo, es importante notar que dichos datos NO deben almacenarse en bases de datos ya que implican requisitos de ciberseguridad asociados con el estándar PCI que han sido abstraídos con el uso del cardId en la API de PayCaddy.
+- **Temporarilyblocked** - For self-manageable blocks. (see [UnblockCard POST](card_ops.es.md#unblock-card-post))
 
-La fecha de vencimiento de la tarjeta se presenta en la respuesta exitosa de la llamada de creación de la tarjeta en el campo "dueDate" siguiendo el formato AAAAMM.
+- **Cancel** - For canceled cards (see [CancelCard POST](card_ops.es.md#block-card-post))
 
-En caso de cualquier error o inconsistencia con los datos proporcionados, la API responderá con un error 400 descriptivo de una de las posibles razones más comunes:
+- **Active** - For active cards
 
-1. El userId al que se desea asociar la tarjeta no existe o está inactivo.
-2. El walletId al que se desea asociar la tarjeta no existe o no pertenece al usuario ingresado.
-3. El código proporcionado en la llamada no coincide con el tipo de usuario al que se desea asociar la tarjeta.
-4. El código proporcionado en la llamada no coincide con el tipo de tarjeta (virtual o física) que se intenta crear.
+The sensitive card data (PAN and CVV) can be queried using the **[checkPan POST](card_ops.es.md#check-pan-post)** and **[checkCvv POST](card_ops.es.md#check-cvv-post)** calls. However, it is important to note that such data must NOT be stored in databases as they imply cybersecurity requirements associated with the PCI standard that have been abstracted with the use of the cardId in the PayCaddy API.
 
-> Es importante tener en cuenta que los reintentos en caso de errores deben gestionarse de forma responsable, es decir, creando límites de tiempo de al menos 5 segundos antes del reintento y limitando el número de reintentos a 3.
+The card's expiration date is presented in the successful response of the card creation call in the "dueDate" field following the format YYYYMM.
+
+In case of any error or inconsistency with the provided data, the API will respond with a descriptive 400 error of one of the most common possible reasons:
+
+1. The userId to which the card is to be associated does not exist or is inactive.
+2. The walletId to which the card is to be associated does not exist or does not belong to the entered user.
+3. The code provided in the call does not match the type of user to which the card is to be associated.
+4. The code provided in the call does not match the type of card (virtual or physical) being attempted to create.
+
+> It is important to note that retries in case of errors must be managed responsibly, i.e., by creating time limits of at least 5 seconds before the retry and limiting the number of retries to 3.
 
 ---
 
 ## **Credit Card <font color="sky-blue">GET</font>**
 
-**URL:** https://api.paycaddy.dev/v1/CreditCards/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/CreditCards/
 
-El metodo GET para una tarjeta de crédito le permite recuperar información relevante asociada a un cardId particular proporcionado a través de la siguiente estructura:
+The GET call for a Credit Card allows you to retrieve relevant information associated to a particular cardId provided through the following structure:
 
 === "Request"
     ```json
@@ -272,7 +279,7 @@ El metodo GET para una tarjeta de crédito le permite recuperar información rel
         "dueDate": "string"
     }
     ```
-Esta llamada es especialmente necesaria para gestionar el estado de la transacción de la tarjeta, ya que la respuesta correcta también incluye la actividad booleana **"isActive“** y el campo descriptivo **"status"**, además de los otros campos de la respuesta correcta de creación de tarjeta. En caso de que se envíe un cardId no válido, la API de PayCaddy responderá con un error HTTP 400.
 
-Si se produce un error HTTP 500, comunique la incidencia al equipo de asistencia de PayCaddy.
+This call is especially necessary in managing the transaction status of the card, since the successful response also includes the **"isActive"** boolean activity and the descriptive **"status"** field, in addition to the other fields in the successful response of card creation.In case an invalid cardId is sent, the PayCaddy API will respond with an HTTP 400 error.
 
+If there is a HTTP 500 error encountered, report the incident to the PayCaddy support team.
