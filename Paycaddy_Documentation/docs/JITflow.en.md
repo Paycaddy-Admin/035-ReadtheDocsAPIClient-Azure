@@ -1,37 +1,49 @@
-## **Flow Overview**
+This document explains the Just In Time Funding (JIT) flow used by PayCaddy to authorize card transactions using an external authorization endpoint provided by the client, this helps developers and clients understand how a single transaction is processed from request to final webhook notification. 
 
-The flows for using the NeoBank API are categorized based on the main entity they register, modify, or query. At a high level, the flows are correlated as explained bellow:
-![entity_diagram](./assets/imgs/flow_entitys.png){class="img img-thin"}
+Find in this section a high-level explanation of the decision flow for a transaction. The API schemas and format details can be found in [JIT Funding Transactions](JITtrx.es.md)
+
+### Step-by-Step Flow
+
+1. **Transaction Initiation**  
+    A transaction is initiated on the card network (e.g., Mastercard), and PayCaddy receives a request for authorization. This is most relevant for JIT funding when the transaction is of type `PeticionAutorizacion` but the transaction initiation could be any of the Online Transaction Notification types.
+    
+2. **Forwarding to the Client's Endpoint**  
+    PayCaddy creates a request with all relevant transaction data and sends a `POST` request to the client’s configured authorization endpoint (following the JIT format).
+    
+3. **Client Decision**  
+    The client receives the request and decides whether to approve or deny the transaction. The client must respond within 1 second.
+    
+    - If the response is `{ "Funding": true }`, the transaction is approved.
+        
+    - If the response is `{ "Funding": false }`, the transaction is denied.
+        
+4. **Timeout Handling**  
+    If the client does not respond within 1 second, PayCaddy automatically denies the transaction and records it as a timeout.
+    
+5. **Webhook Notification**  
+    After processing the decision, PayCaddy sends a webhook to the client’s `NotificationEnlist` endpoint.
+    
+    - If approved: transaction proceeds, a confirmation webhook is sent with `c1Tipo: PeticionAutorizacion`.
+        
+    - If denied (either by client or due to timeout): a rejection webhook is sent with `c1Tipo`:
+        
+        - `RechazadaPorAutorizador` (rejected in time)
+            
+        - `ExcedeTiempoAutorizacion` (timeout)
+            
+6. **Batch Processing & Settlement**  
+    Later, if applicable, a settlement batch may arrive with corrections:
+    
+    - `TransaccionCorregidaPositiva`: more funds are needed than initially authorized.
+        
+    - `TransaccionCorregidaNegativa`: the final amount was lower; excess is released.
+        
+    - `TransaccionConfirmada`: original authorization was matched and confirmed.
+
+A visualization of this flow can be found below:
+
+![jitflow](JITflow.svg){class="img"}
+
 
 ---
 
-## **User Flow**
-
-The creation of new UserIDs in the NeoBank API follows two separate flows depending on the type of person to be entered into the system.
-
-EndUser refers to the users created for natural persons.
-MerchantUser refers to the users created for legal entities.
-
->It is important to note that there are separate endpoints for creating EndUsers and MerchantUsers.
-
->During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
-
-![entity_diagram](./assets/imgs/user_flow.png){class="img"}
-
----
-
-## **Card Flow**
-
-The NeoBank API has differentiated calls for the creation of debit, credit, and prepaid cards. Through these calls, it is possible to create a physical or virtual card for an existing UserID linked to the available balance in a specific WalletID of that user.
-
-All cards are created using a unique parameterization code for each card product, which must be previously requested from the PayCaddy integration team.
-
-The creation of a card starts with the post debitCard POST, creditCard POST or prepaidCard POST call, depending on the acquired issuance service.
-
->It is important to consider the type of user for which the card has been parameterized. Cards parameterized for natural persons can only be created by associating them with UserIDs representing EndUsers, while those parameterized for legal entities can only be created by associating them with MerchantUsers.
-
-Once you have been granted a card creation code, you can begin testing card creation in the test environment.
-
-
-
----

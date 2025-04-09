@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/index.md",
+                "file": "Paycaddy_Documentation/docs/JITflow.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "JITflow.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/index.md",
+                "file": "Paycaddy_Documentation/docs/JITflow.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of JITflow.en"
             }
           }
         ],
@@ -169,10 +169,13 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/userFlow.en.md",
+    "Paycaddy_Documentation/docs/assets/imgs/settlement.svg",
+    "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg",
+    "Paycaddy_Documentation/docs/JITflow.en.md",
     "Paycaddy_Documentation/docs/JITtrx.en.md",
     "Paycaddy_Documentation/docs/JITtrx.es.md",
     "Paycaddy_Documentation/docs/index.md",
+    "Paycaddy_Documentation/docs/userFlow.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/generalFlow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/generaluserflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/merchantuser.svg",
@@ -183,14 +186,12 @@
     "Paycaddy_Documentation/docs/overviewFlow.en.md",
     "Paycaddy_Documentation/docs/transaction.en.md",
     "Paycaddy_Documentation/docs/JITflow.es.md",
-    "Paycaddy_Documentation/docs/JITflow.en.md",
     "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "GENERALFLOW.svg",
     "userSR.en.md",
     "docs/user.en.md",
     "docs",
     "Paycaddy_Documentation/docs/assets/imgs/user_flow.png",
-    "Paycaddy_Documentation/docs/assets/imgs/user_flow.svg",
     "Paycaddy_Documentation/docs/index.es.md",
     "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/trxNotification.es.md",
@@ -199,7 +200,6 @@
     "Paycaddy_Documentation/docs/transaction.es.md",
     "Paycaddy_Documentation/docs/trxNotification.en.md",
     "().md",
-    "Paycaddy_Documentation/docs/assets/imgs/entitys.png",
     "Paycaddy_Documentation/docs/card_ops.en.md",
     "Paycaddy_Documentation/docs/creditCore.es.md",
     "Paycaddy_Documentation/docs/backoffice.es.md",
