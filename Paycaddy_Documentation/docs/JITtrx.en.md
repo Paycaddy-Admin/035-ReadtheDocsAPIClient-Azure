@@ -36,6 +36,9 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
 }
 ```
 
+
+---
+
 #### **Expected Responses**
 
 The endpoint should always return a boolean response in JSON format and in some cases include the `amount` attribute to display balance data:
@@ -76,7 +79,7 @@ The endpoint should always return a boolean response in JSON format and in some 
 
 
 
-
+---
 
 #### **Webhook Notification on Rejection**
 
@@ -103,7 +106,6 @@ If a transaction is denied, a webhook will be sent to the client with one of the
 
 
 ---
-
 
 
 

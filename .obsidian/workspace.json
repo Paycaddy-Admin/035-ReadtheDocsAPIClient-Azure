@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/settlement.en.md",
+                "file": "Paycaddy_Documentation/docs/JITtrx.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "settlement.en"
+              "title": "JITtrx.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/settlement.en.md",
+                "file": "Paycaddy_Documentation/docs/JITtrx.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of settlement.en"
+              "title": "Outline of JITtrx.en"
             }
           }
         ],
@@ -169,16 +169,16 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/JITtrx.en.md",
+    "Paycaddy_Documentation/docs/JITflow.es.md",
     "Paycaddy_Documentation/docs/JITflow.en.md",
-    "Paycaddy_Documentation/docs/kyc.en.md",
+    "Paycaddy_Documentation/docs/trxNotification.en.md",
     "Paycaddy_Documentation/docs/settlement.en.md",
+    "Paycaddy_Documentation/docs/transaction.en.md",
+    "Paycaddy_Documentation/docs/JITtrx.en.md",
+    "Paycaddy_Documentation/docs/kyc.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg.svg",
     "Paycaddy_Documentation/docs/JITtrx.es.md",
-    "Paycaddy_Documentation/docs/JITflow.es.md",
-    "Paycaddy_Documentation/docs/transaction.en.md",
-    "Paycaddy_Documentation/docs/trxNotification.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/settlement.svg",
     "Paycaddy_Documentation/docs/index.md",
     "Paycaddy_Documentation/docs/userFlow.en.md",

@@ -13,7 +13,7 @@ Our system utilizes three key types of webhook notifications to manage various t
 
 
 
-#### **Amount Correction Use Cases**
+## Amount Correction Use Cases
 
 A couple of examples of transactions that could be corrected through a batch process are:
 
@@ -26,7 +26,7 @@ Batch processing streamlines the handling of deferred transactions and ensures p
 
 Whenever possible, it is recommended to match the corrected transaction with the original transaction for UI purposes. This way, cardholders will have a better understanding of how and why their balance has been modified.
 
-#### **Webhook Schemas**
+## Webhook Schemas
 
 Settlement of transactions will be notified through a webhook that carries one of the following schemas:
 
@@ -86,7 +86,7 @@ Settlement of transactions will be notified through a webhook that carries one o
     ```
 
 
-#### **Transaction Matching and Funds Capture**
+## Transaction Matching and Funds Capture
 
 - **Matching Transactions:** Each transaction includes a unique identifier `c11NumeroIdentificativoTransaccion`, which is crucial for matching the corrected or confirmed settlement with its initial authorization. This matching process is essential for maintaining transaction integrity and provides cardholders with a clear understanding of how and why their balances were adjusted.
 - **Notifications Details:** Settlement webhook notifications contain information about the transaction, including the transaction amount, the identifier, and the type of adjustment or confirmation.
