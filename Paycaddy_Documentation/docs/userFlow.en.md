@@ -4,11 +4,11 @@ This guide explains the logic and API interaction required to create and activat
 
 There are **three types** of users in PayCaddy’s system:
 
-| User Type      | Description                            | KYC Flow                                                                |
-| -------------- | -------------------------------------- | ----------------------------------------------------------------------- |
-| `EndUser`      | A natural person using Integrated KYC. | PayCaddy handles KYC via a hosted link.                                 |
-| `EndUserSR`    | A natural person using Delegated KYC.  | The client collects and verifies KYC, then sends verified data via API. |
-| `MerchantUser` | A business entity.                     | Delegated KYB (Know Your Business), provided by the client.             |
+| User Type        | Description                            | KYC Flow                                                                |
+| ---------------- | -------------------------------------- | ----------------------------------------------------------------------- |
+| `EndUser`        | A natural person using Integrated KYC. | PayCaddy handles KYC via a hosted link.                                 |
+| `EndUserSR`      | A natural person using Delegated KYC.  | The client collects and verifies KYC, then sends verified data via API. |
+| `MerchantUser`   | A business entity.                     | Delegated KYB (Know Your Business), provided by the client.             |
 
 To determine the correct endpoint for a particular scenario, refer to the following flow. For more detailed information on each specific flow, please find the respective section in this chapter.
 
@@ -41,7 +41,7 @@ This flow is used when PayCaddy is responsible for handling identity verificatio
         
 4. **User becomes active**
     
-    - You can confirm the user's activation by querying [EndUser GET](user.en.md#get)
+    - You can confirm the user's activation by querying [EndUser GET](user.en.md#end-user-get)
 
 A visualization of the above described steps can be seen in the following flow:
 
@@ -69,7 +69,7 @@ Used when your system (or your client’s) already handles the KYC process indep
         
 2. **Create the user**
     
-    - Payload schema is detailed in [EndUserSR POST](userSR.en.md)
+    - Payload schema is detailed in [EndUserSR POST](user.en.md#end-user-sr-post)
         
     - Payload must include temporary* URLs to access the document files data.
 	    - Details regarding exact document files data capture parameters will be discussed with Compliance Team during onboarding.
@@ -108,7 +108,7 @@ This user type represents a business entity. KYB is fully delegated.
 	    
 3. **Create the merchant**
     
-    - Schema detailed in [MerchantUser POST](merchant.en.md)
+    - Schema detailed in [MerchantUser POST](user.en.md#merchant-user-post)
         
 4. **Merchant becomes active**
     
@@ -129,11 +129,11 @@ A visualization of the above described steps can be seen in the following flow:
 
 ###  Summary Table
 
-| User Type      | API Endpoint                    | KYC Mode   | Activation Trigger       |
-| -------------- | ------------------------------- | ---------- | ------------------------ |
-| `EndUser`      | [EndUser POST](user.en.md)      | Integrated | MetaMap webhook          |
-| `EndUserSR`    | [EndUserSR POST](user.en.md)    | Delegated  | Immediate after creation |
-| `MerchantUser` | [MerchantUser POST](user.en.md) | Delegated  | After document approval  |
+| User Type      | API Endpoint                                       | KYC Mode   | Activation Trigger       |
+| -------------- | -------------------------------------------------- | ---------- | ------------------------ |
+| `EndUser`      | [EndUser POST](user.en.md#end-user-post)           | Integrated | MetaMap webhook          |
+| `EndUserSR`    | [EndUserSR POST](user.en.md#end-user-sr-post)      | Delegated  | Immediate after creation |
+| `MerchantUser` | [MerchantUser POST](user.en.md#merchant-user-post) | Delegated  | After document approval  |
 
 >During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
 

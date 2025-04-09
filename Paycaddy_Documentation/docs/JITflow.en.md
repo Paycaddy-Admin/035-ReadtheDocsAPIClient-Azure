@@ -1,6 +1,6 @@
 This document explains the Just In Time Funding (JIT) flow used by PayCaddy to authorize card transactions using an external authorization endpoint provided by the client, this helps developers and clients understand how a single transaction is processed from request to final webhook notification. 
 
-Find in this section a high-level explanation of the decision flow for a transaction. The API schemas and format details can be found in [JIT Funding Transactions](JITtrx.es.md)
+Find in this section a high-level explanation of the decision flow for a transaction. The API schemas and format details can be found in [JIT Funding Transactions](JITtrx.en.md)
 
 ### Step-by-Step Flow
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/JITtrx.en.md",
+                "file": "Paycaddy_Documentation/docs/userFlow.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JITtrx.en"
+              "title": "userFlow.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/JITtrx.en.md",
+                "file": "Paycaddy_Documentation/docs/userFlow.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of JITtrx.en"
+              "title": "Outline of userFlow.en"
             }
           }
         ],
@@ -169,12 +169,13 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/JITflow.es.md",
-    "Paycaddy_Documentation/docs/JITflow.en.md",
-    "Paycaddy_Documentation/docs/trxNotification.en.md",
+    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "Paycaddy_Documentation/docs/settlement.en.md",
-    "Paycaddy_Documentation/docs/transaction.en.md",
+    "Paycaddy_Documentation/docs/JITflow.en.md",
     "Paycaddy_Documentation/docs/JITtrx.en.md",
+    "Paycaddy_Documentation/docs/JITflow.es.md",
+    "Paycaddy_Documentation/docs/trxNotification.en.md",
+    "Paycaddy_Documentation/docs/transaction.en.md",
     "Paycaddy_Documentation/docs/kyc.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg.svg",
@@ -190,7 +191,6 @@
     "generaluserflow.svg",
     "Paycaddy_Documentation/docs/user.en.md",
     "Paycaddy_Documentation/docs/overviewFlow.en.md",
-    "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "GENERALFLOW.svg",
     "userSR.en.md",
     "docs/user.en.md",
