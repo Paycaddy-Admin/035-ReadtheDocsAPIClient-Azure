@@ -1,2 +1,1 @@
-# Whitelabel
-This is the mobile application cross-plataform of Pay Caddy to manage wallets and cards, make transactions, create reports and etc...
+This documentation page is under construction.
