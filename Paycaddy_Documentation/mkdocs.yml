@@ -20,9 +20,10 @@ nav:
           - Card Creation & Retrieval: card.md #
           - Card Operations: card_ops.md #
       - Transactions:
-          - Prefunded: trxNotification.md
+          - Prefunded: prefundedTRX.md
           - Just-In-Time Funding: JITtrx.md
           - Settlement: settlement.md
+          - Other Transactions: otherTransactions.md
           - Transaction Data Retrieval: transactionLists.md
       - Webhooks: notificationsEnlist.md
   - Credit Core:
