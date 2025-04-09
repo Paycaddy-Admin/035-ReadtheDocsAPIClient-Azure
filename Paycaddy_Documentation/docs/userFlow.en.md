@@ -9,14 +9,12 @@ There are **three types** of users in PayCaddy’s system:
 | `EndUser`      | A natural person using Integrated KYC. | PayCaddy handles KYC via a hosted link.                                 |
 | `EndUserSR`    | A natural person using Delegated KYC.  | The client collects and verifies KYC, then sends verified data via API. |
 | `MerchantUser` | A business entity.                     | Delegated KYB (Know Your Business), provided by the client.             |
-
-
-![entity_diagram](./assets/imgs/user_flow.svg)
+![general_user_flow](./assets/imgs/generaluserflow.svg)
 {class="img"}
 
 ### EndUser (Integrated KYC)
 
-This flow is used when PayCaddy is responsible for handling identity verification via a KYC provider like MetaMap.
+This flow is used when PayCaddy is responsible for handling identity verification via our 3rd party KYC provider.
 
 **Steps:**
 
@@ -42,11 +40,23 @@ This flow is used when PayCaddy is responsible for handling identity verificatio
     
     - You can confirm the user's activation by querying [EndUser GET](user.en.md#get)
 
+A visualization of the above described steps can be seen in the following flow:
+
+
+![enduserflow](./assets/imgs/enduser.svg)
+
+
+>*** Based on the KYC notification webhook, you can decide whether to offer users a retry option, as per your UX/UI preferences. For pricing details related to integrated KYC verifications, consult our commercial team.
+
 ---
 
 ### EndUserSR (Delegated KYC)
 
 Used when your system (or your client’s) already handles the KYC process independently and sends verified data to PayCaddy.
+
+>This option is reserved to **regulated entities** within their country of jurisdiction. 
+>
+>Access to the creation of this type of user must be requested and approved by PayCaddy's compliance team during onboarding or upgrade cycles.
 
 **Steps:**
 
@@ -66,6 +76,12 @@ Used when your system (or your client’s) already handles the KYC process indep
     - Since verification is delegated, no further KYC is needed from PayCaddy.
     - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.en.md)
 
+A visualization of the above described steps can be seen in the following flow:
+
+![endusersrflow](./assets/imgs/EndUserSR.svg)
+
+
+>** For specific periodicity details on scheduled KYC checks, consult with PayCaddy's compliance team during the integration phase.
 
 ---
 
@@ -79,33 +95,42 @@ This user type represents a business entity. KYB is fully delegated.
     
     - Gather legal documents, beneficial owner info, tax IDs, etc.
         
-2. **Create the merchant**
-    
-    - Schema detailed in [MerchantUser POST](merchant.en.md)
-        
-3. **CONDITIONAL - Submit for preapproval**
+2. **CONDITIONAL - Submit for pre-approval*** ***  
     
     - Some card programs require pre-approval of MerchantUsers prior to their creation.
 	    
-    - Failure to do so will incur in the blocking of non-approved users.
+    - Failure to do so will incur in the blocking of non-approved users during scheduled checks.
 	    
     - For particular card programs, this condition can be lifted during onboarding definitions.
+	    
+3. **Create the merchant**
+    
+    - Schema detailed in [MerchantUser POST](merchant.en.md)
         
 4. **Merchant becomes active**
     
     - Since verification is delegated, no further KYC is needed from PayCaddy.
     - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.en.md)
 
+>* For specifics on which verification checks are done, review with Compliance team during onboarding process.
+>
+>** For specific periodicity details on scheduled KYC checks, consult with PayCaddy's compliance team during the integration phase.
+>
+>*** All card programs for Merchant type users will undergo a definition process with PayCaddy’s compliance team to establish file formats and pre-approval conditions if applicable.
+
+A visualization of the above described steps can be seen in the following flow:
+
+![merchantuserflow](./assets/imgs/merchantuser.svg)
 
 ---
 
 ###  Summary Table
 
-| User Type      | API Endpoint      | KYC Mode   | Activation Trigger       |
-| -------------- | ----------------- | ---------- | ------------------------ |
-| `EndUser`      | `POST /users`     | Integrated | MetaMap webhook          |
-| `EndUserSR`    | `POST /users`     | Delegated  | Immediate after creation |
-| `MerchantUser` | `POST /merchants` | Delegated  | After document approval  |
+| User Type      | API Endpoint                    | KYC Mode   | Activation Trigger       |
+| -------------- | ------------------------------- | ---------- | ------------------------ |
+| `EndUser`      | [EndUser POST](user.en.md)      | Integrated | MetaMap webhook          |
+| `EndUserSR`    | [EndUserSR POST](user.en.md)    | Delegated  | Immediate after creation |
+| `MerchantUser` | [MerchantUser POST](user.en.md) | Delegated  | After document approval  |
 
 >During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
 
