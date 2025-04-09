@@ -1,5 +1,6 @@
 The Prefunded Flow in PayCaddy allows you to maintain and manage funds within user wallets before transactions occur. Each wallet can be associated with one or more cards, and serves as a container for electronic money that powers payment transactions. This chapter provides an overview of how this flow works, how transactions are authorized and settled, and how funds are placed into (and withdrawn from) wallets.
 
+
 ## Overview
 
 1. **User Wallets**  
@@ -21,21 +22,48 @@ The Prefunded Flow in PayCaddy allows you to maintain and manage funds within us
     - **Adjustments**: The final settled amount may differ from the initially authorized amount. Any changes in the settlement amount are also included in the settlement notification (e.g., tips or currency fluctuations).
         
 
+
+![prefundedflow](./assets/imgs/prefundedflow.svg)
+
+
+---
+
+
 ## Funding a Wallet
 
 A wallet must have sufficient funds to cover transactions. Funds can be placed into a wallet in two main ways:
 
 1. **Direct PayIns**  
     Use the PayCaddy _PayIn_ endpoint to add funds directly to an active wallet. This method instantly makes the declared funds available for wallet transactions. Ultimately, PayCaddy will settle these PayIns offline through a daily ACH or wire transfer process.
-    
+
+![payindirect](./assets/imgs/payindirect.svg)
+
+
+
 2. **Transfer from a Company Wallet**  
     This is the recommended approach for clients who wish to maintain a single “Company Wallet” and distribute funds to individual user wallets as needed. Centralizing PayIns into the Company Wallet first allows for streamlined reconciliation and improved traceability of funds. You can then use the Transfer method to move the necessary amounts to each user’s wallet.
-    
+
+![payincentral](./assets/imgs/payincentral.svg)
+
+
+
+
+---
 
 The details on how to utilize the PayIn method are found on our [Wallet Operations](wallet_ops.en) chapter.
-### Daily Settlement of PayIns
 
-On a daily basis, PayCaddy consolidates all PayIns executed the previous day and sends a detailed report to the client. Settlement is then completed via ACH or wire transfer. This ensures that all direct PayIns made available for user spending are properly settled. You can find a detailed explanation of this process in our [Settlement Chapter](settlement.en)
+---
+
+
+### Settlement of PayIns
+
+**Direct PayIns**
+Through an offline process, PayCaddy consolidates all PayIns executed and sends a detailed report for conciliation. Settlement is then completed via ACH or wire transfer. This ensures that all direct PayIns made available for user spending are properly settled.
+
+**Transfer from a Company Wallet**
+With the submission of evidence of a ACH or Wire transaction, approval for executing a centralized PayIn can be requested ensuring individual wallet funds are settled ahead of time.
+
+>Depending on the Card Program's operation, the parameters for settlement of PayIns will be defined with PayCaddy's Treasury Operations team.
 
 ## Eliminating Funds (PayOut)
 
