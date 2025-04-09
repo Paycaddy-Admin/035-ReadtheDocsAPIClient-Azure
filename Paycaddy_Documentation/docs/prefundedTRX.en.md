@@ -81,7 +81,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
 
 ## Online Transaction Notifications
 
-There are three main types of transactions that you will receive as online type:
+There are four main types of transactions that you will receive as online type:
 
 1. **AuthorizationRequest:** This transaction will decrease the customer's balance.
 2. **AuthorizationCommunication:** This transaction will also decrease the customer's balance.
