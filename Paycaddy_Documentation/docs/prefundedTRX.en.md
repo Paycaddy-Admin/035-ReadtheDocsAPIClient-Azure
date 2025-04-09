@@ -1,4 +1,4 @@
-In our [Prefunded Flow](prefundedFlow.en), When a card issued in PayCaddy’s API makes a transaction on the Mastercard network, PayCaddy’s authorization engine reviews funds availability for the specific transaction. Based on this review if the transaction goes through, it sends a payload with one of four possible transaction types to an enlisted URL.
+In our [Prefunded Flow](prefundedFlow.en), when a card issued in PayCaddy’s API makes a transaction on the Mastercard network, PayCaddy’s authorization engine reviews funds availability for the specific transaction. Based on this review if the transaction goes through, it sends a payload with one of four possible transaction types to a previously enlisted callback URL.
 
 === "AuthorizationRequest"
     ```json
@@ -114,4 +114,5 @@ Once online transactions are processed, they are reconciled with the settlement 
 	Indicates that the original authorization was matched and confirmed during settlement without requiring adjustment.
 
 >These corrections are processed asynchronously and reported via batch, not through the JIT webhook mechanism.
+
 ---

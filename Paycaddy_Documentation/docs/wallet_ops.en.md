@@ -188,7 +188,7 @@ To carry out transactions within the NeoBank API environment between two previou
         "amount": 0,
         "currency": "string",
         "statement": "string"
-    }
+    }```
 === "Response"
     ```json
     {
