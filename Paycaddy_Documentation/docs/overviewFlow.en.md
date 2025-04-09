@@ -15,7 +15,7 @@ Enables the creation of Prepaid, Debit or Credit cards associated to a particula
 [**Prefunded Transactions Flow**](prefundedFlow.en.md)
 This flow encompasses the funding of wallets through [wallet operations](wallet_ops.en.md), the approval of open-loop transactions, the enlisting of a Callback URL and the notifications sent via webhook to said address.
 
-[**Just-In-Time Funding Transactions Flow**](JITllow.en.md)
+[**Just-In-Time Funding Transactions Flow**](JITflow.en.md)
 Enables external authorization of card transactions. This flow describes the requirements and specifications for the authorization webservice that needs to be made available, as well as the authorization request schemas and consequential transaction event notifications.
 
 ---

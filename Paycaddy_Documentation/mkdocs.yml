@@ -6,8 +6,9 @@ nav:
       - Flow Overview: overviewFlow.md
       - User Creation: userFlow.md #
       - Card Creation: cardFlow.md #
-      - Prefunded Flow: prefundedFlow.md #
-      - Just-In-Time Funding: JITflow.md #
+      - Funding Flow:
+          - Prefunded: prefundedFlow.md #
+          - Just-In-Time: JITflow.md #
 
   - Card Issuing API:
       - Users:
