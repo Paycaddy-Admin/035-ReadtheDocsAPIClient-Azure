@@ -10,7 +10,7 @@ Use this documentation as a guide to execute tasks such as:
 - Creating cards linked to the created wallets. (Check **[Cards](card.en.md)**)
 - Managing created cards. (Check **[Card Operations](card_ops.en.md)**)
 - Registering a Callback URLs for event notifications (Check [**Notifications Enlist**](notificationsEnlist.en.md))
-- Retrieving transactional data. (Check [**Transaction Data Retrieval**](transactionLists.en))
+- Retrieving transactional data. (Check [**Transaction Data Retrieval**](transactionLists.en.md))
 
 
 > Card creation is done through different endpoints for debit, credit, and prepaid cards.
