@@ -127,7 +127,7 @@ For complete information on KYC, please find detailed information on this docume
 
 ---
 
-## **End User <font color="sky-blue">GET</font>**
+## **End User <font color="sky-blue">GET</font>** 
 
 **Request URL:** https://api.paycaddy.dev/v1/endUsers/
 

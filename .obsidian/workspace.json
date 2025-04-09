@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/overviewFlow.en.md",
+                "file": "Paycaddy_Documentation/docs/userFlow.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "overviewFlow.en"
+              "title": "userFlow.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/overviewFlow.en.md",
+                "file": "Paycaddy_Documentation/docs/userFlow.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of overviewFlow.en"
+              "title": "Outline of userFlow.en"
             }
           }
         ],
@@ -154,8 +154,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 503.5,
-    "collapsed": true
+    "width": 503.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -170,9 +169,18 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/index.md",
-    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
+    "Paycaddy_Documentation/docs/user.en.md",
     "Paycaddy_Documentation/docs/userFlow.en.md",
+    "userSR.en.md",
+    "Paycaddy_Documentation/docs/index.md",
+    "docs/user.en.md",
+    "docs",
+    "Paycaddy_Documentation/docs/assets/imgs/user_flow.png",
+    "Paycaddy_Documentation/docs/assets/imgs/user_flow.svg",
+    "Paycaddy_Documentation/docs/index.es.md",
+    "Paycaddy_Documentation/docs/assets/imgs/generalFlow.svg",
+    "Paycaddy_Documentation/docs/overviewFlow.en.md",
+    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/trxNotification.es.md",
     "Paycaddy_Documentation/docs/transactionLists.es.md",
     "Paycaddy_Documentation/docs/transactionLists.en.md",
@@ -180,8 +188,6 @@
     "Paycaddy_Documentation/docs/transaction.en.md",
     "Paycaddy_Documentation/docs/trxNotification.en.md",
     "().md",
-    "Paycaddy_Documentation/docs/overviewFlow.en.md",
-    "Paycaddy_Documentation/docs/assets/imgs/generalFlow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/entitys.png",
     "Paycaddy_Documentation/docs/assets/imgs/logo.svg",
     "Paycaddy_Documentation/docs/assets/imgs/flow_entitys.png",
@@ -190,7 +196,6 @@
     "Paycaddy_Documentation/docs/card_ops.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/card_flow.png",
     "Paycaddy_Documentation/docs/assets/imgs/states_descriptions.png",
-    "Paycaddy_Documentation/docs/assets/imgs/user_flow.png",
     "Paycaddy_Documentation/docs/JITflow.en.md",
     "Paycaddy_Documentation/docs/creditCore.es.md",
     "Paycaddy_Documentation/docs/backoffice.es.md",
@@ -201,10 +206,6 @@
     "Paycaddy_Documentation/docs/card_ops.es.md",
     "Paycaddy_Documentation/docs/backoffice.en.md",
     "Paycaddy_Documentation/docs/card.es.md",
-    "Paycaddy_Documentation/docs/overviewFlow.es.md",
-    "Paycaddy_Documentation/docs/cardFlow.es.md",
-    "Paycaddy_Documentation/docs/cardFlow.en.md",
-    "Paycaddy_Documentation/docs/chatbot.en.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/WHEEL",
@@ -213,7 +214,6 @@
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/METADATA",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/INSTALLER",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/COPYING",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info",
-    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n/__pycache__/__init__.cpython-313.pyc"
+    "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info"
   ]
 }

@@ -1,6 +1,6 @@
 There are several achievable functional flows in our PayCaddy API. They can be categorized by the affected entity or the functional outcome. Essentially all Card Programs require a combination of these flows described below:
 
-[**User Creation Flow**](user.en.md)
+[**User Creation Flow**](userFlow.en.md)
 Enables the registration and KYC verification of new users associated to a particular Card Program. Users can be Natural Persons or Businesses and the KYC verification can be either *Integrated*, or *Delegated*.
 
 >*Integrated KYC* flows utilize PayCaddy's solution for KYC data capture and user activation is conditional to programatic verification through a 3rd party identity verification provider.

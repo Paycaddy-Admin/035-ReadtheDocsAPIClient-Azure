@@ -39,7 +39,7 @@ Utilize our [Sandbox Swagger Interface](https://api.api-sandbox.paycaddy.dev/ope
 PayCaddy API has 3 fundamental entities with which you will interact each time you consume an endpoint to complete the various available flows. These entities identify the end users of the card issuance service, the wallets or virtual containers for money, and the cards associated with them.
 
 ![entity_diagram](./assets/imgs/entityRelationship.svg)
-{class="img-thin"}
+{class="img"}
 
 **UserID:** ‍Uniquely identifies an EndUser or MerchantUser interchangeably. The UserID is the primary entity of the NeoBank API. The process of creating an EndUser or MerchantUser always results in the creation of a UserID and, in turn, an associated WalletID.
 ‍
