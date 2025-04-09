@@ -62,7 +62,7 @@ The GET call for a PayIn allows accessing information related to a specific tran
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/payIns/{PAYIN_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/payIns/{PAYIN_ID}
     ```
 === "Response"
     ```json
@@ -154,7 +154,7 @@ The GET call for a PayOut allows access to information related to a specific **t
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/payOuts/{PAYOUT_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/payOuts/{PAYOUT_ID}
     ```
 === "Response"
     ```json
@@ -228,7 +228,7 @@ The GET call for a transfer between wallets allows access to information related
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/transfers/{TRANSFER_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/transfers/{TRANSFER_ID}
     ```
 === "Response"
     ```json

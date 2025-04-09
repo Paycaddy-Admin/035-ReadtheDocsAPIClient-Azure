@@ -46,7 +46,7 @@ The GET call for wallets allows you to retrieve the information associated with 
 
 === "Request"
     ```json
-    https://api.paycaddy.dev/v1/wallets/{WALLET_ID}
+    https://api.api-sandbox.paycaddy.dev/v1/wallets/{WALLET_ID}
     
     ```
 === "Response"

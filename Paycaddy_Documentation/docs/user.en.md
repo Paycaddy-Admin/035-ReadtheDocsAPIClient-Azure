@@ -54,7 +54,7 @@
     ```
 It should be noted that the responsibility for validating the accuracy and format of the entered data falls on the PayCaddy client, meaning that our API will return a successful response as long as the following parameters are met, regardless of the accuracy of the information or duplication of the shared data:
 
-1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the ASCII range.
+1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the [ITU-T50](https://www.itu.int/rec/T-REC-T.50/en) range, which is a slightly more restrictive subset of ASCII.
 2. None of the fields should be sent as NULL.
 3. The email field must follow a standard email format.
 
@@ -137,7 +137,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 === "Request"
     ```
-     https://api.paycaddy.dev/v1/endUsers/${USER_ID}
+     https://api.api-sandbox.paycaddy.dev/v1/endUsers/${USER_ID}
     ```
 === "Response"
     ```json
@@ -196,7 +196,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 
     ```
 === "Response"
-    ```json
+    ```json```
     {
         "id": "string",
         "email": "string",
@@ -219,9 +219,10 @@ The creation of a new user for a legal entity begins with a POST call in which a
         "creationDate": "2022-07-18T22:29:45.914Z"
     }
     ```
+
 It should be noted that the responsibility for validating the accuracy and format of the entered data falls on the PayCaddy client, meaning that our API will return a successful response as long as the following parameters are met, regardless of the accuracy of the information or duplication of the shared data:
 
-1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the ASCII range.
+1. The First Name and Last Name fields must add up to a maximum total of 22 characters that must be sent in a sanitized form, removing special characters and limiting themselves to the [ITU-T50](https://www.itu.int/rec/T-REC-T.50/en) range, which is a slightly more restrictive subset of ASCII.
 2. None of the fields should be sent as NULL.
 3. The email field must follow a standard email format.
 
@@ -286,7 +287,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 === "Request"
     ```
-     https://api.paycaddy.dev/v1/merchantUsers/{MERCHANT_ID}
+     https://api.api-sandbox.paycaddy.dev/v1/merchantUsers/{MERCHANT_ID}
     ```
 === "Response"
     ```json
@@ -319,7 +320,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 ## **End User SR <font color="green">POST</font>** 
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/endUserSRs
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/SR/EndUserSRs
 
 The creation of a new user for a natural person with a delegated KYC flow begins with a POST call in which an endpoint is consumed for sending the basic data of the user:
 
@@ -402,13 +403,13 @@ If this event does not generate errors, the system will respond with an HTTP 200
 
 ## **End User SR <font color="sky-blue">GET</font>** 
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/endUserSRs/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/SR/EndUserSRs/
 
 The GET call for an EndUserSR allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
 === "Request"
     ```
-     https://api.paycaddy.dev/v1/SR/EndUserSRs/{USER_ID}
+     https://api.api-sandbox.paycaddy.dev/v1/SR/EndUserSRs/{USER_ID}
     ```
 === "Response"
     ```json
