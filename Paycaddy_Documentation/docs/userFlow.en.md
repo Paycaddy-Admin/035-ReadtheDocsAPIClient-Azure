@@ -9,6 +9,9 @@ There are **three types** of users in PayCaddy’s system:
 | `EndUser`      | A natural person using Integrated KYC. | PayCaddy handles KYC via a hosted link.                                 |
 | `EndUserSR`    | A natural person using Delegated KYC.  | The client collects and verifies KYC, then sends verified data via API. |
 | `MerchantUser` | A business entity.                     | Delegated KYB (Know Your Business), provided by the client.             |
+
+To determine the correct endpoint for a particular scenario, refer to the following flow. For more detailed information on each specific flow, please find the respective section in this chapter.
+
 ![general_user_flow](./assets/imgs/generaluserflow.svg)
 {class="img"}
 

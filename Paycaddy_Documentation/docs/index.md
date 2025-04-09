@@ -41,10 +41,8 @@ PayCaddy API has 3 fundamental entities with which you will interact each time y
 ![entity_diagram](./assets/imgs/entityRelationship.svg)
 {class="img"}
 
-**UserID:** ‍Uniquely identifies an EndUser or MerchantUser interchangeably. The UserID is the primary entity of the NeoBank API. The process of creating an EndUser or MerchantUser always results in the creation of a UserID and, in turn, an associated WalletID.
-‍
-‍**WalletID:** The WalletID is the identifier of the electronic money container to which funds are credited and debited through PayIns, PayOuts, and/or transactions of the card(s) associated with it. A UserID will always be associated with at least one WalletID; however, it may contain multiple WalletIDs if required by the client's solution.
+- **UserID:** ‍Uniquely identifies an EndUser or MerchantUser interchangeably. The UserID is the primary entity of the NeoBank API. The process of creating an EndUser or MerchantUser always results in the creation of a UserID and, in turn, an associated WalletID.
 
-**‍CardID:** ‍These are the unique identifiers of the card that also serve as an abstraction of the PAN of the issued cards, avoiding the need for storing sensitive card information.
+- **WalletID:** The WalletID is the identifier of the electronic money container to which funds are credited and debited through PayIns, PayOuts, and/or transactions of the card(s) associated with it. A UserID will always be associated with at least one WalletID; however, it may contain multiple WalletIDs if required by the client's solution.
 
-
+- **‍CardID:** ‍These are the unique identifiers of the card that also serve as an abstraction of the PAN of the issued cards, avoiding the need for storing sensitive card information.
