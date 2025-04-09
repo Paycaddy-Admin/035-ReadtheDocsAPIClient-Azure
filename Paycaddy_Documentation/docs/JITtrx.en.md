@@ -1,5 +1,7 @@
 This document explains the Just In Time Funding (JIT) flow used by PayCaddy to authorize card transactions using an external authorization endpoint provided by the client. It describes the different types of online transaction notifications, how to handle authorization requests, and how to implement balance inquiry support within the same flow.
 
+
+
 ## Authorization Requests in JIT Flow
 
 For transactions of type `PeticionAutorizacion`, a POST request will be made to the external authorization endpoint provided by the client. The request will include all relevant fields and follow specific HTTP requirements:
@@ -12,6 +14,9 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
     
 
 > The external endpoint must respond within **1 second**. If the timeout is exceeded, the transaction will be automatically denied with an internal code representing a timeout.
+
+
+
 
 ### Expected Response
 
@@ -52,6 +57,9 @@ The endpoint should return a boolean response in JSON format:
     ```
 
 
+
+
+
 ### Webhook Notification on Rejection
 
 If a transaction is denied, a webhook will be sent to the client with one of the following types:
@@ -78,9 +86,15 @@ If a transaction is denied, a webhook will be sent to the client with one of the
 
 ---
 
+
+
+
 ## Balance Inquiry (Consulta de Saldo)
 
 JIT Funding also supports balance inquiries under two scenarios:
+
+
+
 
 ### 1. Pure Balance Inquiries (Not Associated with ATM Withdrawal)
 
@@ -98,24 +112,28 @@ The request body matches the standard webhook structure. Valid `C3CodigoProceso`
 
 #### Expected Response
 
-```
-{
-  "amount": int64
-}
-```
+=== "Allow Balance Display"
+    ```json
+    {
+	    "amount": int64 //Balance in cents
+    }
 
-If the balance inquiry must be denied:
+    ```
 
-```
-{
-  "Funding": false
-}
-```
+=== "Deny Balance Display"
+    ```json
+    {
+        "Funding": false,
+    }
+
+    ```
 
 If the response exceeds 1 second, the transaction is automatically denied and a webhook of type `ExcedeTiempoAutorizacion` is sent.
 
----
 
+
+
+---
 ### 2. ATM Withdrawals with Balance Display
 
 These transactions are sent with:
@@ -139,8 +157,10 @@ To enable balance display on the ATM screen, the authorization response must inc
 }
 ```
 
----
 
+
+
+---
 ## General Considerations
 
 - All values in the `amount` field must be expressed in cents (USD).
@@ -150,6 +170,9 @@ To enable balance display on the ATM screen, the authorization response must inc
 - Rejections due to timeout or insufficient funds are notified via webhook.
     
 - Some merchants may initiate balance inquiries as part of verification flows, such as subscription enrollment.
+
+
+
 
 ---
 ## Online Transaction Notification Types 
@@ -210,6 +233,9 @@ All online transactions are notified via webhook to the callback URL configured 
 >Online Transaction Notifications don't expect a reply, they represent a notice of a card event that can affect balance.
 
 >In Just In Time Funding operations, Transaction Notifications can be the result of an approval or denial in the Authorization Request in JIT Flow.
+
+
+
 
 ---
 ## Settlement and Batch Process Corrections

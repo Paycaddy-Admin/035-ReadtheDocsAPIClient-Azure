@@ -7,8 +7,12 @@ Find in this section a high-level explanation of the decision flow for a transac
 1. **Transaction Initiation**  
     A transaction is initiated on the card network (e.g., Mastercard), and PayCaddy receives a request for authorization. This is most relevant for JIT funding when the transaction is of type `PeticionAutorizacion` but the transaction initiation could be any of the Online Transaction Notification types.
     
+    
+    
 2. **Forwarding to the Client's Endpoint**  
     PayCaddy creates a request with all relevant transaction data and sends a `POST` request to the client’s configured authorization endpoint (following the JIT format).
+    
+    
     
 3. **Client Decision**  
     The client receives the request and decides whether to approve or deny the transaction. The client must respond within 1 second.
@@ -17,8 +21,12 @@ Find in this section a high-level explanation of the decision flow for a transac
         
     - If the response is `{ "Funding": false }`, the transaction is denied.
         
+        
+        
 4. **Timeout Handling**  
     If the client does not respond within 1 second, PayCaddy automatically denies the transaction and records it as a timeout.
+    
+    
     
 5. **Webhook Notification**  
     After processing the decision, PayCaddy sends a webhook to the client’s `NotificationEnlist` endpoint.
@@ -31,6 +39,8 @@ Find in this section a high-level explanation of the decision flow for a transac
             
         - `ExcedeTiempoAutorizacion` (timeout)
             
+            
+            
 6. **Batch Processing & Settlement**  
     Later, if applicable, a settlement batch may arrive with corrections:
     
@@ -40,9 +50,11 @@ Find in this section a high-level explanation of the decision flow for a transac
         
     - `TransaccionConfirmada`: original authorization was matched and confirmed.
 
+
+
 A visualization of this flow can be found below:
 
-![jitflow](JITflow.svg){class="img"}
+![jitflow](./assets/imgs/JITflow.svg){class="img"}
 
 
 ---
