@@ -1,65 +1,5 @@
 This document explains the Just In Time Funding (JIT) flow used by PayCaddy to authorize card transactions using an external authorization endpoint provided by the client. It describes the different types of online transaction notifications, how to handle authorization requests, and how to implement balance inquiry support within the same flow.
 
-## Online Transaction Notification Types 
-
-All online transactions are notified via webhook to the callback URL configured by the client using the **NotificationEnlist POST** endpoint. The webhook format follows the structure described in our [NotificationEnlist documentation](https://es.paycaddy.com/developers/documentation#notificationenlist).
-
-### Authorization Request
-
-This transaction represents a pending authorization request. It reduces the available balance on the cardholder's wallet.
-
-```
-{
-  "password": "password",
-  "c1Tipo": "PeticionAutorizacion",
-  "c2CardId": "cardId",
-  "c3CodigoProceso": "000000",
-  "c4ImporteTransaccion": "000000001617",
-  "c7FechaHoraTransaccion": "20220429052901",
-  "c11NumeroIdentificativoTransaccion": "000004339",
-  "c18CodigoActividadEstablecimiento": "5999",
-  "c19CodigoPaisAdquirente": "442",
-  "c38NumeroAutorizacion": "040031",
-  "c41TerminalId": "00227759",
-  "c42Comercio": "227759000156182",
-  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
-}
-```
-
-### Authorization Communication
-
-This transaction represents an automatic authorization that does not require approval from the external Authorizer. It reduces the cardholder's available balance.
-```
-{
-  "c1Tipo": "ComunicacionAutorizacion",
-  ...
-}
-```
-### Annulment Communication
-
-This transaction increases the available balance in the cardholder's wallet.
-```
-{
-  "c1Tipo": "ComunicacionAnulacion",
-  ...
-}
-```
-### Reversal Request
-
-This represents a refund request that will be processed offline via the batch process. The transaction amount will be declared as "0". Once confirmed by the network, the processed amount will be declared in a related `TransaccionCorregidaPositiva` sent via the batch.
-```
-{
-  "c1Tipo": "PeticionDevolucion",
-  ...
-}
-```
-
->Online Transaction Notifications don't expect a reply, they represent a notice of a card event that can affect balance.
-
->In Just In Time Funding operations, Transaction Notifications can be the result of an approval or denial in the Authorization Request in JIT Flow.
-
----
-
 ## Authorization Requests in JIT Flow
 
 For transactions of type `PeticionAutorizacion`, a POST request will be made to the external authorization endpoint provided by the client. The request will include all relevant fields and follow specific HTTP requirements:
@@ -77,71 +17,64 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
 
 The endpoint should return a boolean response in JSON format:
 
-```
-{
-  "Funding": true
-}
-```
 
-or
+=== "Authorize Transaction"
+    ```json
+    {
+        "Funding": true
+    }
 
-```
-{
-  "Funding": false
-}
-```
+    ```
+
+=== "Deny Transaction"
+    ```json
+    {
+        "Funding": false
+    }
+
+    ```
+
+=== "Authorize Transaction with Balance Data Inquiry"
+    ```json
+    {
+        "Funding": false,
+        "amount": int64 //Balance in cents
+    }
+
+    ```
+
+=== "Approved Balance Data Inquiry"
+    ```json
+    {
+        "amount": int64 //Balance in cents
+    }
+
+    ```
+
 
 ### Webhook Notification on Rejection
 
 If a transaction is denied, a webhook will be sent to the client with one of the following types:
 
-#### Rejection with On-Time Response
 
-```
-{
-  "c1Tipo": "RechazadaPorAutorizador",
-  ...
-}
-```
+=== "Rejection with On-Time Response"
+    ```json
+    {
+        "c1Tipo": "RechazadaPorAutorizador",
+		  ...
+    }
 
-#### Rejection Due to Timeout
+    ```
 
-```
-{
-  "c1Tipo": "ExcedeTiempoAutorizacion",
-  ...
-}
-```
+=== "Rejection Due to Timeout"
+    ```json
+    {
+        "c1Tipo": "ExcedeTiempoAutorizacion",
+		  ...
+    }
 
----
+    ```
 
-## Simulation Endpoint
-
-A simulation endpoint is available for testing:
-
-```
-https://int.api.paycaddy.dev/v1/JustInTimeFundings
-```
-
-### Request Body Structure
-
-```
-{
-  "C1Tipo": "PeticionAutorizacionJIT",
-  "C2CardId": "string",
-  "C3CodigoProceso": "string",
-  "C4ImporteTransaccion": "string",
-  "C7FechaHoraTransaccion": "string",
-  "BDateUtcCreate": "string",
-  "C11NumeroIdentificativoTransaccion": "string",
-  "C18CodigoActividadEstablecimiento": "string",
-  "C19CodigoPaisAdquirente": "string",
-  "C38NumeroAutorizacion": "string",
-  "C41TerminalId": "string",
-  "C42Comercio": "string",
-  "C43IdentificadorComercio": "string"
-}
-```
 
 ---
 
@@ -219,21 +152,77 @@ To enable balance display on the ATM screen, the authorization response must inc
 - Some merchants may initiate balance inquiries as part of verification flows, such as subscription enrollment.
 
 ---
+## Online Transaction Notification Types 
 
-## Settlement and Batch Corrections
+All online transactions are notified via webhook to the callback URL configured by the client using the **NotificationEnlist POST** endpoint. The webhook format follows the structure described in our Just In Time 
+
+1. **Authorization Request**
+	This transaction represents a pending authorization request. It reduces the available balance on the cardholder's wallet
+
+```
+{
+  "password": "password",
+  "c1Tipo": "PeticionAutorizacion",
+  "c2CardId": "cardId",
+  "c3CodigoProceso": "000000",
+  "c4ImporteTransaccion": "000000001617",
+  "c7FechaHoraTransaccion": "20220429052901",
+  "c11NumeroIdentificativoTransaccion": "000004339",
+  "c18CodigoActividadEstablecimiento": "5999",
+  "c19CodigoPaisAdquirente": "442",
+  "c38NumeroAutorizacion": "040031",
+  "c41TerminalId": "00227759",
+  "c42Comercio": "227759000156182",
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+}
+```
+
+2. **Authorization Communication**
+	This transaction represents an automatic authorization that does not require approval from the external Authorizer. It reduces the cardholder's available balance.
+
+```
+{
+  "c1Tipo": "ComunicacionAutorizacion",
+  ...
+}
+```
+
+3. **Annulment Communication**
+	This transaction increases the available balance in the cardholder's wallet.
+
+```
+{
+  "c1Tipo": "ComunicacionAnulacion",
+  ...
+}
+```
+
+4. **Reversal Request**
+	This represents a refund request that will be processed offline via the batch process. The transaction amount will be declared as "0". Once confirmed by the network, the processed amount will be declared in a related `TransaccionCorregidaPositiva` sent via the batch.
+
+```
+{
+  "c1Tipo": "PeticionDevolucion",
+  ...
+}
+```
+
+>Online Transaction Notifications don't expect a reply, they represent a notice of a card event that can affect balance.
+
+>In Just In Time Funding operations, Transaction Notifications can be the result of an approval or denial in the Authorization Request in JIT Flow.
+
+---
+## Settlement and Batch Process Corrections
 
 Once online transactions are processed, they are reconciled with the settlement files received from the network. Discrepancies or adjustments to the original transaction may be reported through the batch process using the following correction types:
 
-### TransaccionCorregidaPositiva
+1. **TransaccionCorregidaPositiva**
+	Indicates an adjustment that confirms a transaction amount higher than initially authorized. The additional amount will be debited from the cardholder's account.
 
-Indicates an adjustment that confirms a transaction amount higher than initially authorized. The additional amount will be debited from the cardholder's account.
+2. **TransaccionCorregidaNegativa**
+	Indicates a correction that results in a lower final amount than originally authorized. The excess amount will be released back to the cardholder's available balance.
 
-### TransaccionCorregidaNegativa
+3. **TransaccionConfirmada**
+	Indicates that the original authorization was matched and confirmed during settlement without requiring adjustment.
 
-Indicates a correction that results in a lower final amount than originally authorized. The excess amount will be released back to the cardholder's available balance.
-
-### TransaccionConfirmada
-
-Indicates that the original authorization was matched and confirmed during settlement without requiring adjustment.
-
-These corrections are processed asynchronously and reported via batch, not through the JIT webhook mechanism.
+>These corrections are processed asynchronously and reported via batch, not through the JIT webhook mechanism.
