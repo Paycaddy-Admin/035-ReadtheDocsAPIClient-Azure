@@ -35,15 +35,15 @@ A wallet must have sufficient funds to cover transactions. Funds can be placed i
 
 1. **Direct PayIns**  
     Use the PayCaddy _PayIn_ endpoint to add funds directly to an active wallet. This method instantly makes the declared funds available for wallet transactions. Ultimately, PayCaddy will settle these PayIns offline through a daily ACH or wire transfer process.
-
-![payindirect](./assets/imgs/payindirect.svg)
+    
+    ![payindirect](./assets/imgs/payindirect.svg)
 
 
 
 2. **Transfer from a Company Wallet**  
     This is the recommended approach for clients who wish to maintain a single “Company Wallet” and distribute funds to individual user wallets as needed. Centralizing PayIns into the Company Wallet first allows for streamlined reconciliation and improved traceability of funds. You can then use the Transfer method to move the necessary amounts to each user’s wallet.
-
-![payincentral](./assets/imgs/payincentral.svg)
+    
+    ![payincentral](./assets/imgs/payincentral.svg)
 
 
 
