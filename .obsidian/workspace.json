@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/JITtrx.en.md",
+                "file": "Paycaddy_Documentation/docs/settlement.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JITtrx.en"
+              "title": "settlement.en"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/JITtrx.en.md",
+                "file": "Paycaddy_Documentation/docs/settlement.en.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of JITtrx.en"
+              "title": "Outline of settlement.en"
             }
           }
         ],
@@ -169,10 +169,12 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/JITtrx.en.md",
     "Paycaddy_Documentation/docs/JITflow.en.md",
+    "Paycaddy_Documentation/docs/kyc.en.md",
+    "Paycaddy_Documentation/docs/settlement.en.md",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/JITflow.svg.svg",
-    "Paycaddy_Documentation/docs/JITtrx.en.md",
     "Paycaddy_Documentation/docs/JITtrx.es.md",
     "Paycaddy_Documentation/docs/JITflow.es.md",
     "Paycaddy_Documentation/docs/transaction.en.md",
@@ -204,7 +206,6 @@
     "Paycaddy_Documentation/docs/creditCore.es.md",
     "Paycaddy_Documentation/docs/backoffice.es.md",
     "Paycaddy_Documentation/docs/changelog.en.md",
-    "Paycaddy_Documentation/docs/card_ops.es.md",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/top_level.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/entry_points.txt",
     "chatbot-doc/pythonenvironment/lib/python3.13/site-packages/mkdocs_i18n-0.4.6.dist-info/WHEEL",

@@ -16,11 +16,29 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
 > The external endpoint must respond within **1 second**. If the timeout is exceeded, the transaction will be automatically denied with an internal code representing a timeout.
 
 
+#### **Request Format**
 
+```
+{
+  "password": "password",
+  "c1Tipo": "PeticionAutorizacionJIT",
+  "c2CardId": "cardId",
+  "c3CodigoProceso": "000000",
+  "c4ImporteTransaccion": "000000001617",
+  "c7FechaHoraTransaccion": "20220429052901",
+  "c11NumeroIdentificativoTransaccion": "000004339",
+  "c18CodigoActividadEstablecimiento": "5999",
+  "c19CodigoPaisAdquirente": "442",
+  "c38NumeroAutorizacion": "040031",
+  "c41TerminalId": "00227759",
+  "c42Comercio": "227759000156182",
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+}
+```
 
-### Expected Response
+#### **Expected Responses**
 
-The endpoint should return a boolean response in JSON format:
+The endpoint should always return a boolean response in JSON format and in some cases include the `amount` attribute to display balance data:
 
 
 === "Authorize Transaction"
@@ -60,7 +78,7 @@ The endpoint should return a boolean response in JSON format:
 
 
 
-### Webhook Notification on Rejection
+#### **Webhook Notification on Rejection**
 
 If a transaction is denied, a webhook will be sent to the client with one of the following types:
 
@@ -89,28 +107,20 @@ If a transaction is denied, a webhook will be sent to the client with one of the
 
 
 
-## Balance Inquiry (Consulta de Saldo)
+## Balance Inquiry
 
-JIT Funding also supports balance inquiries under two scenarios:
-
-
+JIT Funding supports balance inquiries under two scenarios:
 
 
-### 1. Pure Balance Inquiries (Not Associated with ATM Withdrawal)
 
-These transactions are identified with:
 
-```
-"C1Tipo": "JITConsultaSaldo"
-```
-
-The request body matches the standard webhook structure. Valid `C3CodigoProceso` values include, but are not limited to:
-
-```
-300000, 300200, 300220, 300230, 301000, 302000, 303000
-```
-
-#### Expected Response
+1. **Pure Balance Inquiries (Not Associated with ATM Withdrawal)**
+	
+	These transactions are identified with: `"C1Tipo": "JITConsultaSaldo"`
+	
+	The request body matches the standard webhook structure. Valid `C3CodigoProceso` values include, but are not limited to: `300000, 300200, 300220, 300230, 301000, 302000, 303000`
+	
+	The expected responses format for such requests is as follows:
 
 === "Allow Balance Display"
     ```json
@@ -128,27 +138,20 @@ The request body matches the standard webhook structure. Valid `C3CodigoProceso`
 
     ```
 
-If the response exceeds 1 second, the transaction is automatically denied and a webhook of type `ExcedeTiempoAutorizacion` is sent.
+
+>If the response exceeds 1 second, the transaction is automatically denied and a webhook of type `ExcedeTiempoAutorizacion` is sent.
 
 
 
 
 ---
-### 2. ATM Withdrawals with Balance Display
-
-These transactions are sent with:
-
-```
-"C1Tipo": "PeticionAutorizacionJIT"
-```
-
-They can be identified by their `C3CodigoProceso`, which follows the pattern:
-
-```
-01XXXXXX
-```
-
-To enable balance display on the ATM screen, the authorization response must include:
+2. **ATM Withdrawals with Balance Display**
+	
+	These transactions are sent with: `"C1Tipo": "PeticionAutorizacionJIT"`
+	
+	They can be identified by their `C3CodigoProceso`, which follows the pattern: `01XXXXXX`
+	
+	To enable balance display on the ATM screen, the authorization response must include:
 
 ```
 {
