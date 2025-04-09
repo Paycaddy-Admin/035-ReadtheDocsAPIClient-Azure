@@ -1,6 +1,6 @@
 ## **Debit Card <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/debitCards
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/debitCards
 
 ‍This call enables the creation of a Debit Card and follows the following structure:
 
@@ -65,7 +65,7 @@ In case of any error or inconsistency with the provided data, the API will respo
 
 ## **Debit Card <font color="sky-blue">GET</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/debitCards/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/debitCards/
 
 The GET call for debit cards allows you to query the data of a card based on a cardId.
 
@@ -96,7 +96,7 @@ If there is a HTTP 500 error encountered, report the incident to the PayCaddy su
 
 ## **Prepaid Card <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/prepaidCards
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/prepaidCards
 
 This is the call used to create prepaid cards associated with a particular **userId** and **walletId**, and it carries the following structure:
 
@@ -159,7 +159,7 @@ In case of any error or inconsistency with the provided data, the API will respo
 
 ## **Prepaid Card <font color="sky-blue">GET</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/prepaidCards/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/prepaidCards/
 
 The GET call for prepaid cards allows you to query the data of a card based on a cardId.
 
@@ -189,7 +189,7 @@ If there is a HTTP 500 error encountered, report the incident to the PayCaddy su
 
 ## **Credit Card <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/CreditCards
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/CreditCards
 
 This call enables the creation of a Credit Card associated to a particular **userId** and **walletId**.
 The following structure must be kept to send the relevant data.
@@ -257,7 +257,7 @@ In case of any error or inconsistency with the provided data, the API will respo
 
 ## **Credit Card <font color="sky-blue">GET</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/CreditCards/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/CreditCards/
 
 The GET call for a Credit Card allows you to retrieve relevant information associated to a particular cardId provided through the following structure:
 

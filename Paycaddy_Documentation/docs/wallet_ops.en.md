@@ -2,7 +2,7 @@
 
 ## **Pay In <font color="green">POST</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/payIns
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payIns
 
 ‍PayIn is PayCaddy API's method for adding funds to a specific wallet. It is a simple call that loads the information of the **'walletId'** to which funds are to be loaded, the amount to be credited to the wallet in cents, the code of the currency according to ISO 4217, and a description of the transaction.
 
@@ -56,7 +56,7 @@ If there is a problem with the data provided the PayCaddy API will respond with 
 
 ## **Pay In <font color="sky-blue">GET</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/payIns/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payIns/
 
 The GET call for a PayIn allows accessing information related to a specific transactionId. The successful response of this call loads the following structure:
 
@@ -84,7 +84,7 @@ The call may fail if an incorrect walletId is provided, in which case the PayCad
 
 ## **Pay Out <font color="green">POST</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/payOuts
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payOuts
 
 PayOut is a method to debit funds available in a specific wallet. Unlike a transfer, using this method eliminates the existence of the funds from the NeoBank API. This method should be associated with an accounting operation that requires such a call.
 
@@ -148,7 +148,7 @@ If there is a problem with the data provided the PayCaddy API will respond with 
 
 ## **Pay Out <font color="sky-blue">GET</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/payOuts/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payOuts/
 
 The GET call for a PayOut allows access to information related to a specific **transactionId**. The successful response of this call loads the following structure:
 
@@ -176,7 +176,7 @@ The API will respond with an HTTP 400 error if it is an incorrect transactionId 
 
 ## **Transfer <font color="green">POST</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/transfers
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/transfers
 
 To carry out transactions within the NeoBank API environment between two previously created wallets, the **Transfer POST** call must be used, which has the following structure:
 
@@ -222,7 +222,7 @@ Similarly, the call will always fail if the **walletIdFrom** does not maintain t
 
 ## **Transfer <font color="sky-blue">GET</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/transfers/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/transfers/
 
 The GET call for a transfer between wallets allows access to information related to a specific transactionId and carries the following structure:
 

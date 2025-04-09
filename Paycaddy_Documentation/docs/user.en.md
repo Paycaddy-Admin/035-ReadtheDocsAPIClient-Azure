@@ -1,6 +1,6 @@
 ## **End User <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/endUsers
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/endUsers
 
 ‍The creation of a new user for a natural person begins with a POST call in which an endpoint is consumed for sending the user's basic information:
 
@@ -129,7 +129,7 @@ For complete information on KYC, please find detailed information on this docume
 
 ## **End User <font color="sky-blue">GET</font>** 
 
-**Request URL:** https://api.paycaddy.dev/v1/endUsers/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/endUsers/
 
 ‍The GET call for an endUser allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
@@ -170,7 +170,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 ## **Merchant User <font color="green">POST</font>** 
 
-**Request URL:** https://api.paycaddy.dev/v1/merchantUsers
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/merchantUsers
 
 The creation of a new user for a legal entity begins with a POST call in which an endpoint is consumed for sending the basic data of the legal entity.
 
@@ -278,7 +278,7 @@ If there is an error, the system will respond with one of the following error me
 
 ## **Merchant User <font color="sky-blue">GET</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/merchantUsers/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/merchantUsers/
 
 The GET call for a merchantUser allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
@@ -319,7 +319,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 ## **End User SR <font color="green">POST</font>** 
 
-**Request URL:**  https://api.paycaddy.dev/v1/SR/endUserSRs/
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/endUserSRs
 
 The creation of a new user for a natural person with a delegated KYC flow begins with a POST call in which an endpoint is consumed for sending the basic data of the user:
 
@@ -402,7 +402,7 @@ If this event does not generate errors, the system will respond with an HTTP 200
 
 ## **End User SR <font color="sky-blue">GET</font>** 
 
-**Request URL:** https://api.paycaddy.dev/v1/SR/endUserSRs/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/endUserSRs/
 
 The GET call for an EndUserSR allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 

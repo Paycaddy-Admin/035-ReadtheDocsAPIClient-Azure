@@ -2,7 +2,7 @@
 
 ## **ACK Reception <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/ackReception
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/ackReception
 
 As a security measure in the logistical process of delivering physical plastics, by default, all physical cards created in the NeoBank API are born inactive. This is reflected in the "isActive" and "status" fields of successful responses for the creation of these cards, as well as when making a GET call for all types of cards, such as seen in the example below:
 
@@ -45,7 +45,7 @@ The successful response to the call simply replicates the entered **cardId**. In
 
 ## **Block Card <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/blockCard
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/blockCard
 
 ‍This call allows for self-managed change of the card's activity status. This call directly affects the **"isActive"** boolean by transforming it to **"false"** based on a simple call that only carries the **cardId**.
 
@@ -71,7 +71,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Unblock Card <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/unblockCard
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/unblockCard
 
 ‍This call allows for self-managed change of the card's activity status. This call directly affects the "isActive" boolean by transforming it to **"true"** based on a simple call that only carries the cardId.
 
@@ -97,7 +97,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Cancel Card <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/cancelCard
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/cancelCard
 
 !!!Danger
     The results caused by the action of this method is unreversible. It shall not be use lightly once it results in countable effects
@@ -126,7 +126,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Check PAN <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/checkPan
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkPan
 
 ‍This call allows access to sensitive data such as the card number and expiration date.
 It requires a cardId as an input and carries the following structure:
@@ -158,7 +158,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Check CVV <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/checkCvv
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkCvv
 
 This call allows access to sensitive data such as the card's CVV (Card Verification Value).
 It requires a cardId as an input and carries the following structure:
@@ -188,7 +188,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Check Exp. Date <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/checkDueDate
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkDueDate
 
 This call allows access the expiration date from the card.
 It requires a cardId as an input and carries the following structure:
@@ -217,7 +217,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Check PIN <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/checkPin
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/checkPin
 
 This call allows access to the sensitive PIN data of the card, required for all ATM withdrawals and for some geographic regions' POS transactions.
 
@@ -246,7 +246,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Unblock PIN <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/unblockPin
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/unblockPin
 
 This call allows the reactivation of a card's PIN after a security block occurs due to three incorrect attempts. The total number of acceptable incorrect attempts before the security block is a parameter that can be discussed during the project's scope definition phase, specifically for customized card profiles.
 
@@ -275,7 +275,7 @@ In case of encountering an HTTP 500 error, contact the PayCaddy support team wit
 
 ## **Change PIN <font color="green">POST</font>**
 
-**Request URL:** https://api.paycaddy.dev/v1/cardOperations/changePin
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/cardOperations/changePin
 
 This call allows managing the sensitive PIN data of the card, which is required for all ATM withdrawals and for some geographic areas in point-of-sale devices. The call is designed to assign a 4-digit PIN specified by the user. The responses to this call should not be stored in databases for security reasons.
 ‍
@@ -295,3 +295,58 @@ This call allows managing the sensitive PIN data of the card, which is required 
         "pin": "string"
     }
     ```
+
+
+## **Change Internal Card Limit <font color="green">POST</font>**
+
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/ChangeLimitIWL
+
+Each card generated by PayCaddy's API has a series of properties that are used when conducting transactions. One of these is the limit assigned by clients to control the spending of their users. The value of the limit will determine the amount that can be transacted and may vary for each user. Only clients can make changes and updates to the limit value.
+
+The limits are reset at the beginning of each month, and each transaction is approved according to the current limit at the time.
+
+=== "Request"
+    ```json
+    {
+        "cardId": "string",
+        "limit": 0
+    }
+    ```
+=== "Response"
+    ```json
+    {
+        "cardId": "string",
+        "limit": 0
+    }
+    ```
+
+The API will respond with a HTTP 422 Error "card not found" if the provided cardId has no match for the authenticated client.
+
+---
+
+## **Change Internal Card Limit <font color="sky-blue">GET</font>**
+
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/ChangeLimitIWL/
+
+To retrieve the current limit of a particular card the GET method for the Internal Wallet Limit must be used.
+
+The request must be made with the particular **cardId** that is to be consulted. In the example below, the cardId is highlighted in the request URL.
+
+=== "Request"
+    ```json
+    https://api.paycaddy.dev/v1/ChangeLimitIWL/{CARD_ID}
+    ```
+=== "Response"
+    ```json
+    {
+        "cardId": "string",
+        "limit": 0
+    }
+    ```
+
+In case the Limit is 0 or has not been previously set, the response will carry a message of **“No stablish internal limit”** as the limit attribute.
+
+The API will respond with a HTTP 422 Error **"card not found"** if the provided cardId has no match for the authenticated client.
+
+
+---

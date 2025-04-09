@@ -2,7 +2,7 @@ There are two methods to retrieve a list of transactions that occurred associate
 
 ## **Transaction Detail List by Card <font color="green">POST</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/TransactionDetailList
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailList
 
 This POST call retrieves all transactions of a particular cardId provided.
 
@@ -43,7 +43,7 @@ The structure of the data shared in each transaction follow the same format as a
 
 ## **Transaction Detail List by Wallet <font color="green">POST</font>**
 
-**Request URL:**  https://api.paycaddy.dev/v1/TransactionDetailListByWallet
+**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailListByWallet
 
 The **TransactionDetailListByWallet** endpoint offers a detailed view of all transactions linked to a specific wallet. This encompasses wallet-specific transactions like pay-ins, pay-outs, and transfers, as well as card transactions tied to the specified wallet ID.
 

@@ -6,7 +6,7 @@ nav:
       - Flow Overview: overviewFlow.md
       - User Creation: userFlow.md #
       - Card Creation: cardFlow.md #
-      - Prefunded Transactions: prefundedFlow.md #
+      - Prefunded Flow: prefundedFlow.md #
       - Just-In-Time Funding: JITflow.md #
 
   - Card Issuing API:
@@ -20,13 +20,13 @@ nav:
           - Card Creation & Retrieval: card.md #
           - Card Operations: card_ops.md #
       - Transactions:
-          - Prefunded: prefundedTRX.md
+          - Prefunded Transactions: prefundedTRX.md
           - Just-In-Time Funding: JITtrx.md
           - Settlement: settlement.md
           - Other Transactions: otherTransactions.md
           - Transaction Data Retrieval: transactionLists.md
       - Webhooks: notificationsEnlist.md
-  - Credit Core:
+  - Credit Core (beta):
       - Credit Flows: creditFlows.md
       - Credit Core API: creditCore.md
   - Interfaces:
