@@ -28,7 +28,7 @@ nav:
           - Transaction Data Retrieval: transactionLists.md
       - Webhooks: notificationsEnlist.md
   - Credit Core (beta):
-      - Credit Flows: creditFlows.md
+      - Credit Flows: creditFlow.md
       - Credit Core API: creditCore.md
   - Interfaces:
       - WhatsApp Chatbot: chatbot.md
