@@ -1,87 +1,178 @@
-As an alternative to the debit-based system, the credit core gives you the flexibility to offer credit lines to your users based on your own criteria. This feature allows you to configure and manage credit lines to individual user profiles.
+As an alternative to the debit and prepaid based systems, the credit core gives you the flexibility to offer credit lines to your users based on your own criteria. This feature allows you to configure and manage credit lines to individual user profiles.
 
-With the credit core, users are assigned credit wallets linked to a specific credit line settings. From there, they can begin making transactions using their available credit, just as they would with a balance in a debit wallet.
+With the credit core, users are assigned credit wallets linked to specific credit line settings. From there, they can begin making transactions using their available credit, just as they would with the balance of a prefunded wallet.
 
 ---
 ## Credit Products
 
 It is the heart of our credit core as it is what governs how  each credit line will behave over time. Think of it as the "rule-book" that defines the terms and conditions of credit usage for your users.
 
-Since each credit wallet issued to a user is tied to a credit product, which ensures consistent behavior across similar credit lines and allows you to manage risk, profitability and flexibility with precision and granularity.
+Each credit wallet issued to a user is tied to a credit product, which ensures consistent behavior across similar credit lines and allows you to manage risk, profitability and flexibility with precision and granularity.
 
 They are provided by PayCaddy based on agreements/requests with the clients previously. You can have as much credit products as it considers necessary although every credit product request is reviewed internally to avoid conflicts or misunderstandings on how it scales over time.
 
-It is build to be as granular as possible, you can control from basic settings as grace period, cut frequency and interest rate. Until the more specific ones such as base minimum payment rate, if it is revolving or not, the capital interest split and etc...
+It is build to be as granular as possible, you can control from basic settings as grace period, cut frequency and interest rate. Until the more specific ones such as base minimum payment rate, if it is revolving or not, the capital interest split, etc.
+
+The full list of adjustable parameters can be found in the table below:
+
+| Field                         | Description                                                                                                                                                                                                                                | Example                                            |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| **revolving**                 | Indicates whether the credit line is restored after a payment report. If **false**, the amount reported to **AA** is not reinstated.                                                                                                       | `true` / `false`                                   |
+| **compound**                  | Indicates whether the interest calculation at statement close should use **IO + AO** (`true`) or only **AO** (`false`).                                                                                                                    | `true` / `false`                                   |
+| **cutFrequency**              | Length of a credit‑line cycle. Defines how often statements (cuts) are generated.                                                                                                                                                          | “daily”, “weekly”, “biweekly”, “month”, “year”     |
+| **fixedInterestAmount**       | Fixed amount added to **IO** when calculating wallet interest. Example formula when **compound** is `true`: `fixedInterestAmount + baseInterestRate * (AO + IO) + AO`.                                                                     | In cents: `1000` → USD 10                          |
+| **baseInterestRate**          | Percentage applied to **AO** to generate **IO** at the end of each cycle.                                                                                                                                                                  | Percentage: 2 → 2%; 5 → 5%; 100 → 100%; 150 → 150% |
+| **baseMinimumPaymentRate**    | Minimum percentage of **AO** expected in the sum of payments reported during a cycle so a wallet is not considered delinquent.                                                                                                             | Percentage: 2 → 2%; 5 → 5%; 100 → 100 %(max.)      |
+| **fixedMinimumPaymentAmount** | Fixed amount defined as the minimum expected payment (alone or combined) so a wallet is not considered delinquent. At statement close, this value is added to the result of **baseMinimumPaymentRate** to form the total minimum expected. | In cents: `1000` → USD 10                          |
+| **capitalInterestSplit**      | Percentage of the reported payment amount that must be allocated to **IO**; the remainder goes to **AO**.                                                                                                                                  | Percentage: 2 → 2%; 5 → 5%; 99 → 99 %(max.)        |
+| **gracePeriod**               | Number of days after the statement date in which the client must report a payment so the wallet is not considered delinquent. Must be greater than 0.                                                                                      | In days: 1 → 1 day; 2 → 2 days; 3 → 3 days         |
+| **variableSpecs**             | Indicates whether, after creating a credit wallet, the client can change the related CP through **ChangeInterestCreditCapital**.                                                                                                           | `true` / `false`                                   |
+| **morosidadRate**             | Percentage of interest owed. Added to the interest calculation when a wallet is delinquent.                                                                                                                                                | Percentage: 2 → 2%; 5 → 5%; 100 → 100%; 150 → 150% |
+| **baseInterestMorosidad**     | Fixed amount added to the interest calculation when a wallet is delinquent.                                                                                                                                                                | In cents: `1000` → USD 10                          |
+
 
 ---
 ## Credit Notifications
 
-Notification from our credit core, just as we do on debit-based system, are send via webhooks. We provide you a easy way to inform a URL on (see [NotificationsEnlist](NotificationsEnlist.en)). Based on this notifications you can be up to date with changes that may happen over the usage of the credit lines in each wallet. 
-
-> It is crucial that the **URL** provided is able to receive it properly since there is valuable information on each one of them.
+Notifications from our credit core are sent via webhooks. We provide you a easy way to enlist a Callback URL to receive said webhook notifications (see [NotificationsEnlist](NotificationsEnlist.en)). Based on this notifications you can be up to date with changes that may happen over the cut period of the credit lines in each wallet. 
 
 !!!Warning
 	We highly recommend to use a different **URL** for credit notifications 
 
-The most common notifications that are send is going to be the informs of interest generated/executed and cancelling of interest (which happens every-time a report of payment is made). But, there is some others that are send when an action happens, such as:
+#### Typical Flow
 
-* Creation of a credit wallet;
-* Change on wallet's limit;
-* Change on specs of the credit product tied to a specific wallet;
+1. **Client** registers `creditNotificationsURL` once per environment.
+    
+2. **PayCaddy's Credit Core** validates URL and begins POSTing events in near‑real time.
+    
+3. Your system **verifies the signature**, parses the JSON, and updates:
+    
+    - **AA** (available credit) after payments or limit changes.
+        
+    - **AO** (outstanding principal) and **IO** (outstanding interest) after executions and cancellations.
+
+By subscribing to these events you can keep ledger balances, statements, and customer UIs in sync with PayCaddy’s credit core—without polling any additional endpoints.
+
+See below the full list of possible notifications to be received:
+
+| `description`                   | When it fires                                                                                                                                                    | How to handle                                                                             |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Interes nominal calculado**   | Closing‑date script computes regular interest (`baseInterestRate`, `fixedInterestAmount`) and stores it in **IO** _pending execution_.                           | Display or store the provisional charge. **Do not** expect the customer to pay yet.       |
+| **Interes nominal ejecutado**   | At cut‑off + 1 day (or your configuration), the previously calculated nominal interest is booked. `amountExecuted` equals the executed IO.                       | Add `amountExecuted` to the balance the customer must cover in their next payment report. |
+| **Interes moroso calculado**    | Wallet is flagged **delinquent** (missed minimum). The system computes penal interest (`morosidadRate`, `baseInterestMorosidad`) and holds it pending execution. | Treat as provisional; no payment expected until execution.                                |
+| **Interes moroso ejecutado**    | Penal interest is booked. `amountExecuted` is moved to **IO**.                                                                                                   | Add to the customer’s outstanding interest immediately.                                   |
+| **Interes cancelado**           | A **ReportPay** reduced outstanding interest. `amount` is the decrease applied to **IO**.                                                                        | Subtract from the interest balance you track.                                             |
+| **Credito Reintegrado**         | For revolving products (`revolving = true`), after a **ReportPay** the system frees up credit. `amount` is the new **AA** (Available Amount).                    | Update the wallet’s available‑credit display.                                             |
+| **Credito creado**              | A new credit wallet is issued (via `CreateCreditWallet`). Payload includes initial `limit` in `amount`.                                                          | Store the new wallet ID, limit, and begin tracking.                                       |
+| **Cambio de limite de credito** | Client called **`ChangeWalletLimit`**. `amount` is the _new_ limit; the delta was applied to **AA**.                                                             | Refresh limit and available‑credit fields in your UI.                                     |
+| **Cambio Interest**             | Client called **`ChangeInterestCreditCapital`**. Request is stored but **not** live until the next cut.                                                          | Optionally show a “pending change” badge.                                                 |
+| **Cambio Interest ejecutado**   | At statement close, the pending interest‑rate/spec change took effect for the new cycle.                                                                         | Update the wallet’s CP parameters used for future calculations.                           |
+
 
 ---
 
 ## Wallet Creation
 
-Once you already have a credit product and a URL set to receive credit notifications, we are set to start to create our first wallet.
+Once you have **(1) an approved credit product (`creditProductCode`)** and **(2) a callback URL for credit notifications**, you can open your first credit wallet with the **`Wallet Credit POST`** endpoint.
 
-Creating a credit wallet is very similar to create a debit wallet, it basically flows the some core principles, but with a few additional field to account for credit-specific logic.
+A credit wallet is a ledger that tracks borrowing against an assigned limit. It never carries a positive cash balance—only counters for **AA (available amount)**, **AO (outstanding principal)**, and **IO (outstanding interest)**.  
 
-Just like a debit wallet the fields: **userId, currency and description are required.**
+Send a `POST /v1/WalletCredits` with the following JSON body:
 
-However, because credit wallets are governed by time-based rules and borrowing limit, you'll also need to define: 
+| Field               | Purpose                                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `userId`            | Links the wallet to a specific customer profile that already exists in your tenant.                         |
+| `currency`          | ISO 4217 currency code for all amounts (e.g., `"USD"`).                                                     |
+| `description`       | Free‑text label to help you identify the wallet in dashboards and reports.                                  |
+| `limit`             | Credit‑line ceiling in **minor units** (e.g., `100000` = USD 1 000.00).                                     |
+| `firstCutDate`      | ISO 8601 timestamp that marks the start of the first billing cycle and anchors all future cut dates.        |
+| `time`              | Number of days the credit line remains active; after expiry, new transactions are denied.                   |
+| `creditProductCode` | Three‑digit code, issued by PayCaddy, that applies the rules defined in **Credit Products** to this wallet. |
 
-- The start date of the credit cycle (used to determine due dates and billing periods)
-- The total credit limit available to the user
-- The amount of time (in days) that the wallet will be active (meaning that once the time has passed, the wallet can no longer trade)
-- The identifier for the credit product that regulates the wallet's behavior (e.g. interest, grace period, penalties, etc...)
+> **Note**  
+> The field `time` is optional. If `time` is omitted, the wallet remains active indefinitely (subject to your own program rules).
 
-P.S: The **code** is provided to you once the credit product requirements is approved by PayCaddy.
-
-It's important to consider that a credit wallet won't be able to execute any pay ins, pay outs or transfers, since it will never have a **balance** if not, it will only have an limit and a counter of their expenses.
+After the call returns **HTTP 201** with the wallet `id`, you may immediately link cards or virtual PANs to this wallet. All subsequent events—interest accruals, limit changes, payments, and so on—will be delivered to the callback URL you registered in **Credit Notifications**, keeping your internal ledgers and user interfaces in sync with PayCaddy’s credit core.
 
 ---
 ## Credit Usage
 
-Once everything is set, the users will be able to consume their credit lines through their credit cards, previously created and related to a credit wallet. It works as any other credit program, they will be able to make purchases until they reach their wallet's **limit** on the current billing cycle. All purchases are deducted from the **available credit**, not from a stored balance.
+Once a credit wallet is linked to one or more cards, the cardholder can spend up to the wallet’s **limit** during each billing cycle. Every purchase reduces the **available amount (AA)**—no funds are ever drawn from a cash balance.
 
-Although, you can manage it in two ways:
+#### Day‑to‑Day Management
 
-- **Report a Payment:** It restores the amount reported to the **available credit**. It can either be partial or complete;
-- **Increase the Wallet Limit:** The credit limit itself can be increased any time, allowing for a higher spending threshold if you thinks this is the best way to go.
+| Action                        | Effect on the wallet                                                                                                                                                                            | Typical endpoint    |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| **Report a Payment**          | Decreases **AO** (outstanding principal) and, if interest has been executed, **IO** (outstanding interest). The same amount is immediately restored to **AA**. Payments may be partial or full. | `ReportPayCredit`   |
+| **Report a Charge**           | Registers a closed‑loop purchase or any miscellaneous fee you want to post yourself. The reported amount is deducted from **AA**, just like an open‑loop card transaction.                      | `PayOutCredit`      |
+| **Increase the Wallet Limit** | Raises the credit line itself, giving the user more headroom for spending.                                                                                                                      | `ChangeWalletLimit` |
 
-When a cycle is completed, is expected for each credit wallet that had expenses, to receive a report pay. The report pays are the way to restore the limit from a wallet and pay it's interests that may be generated due its use.
+---
 
-When we don't find any report on the period between the end of the cycle and the end of the **grace period** (which is defined by the credit product specs), we consider that the wallet is currently debtor.
+#### Cycle Close, Grace Period, and Default Status
 
-A debtor wallet is charged besides the regular interests, the debtor ones, which are incremented to the already existing interests. So, it means that it scales quickly as long as it takes for us to receive a report.
+1. **Cycle close** (`firstCutDate` + `cutFrequency`)
+    
+    - The credit core calculates **Interes nominal calculado** (regular interest) and sends the corresponding webhook.
+        
+2. **Grace period** (`gracePeriod` days after the cut date)
+    
+    - During this window the customer must submit one or more **ReportPayCredit** calls whose **combined amount** satisfies the **minimum payment rule** configured in the credit product: 
+        
+        `minimumPayment = baseMinimumPaymentRate × AO + fixedMinimumPaymentAmount`
+    
+3. **Missing the minimum**
+    
+    - If the required minimum is not met by grace‑period end, the wallet enters **default status**.
+        
+    - The system generates **Interes moroso calculado** (penal interest) and, after execution, **Interes moroso ejecutado**. These amounts are added to **IO** on top of any nominal interest already owed, so the debt grows faster the longer it remains unresolved.
+        
+4. **Returning to good standing**
+    
+    - The wallet exits default status once the sum of reported payments in the current cycle **covers the minimum payment** as defined above **plus** any **executed penal interest**.
+        
+    - A qualifying payment triggers an **Interes cancelado** webhook and, for revolving products, **Credito Reintegrado**, replenishing **AA** accordingly.
+        
 
-A credit wallet is no longer considered to be in debtor status once we receive a reported payment that meets or exceeds the minimum required amount (it's defined by the credit product) based on the interest owed + its expenses.
+Because penal (“moroso”) interest can compound on top of regular (“nominal”) interest, remaining in default quickly becomes costly. Promptly reporting at least the calculated minimum payment keeps the wallet current and prevents additional charges.
 
 ---
 
 ## Credit Operations
 
-Our credit core allows you to manage yours users wallets as you like. Using a few endpoints provided you will be able to block/unblock temporary, change a wallet limit and dissolve a wallet.
+### Administering Existing Credit Wallets
 
-Its important to understand the difference between block and dissolve a wallet, cause it may lead into misunderstandings. 
+The credit core gives you fine‑grained control over each wallet. With a small set of endpoints you can:
 
-- A blocked wallet will stop your users to make transactions with cards related with that wallet, it doesn't stops the generation of new interests, neither ignores any debt that it may already have. Also, it can be undone any time you want;
-- On the other hand, a dissolved wallet can no longer be used period. It won't generate any new interest although is still expected to receive a report pay for the debt that still may exist.
+- **Block or unblock** a wallet temporarily
+    
+- **Increase** a wallet’s credit limit
+    
+- **Dissolve** a wallet permanently
+    
+- **Override interest parameters** for an individual wallet (when permitted)
+    
 
-When changing the wallet limit, is important to taking in consideration that the amount can only goes **up**. We don't allow to decrease the limit already provided to a wallet.
+---
 
-### Change Interests
+#### Block vs. Dissolve
 
-We also offer flexibility to tailor specific configurations at **wallet level**, without affecting the underlying product or other wallet tied to it. It means you can override certain settings from the credit product **specifically for an individual wallet**, allowing you to respond to unique user needs or exceptions.
->Please note: This customization is only possible if the associated credit product is explicitly configured to allow wallet-level overrides
+|Action|Effect|Reversible?|Interest Accrual|Card Usage|
+|---|---|---|---|---|
+|**Block Wallet**|Sets the wallet status to _blocked_. All card authorisations linked to the wallet are declined. Balances remain unchanged.|**Yes** – call the _Unblock_ endpoint at any time.|**Continues** under the credit‑product rules.|**Stopped**|
+|**Dissolve Wallet**|Closes the wallet permanently. No new transactions or interest will be generated. Any outstanding **AO** and **IO** must still be cleared via `ReportPayCredit`.|**No** – the operation is final.|**Ceases** after dissolution.|**Stopped**|
+
+---
+
+#### Increasing the Credit Limit
+
+Use **`ChangeWalletLimit`** to raise the wallet’s limit. **Limits can only move upward**; reductions are disallowed to avoid stranding unsettled authorisations.
+
+---
+
+#### Wallet‑Level Interest Overrides
+
+If the associated credit product has `variableSpecs = true`, you may fine‑tune certain interest settings for one wallet without affecting any others. Submit **`ChangeInterestCreditCapital`** with the fields you wish to override; the changes activate at the next cut date and are confirmed via the **Cambio Interest ejecutado** webhook.
+
+> **Note**  
+> Overrides are ignored when `variableSpecs` is `false`, ensuring that products intended to remain uniform cannot be altered at wallet level.
