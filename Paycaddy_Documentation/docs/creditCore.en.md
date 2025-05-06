@@ -123,7 +123,7 @@ The **currency** field corresponds to the currency of the wallet. The **state
 
 If successful, the payment report will be generated with the specified data, and the call will return a HTTP 200 detailing the date on which the report was made, as well as the amount of the wallet’s limit and the available balance. Also a webhook notification is send **(see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post))** to inform the report and its effects. 
 
-Otherwise, the NeoBank API will respond with a HTTP 422 error. The most common errors may include:
+Otherwise, the NeoBank API will respond with an HTTP 422 error. The most common errors may include:
 
 - Invalid or non-credit **walletId**.
 - Currency value does not match the original currency of the wallet.

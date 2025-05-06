@@ -1,3 +1,3 @@
 To emulate mkdocs locally run:
-- cd chatbot-doc
+- cd Paycaddy_Documentation
 -mkdocs serve

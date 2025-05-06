@@ -346,7 +346,7 @@ The creation of a new user for a natural person with a delegated KYC flow begins
         }
         "idUrlFront": "string",
         "idUrlBack": "string",
-        "residenceProofUrl": "string",
+        "residenceProofUrl": "string"
     }
     ```
 === "Response"
