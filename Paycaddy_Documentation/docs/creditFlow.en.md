@@ -34,7 +34,7 @@ The full list of adjustable parameters can be found in the table below:
 ---
 ## Credit Notifications
 
-Notifications from our credit core are sent via webhooks. We provide you a easy way to enlist a Callback URL to receive said webhook notifications (see [NotificationsEnlist](NotificationsEnlist.en)). Based on this notifications you can be up to date with changes that may happen over the cut period of the credit lines in each wallet. 
+Notifications from our credit core are sent via webhooks. We provide you a easy way to enlist a Callback URL to receive said webhook notifications (see [NotificationsEnlist](NotificationsEnlist.en)). Based on this notifications you can be up to date with changes that may happen over the billing cycle of the credit lines in each wallet. 
 
 !!!Warning
 	We highly recommend to use a different **URL** for credit notifications 
@@ -84,7 +84,7 @@ Send a `POST /v1/WalletCredits` with the following JSON body:
 | `userId`            | Links the wallet to a specific customer profile that already exists in your tenant.                         |
 | `currency`          | ISO 4217 currency code for all amounts (e.g., `"USD"`).                                                     |
 | `description`       | Free‑text label to help you identify the wallet in dashboards and reports.                                  |
-| `limit`             | Credit‑line ceiling in **minor units** (e.g., `100000` = USD 1 000.00).                                     |
+| `limit`             | Credit‑line ceiling in **cents** (e.g., `100000` = USD 1 000.00).                                           |
 | `firstCutDate`      | ISO 8601 timestamp that marks the start of the first billing cycle and anchors all future cut dates.        |
 | `time`              | Number of days the credit line remains active; after expiry, new transactions are denied.                   |
 | `creditProductCode` | Three‑digit code, issued by PayCaddy, that applies the rules defined in **Credit Products** to this wallet. |
@@ -101,11 +101,11 @@ Once a credit wallet is linked to one or more cards, the cardholder can spend up
 
 #### Day‑to‑Day Management
 
-| Action                        | Effect on the wallet                                                                                                                                                                            | Typical endpoint    |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| **Report a Payment**          | Decreases **AO** (outstanding principal) and, if interest has been executed, **IO** (outstanding interest). The same amount is immediately restored to **AA**. Payments may be partial or full. | `ReportPayCredit`   |
-| **Report a Charge**           | Registers a closed‑loop purchase or any miscellaneous fee you want to post yourself. The reported amount is deducted from **AA**, just like an open‑loop card transaction.                      | `PayOutCredit`      |
-| **Increase the Wallet Limit** | Raises the credit line itself, giving the user more headroom for spending.                                                                                                                      | `ChangeWalletLimit` |
+| Action                        | Effect on the wallet                                                                                                                                                                            | Typical endpoint                                               |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| **Report a Payment**          | Decreases **AO** (outstanding principal) and, if interest has been executed, **IO** (outstanding interest). The same amount is immediately restored to **AA**. Payments may be partial or full. | [ReportPayCredit](creditCore.en.md#report-pay-credit-post)     |
+| **Report a Charge**           | Registers a closed‑loop purchase or any miscellaneous fee you want to post yourself. The reported amount is deducted from **AA**, just like an open‑loop card transaction.                      | [PayOutCredit](creditCore.en.md#pay-out-credit-post)           |
+| **Increase the Wallet Limit** | Raises the credit line itself, giving the user more headroom for spending.                                                                                                                      | [ChangeWalletLimit](creditCore.en.md#change-wallet-limit-post) |
 
 ---
 
