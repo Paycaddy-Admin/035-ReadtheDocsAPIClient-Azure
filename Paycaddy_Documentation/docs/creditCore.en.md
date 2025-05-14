@@ -137,7 +137,7 @@ Otherwise, the NeoBank API will respond with an HTTP 422 error. The most common 
 
 The **ReportPayCreditCapital** endpoint is used by users who have an active credit line. It expect either a corresponding or parcial payment , in parcial cases generating debtor interests, in order to restore credit through his **walletId**. 
 
-This endpoint doesn’t consider the **split** value from the creditProductCode **(see [changeInterestCapital](#))**, once it only discount the reported amount from the **amountOwed**, it doesn’t consider if the wallet is on debt and has debtor interest executed not payed.
+This endpoint doesn’t consider the **split** value from the creditProductCode **(see [changeInterestCapital](#change-interest-credit-capital-post))**, once it only discount the reported amount from the **amountOwed**, it doesn’t consider if the wallet is on debt and has debtor interest executed not payed.
 
 === "Request"
     ```json
@@ -163,7 +163,7 @@ The **currency** field corresponds to the currency of the wallet.
 
 The **statement** field will be used to leave a brief description of the operation performed.
 
-If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the values of the card limit and the available balance. Also a webhook notification is send **((see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post)))** to inform the report and its effects.
+If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the values of the card limit and the available balance. Also a webhook notification is send **(see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post))** to inform the report and its effects.
 
 Otherwise, the NeoBank API will respond with a HTTP 422 error. The most common errors may include:
 
@@ -205,7 +205,82 @@ All amounts are reflected in cents, meaning USD 1,000.00 would be represented as
 The call may fail if an incorrect walletId is provided or a smaller value is sented in **newLimit**, in which case the PayCaddy API would respond with a HTTP 400 error.
 
 ---
+## **Change Interest Credit Capital <font color="green">POST</font>** 
 
+**Request URL:** https://api.paycaddy.dev/v1/ChangeInterestCreditCapital
+
+This endpoint fills the purpose of customize as you wish an instance of a credit product related to a specific wallet. You can change a lot of specifics properties from this credit product based on your own criteria. The description for each field is described on [credit products](creditFlow.en.md#credit-products) session.
+
+Although, is required that the credit product allows this operation to happen. You can check it contacting PayCaddy's team to get this information, although we recommend that every credit product created should be documented and stored properly.
+
+=== "Request"
+    ```json
+    {
+		"walletId": "string",
+		"interestRate": 0,
+		"interestFixedAmount": 0,
+		"morosidadRate": 0,
+		"morosidadFixedAmount": 0,
+		"minimumPaymentRate": 0,
+		"minimumPaymentFixed": 0,
+		"split": 0
+    }
+    ```
+=== "Response"
+    ```json
+    {
+		"walletId": "string",
+		"interestRate": 0,
+		"interestFixedAmount": 0,
+		"morosidadRate": 0,
+		"morosidadFixedAmount": 0,
+		"minimumPaymentRate": 0,
+		"minimumPaymentFixed": 0,
+		"split": 0
+    }
+    ```
+
+Only credit wallets are allowed to use this endpoint. If provided a debit wallet, the endpoint will respond with a HTTP 422 error. 
+
+The API will also respond with the same error if the userId associated with it is block or inactive.
+It is recommended to verify the status of the user associated prior to making the ChangeInterestCreditCapital call.
+
+---
+## **PayOut Credit <font color="green">POST</font>** 
+
+**Request URL:** https://api.paycaddy.dev/v1/Credit/PayOutCredits
+
+PayOut is a method to consume manually a credit line limit, its amount available to spent. Unlike regular transactions that won't ever cross the credit line limit, the pay out credit can keep incrementing the amount owed by the wallet, even if the wallet doesn't have any spare amount available.
+
+Similar to a simple PayOut, the successfull response will return the entered data accompanied by a unique transaction identified and it's timestamp.
+
+=== "Request"
+    ```json
+    {
+		  "walletIdFrom": "string",
+		  "amount": 0,
+		  "currency": "string",
+		  "statement": "string"
+	}
+    ```
+=== "Response"
+    ```json
+    {
+		    "id": "string",
+		    "walletIdFrom": "string",
+		    "amount": 0,
+		    "currency": "string",
+		    "statement": "string",
+		    "creationDate": "string"
+	}
+    ```
+
+Only credit wallets are allowed to use this endpoint. If provided a debit wallet, the endpoint will respond with a HTTP 422 error. 
+
+The API will also respond with the same error if the userId associated with it is block or inactive.
+It is recommended to verify the status of the user associated prior to making the PayOutCredit POST call.
+
+---
 ## **Check Credit Operation <font color="sky-blue">GET</font>** 
 
 **Request URL:** https://api.paycaddy.dev/v1/CheckCredit/
