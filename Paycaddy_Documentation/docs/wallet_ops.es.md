@@ -1,248 +1,254 @@
-# Wallet Operations
+# Operaciones de Wallet
 
 ## **Pay In <font color="green">POST</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payIns
+**URL de la solicitud:** `https://api.api-sandbox.paycaddy.dev/v1/payIns`
 
-‍PayIn is PayCaddy API's method for adding funds to a specific wallet. It is a simple call that loads the information of the **'walletId'** to which funds are to be loaded, the amount to be credited to the wallet in cents, the code of the currency according to ISO 4217, and a description of the transaction.
+`Pay In` es el método de la API de PayCaddy para **añadir fondos** a una `wallet` específica. La llamada requiere el **walletId** de destino, el monto a acreditar en centavos, el código de la divisa según ISO 4217 y una descripción de la transacción.
 
 === "Request"
-    ```json
-    {
-        "walletIdTo": "string",
-        "amount": 0,
-        "currency": "string",
-        "statement": "string"
-    }
-    ```
+	```json
+	{
+	    "walletIdTo": "string",
+	    "amount": 0,
+	    "currency": "string",
+	    "statement": "string"
+	}
+	```
+
 === "Response"
-    ```json
-    {
-        "id": "string",
-        "walletIdTo": "string",
-        "amount": 0,
-        "currency": "string",
-        "statement": "string",
-        "creationDate": "2022-07-20T20:47:04.060Z"
-    }
-    ```
+	```json
+	{
+	    "id": "string",
+	    "walletIdTo": "string",
+	    "amount": 0,
+	    "currency": "string",
+	    "statement": "string",
+	    "creationDate": "2022-07-20T20:47:04.060Z"
+	}
+	```
 
-The successful response of this call, in addition to the provided information, includes a timestamp with the execution date of the transaction and a unique transaction identifier that allows retrieving the associated information with the GET call.
+La respuesta exitosa incluye la marca de tiempo de la operación y un identificador único que permite recuperar la información con la llamada **GET** correspondiente.
 
-If there is a problem with the data provided the PayCaddy API will respond with a HTTP 400 error.
+Si los datos son incorrectos, la API devuelve un error HTTP 400.
 
 === "Wallet not found"
-    ```json
-    {
-        "type": "Decoding body",
-        "title": "Error ",
-        "status": 422,
-        "detail": "Wallet not found",
-        "instance": ""
-    }
-    ```
+	```json
+	{
+	    "type": "Decoding body",
+	    "title": "Error",
+	    "status": 422,
+	    "detail": "Wallet not found",
+	    "instance": ""
+	}
+	```
+
 === "Incorrect currency"
-    ```json
-    {
-        "type": "",
-        "title": "currency code does not match target walletId",
-        "status": 0,
-        "detail": "",
-        "instance": ""
-    }
-    ```
+	```json
+	{
+	    "type": "",
+	    "title": "currency code does not match target walletId",
+	    "status": 0,
+	    "detail": "",
+	    "instance": ""
+	}
+	```
 
 ---
 
 ## **Pay In <font color="sky-blue">GET</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payIns/
+**URL de la solicitud:** `https://api.api-sandbox.paycaddy.dev/v1/payIns/{PAYIN_ID}`
 
-The GET call for a PayIn allows accessing information related to a specific transactionId. The successful response of this call loads the following structure:
+La llamada **GET** devuelve los datos de un `Pay In` específico:
 
 === "Request"
-    ```json
-    https://api.api-sandbox.paycaddy.dev/v1/payIns/{PAYIN_ID}
-    ```
-=== "Response"
-    ```json
-    {
-        "data": [{
-            "id": "string",
-            "walletIdTo": "string",
-            "amount": 0,
-            "currency": "string",
-            "statement": "string",
-            "creationDate": "2022-07-20T20:47:04.056Z"
-        }]
-    }
-    ```
 
-The call may fail if an incorrect walletId is provided, in which case the PayCaddy API would respond with a HTTP 400 error.
+```json
+https://api.api-sandbox.paycaddy.dev/v1/payIns/{PAYIN_ID}
+```
+
+=== "Response"
+	```json
+	{
+	    "data": [{
+	        "id": "string",
+	        "walletIdTo": "string",
+	        "amount": 0,
+	        "currency": "string",
+	        "statement": "string",
+	        "creationDate": "2022-07-20T20:47:04.056Z"
+	    }]
+	}
+	```
+
+Un **PAYIN_ID** inválido genera un error HTTP 400.
 
 ---
 
 ## **Pay Out <font color="green">POST</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payOuts
+**URL de la solicitud:** `https://api.api-sandbox.paycaddy.dev/v1/payOuts`
 
-PayOut is a method to debit funds available in a specific wallet. Unlike a transfer, using this method eliminates the existence of the funds from the NeoBank API. This method should be associated with an accounting operation that requires such a call.
-
-Similar to PayIn, the successful response will return the entered data accompanied by a unique transaction identifier and its timestamp.
+`Pay Out` permite **debitAR fondos** disponibles en una `wallet`. A diferencia de una transferencia, los fondos **salen** del ecosistema PayCaddy y deben corresponderse con una operación contable externa.
 
 === "Request"
-    ```json
-    {
-        "walletIdFrom": "string",
-        "amount": 0,
-        "currency": "string",
-        "statement": "string"
-    }
-    ```
-=== "Response"
-    ```json
-    {
-        "id": "string",
-        "walletIdFrom": "string",
-        "amount": 0,
-        "currency": "string",
-        "statement": "string",
-        "creationDate": "2022-07-20T20:47:04.060Z"
-    }
-    ```
+	```json
+	{
+	    "walletIdFrom": "string",
+	    "amount": 0,
+	    "currency": "string",
+	    "statement": "string"
+	}
+	```
 
-If there is a problem with the data provided the PayCaddy API will respond with a HTTP 400 error.
+=== "Response"
+	```json
+	{
+	    "id": "string",
+	    "walletIdFrom": "string",
+	    "amount": 0,
+	    "currency": "string",
+	    "statement": "string",
+	    "creationDate": "2022-07-20T20:47:04.060Z"
+	}
+	```
+
+Errores habituales (HTTP 400):
 
 === "Wallet not found"
-    ```json
-    {
-        "type": "Decoding body",
-        "title": "Error ",
-        "status": 422,
-        "detail": "Wallet not found",
-        "instance": ""
-    }
-    ```
+	```json
+	{
+	    "type": "Decoding body",
+	    "title": "Error",
+	    "status": 422,
+	    "detail": "Wallet not found",
+	    "instance": ""
+	}
+	```
+
 === "Incorrect currency"
-    ```json
-    {
-        "type": "",
-        "title": "currency code does not match target walletId",
-        "status": 0,
-        "detail": "",
-        "instance": ""
-    }
-    ```
+	```json
+	{
+	    "type": "",
+	    "title": "currency code does not match target walletId",
+	    "status": 0,
+	    "detail": "",
+	    "instance": ""
+	}
+	```
+
 === "Insufficient funds"
-    ```json
-        {
-            "type": "",
-            "title": "Wallet does not have sufficient funds",
-            "status": 0,
-            "detail": "",
-            "instance": ""
-        }
-    ```
+	```json
+	{
+	    "type": "",
+	    "title": "Wallet does not have sufficient funds",
+	    "status": 0,
+	    "detail": "",
+	    "instance": ""
+	}
+	```
 
 ---
 
 ## **Pay Out <font color="sky-blue">GET</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/payOuts/
+**URL de la solicitud:** `https://api.api-sandbox.paycaddy.dev/v1/payOuts/{PAYOUT_ID}`
 
-The GET call for a PayOut allows access to information related to a specific **transactionId**. The successful response of this call loads the following structure:
+Devuelve los datos de un `Pay Out` específico:
 
 === "Request"
-    ```json
-    https://api.api-sandbox.paycaddy.dev/v1/payOuts/{PAYOUT_ID}
-    ```
-=== "Response"
-    ```json
-    {
-        "data": [{
-            "id": "string",
-            "walletIdTo": "string",
-            "amount": 0,
-            "currency": "string",
-            "statement": "string",
-            "creationDate": "2022-07-20T20:47:04.056Z"
-        }]
-    }
-    ```
 
-The API will respond with an HTTP 400 error if it is an incorrect transactionId or a transactionId that is not related to a PayOut.
+```json
+https://api.api-sandbox.paycaddy.dev/v1/payOuts/{PAYOUT_ID}
+```
+
+=== "Response"
+	```json
+	{
+	    "data": [{
+	        "id": "string",
+	        "walletIdTo": "string",
+	        "amount": 0,
+	        "currency": "string",
+	        "statement": "string",
+	        "creationDate": "2022-07-20T20:47:04.056Z"
+	    }]
+	}
+	```
+
+Un **PAYOUT_ID** incorrecto genera un error HTTP 400.
 
 ---
 
 ## **Transfer <font color="green">POST</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/transfers
+**URL de la solicitud:** `https://api.api-sandbox.paycaddy.dev/v1/transfers`
 
-To carry out transactions within the NeoBank API environment between two previously created wallets, the **Transfer POST** call must be used, which has the following structure:
+Para mover fondos **entre dos wallets** dentro de PayCaddy se usa `Transfer POST`:
 
 === "Request"
-    ```json
-    {
-        "walletIdFrom": "string",
-        "walletIdTo": "string",
-        "amount": 0,
-        "currency": "string",
-        "statement": "string"
-    }```
+	```json
+	{
+	    "walletIdFrom": "string",
+	    "walletIdTo": "string",
+	    "amount": 0,
+	    "currency": "string",
+	    "statement": "string"
+	}
+	```
+
 === "Response"
-    ```json
-    {
-        "id": "string",
-        "walletIdFrom": "string",
-        "walletIdTo": "string",
-        "amount": 0,
-        "currency": "string",
-        "statement": "string",
-        "creationDate": "2022-07-22T15:54:08.059Z"
-    }
-    ```
+	```json
+	{
+	    "id": "string",
+	    "walletIdFrom": "string",
+	    "walletIdTo": "string",
+	    "amount": 0,
+	    "currency": "string",
+	    "statement": "string",
+	    "creationDate": "2022-07-22T15:54:08.059Z"
+	}
+	```
 
-In this call, you must specify the **walletIdFrom** which the funds are being sent and the **walletIdTo** which the funds are being sent. The **"currency"** field must load the code of the currency associated with both wallets following the ISO 4217 standard.
+Consideraciones:
 
-The PayCaddy API does not manage currency conversions, so it is necessary to consider that both wallets must be configured under the same currency.
-
-The amount entered in the **"amount"** field must be in cents following the standard of the other PayCaddy API calls.
-
-The **"statement"** field allows you to enter a description of the transaction for future reference and display on the front-end.
-
-The successful response to this call loads a unique transaction identifier and the timestamp of its acceptance.
-
-In case of an error in the call, the NeoBank API will respond with a descriptive HTTP 400 error.
-
-Commonly, the call will fail if the walletIds involved in the transaction belong to an inactive userId, that is, maintaining its "isActive" attribute as "false".
-
-Similarly, the call will always fail if the **walletIdFrom** does not maintain the adequate balance to cover the transaction or when the currency code of both wallets is not the same as the transfer POST call.
+- Ambas wallets deben usar la **misma divisa**; PayCaddy no realiza conversiones.
+    
+- El monto se expresa en **centavos**.
+    
+- La transacción falla si alguna wallet pertenece a un usuario inactivo o si el saldo es insuficiente.
+    
 
 ---
 
 ## **Transfer <font color="sky-blue">GET</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/transfers/
+**URL de la solicitud:** `https://api.api-sandbox.paycaddy.dev/v1/transfers/{TRANSFER_ID}`
 
-The GET call for a transfer between wallets allows access to information related to a specific transactionId and carries the following structure:
+Recupera la información de una `Transfer` específica:
 
 === "Request"
-    ```json
-    https://api.api-sandbox.paycaddy.dev/v1/transfers/{TRANSFER_ID}
-    ```
-=== "Response"
-    ```json
-    {
-        "data": [{
-            "id": "string",
-            "walletIdFrom": "string",
-            "walletIdTo": "string",
-            "amount": 0,
-            "currency": "string",
-            "statement": "string",
-            "creationDate": "2022-07-22T16:07:33.092Z"
-        }]
-    }
-    ```
 
-The API will respond with a descriptive HTTP 400 error if an incorrect transaction ID is provided or if the transaction ID is not related to a transfer.
+```json
+https://api.api-sandbox.paycaddy.dev/v1/transfers/{TRANSFER_ID}
+```
+
+=== "Response"
+	```json
+	{
+	    "data": [{
+	        "id": "string",
+	        "walletIdFrom": "string",
+	        "walletIdTo": "string",
+	        "amount": 0,
+	        "currency": "string",
+	        "statement": "string",
+	        "creationDate": "2022-07-22T16:07:33.092Z"
+	    }]
+	}
+	```
+
+Un **TRANSFER_ID** incorrecto produce un error HTTP 400.
+
+---

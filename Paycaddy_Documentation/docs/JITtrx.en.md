@@ -18,7 +18,7 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
 
 #### **Request Format**
 
-```
+```json
 {
   "password": "password",
   "c1Tipo": "PeticionAutorizacionJIT",

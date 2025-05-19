@@ -84,8 +84,11 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
 There are four main types of transactions that you will receive as online type:
 
 1. **AuthorizationRequest:** This transaction will decrease the customer's balance.
+	
 2. **AuthorizationCommunication:** This transaction will also decrease the customer's balance.
+	
 3. **CancellationCommunication:** This transaction will increase the available funds in the customer's wallet.
+	
 4. **ReversalRequest:** This transaction type declares a request for a money reversal that will be processed offline through the Batch Process. This transaction will have a declared amount of "0". Once the network confirms the refund, the processed amount will be declared in the related "TransaccionCorregidaPositiva" through the Batch Process.
 
 The transaction type is indicated in the **"c1Tipo"** field of the webhook. For example, if the **"c1Tipo"** field indicates that it is a **"AuthorizationRequest"** type transaction, it should be presented as a deduction in the available balance.
@@ -102,7 +105,7 @@ This documentation translates some terms for easy comprehension.
 
 ## Settlement and Batch Process Corrections
 
-Once online transactions are processed, they are reconciled with the settlement files received from the network. Discrepancies or adjustments to the original transaction may be reported through the batch process using the following correction types:
+Once online transactions are processed, they are reconciled with the settlement files received from the network. Discrepancies or adjustments to the original transaction may be reported through the [batch process](./settlement.en.md) using the following correction types:
 
 1. **TransaccionCorregidaPositiva**
 	Indicates an adjustment that confirms a transaction amount higher than initially authorized. The additional amount will be debited from the cardholder's account.

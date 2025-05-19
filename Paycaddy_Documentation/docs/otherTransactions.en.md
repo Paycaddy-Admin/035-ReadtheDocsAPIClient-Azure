@@ -1,4 +1,4 @@
-There are 9 additional types of transactions that you will receive online through the enlisted URL. It should be noted that these types do not affect balance and are merely informative of the card usage and describe the cause for rejected transactions.
+There are 10 additional types of transactions that you will receive online through the enlisted URL. It should be noted that these types do not affect balance and are merely informative of the card usage and describe the cause for rejected transactions.
 
 ## Rejection Notifications
 

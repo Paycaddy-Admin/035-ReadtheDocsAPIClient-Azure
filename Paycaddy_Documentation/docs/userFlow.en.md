@@ -1,4 +1,4 @@
-This guide explains the logic and API interaction required to create and activate users in the PayCaddy ecosystem. Users can represent either individuals or businesses, and the process varies depending on the type of user and the KYC (Know Your Customer) flow in use.
+This guide explains the logic and API interaction required to create and activate users in the PayCaddy ecosystem. Users can represent either individuals or businesses, and the process varies depending on the type of user and the [KYC (Know Your Customer)](./kyc.en.md) flow in use.
 
 ### User Types
 
@@ -129,11 +129,11 @@ A visualization of the above described steps can be seen in the following flow:
 
 ###  Summary Table
 
-| User Type      | API Endpoint                                       | KYC Mode   | Activation Trigger       |
-| -------------- | -------------------------------------------------- | ---------- | ------------------------ |
-| `EndUser`      | [EndUser POST](user.en.md#end-user-post)           | Integrated | MetaMap webhook          |
-| `EndUserSR`    | [EndUserSR POST](user.en.md#end-user-sr-post)      | Delegated  | Immediate after creation |
-| `MerchantUser` | [MerchantUser POST](user.en.md#merchant-user-post) | Delegated  | After document approval  |
+| User Type      | API Endpoint                                       | KYC Mode   | Activation Trigger                              |
+| -------------- | -------------------------------------------------- | ---------- | ----------------------------------------------- |
+| `EndUser`      | [EndUser POST](user.en.md#end-user-post)           | Integrated | MetaMap webhook                                 |
+| `EndUserSR`    | [EndUserSR POST](user.en.md#end-user-sr-post)      | Delegated  | Immediate after creation                        |
+| `MerchantUser` | [MerchantUser POST](user.en.md#merchant-user-post) | Delegated  | Immediate after creation, document pre-approval |
 
 >During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
 

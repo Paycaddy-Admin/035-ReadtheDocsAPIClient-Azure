@@ -120,8 +120,7 @@ In the user creation response (EndUser POST), a link to the identity validation 
 
 It is important to consider that the kycURL is shared by applying URL encoding that allows the sending of metadata (userId) that links the validation with the created user. To ensure the activation of the user upon successfully completing the validation, it is necessary to ensure that the URL to which the user is redirected from the front-end interface loads the following structure:
 
->https://signup.getmati.com/?merchantToken=6046cc2a54816f001dedd641&
->flowId=6046cc2a54816f001bedd640&metadata={"userid":"a955ea0f-34f3-4254-b10a-0181f30729kd"}
+>https://signup.getmati.com/?merchantToken=6046cc2a54816f001dedd641&flowId=6046cc2a54816f001bedd640&metadata={"userid":"a955ea0f-34f3-4254-b10a-0181f30729kd"}
 
 For complete information on KYC, please find detailed information on this documentation's KYC chapter.
 

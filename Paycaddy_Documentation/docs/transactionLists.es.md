@@ -1,134 +1,135 @@
-There are two methods to retrieve a list of transactions that occurred associated to an entity in our API:
+Existen dos métodos para obtener una lista de transacciones asociadas a una entidad en nuestra API:
 
-## **Transaction Detail List by Card <font color="green">POST</font>**
+## **Lista de Detalle de Transacciones por Tarjeta <font color="green">POST</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailList
+**URL de la solicitud:** [https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailList](https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailList)
 
-This POST call retrieves all transactions of a particular cardId provided.
+Esta llamada **POST** recupera todas las transacciones de la tarjeta cuyo **`cardId`** se indique.
 
 === "Request"
-    ```json
-    {
-        "cardId": "904ee16a-db84-4120-9714-0180892341b3",
-        "startDate": "2023-01-23T18:21:02.157Z"
-    }
-
-    ```
+	```json
+	{
+	    "cardId": "904ee16a-db84-4120-9714-0180892341b3",
+	    "startDate": "2023-01-23T18:21:02.157Z"
+	}
+	```
 
 === "Response"
-    ```json
-    {
-        "transactionListJson": 
-        "[{
-            \"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTransaccion\":\"116\",\"c7FechaHoraTransaccion\":\"20230203194512\",\"c11NumeroIdentificativoTransaccion\":\"000088058\",\"c18CodigoActividadEstablecimiento\":\"4111\",\"c19CodigoPaisAdquiren
-            te\":\"724\",\"c38NumeroAutorizacion\":\"169\",\"c41TerminalId
-            \":\"00004001\",\"c42Comercio\":\"000000047219191\",\"c43Ident
-            ificadorComercio\":\"TRANVIA DE MURCIA        CHURRA-MURCIA  
-            \"},{\"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTrans
-            accion\":\"2266\",\"c7FechaHoraTransaccion\":\"20230317135513\
-            ",\"c11NumeroIdentificativoTransaccion\":\"000099870\",\"c18Co
-            digoActividadEstablecimiento\":\"5813\",\"c19CodigoPaisAdquire
-            nte\":\"724\",\"c38NumeroAutorizacion\":\"171\",\"c41TerminalI
-            d\":\"90315259\",\"c42Comercio\":\"000000175240563\",\"c43Iden
-            tificadorComercio\":\"BULEVAR CAFE EL RANERO   MURCIA
-            \"
-        }]"
-    }
+	```json
+	{
+	    "transactionListJson": 
+	    "[{
+	        \"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTransaccion\":\"116\",\"c7FechaHoraTransaccion\":\"20230203194512\",\"c11NumeroIdentificativoTransaccion\":\"000088058\",\"c18CodigoActividadEstablecimiento\":\"4111\",\"c19CodigoPaisAdquiren
+	        te\":\"724\",\"c38NumeroAutorizacion\":\"169\",\"c41TerminalId
+	        \":\"00004001\",\"c42Comercio\":\"000000047219191\",\"c43Ident
+	        ificadorComercio\":\"TRANVIA DE MURCIA        CHURRA-MURCIA  
+	        \"},{\"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTrans
+	        accion\":\"2266\",\"c7FechaHoraTransaccion\":\"20230317135513\
+	        ",\"c11NumeroIdentificativoTransaccion\":\"000099870\",\"c18Co
+	        digoActividadEstablecimiento\":\"5813\",\"c19CodigoPaisAdquire
+	        nte\":\"724\",\"c38NumeroAutorizacion\":\"171\",\"c41TerminalI
+	        d\":\"90315259\",\"c42Comercio\":\"000000175240563\",\"c43Iden
+	        tificadorComercio\":\"BULEVAR CAFE EL RANERO   MURCIA
+	        \"
+	    }]"
+	}
+	```
 
-    ```
-
-The structure of the data shared in each transaction follow the same format as all transaction notifications. (See [Online Transaction Notification Webhooks](prefundedTRX.es.md))
+La estructura de los datos de cada transacción sigue el mismo formato que el resto de notificaciones de transacciones. (Consulta [Webhooks de Notificación de Transacciones Online](./prefundedTRX.es.md))
 
 ---
 
-## **Transaction Detail List by Wallet <font color="green">POST</font>**
+## **Lista de Detalle de Transacciones por Billetera <font color="green">POST</font>**
 
-**Request URL:**  https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailListByWallet
+**URL de la solicitud:** [https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailListByWallet](https://api.api-sandbox.paycaddy.dev/v1/TransactionDetailListByWallet)
 
-The **TransactionDetailListByWallet** endpoint offers a detailed view of all transactions linked to a specific wallet. This encompasses wallet-specific transactions like pay-ins, pay-outs, and transfers, as well as card transactions tied to the specified wallet ID.
+El endpoint **TransactionDetailListByWallet** ofrece una vista detallada de todas las transacciones vinculadas a una billetera específica. Incluye transacciones propias de la billetera (pay-ins, pay-outs y transfers) y las transacciones de tarjeta asociadas al **walletId** indicado.
 
 === "Request"
-    ```json
-    {
-        "walletId": "string",
-        "startDate": "Start Date in ISO Format",
-        "toDate": "End Date in ISO Format",
-        "maxTransactions": "Maximum Number of Transactions",
-        "offset": "Number of Transactions to Skip",
-        "c43IdentificadorComercio": "Optional Merchant Identifier Filter"
-    }
-    ```
-=== "Response"
-    ```json
-    {
-        "transactionListJson": "[{transaction1},{transaction2},...,{transactionN}]",
-        "totalItems": "Total number of transactions within the requested date range",
-        "currentPage": "Current page number indicator",
-        "totalPages": "Total number of pages available"
-    }
-    ```
+	```json
+	{
+	    "walletId": "string",
+	    "startDate": "Start Date in ISO Format",
+	    "toDate": "End Date in ISO Format",
+	    "maxTransactions": "Maximum Number of Transactions",
+	    "offset": "Number of Transactions to Skip",
+	    "c43IdentificadorComercio": "Optional Merchant Identifier Filter"
+	}
+	```
 
-Each card transaction in the response payload will be a stringified version of the Transaction Notification Webhooks, augmented with three additional field:
+=== "Response"
+	```json
+	{
+	    "transactionListJson": "[{transaction1},{transaction2},...,{transactionN}]",
+	    "totalItems": "Total number of transactions within the requested date range",
+	    "currentPage": "Current page number indicator",
+	    "totalPages": "Total number of pages available"
+	}
+	```
+
+Cada transacción de tarjeta en el payload de respuesta será la versión serializada del webhook de notificación de transacciones, con **tres** campos adicionales:
 
 ```json
-    {
-        "c1Tipo": "string",
-        "c2CardId": "string",
-        "c3CodigoProceso": "string",
-        "c4ImporteTransaccion": "string",
-        "c7FechaHoraTransaccion": "string",
-        "c11NumeroIdentificativoTransaccion": "string",
-        "c18CodigoActividadEstablecimiento": "string",
-        "c19CodigoPaisAdquirente": "string",
-        "c38NumeroAutorizacion": "string",
-        "c41TerminalId": "string",
-        "c42Comercio": "string",
-        "c43IdentificadorComercio": "string",
-        "c51MonedaImporteTransaccion": "string",
-        "c6ImporteMonedaTransaccion": "string",
-        "isSettled": "true"
-    }
+{
+    "c1Tipo": "string",
+    "c2CardId": "string",
+    "c3CodigoProceso": "string",
+    "c4ImporteTransaccion": "string",
+    "c7FechaHoraTransaccion": "string",
+    "c11NumeroIdentificativoTransaccion": "string",
+    "c18CodigoActividadEstablecimiento": "string",
+    "c19CodigoPaisAdquirente": "string",
+    "c38NumeroAutorizacion": "string",
+    "c41TerminalId": "string",
+    "c42Comercio": "string",
+    "c43IdentificadorComercio": "string",
+    "c51MonedaImporteTransaccion": "string",
+    "c6ImporteMonedaTransaccion": "string",
+    "isSettled": "true"
+}
 ```
 
-- **c51MonedaImporteTransaccion:** Represents the currency used for the transaction at the POS.
-- **c6ImporteMonedaTransaccion:** Denotes the transaction amount in the currency used at the POS.
-- **isSettled:** Indicates the settlement status of a transaction. A value of "false" signifies transactions that are unsettled or in transit, while "true" indicates transactions that have been settled.
+- **c51MonedaImporteTransaccion:** Moneda utilizada para la transacción en el POS.
+    
+- **c6ImporteMonedaTransaccion:** Monto de la transacción en la moneda del POS.
+    
+- **isSettled:** Estado de liquidación de la transacción (`false` = pendiente/en tránsito, `true` = liquidada).
+    
 
-Since PayCaddy abstracts the settlement process for its clients, this field is particularly pertinent to specific use cases like reversals and offline cancellations.
+Como PayCaddy abstrae el proceso de liquidación, este campo resulta útil en casos concretos como reversos y anulaciones offline.
 
-The retrieved transaction list will encompass all transactions with "c1tipo" transaction types impacting the wallet's balance. Additional "c1tipo" such as denied transactions won't be included.
+La lista recuperada incluirá únicamente los tipos **`c1Tipo`** que impactan el saldo de la billetera. Transacciones denegadas no se mostrarán.  
+Las operaciones de Batch con **`c1Tipo = "transaccionCorregidaNegativa"`** o **`"transaccionCorregidaPositiva"`** sí se incluirán, siguiendo la misma lógica de los webhooks.
 
-Transactions from the Batch Process with "c1tipo" values of "transaccionCorregidaNegativa" and "transaccionCorregidaPositiva" will be incorporated in the retrieved list, aligning with the expected logic in the webhooks.
+Cada transacción de billetera se presentará con su payload estándar de respuesta **200**.
 
-Each wallet transaction will be presented in their standard 200 response payload:
+### Explicación de Parámetros
 
-**Parameter Explanation:**
+#### Request
 
-**Request:**
+|**Campo**|**Descripción**|
+|---|---|
+|**walletId**|ID único de la billetera cuyo historial se quiere consultar.|
+|**startDate & toDate**|Rango de fechas para la consulta. Para paginar todas las transacciones, usa la fecha actual en ambos campos.|
+|**maxTransactions**|Número máximo de transacciones a devolver. Si existen más dentro del rango, se omitirán.|
+|**offset**|Punto inicial (en orden cronológico inverso) para la paginación.|
+|**c43IdentificadorComercio**|Filtro opcional por comercio. Ej.: `"UBER"` devuelve las transacciones cuyo identificador de comercio contenga “UBER”.|
 
-| **Field**      | **Description**      |
-| ------------- | ------------- |
-| **walletId** | The unique ID for the wallet, essential for fetching associated transactions. |
-| **startDate & toDate** | Set the date range for transaction retrieval. To fetch and paginate all transactions, use the current date for both fields. |
-| **maxTransactions** | Determines the maximum transactions to be returned. If more transactions exist within the date range, they'll be excluded. |
-| **offset** | Sets the starting point for transactions, fetched in reverse chronological order, facilitating pagination. |
-| **c43IdentificadorComercio** | An optional filter based on a specific merchant. For instance, "UBER" fetches all transactions with "UBER" in their merchant identifier. |
+#### Response
 
-**Response**
+|**Campo**|**Descripción**|
+|---|---|
+|**transactionListJson**|Cadena JSON con las transacciones solicitadas en orden cronológico inverso.|
+|**totalItems**|Total de transacciones incluidas en **transactionListJson**.|
+|**currentPage**|Página actual basada en **totalItems** y el **offset**.|
+|**totalPages**|Total de páginas calculado según **totalItems** y **maxTransactions**.|
 
-| **Field**      | **Description**      |
-| ------------- | ------------- |
-| **transactionListJson** | Contains a stringified JSON of all requested transactions in reverse chronological order. |
-| **totalItems** | Specifies the total transactions in the **transactionListJson**. |
-| **currentPage:** | Indicates the current page based on **totalItems** and the request's **offset**. |
-| **totalPages:** | Shows the total pages based on **totalItems** and the request's **maxTransactions**. |
+### Paginación
 
-### Pagination
+Controla la paginación ajustando **maxTransactions** y **offset** en tu solicitud. Esto permite una exploración controlada del historial manteniendo un rendimiento óptimo de la interfaz.
 
-To manage pagination, adjust the **maxTransactions** and **offset** parameters in your request. This ensures a controlled exploration of historical transactions, maintaining a swift UX/UI performance.
+Los parámetros **currentPage** y **totalPages** se incluyen en cada respuesta para tu conveniencia, calculados a partir de **totalItems** y **offset**.
 
-The **currentPage** and **totalPages** parameters are included in each response for convenience, both calculated based on the **totalItems** and offset parameters.
-
-For instance, with a **totalItems** of "25" and an **offset** of "125", the **currentPage** would be "6", displaying transactions numbered 126 to 150 from the date range in reverse chronological order.
+Por ejemplo, con **totalItems = "25"** y **offset = "125"**, **currentPage** será **"6"**, mostrando las transacciones 126-150 del rango solicitado en orden cronológico inverso.
 
 ---

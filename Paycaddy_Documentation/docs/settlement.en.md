@@ -1,6 +1,6 @@
 In order to handle the completion of a transaction's lifecycle, we utilize a Batch Process to update and finalizes the lifecycle of each approved transaction, enabling fast visibility over actual settlement data of each individual transaction in you card issuing program.
 
-PayCaddy leverages this batch processing to deliver notifications through the conventional transactional webhook route (see NotificationEnlist POST) as part of a daily process to confirm and-or adjust the amount previously approved for each transaction.
+PayCaddy leverages this batch processing to deliver notifications through the conventional transactional webhook route (see [**NotificationEnlist POST**](./notificationsEnlist.en.md)) as part of a daily process to confirm and-or adjust the amount previously approved for each transaction.
 
 Our system utilizes three key types of webhook notifications to manage various transaction outcomes:
 

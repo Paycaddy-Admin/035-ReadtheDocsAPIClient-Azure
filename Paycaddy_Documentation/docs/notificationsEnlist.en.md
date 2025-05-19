@@ -3,11 +3,11 @@
 
 PayCaddy sends webhooks to your callback URLs for the following notifications:
 
-•	**TRXs Notifications**, enlisted via Notification Enlist POST
+•	**Transaction Notifications**, enlisted via Notification Enlist POST
 
 •	**Credit Movements Notifications**, also enlisted via Notification Enlist POST (beta)
 
-•	**Integrated KYC Notifications**, enlisted manually by our onboarding team during integration.
+•	[**Integrated KYC Notifications**](./kyc.en.md), enlisted manually by our onboarding team during integration.
 
 
 

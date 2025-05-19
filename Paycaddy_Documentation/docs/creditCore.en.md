@@ -36,7 +36,7 @@ The **“currency”** field must consider ISO 4217 codes. (For example, US Doll
 
 The **"description"** field is used to name the wallet according to its intended use, but is not mandatory for creating a new wallet.
 
-The **"time"** field defines the number of days that the credit line must remain active. This field is used to define the term of a revolving credit **(see [ReportPayCredit](#report-pay-credit-post))**.
+The **"time"** field defines the number of days that the credit line must remain active. This field is used to define the term of a revolving credit **(see [ReportPayCredit](#report-pay-credit-post))**. If this field is omitted, the resulting revolving wallet will remain indefinitely active until manual cancellation.
 
 The **"limit"** field sets the credit limit amount in cents that the wallet will have per month.
 

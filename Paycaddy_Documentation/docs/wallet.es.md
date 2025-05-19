@@ -1,107 +1,110 @@
 ## **Wallets <font color="green">POST</font>** 
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/wallets
+**URL de la solicitud:** https://api.api-sandbox.paycaddy.dev/v1/wallets
 
-‍The creation of a wallet is done through a POST call that carries the following structure:
+‍La creación de una wallet se realiza mediante una llamada **POST** que lleva la siguiente estructura:
 
 === "Request"
-    ```json
-        {
-            "userId": "string",
-            "currency": "string",
-            "description": "string",
-            "walletType": 0
-        }
-    ```
+	```json
+	{
+	    "userId": "string",
+	    "currency": "string",
+	    "description": "string",
+	    "walletType": 0
+	}
+	```
+
 === "Response"
-    ```json
-        {
-            "id": "string",
-            "userId": "string",
-            "currency": "string",
-            "description": "string",
-            "balance": 0,
-            "amountWithheld": 0,
-            "creationDate": "2022-07-19T20:08:29.970Z"
-        }
-    ```
+	```json
+	{
+	    "id": "string",
+	    "userId": "string",
+	    "currency": "string",
+	    "description": "string",
+	    "balance": 0,
+	    "amountWithheld": 0,
+	    "creationDate": "2022-07-19T20:08:29.970Z"
+	}
+	```
 
-This call must be made by associating it with a previously created active userId.
+Esta llamada debe realizarse asociándola a un **userId** activo previamente creado.
 
-The currency field must consider the codes of ISO 4217. (e.g. US Dollars would be entered with the code "USD").
+El campo **currency** debe utilizar los códigos de ISO 4217 (p. ej., los dólares estadounidenses se ingresan con el código `"USD"`).
 
-The description field is created to name the wallet created according to the intended use.
+El campo **description** se utiliza para nombrar la wallet de acuerdo con el uso previsto.
 
-The "walletType" field defines whether the wallet can or cannot be associated with a credit card (see creditCard POST). This boolean must be kept as "0" for all wallets created for debit cards, prepaid cards, or for fund and transfer management. For wallets created for prefunded credit type cards, the "walletType" must be defined as "1".
+El campo **"walletType"** define si la wallet puede o no asociarse a una tarjeta de crédito (consulta **creditCard POST**). Este booleano debe mantenerse en **`0`** para todas las wallets creadas para tarjetas de débito, tarjetas prepago o para la gestión de fondos y transferencias. Para las wallets creadas para tarjetas de crédito **prefunded**, el **"walletType"** debe establecerse en **`1`**.
 
-> The **"Main Wallets"** created automatically in the user creation flow maintain a **"walletType"** of **"0"**.
+> Las **"Main Wallets"** creadas automáticamente en el flujo de creación de usuario mantienen un **"walletType"** de **`0`**.
 
 ---
 
 ## **Wallets <font color="sky-blue">GET</font>** 
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/wallets
+**URL de la solicitud:** https://api.api-sandbox.paycaddy.dev/v1/wallets
 
-The GET call for wallets allows you to retrieve the information associated with the queried walletId. This call is particularly important for checking the available balance in a wallet and the balance withheld due to pending transactions.
+La llamada **GET** para wallets permite recuperar la información asociada al **walletId** consultado. Esta llamada es especialmente importante para comprobar el saldo disponible en una wallet y el saldo retenido debido a transacciones pendientes.
 
 === "Request"
-    ```json
-    https://api.api-sandbox.paycaddy.dev/v1/wallets/{WALLET_ID}
-    
-    ```
+	```
+	https://api.api-sandbox.paycaddy.dev/v1/wallets/{WALLET_ID}
+	```
+
 === "Response"
-    ```json
-        {
-            "id": "string",
-            "userId": "string",
-            "currency": "string",
-            "description": "string",
-            "balance": 0,
-            "creationDate": "2024-11-12T12:17:29.710Z",
-            "amountWithheld": 0
-        } 
-    ```
+	```json
+	{
+	    "id": "string",
+	    "userId": "string",
+	    "currency": "string",
+	    "description": "string",
+	    "balance": 0,
+	    "creationDate": "2024-11-12T12:17:29.710Z",
+	    "amountWithheld": 0
+	}
+	```
 
-The total balance is reflected in the "balance" field of the successful 200 response to this call, while the balance withheld is reflected in the "amountWithheld" field.
+El saldo total se refleja en el campo **"balance"** de la respuesta 200 exitosa, mientras que el saldo retenido se muestra en el campo **"amountWithheld"**.
 
-All amounts are reflected in cents, meaning USD 1,000.00 would be represented as 100000.
+Todos los montos se expresan en centavos; por ejemplo, USD 1 000,00 se representaría como **100000**.
 
-The call may fail if an incorrect walletId is provided, in which case the NeoBank API would respond with a HTTP 400 error.
+La llamada puede fallar si se proporciona un **walletId** incorrecto, en cuyo caso la API de NeoBank responderá con un error HTTP 400:
 
 ```json
-    {
-        "type": "",
-        "title": "Wallet 'c4d165d1-xxxx-xxxx-xxxx-017f0c6facf8' not found",
-        "status": 0,
-        "detail": "",
-        "instance": ""
-    }
+{
+    "type": "",
+    "title": "Wallet 'c4d165d1-xxxx-xxxx-xxxx-017f0c6facf8' not found",
+    "status": 0,
+    "detail": "",
+    "instance": ""
+}
 ```
 
 ---
 
-## **Wallet Per User ID <font color="green">POST</font>** 
+## **Wallet Per User ID <font color="green">POST</font>**
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v1/WalletsPerUserIds
+**URL de la solicitud:** [https://api.api-sandbox.paycaddy.dev/v1/WalletsPerUserIds](https://api.api-sandbox.paycaddy.dev/v1/WalletsPerUserIds)
 
-‍This endpoint allows retrieving all the wallets associated with a user ID.By making a POST request with the user's ID, the system returns a list of the identifiers of the different wallets that the user has.
+‍Este endpoint permite recuperar todas las wallets asociadas a un **userId**. Al realizar una solicitud **POST** con el ID del usuario, el sistema devuelve una lista con los identificadores de las distintas wallets que posee.
 
 === "Request"
-    ```json
-    {
-        "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-    }
-    ```
+	```json
+	{
+	    "userId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+	}
+	```
+
 === "Response"
-    ```json
-    {  
-        "walletsJson": "[
-        ‍{\"Id\":\"216fa217-6826-48b8-ab5b-0180891cef30\",\"BDateUtcCreate\":\"2022-05-03T08:50:16.4959966\",\"BTimestamp\":\"AAAAAAAb6Pk=\",
-        \"ClientId\":\"1c5a29f5-b018-40c7-a6d4-017efe423d42\",\"UserId\":\"qa2c3b2a-23f6-49be-b882-0180891cef30\",\"Currency\":\"USD\",\"Description\":\"Main wallet\",\"AmountAvailable\":38574,\"AmountWithheld\":1110756},
-        {
-        \"Id\":\"d6928675-a4fe-4752-8e7e-018099d30fe1\",\"BDateUtcCreate\":\"2022-05-06T14:43:07.7804616\",\"BTimestamp\":\"AAAAAAAbv6Q=\",
-        \"ClientId\":\"1c5a29f5-b018-40c7-a6d4-017efe423d42\",\"UserId\":\"ea2c3b2a-23f6-49be-b882-0180891cef30\",\"Currency\":\"USD\",\"Description\":\"SecondaryWallet\",\"AmountAvailable\":381599,\"AmountWithheld\":29253372}]"
-    }```
+	```json
+	{
+	    "walletsJson": "[
+	        {\"Id\":\"216fa217-6826-48b8-ab5b-0180891cef30\",\"BDateUtcCreate\":\"2022-05-03T08:50:16.4959966\",\"BTimestamp\":\"AAAAAAAb6Pk=\",
+	        \"ClientId\":\"1c5a29f5-b018-40c7-a6d4-017efe423d42\",\"UserId\":\"qa2c3b2a-23f6-49be-b882-0180891cef30\",\"Currency\":\"USD\",\"Description\":\"Main wallet\",\"AmountAvailable\":38574,\"AmountWithheld\":1110756},
+	        {\"Id\":\"d6928675-a4fe-4752-8e7e-018099d30fe1\",\"BDateUtcCreate\":\"2022-05-06T14:43:07.7804616\",\"BTimestamp\":\"AAAAAAAbv6Q=\",
+	        \"ClientId\":\"1c5a29f5-b018-40c7-a6d4-017efe423d42\",\"UserId\":\"ea2c3b2a-23f6-49be-b882-0180891cef30\",\"Currency\":\"USD\",\"Description\":\"SecondaryWallet\",\"AmountAvailable\":381599,\"AmountWithheld\":29253372}]"
+	}
+	```
 
-The response to this call carries all the information from the multiple wallets associated to the same UserId in a string format that maintains the same structure as the response of the Wallet GET call.
+La respuesta a esta llamada devuelve la información de todas las wallets asociadas al mismo **userId** en formato de cadena, manteniendo la misma estructura que la respuesta de la llamada **Wallet GET**.
 
+---

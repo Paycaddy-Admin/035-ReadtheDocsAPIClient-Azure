@@ -1,140 +1,139 @@
-This guide explains the logic and API interaction required to create and activate users in the PayCaddy ecosystem. Users can represent either individuals or businesses, and the process varies depending on the type of user and the KYC (Know Your Customer) flow in use.
+Esta guía explica la lógica y la interacción con la API necesarias para crear y activar usuarios en el ecosistema de PayCaddy. Los usuarios pueden representar tanto personas naturales como empresas, y el proceso varía según el tipo de usuario y el flujo [KYC (_Know Your Customer_)](./kyc.es.md) empleado.
 
-### User Types
+### Tipos de usuario
 
-There are **three types** of users in PayCaddy’s system:
+En el sistema de PayCaddy existen **tres tipos** de usuarios:
 
-| User Type        | Description                            | KYC Flow                                                                |
-| ---------------- | -------------------------------------- | ----------------------------------------------------------------------- |
-| `EndUser`        | A natural person using Integrated KYC. | PayCaddy handles KYC via a hosted link.                                 |
-| `EndUserSR`      | A natural person using Delegated KYC.  | The client collects and verifies KYC, then sends verified data via API. |
-| `MerchantUser`   | A business entity.                     | Delegated KYB (Know Your Business), provided by the client.             |
+| Tipo de usuario | Descripción                            | Flujo KYC                                                                         |
+| --------------- | -------------------------------------- | --------------------------------------------------------------------------------- |
+| `EndUser`       | Persona natural que usa KYC Integrado. | PayCaddy gestiona el KYC mediante un enlace _hosted_.                             |
+| `EndUserSR`     | Persona natural con KYC Delegado.      | El cliente recopila y verifica el KYC, luego envía los datos verificados vía API. |
+| `MerchantUser`  | Entidad empresarial.                   | KYB (_Know Your Business_) Delegado, proporcionado por el cliente.                |
 
-To determine the correct endpoint for a particular scenario, refer to the following flow. For more detailed information on each specific flow, please find the respective section in this chapter.
+Para determinar el endpoint correcto en un escenario particular, consulta el siguiente diagrama de flujo. Para información detallada de cada flujo específico, revisa la sección correspondiente en este capítulo.
 
-![general_user_flow](./assets/imgs/generaluserflow.svg)
+![general_user_flow](./assets/imgs/generaluserflow.svg)  
 {class="img"}
 
-### EndUser (Integrated KYC)
+### EndUser (KYC Integrado)
 
-This flow is used when PayCaddy is responsible for handling identity verification via our 3rd party KYC provider.
+Este flujo se utiliza cuando PayCaddy se encarga de la verificación de identidad mediante nuestro proveedor externo de KYC.
 
-**Steps:**
+**Pasos:**
 
-1. **Create the user**
+1. **Crear el usuario**
     
-    - Payload schema is detailed in [EndUser POST](user.es.md)
+    - El esquema del payload se detalla en [EndUser POST](user.es.md).
         
-    - PayCaddy returns a KYC verification session link (e.g., MetaMap URL).
+    - PayCaddy devuelve un enlace de sesión de verificación KYC (por ejemplo, URL de MetaMap).
         
-2. **User completes KYC**
+2. **El usuario completa el KYC**
     
-    - The user is redirected or sent the KYC link.
+    - El usuario es redirigido o recibe el enlace KYC.
         
-    - KYC & AML 3rd party solution (Metamap) handles the identity capture and verification.
+    - La solución externa de KYC & AML (Metamap) realiza la captura y verificación de identidad.
         
-3. **Verification callback**
+3. **Callback de verificación**
     
-    - Positive verification status webhook is sent to callback URL.
+    - Se envía un webhook con estado positivo de verificación a la Callback URL.
         
-    - The user’s KYC status is updated to `approved`.
+    - El estado KYC del usuario se actualiza a `approved`.
         
-4. **User becomes active**
+4. **El usuario queda activo**
     
-    - You can confirm the user's activation by querying [EndUser GET](user.es.md#end-user-get)
+    - Puedes confirmar la activación consultando [EndUser GET](user.es.md#end-user-get).
+        
 
-A visualization of the above described steps can be seen in the following flow:
-
+A continuación se muestra un diagrama de este flujo:
 
 ![enduserflow](./assets/imgs/enduser.svg)
 
-
->*** Based on the KYC notification webhook, you can decide whether to offer users a retry option, as per your UX/UI preferences. For pricing details related to integrated KYC verifications, consult our commercial team.
+> *** Con base en el webhook de notificación KYC, puedes decidir ofrecer un reintento a los usuarios según tu UX/UI. Para información de precios sobre verificaciones KYC integradas, contacta a nuestro equipo comercial.
 
 ---
 
-### EndUserSR (Delegated KYC)
+### EndUserSR (KYC Delegado)
 
-Used when your system (or your client’s) already handles the KYC process independently and sends verified data to PayCaddy.
+Se usa cuando tu sistema (o el de tu cliente) ya gestiona el proceso KYC de forma independiente y envía los datos verificados a PayCaddy.
 
->This option is reserved to **regulated entities** within their country of jurisdiction. 
->
->Access to the creation of this type of user must be requested and approved by PayCaddy's compliance team during onboarding or upgrade cycles.
+> Esta opción está reservada para **entidades reguladas** en su país de jurisdicción.  
+> El acceso para crear este tipo de usuario debe ser solicitado y aprobado por el equipo de compliance de PayCaddy durante la etapa de onboarding o ciclos de mejora.
 
-**Steps:**
+**Pasos:**
 
-1. **Verify user externally**
+1. **Verificar al usuario externamente**
     
-    - Use your KYC provider to collect documents and validate identity.
+    - Utiliza tu proveedor de KYC para recopilar documentos y validar la identidad.
         
-2. **Create the user**
+2. **Crear el usuario**
     
-    - Payload schema is detailed in [EndUserSR POST](user.es.md#end-user-sr-post)
+    - El esquema del payload se detalla en [EndUserSR POST](user.es.md#end-user-sr-post).
         
-    - Payload must include temporary* URLs to access the document files data.
-	    - Details regarding exact document files data capture parameters will be discussed with Compliance Team during onboarding.
+    - El payload debe incluir URLs _temporales_ para acceder a los archivos de documentos.
         
-3. **User becomes active immediately**
+        - Los parámetros exactos para la captura de documentos se definirán con el equipo de Compliance en el onboarding.
+            
+3. **El usuario queda activo inmediatamente**
     
-    - Since verification is delegated, no further KYC is needed from PayCaddy.
-    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.es.md)
+    - Al ser verificación delegada, PayCaddy no realiza más KYC.
+        
+    - Periódicamente se requerirá actualización de la información KYC. Revisa [Edit User Data](editUserData.es.md).
+        
 
-A visualization of the above described steps can be seen in the following flow:
+Diagrama de este flujo:
 
 ![endusersrflow](./assets/imgs/EndUserSR.svg)
 
-
->** For specific periodicity details on scheduled KYC checks, consult with PayCaddy's compliance team during the integration phase.
+> ** Para detalles de periodicidad en controles KYC programados, consulta con el equipo de compliance de PayCaddy durante la integración.
 
 ---
 
-### MerchantUser (Delegated KYB)
+### MerchantUser (KYB Delegado)
 
-This user type represents a business entity. KYB is fully delegated.
+Este tipo de usuario representa una entidad empresarial. El KYB es completamente delegado.
 
-**Steps:**
+**Pasos:**
 
-1. **Collect business documents**
+1. **Recopilar documentos de la empresa**
     
-    - Gather legal documents, beneficial owner info, tax IDs, etc.
+    - Reúne documentos legales, datos de beneficiarios finales, identificaciones fiscales, etc.
         
-2. **CONDITIONAL - Submit for pre-approval*** ***  
+2. **CONDICIONAL – Enviar para preaprobación*** ***
     
-    - Some card programs require pre-approval of MerchantUsers prior to their creation.
-	    
-    - Failure to do so will incur in the blocking of non-approved users during scheduled checks.
-	    
-    - For particular card programs, this condition can be lifted during onboarding definitions.
-	    
-3. **Create the merchant**
-    
-    - Schema detailed in [MerchantUser POST](user.es.md#merchant-user-post)
+    - Algunos programas de tarjeta requieren la preaprobación de _MerchantUsers_ antes de su creación.
         
-4. **Merchant becomes active**
+    - No hacerlo puede bloquear usuarios no aprobados en controles programados.
+        
+    - Para ciertos programas, esta condición puede eliminarse durante la definición en onboarding.
+        
+3. **Crear el comercio**
     
-    - Since verification is delegated, no further KYC is needed from PayCaddy.
-    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.es.md)
+    - Esquema detallado en [MerchantUser POST](user.es.md#merchant-user-post).
+        
+4. **El comercio queda activo**
+    
+    - Al ser verificación delegada, PayCaddy no realiza más KYC.
+        
+    - Periódicamente se requerirá actualización de la información KYC. Revisa [Edit User Data](editUserData.es.md).
+        
 
->* For specifics on which verification checks are done, review with Compliance team during onboarding process.
->
->** For specific periodicity details on scheduled KYC checks, consult with PayCaddy's compliance team during the integration phase.
->
->*** All card programs for Merchant type users will undergo a definition process with PayCaddy’s compliance team to establish file formats and pre-approval conditions if applicable.
+> - Para detalles de qué verificaciones se realizan, consúltalo con el equipo de Compliance en el onboarding.  
+>     ** Para periodicidad específica de verificaciones KYC programadas, contacta al equipo de compliance de PayCaddy.  
+>     *** Todos los programas de tarjeta para usuarios Merchant se definirán con el equipo de compliance de PayCaddy para establecer formatos de archivo y condiciones de preaprobación cuando corresponda.
+>     
 
-A visualization of the above described steps can be seen in the following flow:
+Diagrama de este flujo:
 
 ![merchantuserflow](./assets/imgs/merchantuser.svg)
 
 ---
 
-###  Summary Table
+### Tabla resumen
 
-| User Type      | API Endpoint                                       | KYC Mode   | Activation Trigger       |
-| -------------- | -------------------------------------------------- | ---------- | ------------------------ |
-| `EndUser`      | [EndUser POST](user.es.md#end-user-post)           | Integrated | MetaMap webhook          |
-| `EndUserSR`    | [EndUserSR POST](user.es.md#end-user-sr-post)      | Delegated  | Immediate after creation |
-| `MerchantUser` | [MerchantUser POST](user.es.md#merchant-user-post) | Delegated  | After document approval  |
+| Tipo de usuario | Endpoint API                                       | Modalidad KYC | Disparador de activación                                     |
+| --------------- | -------------------------------------------------- | ------------- | ------------------------------------------------------------ |
+| `EndUser`       | [EndUser POST](user.es.md#end-user-post)           | Integrado     | Webhook de MetaMap                                           |
+| `EndUserSR`     | [EndUserSR POST](user.es.md#end-user-sr-post)      | Delegado      | Inmediato tras la creación                                   |
+| `MerchantUser`  | [MerchantUser POST](user.es.md#merchant-user-post) | Delegado      | Inmediato tras la creación, con pre-aprobación de documentos |
 
->During the initial exploration, our sales team should have assigned you the specific details of your card program profiles, which will define which endpoint(s) you should call for user creation and the relevant KYC obligations.
-
-
+> Durante la fase inicial, nuestro equipo de ventas debió asignarte los perfiles específicos de tu programa de tarjeta, lo que definirá qué endpoint(s) debes llamar para la creación de usuarios y las obligaciones KYC correspondientes.

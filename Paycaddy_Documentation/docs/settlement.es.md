@@ -1,98 +1,101 @@
-In order to handle the completion of a transaction's lifecycle, we utilize a Batch Process to update and finalizes the lifecycle of each approved transaction, enabling fast visibility over actual settlement data of each individual transaction in you card issuing program.
+Para manejar la finalización del ciclo de vida de una transacción, utilizamos un **Proceso Batch** para actualizar y cerrar cada transacción aprobada, lo que permite visibilidad rápida de los datos reales de liquidación de cada transacción en tu programa de emisión de tarjetas.
 
-PayCaddy leverages this batch processing to deliver notifications through the conventional transactional webhook route (see NotificationEnlist POST) as part of a daily process to confirm and-or adjust the amount previously approved for each transaction.
+PayCaddy aprovecha este procesamiento por lotes para enviar notificaciones a través de la ruta convencional de webhooks transaccionales (consulta [**NotificationEnlist POST**](/.notificationsEnlist.es.md)) como parte de un proceso diario destinado a confirmar y/o ajustar el monto previamente aprobado para cada transacción.
 
-Our system utilizes three key types of webhook notifications to manage various transaction outcomes:
+Nuestro sistema emplea tres tipos clave de notificaciones webhook para gestionar los distintos resultados posibles:
 
-1. **TransaccionCorregidaPositiva:** Issued when the final settlement results in a positive adjustment to the initially authorized amount, thereby adding funds to the user’s wallet.
-2. **TransaccionCorregidaNegativa:** Issued when the final settlement results in a negative adjustment, thereby deducting funds from the user's wallet.
-3. **TransaccionConfirmada:** Introduced to confirm that the transaction has settled exactly at the amount authorized initially, providing clear and precise confirmation of the transaction outcome.
-
+1. **TransaccionCorregidaPositiva:** Se envía cuando la liquidación final produce un ajuste **positivo** al monto inicialmente autorizado, añadiendo fondos a la billetera del usuario.
+    
+2. **TransaccionCorregidaNegativa:** Se envía cuando la liquidación final produce un ajuste **negativo**, deduciendo fondos de la billetera del usuario.
+    
+3. **TransaccionConfirmada:** Se envía para confirmar que la transacción se liquidó exactamente por el monto autorizado inicialmente, brindando una confirmación clara y precisa del resultado.
+    
 
 ![settlement](./assets/imgs/settlement.svg)
 
+## Casos de Uso de Corrección de Monto
 
+Algunos ejemplos de transacciones que pueden corregirse mediante un proceso batch son:
 
-## Amount Correction Use Cases
+1. **Alquiler de autos:** Al rentar un auto, la agencia suele autorizar un monto inicial para cubrir el alquiler y posibles daños. El monto final puede variar según el uso real del vehículo (distancia recorrida, combustible, etc.). En estos casos, el mensaje correctivo **TransaccionCorregidaPositiva** o **TransaccionCorregidaNegativa** ajusta el cargo final una vez devuelto el vehículo y calculado el importe definitivo.
+    
+2. **Reservas de hotel:** Al reservar una habitación, el hotel bloquea un monto para cubrir la estancia y cargos adicionales (minibar, room service). Al finalizar la estancia, el monto final puede diferir del bloqueado inicialmente. El mensaje correctivo **TransaccionCorregidaPositiva** o **TransaccionCorregidaNegativa** ajusta el cargo final tras calcular los cargos adicionales reales.
+    
 
-A couple of examples of transactions that could be corrected through a batch process are:
+El procesamiento por lotes agiliza el manejo de transacciones diferidas y garantiza una liquidación correcta, reduciendo discrepancias y la necesidad de conciliaciones manuales. Estos webhooks mejoran la gestión de transacciones, minimizan errores y optimizan la administración en general.
 
-1. **Car rental:** When a customer rents a car, the rental company usually authorizes an initial amount on the customer's card to cover the cost of the rental and any possible damage. However, the final amount could vary depending on the actual use of the vehicle and other factors, such as the distance traveled or the cost of fuel. In these cases, the corrective message "TransaccionCorregidaPositiva" or "TransaccionCorregidaNegativa" could be used to adjust the final amount charged to the customer's card, once the vehicle has been returned and the final calculation has been made.
-2. **Hotel bookings:** When a customer reserves a hotel room, the hotel usually blocks an amount on the customer's card to cover the cost of the stay and possible additional charges, such as the minibar or room service. At the end of the stay, the final amount may be different from the initially blocked amount, depending on the actual use of these additional services. In these cases, the corrective message "TransaccionCorregidaPositiva" or "TransaccionCorregidaNegativa" could be used to adjust the final amount charged to the customer's card, once the final charges have been calculated.
+> La mayoría de los webhooks relacionados con estas transacciones correctivas se envían durante la misma ventana nocturna, ya que el proceso de generación de webhooks se ejecuta de noche para consolidar y notificar los cambios en las transacciones del día.
 
-Batch processing streamlines the handling of deferred transactions and ensures proper settlement, reducing discrepancies and the need for manual reconciliation. These webhooks improve transaction handling, minimize errors, and optimize overall management.
+Siempre que sea posible, se recomienda emparejar la transacción corregida con la transacción original en la interfaz de usuario. Así, los tarjetahabientes comprenderán mejor cómo y por qué se modificó su saldo.
 
->The majority of webhooks related to these corrective transactions will be sent during the same period overnight. This is because our webhook generation process is a batch process that runs overnight to consolidate and notify if there were changes to the day's transactions.
+## Esquemas de Webhook
 
-Whenever possible, it is recommended to match the corrected transaction with the original transaction for UI purposes. This way, cardholders will have a better understanding of how and why their balance has been modified.
-
-## Webhook Schemas
-
-Settlement of transactions will be notified through a webhook that carries one of the following schemas:
+La liquidación de transacciones se notificará mediante un webhook con uno de los siguientes esquemas:
 
 === "TransaccionCorregidaPositiva"
-    ```json
-    {
-        "password": "password",
-        "c1Tipo": "TransaccionCorregidaPositiva",
-        "c2CardId": "cardId",
-        "c3CodigoProceso": "000000",
-        "c4ImporteTransaccion": "000000001617",
-        "c7FechaHoraTransaccion": "20220429052901",
-        "c11NumeroIdentificativoTransaccion": "000004339",
-        "c18CodigoActividadEstablecimiento": "5999",
-        "c19CodigoPaisAdquirente": "442",
-        "c38NumeroAutorizacion": "040031",
-        "c41TerminalId": "00227759",
-        "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
-    }
-    ```
+	```json
+	{
+	    "password": "password",
+	    "c1Tipo": "TransaccionCorregidaPositiva",
+	    "c2CardId": "cardId",
+	    "c3CodigoProceso": "000000",
+	    "c4ImporteTransaccion": "000000001617",
+	    "c7FechaHoraTransaccion": "20220429052901",
+	    "c11NumeroIdentificativoTransaccion": "000004339",
+	    "c18CodigoActividadEstablecimiento": "5999",
+	    "c19CodigoPaisAdquirente": "442",
+	    "c38NumeroAutorizacion": "040031",
+	    "c41TerminalId": "00227759",
+	    "c42Comercio": "227759000156182",
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	}
+	```
+
 === "TransaccionCorregidaNegativa"
-    ```json
-    {
-        "password": "password",
-        "c1Tipo": "TransaccionCorregidaNegativa",
-        "c2CardId": "cardId",
-        "c3CodigoProceso": "000000",
-        "c4ImporteTransaccion": "000000001617",
-        "c7FechaHoraTransaccion": "20220429052901",
-        "c11NumeroIdentificativoTransaccion": "000004339",
-        "c18CodigoActividadEstablecimiento": "5999",
-        "c19CodigoPaisAdquirente": "442",
-        "c38NumeroAutorizacion": "040031",
-        "c41TerminalId": "00227759",
-        "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
-    }
-    ```
+	```json
+	{
+	    "password": "password",
+	    "c1Tipo": "TransaccionCorregidaNegativa",
+	    "c2CardId": "cardId",
+	    "c3CodigoProceso": "000000",
+	    "c4ImporteTransaccion": "000000001617",
+	    "c7FechaHoraTransaccion": "20220429052901",
+	    "c11NumeroIdentificativoTransaccion": "000004339",
+	    "c18CodigoActividadEstablecimiento": "5999",
+	    "c19CodigoPaisAdquirente": "442",
+	    "c38NumeroAutorizacion": "040031",
+	    "c41TerminalId": "00227759",
+	    "c42Comercio": "227759000156182",
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	}
+	```
+
 === "TransaccionConfirmada"
-    ```json
-    {
-        "password": "password",
-        "c1Tipo": "TransaccionConfirmada",
-        "c2CardId": "cardId",
-        "c3CodigoProceso": "000000",
-        "c4ImporteTransaccion": "000000001617",
-        "c7FechaHoraTransaccion": "20220429052901",
-        "c11NumeroIdentificativoTransaccion": "000004339",
-        "c18CodigoActividadEstablecimiento": "5999",
-        "c19CodigoPaisAdquirente": "442",
-        "c38NumeroAutorizacion": "040031",
-        "c41TerminalId": "00227759",
-        "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
-    }
-    ```
+	```json
+	{
+	    "password": "password",
+	    "c1Tipo": "TransaccionConfirmada",
+	    "c2CardId": "cardId",
+	    "c3CodigoProceso": "000000",
+	    "c4ImporteTransaccion": "000000001617",
+	    "c7FechaHoraTransaccion": "20220429052901",
+	    "c11NumeroIdentificativoTransaccion": "000004339",
+	    "c18CodigoActividadEstablecimiento": "5999",
+	    "c19CodigoPaisAdquirente": "442",
+	    "c38NumeroAutorizacion": "040031",
+	    "c41TerminalId": "00227759",
+	    "c42Comercio": "227759000156182",
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	}
+	```
 
+## Conciliación de Transacciones y Captura de Fondos
 
-## Transaction Matching and Funds Capture
+- **Emparejamiento de transacciones:** Cada transacción incluye un identificador único `c11NumeroIdentificativoTransaccion`, crucial para emparejar la liquidación corregida o confirmada con su autorización inicial. Este proceso es esencial para mantener la integridad de la transacción y permite a los tarjetahabientes entender cómo y por qué se ajustaron sus saldos.
+    
+- **Detalles de notificación:** Los webhooks de liquidación contienen información sobre la transacción, incluido el importe, el identificador y el tipo de ajuste o confirmación.
+    
 
-- **Matching Transactions:** Each transaction includes a unique identifier `c11NumeroIdentificativoTransaccion`, which is crucial for matching the corrected or confirmed settlement with its initial authorization. This matching process is essential for maintaining transaction integrity and provides cardholders with a clear understanding of how and why their balances were adjusted.
-- **Notifications Details:** Settlement webhook notifications contain information about the transaction, including the transaction amount, the identifier, and the type of adjustment or confirmation.
+> Una vez que una transacción ha sido modificada, no se modificará de nuevo.
 
-> Once a transaction has been modified, it will not be modified again.
-
->Although it is less common, it can also occur that a charge arrives only in the batch process and not online. If this is the case, the webhook may arrive with less information. It should be noted that this information is according to the network's protocol for handles these confirmations and does not depend on PayCaddy.
-
----
+> Aunque es menos común, puede ocurrir que un cargo llegue únicamente a través del proceso batch y no online. En ese caso, el webhook puede incluir menos información. Esta limitación obedece al protocolo de la red que gestiona estas confirmaciones y no depende de PayCaddy.

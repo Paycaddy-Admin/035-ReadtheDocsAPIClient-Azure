@@ -1,4 +1,3 @@
-
 ## **Integrated KYC Notifications**
 
 As part of our Integrated KYC flow for Natural Persons, after users complete the identity verification steps at the URL shared in the **kycURL** field **(see EndUser POST)**, our identity verification provider's system processes the submitted data and compares it with blacklists and does AML checks. Our API leverages these verifications and provides status notifications via webhook.
@@ -40,6 +39,7 @@ The webhook flow for a validation follows the diagram described below.
 ![kycflow](./assets/imgs/kycflow.svg)
 {class="img"}
 
+### Possible States
 Following this process flow, below are the webhooks corresponding to each state.
 Each of these webhooks provide a description of the corresponding state, including rejection reasons in case of failed verifications. The corresponding descriptions are detailed below for your reference.
 
