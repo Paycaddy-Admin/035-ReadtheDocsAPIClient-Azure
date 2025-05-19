@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/notificationsEnlist.es.md",
+                "file": "Paycaddy_Documentation/docs/card_ops.es.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "notificationsEnlist.es"
+              "title": "card_ops.es"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Paycaddy_Documentation/docs/notificationsEnlist.es.md",
+                "file": "Paycaddy_Documentation/docs/card_ops.es.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for notificationsEnlist.es"
+              "title": "Backlinks for card_ops.es"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Paycaddy_Documentation/docs/notificationsEnlist.es.md",
+                "file": "Paycaddy_Documentation/docs/card_ops.es.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from notificationsEnlist.es"
+              "title": "Outgoing links from card_ops.es"
             }
           },
           {
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Paycaddy_Documentation/docs/notificationsEnlist.es.md",
+                "file": "Paycaddy_Documentation/docs/card_ops.es.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of notificationsEnlist.es"
+              "title": "Outline of card_ops.es"
             }
           }
         ],
@@ -170,8 +170,11 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
+    "Paycaddy_Documentation/docs/kyc.es.md",
+    "Paycaddy_Documentation/docs/userFlow.es.md",
+    "Paycaddy_Documentation/docs/userFlow.en.md",
     "Paycaddy_Documentation/docs/notificationsEnlist.es.md",
+    "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/transactionLists.es.md",
     "Paycaddy_Documentation/docs/transactionLists.en.md",
     "Paycaddy_Documentation/docs/prefundedTRX.es.md",
@@ -185,7 +188,6 @@
     "Paycaddy_Documentation/docs/JITtrx.en.md",
     "Paycaddy_Documentation/docs/prefundedFlow.es.md",
     "Paycaddy_Documentation/docs/kyc.en.md",
-    "Paycaddy_Documentation/docs/kyc.es.md",
     "Paycaddy_Documentation/docs/prefundedTRX.en.md",
     "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "Paycaddy_Documentation/docs/card_ops.es.md",
@@ -194,8 +196,6 @@
     "Paycaddy_Documentation/docs/card.en.md",
     "Paycaddy_Documentation/docs/cardFlow.en.md",
     "Paycaddy_Documentation/docs/cardFlow.es.md",
-    "Paycaddy_Documentation/docs/index.es.md",
-    "Paycaddy_Documentation/docs/index.md",
     "Paycaddy_Documentation/docs/assets/imgs/kycflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/cardFlow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/payindirect.svg",

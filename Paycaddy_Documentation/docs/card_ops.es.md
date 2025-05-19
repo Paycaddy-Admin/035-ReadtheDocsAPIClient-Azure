@@ -96,8 +96,8 @@ La API devolverá un **HTTP 400** si se intenta desbloquear una tarjeta ya activ
 
 **URL de la solicitud:** [https://api.api-sandbox.paycaddy.dev/v1/cardOperations/cancelCard](https://api.api-sandbox.paycaddy.dev/v1/cardOperations/cancelCard)
 
-!!!Danger  
-Los resultados de esta acción son **irreversibles**. Úsala con precaución, ya que genera efectos contables permanentes.
+!!!Caution
+	Los resultados de esta acción son **irreversibles**. Úsala con precaución, ya que genera efectos contables permanentes.
 
 Esta llamada **cancela permanentemente** una tarjeta, cambiando **"isActive"** a **false** y **"status"** a **"Cancel"** mediante un llamado que solo incluye el **cardId**.
 
