@@ -1,48 +1,48 @@
-Welcome to PayCaddy's API documentation, a comprehensive and flexible platform designed to enable businesses and developers to easily integrate banking and financial services into their applications and systems.
+Bienvenido a la documentación de la API de PayCaddy, una plataforma completa y flexible diseñada para permitir que empresas y desarrolladores integren fácilmente servicios bancarios y financieros en sus aplicaciones y sistemas.
 
-Our API is built as a REST interface. The main benefit is that it accepts form-encoded request bodies and returns JSON-encoded responses, using standard HTTP response codes which should make our API familiar to anyone with previous experience using APIs.
+Nuestra API está construida como una interfaz REST. El principal beneficio es que acepta cuerpos de solicitud codificados como formularios y devuelve respuestas codificadas en JSON, utilizando códigos de respuesta HTTP estándar, lo que debería hacer que nuestra API resulte familiar para cualquiera con experiencia previa en el uso de APIs.
 
-Use this documentation as a guide to execute tasks such as:
+Utiliza esta documentación como guía para ejecutar tareas tales como:
 
-- Creating natural and legal type users. (Check **[Users](user.es.md)**)
-- Creating wallets for each user you create. This option will be useful if you are going to integrate pre-funded credit type cards or if you want to manage more than one wallet per user. (Check **[Wallets](wallet.es.md)**)
-- Managing balances of wallets created through PayIns, PayOuts, and Transfers between wallets. (Check **[Wallet Operations](wallet_ops.es.md)**)
-- Creating cards linked to the created wallets. (Check **[Cards](card.es.md)**)
-- Managing created cards. (Check **[Card Operations](card_ops.es.md)**)
-- Registering a Callback URLs for event notifications (Check [**Notifications Enlist**](notificationsEnlist.es.md))
-- Retrieving transactional data. (Check [**Transaction Data Retrieval**](transactionLists.es.md))
+- Crear usuarios de tipo natural y jurídico. (Consulta **[Usuarios](user.es.md)**)  
+- Crear wallets para cada usuario que crees. Esta opción será útil si vas a integrar tarjetas de crédito prefundadas o si deseas gestionar más de una wallet por usuario. (Consulta **[Wallets](wallet.es.md)**)  
+- Gestionar los saldos de las wallets creadas a través de PayIns, PayOuts y transferencias entre wallets. (Consulta **[Operaciones de Wallet](wallet_ops.es.md)**)  
+- Crear tarjetas vinculadas a las wallets creadas. (Consulta **[Tarjetas](card.es.md)**)  
+- Gestionar las tarjetas creadas. (Consulta **[Operaciones de Tarjetas](card_ops.es.md)**)  
+- Registrar URLs de Callback para notificaciones de eventos (Consulta [**Enlistado de Notificaciones**](notificationsEnlist.es.md))  
+- Recuperar datos transaccionales. (Consulta [**Obtención de Datos de Transacción**](transactionLists.es.md))
 
+> La creación de tarjetas se realiza mediante distintos endpoints para tarjetas débito, crédito y prepago.
 
-> Card creation is done through different endpoints for debit, credit, and prepaid cards.
-
-> In the initial product exploration, our commercial team will gather the specifications of the *card product* to be issued. Our integration team will provide a related `clientCode` for each *card product* required, this is a unique code for your assigned card profile that should be included in the card creation calls.
+> Durante la exploración inicial del producto, nuestro equipo comercial recopilará las especificaciones del *producto de tarjeta* que se emitirá. Nuestro equipo de integración proporcionará un `clientCode` relacionado para cada *producto de tarjeta* requerido; este es un código único para el perfil de tarjeta asignado que debe incluirse en las llamadas de creación de tarjetas.
 
 ---
 
-## **Sandbox Access and Authentication**
+## **Acceso a Sandbox y Autenticación**
 
-To start an integration process, you must first request integration API Keys by contacting info@paycaddy.com. After initial scoping and onboarding processes, sandbox API keys will be delivered via email to the technical responsible party.
+Para iniciar un proceso de integración, primero debes solicitar las API Keys de integración contactando a info@paycaddy.com. Después de la fase inicial de alcance y procesos de incorporación, las API Keys de sandbox se enviarán por correo electrónico a la persona técnica responsable.
 
-Handling the keys is of great importance and it is the responsibility of the key recipient to keep them safe. Secret keys must not be shared on any publicly accessible site such as GitHub, client-side code, etc.
+El manejo de las claves es de gran importancia y es responsabilidad del receptor mantenerlas seguras. Las claves secretas no deben compartirse en ningún sitio de acceso público como GitHub, código del lado del cliente, etc.
 
-Authentication to the API should be performed via X-API Key. It is necessary to provide the API Key as the basic user value, without the need to provide a password.‍
+La autenticación en la API debe realizarse mediante X-API Key. Es necesario proporcionar la API Key como el valor de usuario básico, sin necesidad de proporcionar una contraseña.
 
-All calls must be made via HTTPS; any call made via HTTP or without authentication will fail‍.
+Todas las llamadas deben realizarse a través de HTTPS; cualquier llamada hecha vía HTTP o sin autenticación fallará.
 
-With the integration credentials, you will be able to make calls to PayCaddy API testing environment directly.
+Con las credenciales de integración, podrás realizar llamadas directamente al entorno de pruebas (testing) de la API de PayCaddy.
 
-Utilize our [Sandbox Swagger Interface](https://api.api-sandbox.paycaddy.dev/openapi/index.html) to test each of the endpoints of our API as you develop your code.
+Utiliza nuestra [Interfaz Swagger del Sandbox](https://api.api-sandbox.paycaddy.dev/openapi/index.html) para probar cada uno de los endpoints de nuestra API mientras desarrollas tu código.
 
 ----
-## **Entity Structure**
 
-PayCaddy API has 3 fundamental entities with which you will interact each time you consume an endpoint to complete the various available flows. These entities identify the end users of the card issuance service, the wallets or virtual containers for money, and the cards associated with them.
+## **Estructura de Entidades**
+
+La API de PayCaddy cuenta con 3 entidades fundamentales con las que interactuarás cada vez que consumas un endpoint para completar los distintos flujos disponibles. Estas entidades identifican a los usuarios finales del servicio de emisión de tarjetas, las wallets o contenedores virtuales de dinero y las tarjetas asociadas a ellos.
 
 ![entity_diagram](./assets/imgs/entityRelationship.svg)
 {class="img"}
 
-- **UserID:** ‍Uniquely identifies an EndUser or MerchantUser interchangeably. The UserID is the primary entity of the NeoBank API. The process of creating an EndUser or MerchantUser always results in the creation of a UserID and, in turn, an associated WalletID.
+- **UserID:** Identifica de forma única a un EndUser o MerchantUser indistintamente. El UserID es la entidad primaria de la API de NeoBank. El proceso de creación de un EndUser o MerchantUser siempre genera la creación de un UserID y, a su vez, de un WalletID asociado.
 
-- **WalletID:** The WalletID is the identifier of the electronic money container to which funds are credited and debited through PayIns, PayOuts, and/or transactions of the card(s) associated with it. A UserID will always be associated with at least one WalletID; however, it may contain multiple WalletIDs if required by the client's solution.
+- **WalletID:** El WalletID es el identificador del contenedor de dinero electrónico al que se acreditan y debitan fondos mediante PayIns, PayOuts y/o transacciones de la(s) tarjeta(s) asociada(s). Un UserID siempre estará asociado a al menos un WalletID; sin embargo, puede contener múltiples WalletIDs si así lo requiere la solución del cliente.
 
-- **‍CardID:** ‍These are the unique identifiers of the card that also serve as an abstraction of the PAN of the issued cards, avoiding the need for storing sensitive card information.
+- **CardID:** Son los identificadores únicos de la tarjeta que también sirven como una abstracción del PAN de las tarjetas emitidas, evitando la necesidad de almacenar información sensible de la tarjeta.

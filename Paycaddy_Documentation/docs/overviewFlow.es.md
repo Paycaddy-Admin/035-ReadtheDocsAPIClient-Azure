@@ -22,4 +22,6 @@ A alto nivel, el flujo desde la creación de un usuario hasta la recepción de n
 ![generalFlow](./assets/imgs/generalFlow.svg){class="img"}
 
 > Para programas de Just-In-Time Funding, no se utilizarán PayIns y el flujo de aprobación de transacciones seguirá una ruta distinta. Para más detalles consulta el [**JIT Flow**](JITflow.es.md).
+
+
 ---
