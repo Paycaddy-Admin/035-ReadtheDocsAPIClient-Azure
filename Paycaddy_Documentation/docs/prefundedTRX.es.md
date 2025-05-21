@@ -106,7 +106,7 @@ El tipo de transacción se indica en el campo **“c1Tipo”** del webhook. Por 
 
 ## Conciliación y Correcciones del Proceso Batch
 
-Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden comunicarse mediante el [proceso batch](./settlement.es.md) usando los siguientes tipos de corrección:
+Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden comunicarse mediante el [proceso batch](/settlement.es.md) usando los siguientes tipos de corrección:
 
 1. **TransaccionCorregidaPositiva**  
     Indica un ajuste que confirma un importe mayor al autorizado inicialmente. El importe adicional se debitará de la cuenta del titular de la tarjeta.

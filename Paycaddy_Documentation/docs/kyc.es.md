@@ -65,7 +65,7 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 **Rejected:** Este estado se refiere a cuando el usuario no ha pasado la verificación de KYC. Los casos se detallan abajo.
 
 === "Input mismatch"
-	```json
+	```
 	{
 	    "metadata": { "userId": "string" },
 	    "status": "rejected",
@@ -77,7 +77,7 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 	```
 
 === "AML Checks Rejected"
-	```json
+	```
 	{
 	    "metadata": { "userId": "string" },
 	    "status": "rejected",
@@ -89,7 +89,7 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 	```
 
 === "User underage"
-	```json
+	```
 	{
 	    "metadata": { "userId": "string" },
 	    "status": "rejected",
@@ -101,7 +101,7 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 	```
 
 === "Document Expired"
-	```json
+	```
 	{
 	    "metadata": { "userId": "string" },
 	    "status": "rejected",
@@ -113,7 +113,7 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 	```
 
 === "Negligence"
-	```json
+	```
 	{
 	    "metadata": { "userId": "string" },
 	    "status": "rejected",
@@ -125,7 +125,7 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 	```
 
 === "Others"
-	```json
+	```
 	{
 	    "metadata": { "userId": "string" },
 	    "status": "rejected",
@@ -185,5 +185,6 @@ A continuación se muestran los webhooks correspondientes a cada estado, con sus
 	    "timeStamp": "2023-03-16T09:42:18.8338086Z"
 	}
 	```
+
 
 ---
