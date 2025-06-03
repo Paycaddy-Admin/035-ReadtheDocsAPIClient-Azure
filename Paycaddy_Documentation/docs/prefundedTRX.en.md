@@ -16,7 +16,8 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0102020963010037725"
     }
     ```
 
@@ -36,7 +37,8 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "IdCadena": "0102020963010037725"
     }
     ```
 === "CancellationComm"
@@ -55,7 +57,8 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "IdCadena": "0102020963010037725"
     }
     ```
 
@@ -75,7 +78,8 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "IdCadena": "0102020963010037725"
     }
     ```
 
@@ -93,12 +97,13 @@ There are four main types of transactions that you will receive as online type:
 
 The transaction type is indicated in the **"c1Tipo"** field of the webhook. For example, if the **"c1Tipo"** field indicates that it is a **"AuthorizationRequest"** type transaction, it should be presented as a deduction in the available balance.
 
->It's important to note that Transaction Notification webhooks are sent with attributes and values named in Spanish.
-This documentation translates some terms for easy comprehension.
+>It's important to note that Transaction Notification webhooks are sent with attributes and values named in Spanish. This documentation translates some terms for easy comprehension.
 
 >The field **"c7FechaHoraTransaccion"** represents the transaction time information in the timezone where the transaction was acquired in the format "YYYYMMDDhhmmss"
 
 >The field **"BDateUtcCreate"** represents the transaction time information in UTC timezone following the same format as the **c7FechaHoraTransaccion**
+
+>The **"IdCadena"** field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. An authorization request (PeticionAutorizacion) that receives an associated cancellation communication will be considered a confirmed or reconciled transaction. Therefore, it will not receive any subsequent batch notification of any kind.
 
 
 ---

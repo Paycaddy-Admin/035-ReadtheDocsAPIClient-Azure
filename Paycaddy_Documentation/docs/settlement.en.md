@@ -45,7 +45,8 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "IdCadena": "0"
     }
     ```
 === "TransaccionCorregidaNegativa"
@@ -63,7 +64,8 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "IdCadena": "0"
     }
     ```
 === "TransaccionConfirmada"
@@ -81,7 +83,8 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "IdCadena": "0"
     }
     ```
 
@@ -91,7 +94,13 @@ Settlement of transactions will be notified through a webhook that carries one o
 - **Matching Transactions:** Each transaction includes a unique identifier `c11NumeroIdentificativoTransaccion`, which is crucial for matching the corrected or confirmed settlement with its initial authorization. This matching process is essential for maintaining transaction integrity and provides cardholders with a clear understanding of how and why their balances were adjusted.
 - **Notifications Details:** Settlement webhook notifications contain information about the transaction, including the transaction amount, the identifier, and the type of adjustment or confirmation.
 
+
+
+>The "IdCadena" field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. Within the context of Settlement notifications, this field will remain as "0"
+
+
 > Once a transaction has been modified, it will not be modified again.
+
 
 >Although it is less common, it can also occur that a charge arrives only in the batch process and not online. If this is the case, the webhook may arrive with less information. It should be noted that this information is according to the network's protocol for handles these confirmations and does not depend on PayCaddy.
 

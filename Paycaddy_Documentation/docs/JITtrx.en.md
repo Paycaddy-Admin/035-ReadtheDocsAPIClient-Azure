@@ -32,7 +32,8 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
   "c38NumeroAutorizacion": "040031",
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
-  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+  "IdCadena": "0102020963010037725"
 }
 ```
 
@@ -187,7 +188,7 @@ All online transactions are notified via webhook to the callback URL configured 
 1. **Authorization Request**
 	This transaction represents a pending authorization request. It reduces the available balance on the cardholder's wallet
 
-```
+```json
 {
   "password": "password",
   "c1Tipo": "PeticionAutorizacion",
@@ -202,13 +203,14 @@ All online transactions are notified via webhook to the callback URL configured 
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+  "IdCadena": "0102020963010037725"
 }
 ```
 
 2. **Authorization Communication**
 	This transaction represents an automatic authorization that does not require approval from the external Authorizer. It reduces the cardholder's available balance.
 
-```
+```json
 {
   "c1Tipo": "ComunicacionAutorizacion",
   ...
@@ -218,7 +220,7 @@ All online transactions are notified via webhook to the callback URL configured 
 3. **Annulment Communication**
 	This transaction increases the available balance in the cardholder's wallet.
 
-```
+```json
 {
   "c1Tipo": "ComunicacionAnulacion",
   ...
@@ -228,7 +230,7 @@ All online transactions are notified via webhook to the callback URL configured 
 4. **Reversal Request**
 	This represents a refund request that will be processed offline via the batch process. The transaction amount will be declared as "0". Once confirmed by the network, the processed amount will be declared in a related `TransaccionCorregidaPositiva` sent via the batch.
 
-```
+```json
 {
   "c1Tipo": "PeticionDevolucion",
   ...

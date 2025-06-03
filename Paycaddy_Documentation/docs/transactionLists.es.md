@@ -18,24 +18,14 @@ Esta llamada **POST** recupera todas las transacciones de la tarjeta cuyo **`car
 	```json
 	{
 	    "transactionListJson": 
-	    "[{
-	        \"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTransaccion\":\"116\",\"c7FechaHoraTransaccion\":\"20230203194512\",\"c11NumeroIdentificativoTransaccion\":\"000088058\",\"c18CodigoActividadEstablecimiento\":\"4111\",\"c19CodigoPaisAdquiren
-	        te\":\"724\",\"c38NumeroAutorizacion\":\"169\",\"c41TerminalId
-	        \":\"00004001\",\"c42Comercio\":\"000000047219191\",\"c43Ident
-	        ificadorComercio\":\"TRANVIA DE MURCIA        CHURRA-MURCIA  
-	        \"},{\"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTrans
-	        accion\":\"2266\",\"c7FechaHoraTransaccion\":\"20230317135513\
-	        ",\"c11NumeroIdentificativoTransaccion\":\"000099870\",\"c18Co
-	        digoActividadEstablecimiento\":\"5813\",\"c19CodigoPaisAdquire
-	        nte\":\"724\",\"c38NumeroAutorizacion\":\"171\",\"c41TerminalI
-	        d\":\"90315259\",\"c42Comercio\":\"000000175240563\",\"c43Iden
-	        tificadorComercio\":\"BULEVAR CAFE EL RANERO   MURCIA
-	        \"
-	    }]"
+        "[{
+            \"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTransaccion\":\"116\",\"c7FechaHoraTransaccion\":\"20230203194512\",\"c11NumeroIdentificativoTransaccion\":\"000088058\",\"c18CodigoActividadEstablecimiento\":\"4111\",\"c19CodigoPaisAdquirente\":\"724\",\"c38NumeroAutorizacion\":\"169\",\"c41TerminalId\":\"00004001\",\"c42Comercio\":\"000000047219191\",\"c43IdentificadorComercio\":\"TRANVIA DE MURCIA        CHURRA-MURCIA  \",\"IdCadena\":\"0102020963010037725\"},
+            {\"c1Tipo\":\"PeticionAutorizacion\",\"c2CardId\":\"904ee16a-db84-4120-9714-0180892341b3\",\"c3CodigoProceso\":\"000000\",\"c4ImporteTransaccion\":\"2266\",\"c7FechaHoraTransaccion\":\"20230317135513\",\"c11NumeroIdentificativoTransaccion\":\"000099870\",\"c18CodigoActividadEstablecimiento\":\"5813\",\"c19CodigoPaisAdquirente\":\"724\",\"c38NumeroAutorizacion\":\"171\",\"c41TerminalId\":\"90315259\",\"c42Comercio\":\"000000175240563\",\"c43IdentificadorComercio\":\"BULEVAR CAFE EL RANERO   MURCIA\",\"IdCadena\":\"0102020963010037725\"}
+        ]"
 	}
 	```
 
-La estructura de los datos de cada transacción sigue el mismo formato que el resto de notificaciones de transacciones. (Consulta [Webhooks de Notificación de Transacciones Online](./prefundedTRX.es.md))
+La estructura de los datos de cada transacción sigue el mismo formato que el resto de notificaciones de transacciones, ahora incluyendo el nuevo `IdCadena`para trazabilidad. (Consulta [Webhooks de Notificación de Transacciones Online](./prefundedTRX.es.md))
 
 ---
 
@@ -71,24 +61,27 @@ Cada transacción de tarjeta en el payload de respuesta será la versión serial
 
 ```json
 {
-    "c1Tipo": "string",
-    "c2CardId": "string",
-    "c3CodigoProceso": "string",
-    "c4ImporteTransaccion": "string",
-    "c7FechaHoraTransaccion": "string",
-    "c11NumeroIdentificativoTransaccion": "string",
-    "c18CodigoActividadEstablecimiento": "string",
-    "c19CodigoPaisAdquirente": "string",
-    "c38NumeroAutorizacion": "string",
-    "c41TerminalId": "string",
-    "c42Comercio": "string",
-    "c43IdentificadorComercio": "string",
-    "c51MonedaImporteTransaccion": "string",
-    "c6ImporteMonedaTransaccion": "string",
-    "isSettled": "true"
-}
+        "c1Tipo": "string",
+        "c2CardId": "string",
+        "c3CodigoProceso": "string",
+        "c4ImporteTransaccion": "string",
+        "c7FechaHoraTransaccion": "string",
+        "c11NumeroIdentificativoTransaccion": "string",
+        "c18CodigoActividadEstablecimiento": "string",
+        "c19CodigoPaisAdquirente": "string",
+        "c38NumeroAutorizacion": "string",
+        "c41TerminalId": "string",
+        "c42Comercio": "string",
+        "c43IdentificadorComercio": "string",
+        "IdCadena": "string",
+        "c51MonedaImporteTransaccion": "string",
+        "c6ImporteMonedaTransaccion": "string",
+        "isSettled": "true"
+    }
 ```
 
+-  **IdCadena:** Links a `ComunicacionAnulacion` (cancellation) to its original `PeticionAutorizacion` (authorization). It is a 15-24-digit numeric string in auth/cancellation events and `"0"` in batch confirmations.
+	  
 - **c51MonedaImporteTransaccion:** Moneda utilizada para la transacción en el POS.
     
 - **c6ImporteMonedaTransaccion:** Monto de la transacción en la moneda del POS.
