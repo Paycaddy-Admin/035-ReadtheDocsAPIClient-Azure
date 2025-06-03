@@ -16,7 +16,8 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0102020963010037725"
 	}
 	```
 
@@ -36,7 +37,8 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0102020963010037725"
 	}
 	```
 
@@ -56,7 +58,8 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0102020963010037725"
 	}
 	```
 
@@ -76,7 +79,8 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0102020963010037725"
 	}
 	```
 
@@ -101,6 +105,8 @@ El tipo de transacción se indica en el campo **“c1Tipo”** del webhook. Por 
 > El campo **“c7FechaHoraTransaccion”** representa la fecha y hora de la transacción en la zona donde se adquirió, con el formato “YYYYMMDDhhmmss”.
 
 > El campo **“BDateUtcCreate”** representa la misma fecha y hora, pero en UTC, siguiendo el mismo formato que **c7FechaHoraTransaccion**.
+
+>El campo **"IdCadena"** sirve para asociar las notificaciones de 'ComunicacionAnulacion' con su respectiva 'PeticionAutorizacion'. Una **PeticionAutorizacion** que reciba una **ComunicacionAnulacion** asociada se considerará una transacción confirmada o conciliada. Por lo tanto, no recibirá ninguna notificación posterior por conciliación via el Proceso Batch.
 
 ---
 

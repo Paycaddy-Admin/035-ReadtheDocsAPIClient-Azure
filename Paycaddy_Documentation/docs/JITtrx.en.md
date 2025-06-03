@@ -202,7 +202,7 @@ All online transactions are notified via webhook to the callback URL configured 
   "c38NumeroAutorizacion": "040031",
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
-  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
   "IdCadena": "0102020963010037725"
 }
 ```
@@ -241,8 +241,7 @@ All online transactions are notified via webhook to the callback URL configured 
 
 >In Just In Time Funding operations, Transaction Notifications can be the result of an approval or denial in the Authorization Request in JIT Flow.
 
-
-
+>The **"IdCadena"** field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. An authorization request (PeticionAutorizacion) that receives an associated cancellation communication will be considered a confirmed or reconciled transaction. Therefore, it will not receive any subsequent batch notification of any kind.
 
 ---
 ## Settlement and Batch Process Corrections

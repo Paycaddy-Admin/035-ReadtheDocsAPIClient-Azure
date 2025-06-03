@@ -3,29 +3,29 @@ nav:
   - Introduction: index.md
 
   - Flows:
-      - Flow Overview: overviewFlow.md
-      - User Creation: userFlow.md #
-      - Card Creation: cardFlow.md #
+      - Flow Overview: overviewFlow.md #done
+      - User Creation: userFlow.md #done
+      - Card Creation: cardFlow.md #done
       - Funding Flow:
-          - Prefunded: prefundedFlow.md #
-          - Just-In-Time: JITflow.md #
+          - Prefunded: prefundedFlow.md #done
+          - Just-In-Time: JITflow.md #done
 
   - Card Issuing API:
       - Users:
-          - User Creation & Retrieval: user.md #
-          - KYC Verification: kyc.md #
+          - User Creation & Retrieval: user.md #done
+          - KYC Verification: kyc.md #done
       - Wallets:
-          - Wallet Creation & Retrieval: wallet.md #
-          - Wallet Operations: wallet_ops.md #
+          - Wallet Creation & Retrieval: wallet.md #done
+          - Wallet Operations: wallet_ops.md #done
       - Cards:
-          - Card Creation & Retrieval: card.md #
-          - Card Operations: card_ops.md #
+          - Card Creation & Retrieval: card.md #done
+          - Card Operations: card_ops.md #done
       - Transactions:
-          - Prefunded Transactions: prefundedTRX.md
-          - Just-In-Time Funding: JITtrx.md
-          - Settlement: settlement.md
-          - Other Transactions: otherTransactions.md
-          - Transaction Data Retrieval: transactionLists.md
+          - Prefunded Transactions: prefundedTRX.md #done
+          - Just-In-Time Funding: JITtrx.md #done
+          - Settlement: settlement.md #done
+          - Other Transactions: otherTransactions.md #done
+          - Transaction Data Retrieval: transactionLists.md #done
       - Webhooks: notificationsEnlist.md
   - Credit Core (beta):
       - Credit Flows: creditFlow.md

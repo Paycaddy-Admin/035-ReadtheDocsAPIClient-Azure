@@ -29,7 +29,8 @@ Para las transacciones de tipo `PeticionAutorizacion`, PayCaddy enviará una sol
   "c38NumeroAutorizacion": "040031",
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
-  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+  "IdCadena": "0102020963010037725"
 }
 ```
 
@@ -161,12 +162,23 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
     Disminuye el saldo disponible en la billetera del titular.
     
     ```json
-    {
-      "password": "password",
-      "c1Tipo": "PeticionAutorizacion",
-      ...
-    }
-    ```
+{
+  "password": "password",
+  "c1Tipo": "PeticionAutorizacion",
+  "c2CardId": "cardId",
+  "c3CodigoProceso": "000000",
+  "c4ImporteTransaccion": "000000001617",
+  "c7FechaHoraTransaccion": "20220429052901",
+  "c11NumeroIdentificativoTransaccion": "000004339",
+  "c18CodigoActividadEstablecimiento": "5999",
+  "c19CodigoPaisAdquirente": "442",
+  "c38NumeroAutorizacion": "040031",
+  "c41TerminalId": "00227759",
+  "c42Comercio": "227759000156182",
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+  "IdCadena": "0102020963010037725"
+}
+```
     
 2. **Comunicación Autorización**  
     Autorización automática que no requiere aprobación externa; también reduce el saldo disponible.
@@ -201,6 +213,9 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
 
 > Las notificaciones de transacciones online no esperan respuesta; son avisos de eventos que pueden afectar el saldo.  
 > En operaciones JIT, estas notificaciones pueden originarse tras la aprobación o el rechazo de la Autorización JIT.
+
+>El campo **"IdCadena"** sirve para asociar las notificaciones de 'ComunicacionAnulacion' con su respectiva 'PeticionAutorizacion'. Una **PeticionAutorizacion** que reciba una **ComunicacionAnulacion** asociada se considerará una transacción confirmada o conciliada. Por lo tanto, no recibirá ninguna notificación posterior por conciliación via el Proceso Batch.
+
 
 ---
 
