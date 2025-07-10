@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/creditCore.en.md",
+                "file": "Paycaddy_Documentation/docs/creditFlow.en.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "creditCore.en"
+              "title": "creditFlow.en"
             }
           }
         ]
@@ -169,10 +169,10 @@
   },
   "active": "4d72a8705508cd24",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/creditCore.en.md",
     "Paycaddy_Documentation/docs/creditFlow.en.md",
     "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "notificationsEnlist.en.md",
-    "Paycaddy_Documentation/docs/creditCore.en.md",
     "Paycaddy_Documentation/docs/JITtrx.en.md",
     "Mercurio.md",
     "Flujos PayCaddy Documentation.drawio",

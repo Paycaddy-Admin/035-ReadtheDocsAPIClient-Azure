@@ -89,9 +89,9 @@ With this method, interest is calculated based solely on the balance owed at the
 | Field                   | Description                                                                    |
 | ----------------------- | ------------------------------------------------------------------------------ |
 | `interestAccrualMethod` | Accrual method: `"average_daily_balance"` or `"balance_at_cut"`                |
-| `rateDivisor`           | Defines whether the daily rate uses 360 or 365 days                            |
-| `gracePeriodDays`       | Number of days between the cut date and when interest is applied               |
-| `interestCompounds`     | `true` if interest compounds into the principal; `false` if tracked separately |
+| `dailyRateDivisor`      | Defines whether the daily rate uses 360 or 365 days                            |
+| `gracePeriod`           | Number of days between the cut date and when interest is applied               |
+| `compound`              | `true` if interest compounds into the principal; `false` if tracked separately |
 
 
 ---
