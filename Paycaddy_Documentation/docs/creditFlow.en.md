@@ -15,59 +15,149 @@ It is build to be as granular as possible, you can control from basic settings a
 
 The full list of adjustable parameters can be found in the table below:
 
-| Field                         | Description                                                                                                                                                                                                                                                                                                     | Example                                            |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **revolving**                 | Specifies whether the credit line is reinstated following the submission of a payment report. If set to **false**, the value reported is not restored.                                                                                                                                                          | `true` / `false`                                   |
-| **compound**                  | Indicates whether the interest calculation at the statement closing should be based on the sum of interests owed and amount owed (**true**), or only on the amount owed (**false**).                                                                                                                            | `true` / `false`                                   |
-| **cutFrequency**              | Specifies the duration of a credit line cycle, determining how frequently statements are generated.                                                                                                                                                                                                             | “daily”, “weekly”, “biweekly”, “month”, “year”     |
-| **fixedInterestAmount**       | Fixed amount added to interest amount when calculating interest. Example formula when **compound** is `true`: `fixedInterestAmount + baseInterestRate * ([amount owed] + [interest owed]) + [amount owed]`.                                                                                                     | In cents: `1000` → USD 10                          |
-| **baseInterestRate**          | Percentage applied to amount owed to calculate interests at the end of each cycle.                                                                                                                                                                                                                              | Percentage: 2 → 2%; 5 → 5%; 100 → 100%; 150 → 150% |
-| **baseMinimumPaymentRate**    | Minimum percentage of the amount owed that must be covered by the total payments reported during a cycle to prevent the wallet from being considered delinquent.                                                                                                                                                | Percentage: 2 → 2%; 5 → 5%; 100 → 100 %(max.)      |
-| **fixedMinimumPaymentAmount** | A fixed amount set as the minimum expected payment—whether on its own or combined with other payments—to keep a wallet from being considered delinquent. At the time of statement closing, this amount is added to the result of the base minimum payment rate to determine the total minimum payment required. | In cents: `1000` → USD 10                          |
-| **capitalInterestSplit**      | Percentage of the reported payment amount that must be applied to the interest owed, with the remaining portion applied to the amount owed.                                                                                                                                                                     | Percentage: 2 → 2%; 5 → 5%; 99 → 99 %(max.)        |
-| **gracePeriod**               | Number of days after the statement closing date within which the client must report a payment to avoid being considered delinquent. Must be greater than 0.                                                                                                                                                     | In days: 1 → 1 day; 2 → 2 days; 3 → 3 days         |
-| **variableSpecs**             | Indicates whether the client is allowed to change the associated Credit Policy after a credit wallet has been created, using the **[Change Interest Credit Capital](creditCore.en.md#change-interest-credit-capital-post)** operation.                                                                          | `true` / `false`                                   |
-| **morosidadRate**             | Percentage of interest owed. Added to the interest calculation when a wallet is delinquent.                                                                                                                                                                                                                     | Percentage: 2 → 2%; 5 → 5%; 100 → 100%; 150 → 150% |
-| **baseInterestMorosidad**     | Fixed amount added to the interest calculation when a wallet is delinquent.                                                                                                                                                                                                                                     | In cents: `1000` → USD 10                          |
+| Field                         | Description                                                                                                                                                                                                                                                                                                     | Example                                                     |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| **revolving**                 | Specifies whether the credit line is reinstated following the submission of a payment report. If set to **false**, the value reported is not restored.                                                                                                                                                          | `true` / `false`                                            |
+| **compound**                  | Indicates whether the interest calculation at the statement closing should be based on the sum of interests owed and amount owed (**true**), or only on the amount owed (**false**).                                                                                                                            | `true` / `false`                                            |
+| **cutFrequency**              | Specifies the duration of a credit line cycle, determining how frequently statements are generated.                                                                                                                                                                                                             | “daily”, “weekly”, “biweekly”, “month”, “year”              |
+| **fixedInterestAmount**       | Fixed amount added to interest amount when calculating interest. Example formula when **compound** is `true`: `fixedInterestAmount + baseInterestRate * ([amount owed] + [interest owed]) + [amount owed]`.                                                                                                     | In cents: `1000` → USD 10                                   |
+| **baseInterestRate**          | Percentage applied to amount owed to calculate interests at the end of each cycle.                                                                                                                                                                                                                              | Percentage: 2 → 2%; 5 → 5%; 100 → 100%; 150 → 150%          |
+| **baseMinimumPaymentRate**    | Minimum percentage of the amount owed that must be covered by the total payments reported during a cycle to prevent the wallet from being considered delinquent.                                                                                                                                                | Percentage: 2 → 2%; 5 → 5%; 100 → 100 %(max.)               |
+| **fixedMinimumPaymentAmount** | A fixed amount set as the minimum expected payment—whether on its own or combined with other payments—to keep a wallet from being considered delinquent. At the time of statement closing, this amount is added to the result of the base minimum payment rate to determine the total minimum payment required. | In cents: `1000` → USD 10                                   |
+| **capitalInterestSplit**      | Percentage of the reported payment amount that must be applied to the interest owed, with the remaining portion applied to the amount owed.                                                                                                                                                                     | Percentage: 2 → 2%; 5 → 5%; 99 → 99 %(max.)                 |
+| **gracePeriod**               | Number of days after the statement closing date within which the client must report a payment to avoid being considered delinquent. Must be greater than 0.                                                                                                                                                     | In days: 1 → 1 day; 2 → 2 days; 3 → 3 days                  |
+| **variableSpecs**             | Indicates whether the client is allowed to change the associated Credit Policy after a credit wallet has been created, using the **[Change Interest Credit Capital](creditCore.en.md#change-interest-credit-capital-post)** operation.                                                                          | `true` / `false`                                            |
+| **morosidadRate**             | Percentage of interest owed. Added to the interest calculation when a wallet is delinquent.                                                                                                                                                                                                                     | Percentage: 2 → 2%; 5 → 5%; 100 → 100%; 150 → 150%          |
+| **baseInterestMorosidad**     | Fixed amount added to the interest calculation when a wallet is delinquent.                                                                                                                                                                                                                                     | In cents: `1000` → USD 10                                   |
+| **interestAccrualMethod**     | Method utilized for Interest generation at the end of each cycle.                                                                                                                                                                                                                                               | "ADB" for Average-Daily-Balance or "BAC" for Balance-At-Cut |
+| **dailyRateDivisor**          | Number of days that should be accounted as a year for the dailyRate calculation.                                                                                                                                                                                                                                | 360 or 365                                                  |
+
+
+---
+## Interest Accrual Methods
+
+PayCaddy supports two interest accrual methods for credit lines associated with wallets: **Average Daily Balance (ADB)** and **Balance at Cut**. The accrual method is defined by the `creditProductCode` used during wallet creation via the `POST /wallet-credits` endpoint.
+
+### 1. Average Daily Balance (ADB)
+
+In the ADB method, interest is calculated based on the average of daily balances recorded throughout the billing cycle. The process is as follows:
+
+- The annual effective interest rate (`annualInterestRate`) is divided by a configurable parameter called `rateDivisor`, which may be 360 or 365.
+    
+    ```
+    dailyInterestRate = annualInterestRate / rateDivisor
+    ```
+    
+- At the end of each day during the cycle, the wallet’s balance is recorded and accumulated into the `sumOfDailyBalance`.
+    
+- At the end of the cycle (`cutDate`), the interest generated is calculated as:
+    
+    ```
+    interestGenerated = dailyInterestRate * sumOfDailyBalance
+    ```
+    
+- After the grace period (defined by `gracePeriod` in the credit product), the interest is applied. It may be:
+    
+    - **Capitalized**: added to the `amountOwed` (principal), or
+        
+    - **Non-capitalized**: added to `interestOwed`, without affecting the principal.
+        
+
+> **Note:** Whether interest is capitalized is controlled by the `compound` parameter in the credit product.
+
+### 2. Balance at Cut
+
+With this method, interest is calculated based solely on the balance owed at the time of the cycle cut.
+
+- On the cut date (`cutDate`), the current `amountOwed` is retrieved.
+    
+- The daily interest rate (same formula as in ADB) is applied directly to this balance:
+    
+    ```
+    interestGenerated = baseInterestRate * amountOwed + fixedInterestAmount
+    ```
+    
+- At the end of the grace period, the generated interest is applied:
+    
+    - Capitalized or not, depending on the credit product configuration.
+        
+
+> This method does **not** take into account the balance changes throughout the cycle—only the state at the cut date matters.
+
+### Related Parameters
+
+| Field                   | Description                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| `interestAccrualMethod` | Accrual method: `"average_daily_balance"` or `"balance_at_cut"`                |
+| `rateDivisor`           | Defines whether the daily rate uses 360 or 365 days                            |
+| `gracePeriodDays`       | Number of days between the cut date and when interest is applied               |
+| `interestCompounds`     | `true` if interest compounds into the principal; `false` if tracked separately |
 
 
 ---
 ## Credit Notifications
 
-Notifications from our credit core are sent via webhooks. We provide you a easy way to enlist a Callback URL to receive said webhook notifications (see [NotificationsEnlist](NotificationsEnlist.en)). Based on this notifications you can be up to date with changes that may happen over the billing cycle of the credit lines in each wallet. 
+Notifications from PayCaddy's credit core are sent via webhooks. These events allow clients to stay in sync with changes to wallet balances, interest, limits, and more. To receive these events, register a callback URL via the [`NotificationsEnlist`](./notificationsEnlist.en) endpoint.
 
 !!!Warning
 	We highly recommend to use a different **URL** for credit notifications 
 
-#### Typical Flow
+### Notification Workflow
 
 1. **Client** registers `creditNotificationsURL` once per environment.
     
-2. **PayCaddy's Credit Core** validates URL and begins POSTing events in near‑real time.
+2. **PayCaddy** validates the URL and starts sending webhook POST requests in near real-time.
     
-3. Your system **verifies the signature**, parses the JSON, and updates:
+3. Your system should **verify the signature**, parse the JSON, and update your internal records accordingly.
     
-    - **AA** (available credit) after payments or limit changes.
-        
-    - **AO** (outstanding principal) and **IO** (outstanding interest) after executions and cancellations.
 
-By subscribing to these events you can keep ledger balances, statements, and customer UIs in sync with PayCaddy’s credit core—without polling any additional endpoints.
+### Event Payload Format
 
-See below the full list of possible notifications to be received:
+Each webhook follows a standard structure:
 
-| `description`                   | When it fires                                                                                                                                                    | How to handle                                                                             |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **Interes nominal calculado**   | Closing‑date script computes regular interest (`baseInterestRate`, `fixedInterestAmount`) and stores it in **IO** _pending execution_.                           | Display or store the provisional charge. **Do not** expect the customer to pay yet.       |
-| **Interes nominal ejecutado**   | At cut‑off + 1 day (or your configuration), the previously calculated nominal interest is booked. `amountExecuted` equals the executed IO.                       | Add `amountExecuted` to the balance the customer must cover in their next payment report. |
-| **Interes moroso calculado**    | Wallet is flagged **delinquent** (missed minimum). The system computes penal interest (`morosidadRate`, `baseInterestMorosidad`) and holds it pending execution. | Treat as provisional; no payment expected until execution.                                |
-| **Interes moroso ejecutado**    | Penal interest is booked. `amountExecuted` is moved to **IO**.                                                                                                   | Add to the customer’s outstanding interest immediately.                                   |
-| **Interes cancelado**           | A **ReportPay** reduced outstanding interest. `amount` is the decrease applied to **IO**.                                                                        | Subtract from the interest balance you track.                                             |
-| **Credito Reintegrado**         | For revolving products (`revolving = true`), after a **ReportPay** the system frees up credit. `amount` is the new **AA** (Available Amount).                    | Update the wallet’s available‑credit display.                                             |
-| **Credito creado**              | A new credit wallet is issued (via `CreateCreditWallet`). Payload includes initial `limit` in `amount`.                                                          | Store the new wallet ID, limit, and begin tracking.                                       |
-| **Cambio de limite de credito** | Client called **`ChangeWalletLimit`**. `amount` is the _new_ limit; the delta was applied to **AA**.                                                             | Refresh limit and available‑credit fields in your UI.                                     |
-| **Cambio Interest**             | Client called **`ChangeInterestCreditCapital`**. Request is stored but **not** live until the next cut.                                                          | Optionally show a “pending change” badge.                                                 |
-| **Cambio Interest ejecutado**   | At statement close, the pending interest‑rate/spec change took effect for the new cycle.                                                                         | Update the wallet’s CP parameters used for future calculations.                           |
+```json
+{
+  "walletId": "string",
+  "type": "Event Type String",
+  "amount": 1234,
+  "direction": "debit" | "credit",
+  "affectsBalance": true,
+  "walletDetails_after": {
+    "principal_outstanding": 81500,
+    "interest_accrued": 1200,
+    "totalDebt": 82700,
+    "limit": 12345,
+    "amountOverdraft": 1234,
+    "interestSpecs": {
+      "interestRateNominal": 1234,
+      "interestRateMoroso": 1234,
+      "fixedInterestNominal": 1234,
+      "fixedInterestMoroso": 1234
+    },
+    "minimumPaymentSpecs": {
+      "minimumPaymentRate": 1234,
+      "fixedMinimumPayment": 1234
+    }
+  }
+}
+```
 
+### Supported Event Types
+
+| `type`                      | Description                                                                          | Direction | Affects Balance | Notes                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------ | --------- | --------------- | ---------------------------------------------------------------- |
+| `Interes Nominal Calculado` | Interest is calculated on cut date but not yet applied.                              | `debit`   | `false`         | Provisional—will be applied at end of grace period.              |
+| `Interes Nominal Aplicado`  | Nominal interest is applied (compounding or not, per product setup).                 | `debit`   | `true`          | Adds to principal or interest depending on compounding settings. |
+| `Interes Moroso Calculado`  | Penal interest is calculated for delinquent wallets.                                 | `debit`   | `false`         | No customer obligation until applied.                            |
+| `Interes Moroso Aplicado`   | Penal interest is booked to the balance.                                             | `debit`   | `true`          | Adds to `interest_accrued`.                                      |
+| `Reporte de Pago`           | A customer payment is reported and split between principal, interest, and overdraft. | `credit`  | `true`          | Updates all balances post-payment.                               |
+| `Cambio de Limite`          | Credit limit is changed. Amount is the difference between new and old limit.         | `credit`  | `true`          | Only the `limit` field changes.                                  |
+
+### Notes on `walletDetails_after`
+
+The `walletDetails_after` object represents the full post-event state of the wallet. Fields like `principal_outstanding`, `interest_accrued`, and `totalDebt` should be used to refresh your internal state immediately.
+
+Even if an event doesn't affect balances directly (e.g. interest calculated but not applied), this object reflects the most up-to-date ledger status.
 
 ---
 

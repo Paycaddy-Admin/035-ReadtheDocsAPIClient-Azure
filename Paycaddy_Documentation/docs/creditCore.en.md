@@ -68,6 +68,7 @@ The GET call for credit wallets allows you to retrieve the information associate
         "amountOwed": 0,
         "interestOwed": 0,
         "amountAvailable": 0,
+        "minimumPaymentDue": 0,
         "creationDate": "2024-11-12T12:48:39.573Z"
     }
     ``` 
@@ -96,15 +97,17 @@ The call may fail if an incorrect walletId is provided, in which case the NeoBan
 
 **Request URL:** https://api.paycaddy.dev/v1/reportPayCredits
 
-The ReportPayCredit endpoint is aimed to users who have an active credit line, the payment value can either be corresponding or parcial, on this case generating debtor interests, to total debt in order to restore credit through his walletId. 
+The ReportPayCredit endpoint is aimed to users who have an active credit line. The payment value can be either corresponding or partial — in which case it may generate debtor interests — and is reported in order to restore credit through the user's `walletId`.
 
-The reported value for amountToCapital will be used to pay off the debtor and nominal debts. The amount for each is determined considering the split value from creditProduct related to the walletId.
+The value reported in `reportedAmount` will be split between capital and interest owed, according to the `interestCapitalSplit` configured in the credit product related to the `walletId`.
+
+
 
 === "Request"
     ```json
     {
         "walletId": "string",
-        "amountToCapital": 0,
+        "reportedAmount": 0,
         "currency": "string",
         "statement": "string"
     }
@@ -114,20 +117,27 @@ The reported value for amountToCapital will be used to pay off the debtor and no
     {
         "creationDate": "2024-08-07T15:52:55.407Z",
         "limit": "string",
-        "amountAvailable": "string"
+        "amountAvailable": "string",
+        "capitalPaid": 0,
+        "interestPaid": 0
     }
     ```
 
-The field called **amountToCapital** determines the amount that the user is reporting, which will have an impact on the available amount, by the user within the credit line.
-The **currency** field corresponds to the currency of the wallet. The **statement** field will be used to leave a brief description of the operation performed.
 
-If successful, the payment report will be generated with the specified data, and the call will return a HTTP 200 detailing the date on which the report was made, as well as the amount of the wallet’s limit and the available balance. Also a webhook notification is send **(see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post))** to inform the report and its effects. 
+The field called **reportedAmount** determines the total amount that the user is reporting, which will be split between **capital** and **interest** and impact the available amount within the credit line.
+
+The **currency** field corresponds to the currency of the wallet. The **statement** field can be used to leave a brief description of the operation performed.
+
+If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the updated credit limit, available balance, and amounts allocated to capital and interest. A webhook notification is also sent **(see** **notificationEnlist****)** to inform the report and its effects.
 
 Otherwise, the NeoBank API will respond with an HTTP 422 error. The most common errors may include:
 
 - Invalid or non-credit **walletId**.
+    
 - Currency value does not match the original currency of the wallet.
-- **amountToCapital** greater than amount owed.
+    
+- **reportedAmount** greater than amount owed.
+    
 
 ---
 
@@ -135,9 +145,9 @@ Otherwise, the NeoBank API will respond with an HTTP 422 error. The most common 
 
 **Request URL:** https://api.paycaddy.dev/v1/ReportPayCreditsCapital
 
-The **ReportPayCreditCapital** endpoint is used by users who have an active credit line. It expect either a corresponding or parcial payment , in parcial cases generating debtor interests, in order to restore credit through his **walletId**. 
+The **ReportPayCreditCapital** endpoint is used by users who have an active credit line. It expects either a corresponding or partial payment — in partial cases generating debtor interests — in order to restore credit through their **walletId**.
 
-This endpoint doesn’t consider the **split** value from the creditProductCode **(see [changeInterestCapital](#change-interest-credit-capital-post))**, once it only discount the reported amount from the **amountOwed**, it doesn’t consider if the wallet is on debt and has debtor interest executed not payed.
+This endpoint **does not consider** the `interestCapitalSplit` from the credit product **(see** **changeInterestCapital****)**. It applies the full reported amount directly to the **capital owed**, without allocating any portion to interest — even if debtor interest exists.
 
 === "Request"
     ```json
@@ -153,23 +163,28 @@ This endpoint doesn’t consider the **split** value from the creditProductCode 
     {
         "creationDate": "2024-08-07T11:28:37.022Z",
         "limit": "string",
-        "amountAvailable": "string"
+        "amountAvailable": "string",
+        "capitalPaid": 0
     }
     ```
 
-The field called **amountToCapital** determines the amount that the user is reporting, which will have an impact on the available amount, by the user within the credit line.
 
-The **currency** field corresponds to the currency of the wallet. 
+The field called **amountToCapital** determines the amount that the user is reporting, which will be applied exclusively to capital and will impact the available credit amount within the line.
 
-The **statement** field will be used to leave a brief description of the operation performed.
+The **currency** field corresponds to the currency of the wallet.
 
-If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the values of the card limit and the available balance. Also a webhook notification is send **(see [notificationEnlist](prefundedTRX.en.md#notification-enlist-post))** to inform the report and its effects.
+The **statement** field can be used to leave a brief description of the operation performed.
 
-Otherwise, the NeoBank API will respond with a HTTP 422 error. The most common errors may include:
+If successful, the payment report will be generated with the specified data, and the call will return an HTTP 200 detailing the date on which the report was made, as well as the values of the card limit and the available balance. A webhook notification is also sent **(see** **notificationEnlist****)** to inform the report and its effects.
+
+Otherwise, the NeoBank API will respond with an HTTP 422 error. The most common errors may include:
 
 - Invalid or non-credit **walletId**.
+    
 - Currency value does not match the original currency of the wallet.
+    
 - **amountToCapital** greater than amount owed.
+
 
 ---
 
