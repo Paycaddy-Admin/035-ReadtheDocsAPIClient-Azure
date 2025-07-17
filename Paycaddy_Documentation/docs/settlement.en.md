@@ -99,9 +99,6 @@ Settlement of transactions will be notified through a webhook that carries one o
 >The "IdCadena" field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. Within the context of Settlement notifications, this field will remain as "0"
 
 
-> Once a transaction has been modified, it will not be modified again.
-
-
 >Although it is less common, it can also occur that a charge arrives only in the batch process and not online. If this is the case, the webhook may arrive with less information. It should be noted that this information is according to the network's protocol for handles these confirmations and does not depend on PayCaddy.
 
 ---

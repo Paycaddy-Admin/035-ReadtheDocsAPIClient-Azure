@@ -96,6 +96,4 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 - **Detalles de notificación:** Los webhooks de liquidación contienen información sobre la transacción, incluido el importe, el identificador y el tipo de ajuste o confirmación.
     
 
-> Una vez que una transacción ha sido modificada, no se modificará de nuevo.
-
 > Aunque es menos común, puede ocurrir que un cargo llegue únicamente a través del proceso batch y no online. En ese caso, el webhook puede incluir menos información. Esta limitación obedece al protocolo de la red que gestiona estas confirmaciones y no depende de PayCaddy.
