@@ -13,6 +13,7 @@ nav:
   - Card Issuing API:
       - Users:
           - User Creation & Retrieval: user.md #done
+          - User Creation & Retrieval V2: userv2.md #done
           - KYC Verification: kyc.md #done
       - Wallets:
           - Wallet Creation & Retrieval: wallet.md #done
