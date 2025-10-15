@@ -647,7 +647,10 @@ In SR, there is **no `kycUrl`** for post-creation KYC verification. Instead, you
 - If any URL is invalid, unreachable, or file type is unsupported, the request will be rejected with **422**.
     
 
+
 > **Activation:** SR users are created **`isActive=true`** immediately upon success. Downstream actions remain subject to standard compliance checks and ongoing monitoring.
+
+
 ---
 
 ## **End User SR <font color="sky-blue">GET</font>** 

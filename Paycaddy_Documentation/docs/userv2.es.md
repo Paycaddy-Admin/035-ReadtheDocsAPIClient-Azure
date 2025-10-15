@@ -648,6 +648,7 @@ In SR, there is **no `kycUrl`** for post-creation KYC verification. Instead, you
     
 
 > **Activation:** SR users are created **`isActive=true`** immediately upon success. Downstream actions remain subject to standard compliance checks and ongoing monitoring.
+
 ---
 
 ## **End User SR <font color="sky-blue">GET</font>** 
