@@ -130,7 +130,7 @@ If the request passes validation and is processed, the API responds with **HTTP 
 > **KYC reminder:** After IDs are assigned, the end-user must complete KYC to activate the profile. Until then, `isActive` remains `false` and all procedures are disabled. See KYC Verification
 
 ---
-### Common Errors
+#### Common Errors
 
 
 === "Missing fields"
@@ -306,7 +306,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 >**Spam Control**
 >Identical Payloads (or the creation of users with identical emails) sent within 5 minutes of each other will result in a 422 error as a measure against erroneous spamming, the payload would become acceptable once again after the time is past.
 
-## Field Requirements
+#### Field Requirements
 
 | Field                             | Type         | Required | Rules                                                                                                                                                                            | Example Error Response                                                                                                                                                  |
 | --------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -329,7 +329,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 | `idShareholders`                  | string (URL) | Yes      | Must be valid URL to scanned IDs of shareholders.                                                                                                                                | {  <br>"type": "",  <br>"title": "Error: idShareholders must be a valid URL",  <br>"status": 0,  <br>"detail": "",  <br>"instance": ""  <br>}                           |
 | `addressVerificationShareholders` | string (URL) | Yes      | Must be valid URL to proof of address documents for shareholders.                                                                                                                | {  <br>"type": "",  <br>"title": "Error: addressVerificationShareholders must be a valid URL",  <br>"status": 0,  <br>"detail": "",  <br>"instance": ""  <br>}          |
 
-### KYB Activation & Additional Field Responsibilities
+#### KYB Activation & Additional Field Responsibilities
 
 In addition to the format verifications, it is important to highlight the responsibility of the client to **consistently send accurate and verifiable business information** for KYB compliance review:
 
@@ -348,7 +348,7 @@ In addition to the format verifications, it is important to highlight the respon
 5. PayCaddy's compliance team will review the shared information for approval and user activation. Ensuring the information is correctly shared diminishes rejection rates.
 
 
-### Common Errors
+#### Common Errors
 
 
 === "Missing fields"
@@ -576,7 +576,7 @@ If the request passes validation and is processed, the API responds with **HTTP 
 > **Delegated KYC:** Users of the EndUserSR type are used exclusively by clients who've been assigned said privilege. These users are create with their activity status as "Active" and do not require a KYC verification link.
 
 ---
-### Common Errors
+#### Common Errors
 
 
 === "Missing fields"
@@ -625,7 +625,7 @@ If the request passes validation and is processed, the API responds with **HTTP 
 > **500 Internal Server Error** indicates an internal issue on our side. Please notify the PayCaddy team with the payload evidence so we can investigate promptly.
 
 ---
-### Delegated KYC (SR) – Document URLs
+#### Delegated KYC (SR) – Document URLs
 
 In SR, there is **no `kycUrl`** for post-creation KYC verification. Instead, you **must** provide **within the creation request** the following documents:
 
@@ -776,7 +776,7 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 >**Spam Control**
 >Identical Payloads (or the creation of users with identical emails) sent within 5 minutes of each other will result in a 422 error as a measure against erroneous spamming, the payload would become acceptable once again after the time is past.
 
-## Field Requirements
+#### Field Requirements
 
 | Field                             | Type         | Required | Rules                                                                                                                                                                            | Example Error Response                                                                                                                                                  |
 | --------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -799,7 +799,7 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 | `idShareholders`                  | string (URL) | Yes      | Must be valid URL to scanned IDs of shareholders.                                                                                                                                | {  <br>"type": "",  <br>"title": "Error: idShareholders must be a valid URL",  <br>"status": 0,  <br>"detail": "",  <br>"instance": ""  <br>}                           |
 | `addressVerificationShareholders` | string (URL) | Yes      | Must be valid URL to proof of address documents for shareholders.                                                                                                                | {  <br>"type": "",  <br>"title": "Error: addressVerificationShareholders must be a valid URL",  <br>"status": 0,  <br>"detail": "",  <br>"instance": ""  <br>}          |
 
-### Additional Field Responsibilities
+#### Additional Field Responsibilities
 
 In addition to the format verifications, it is important to highlight the responsibility of the client to **consistently send accurate and verifiable business information** for KYB compliance review:
 
@@ -818,7 +818,7 @@ In addition to the format verifications, it is important to highlight the respon
 5. PayCaddy's compliance team will review the shared information for approval and user activation. Ensuring the information is correctly shared diminishes rejection rates.
 
 
-### Common Errors
+#### Common Errors
 
 
 === "Missing fields"

@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/user.es.md",
+                "file": "Paycaddy_Documentation/docs/userv2.es.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "user.es"
+              "title": "userv2.es"
             }
           }
         ],
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Paycaddy_Documentation/docs/user.es.md",
+                "file": "Paycaddy_Documentation/docs/userv2.es.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from user.es"
+              "title": "Outgoing links from userv2.es"
             }
           },
           {
@@ -184,12 +184,12 @@
   },
   "active": "ec5ed5239e7a7a85",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/userv2.en.md",
+    "Paycaddy_Documentation/docs/user.es.md",
     "Paycaddy_Documentation/docs/user.en.md",
     "Paycaddy_Documentation/docs/prefundedFlow.en.md",
     "Paycaddy_Documentation/docs/kyc.en.md",
     "Paycaddy_Documentation/docs/JITtrx.en.md",
-    "Paycaddy_Documentation/docs/userv2.en.md",
-    "Paycaddy_Documentation/docs/user.es.md",
     "Paycaddy_Documentation/docs/userFlow.en.md",
     "Paycaddy_Documentation/docs/userFlow.es.md",
     "Paycaddy_Documentation/docs/userv2.es.md",
