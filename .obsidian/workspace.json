@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/userv2.en.md",
+                "file": "Paycaddy_Documentation/docs/userv2.es.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "userv2.en"
+              "title": "userv2.es"
             }
           }
         ],
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Paycaddy_Documentation/docs/userv2.en.md",
+                "file": "Paycaddy_Documentation/docs/userv2.es.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from userv2.en"
+              "title": "Outgoing links from userv2.es"
             }
           },
           {
@@ -184,9 +184,10 @@
   },
   "active": "ec5ed5239e7a7a85",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/userv2.en.md",
     "Paycaddy_Documentation/docs/user.es.md",
     "Paycaddy_Documentation/docs/user.en.md",
-    "Paycaddy_Documentation/docs/userv2.en.md",
+    "Paycaddy_Documentation/docs/userFlow.en.md",
     "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/JITflow.es.md",
     "Paycaddy_Documentation/docs/backoffice.es.md",
@@ -210,7 +211,6 @@
     "Paycaddy_Documentation/docs/JITtrx.es.md",
     "Paycaddy_Documentation/docs/prefundedTRX.es.md",
     "Paycaddy_Documentation/docs/transactionLists.es.md",
-    "Paycaddy_Documentation/docs/kyc.es.md",
     "Paycaddy_Documentation/docs/assets/imgs/kycflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/cardFlow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/payindirect.svg",

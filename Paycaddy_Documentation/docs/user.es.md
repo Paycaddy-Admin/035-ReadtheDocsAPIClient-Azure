@@ -1,4 +1,4 @@
-!!!Tip  
+!!!Importante
 	**Aviso de Depreciación:**  
 	Desde el 15 de octubre de 2025, estos endpoints han iniciado su proceso de depreciación como parte del esfuerzo por migrar toda la creación de usuarios de v1 a nuestros [endpoints v2](./userv2.es). Las comunicaciones oficiales informarán los plazos exactos para la adopción. Si estás integrando el sistema de PayCaddy por primera vez, consulta nuestros [endpoints v2](./userv2.es) para conocer los esquemas actualmente aceptados para nuevos proyectos.
 	

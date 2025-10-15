@@ -1,5 +1,5 @@
 
-!!!Tip
+!!!Important!
     Since October 15th 2025,  these endpoints have been made available as part of an effort to migrate all user creation from v1 into the below documented endpoints. Official communications will handle the exact timelines for adoption. If you're integrating PayCaddy's system for the first time, these are the currently accepted endpoints for user creation flow.
 
 

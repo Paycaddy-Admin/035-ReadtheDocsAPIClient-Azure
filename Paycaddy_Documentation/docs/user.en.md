@@ -1,4 +1,4 @@
-!!!Tip
+!!!Important
     **Future Deprecation Notice:**
     Since October 15th 2025,  these endpoints have initiated their deprecation process as part of an effort to migrate all user creation from v1 into our [v2 endpoints](./userv2.en). Official communications will handle the exact timelines for adoption. If you're integrating PayCaddy's system for the first time, refer to our [v2 endpoints](./userv2.en) for the currently accepted schemas for new projects.
 
