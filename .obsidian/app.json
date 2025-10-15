@@ -1,4 +1,6 @@
 {
   "showUnsupportedFiles": true,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "readableLineLength": true,
+  "showLineNumber": true
 }
