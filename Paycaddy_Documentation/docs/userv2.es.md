@@ -237,7 +237,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 
 === "Request"
     ```json
-        {
+    {
 		  "email": "string",
 		  "registeredName": "string",
 		  "taxId": "string",
@@ -268,7 +268,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 
 === "Response"
     ```json
-		{
+	{
 		  "id": "string",
 		  "email": "string",
 		  "registeredName": "string",
