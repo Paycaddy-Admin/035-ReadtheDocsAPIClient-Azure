@@ -238,30 +238,30 @@ The creation of a new user for a legal entity begins with a POST call in which a
 === "Request"
     ```json
     {
-		  "email": "string",
-		  "registeredName": "string",
-		  "taxId": "string",
-		  "legalRepresentation": "string",
-		  "kindOfBusiness": "string",
-		  "telephone": "string",
-		  "address": {
-		    "addressLine1": "string",
-		    "addressLine2": "string",
-		    "homeNumber": "string",
-		    "city": "string",
-		    "region": "string",
-		    "postalCode": "string",
-		    "country": "string"
-		  },
-		  "firstName": "string",
-		  "lastName": "string",
-		  "nationality": "string",
-		  "countryOfOperations": "string",
-		  "certificateOfGoodStanding": "string",
-		  "businessLicense": "string",
-		  "registerShareholder": "string",
-		  "idShareholders": "string",
-		  "addressVerificationShareholders": "string"
+		"email": "string",
+		"registeredName": "string",
+		"taxId": "string",
+		"legalRepresentation": "string",
+		"kindOfBusiness": "string",
+		"telephone": "string",
+		"address": {
+			"addressLine1": "string",
+			"addressLine2": "string",
+			"homeNumber": "string",
+			"city": "string",
+			"region": "string",
+			"postalCode": "string",
+			"country": "string"
+		},
+		 "firstName": "string",
+		 "lastName": "string",
+		 "nationality": "string",
+		"countryOfOperations": "string",	
+		"certificateOfGoodStanding": "string",
+		"businessLicense": "string",
+		"registerShareholder": "string",
+		"idShareholders": "string",
+		"addressVerificationShareholders": "string"
 		}
 	```
 		
