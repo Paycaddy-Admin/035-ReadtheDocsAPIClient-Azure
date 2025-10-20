@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/userv2.es.md",
+                "file": "Paycaddy_Documentation/docs/userv2.en.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "userv2.es"
+              "title": "userv2.en"
             }
           }
         ],
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Paycaddy_Documentation/docs/userv2.es.md",
+                "file": "Paycaddy_Documentation/docs/userv2.en.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from userv2.es"
+              "title": "Outgoing links from userv2.en"
             }
           },
           {
@@ -184,6 +184,7 @@
   },
   "active": "ec5ed5239e7a7a85",
   "lastOpenFiles": [
+    "Paycaddy_Documentation/docs/userv2.es.md",
     "Paycaddy_Documentation/docs/userv2.en.md",
     "Paycaddy_Documentation/docs/user.es.md",
     "Paycaddy_Documentation/docs/user.en.md",
@@ -192,7 +193,6 @@
     "Paycaddy_Documentation/docs/JITtrx.en.md",
     "Paycaddy_Documentation/docs/userFlow.en.md",
     "Paycaddy_Documentation/docs/userFlow.es.md",
-    "Paycaddy_Documentation/docs/userv2.es.md",
     "Paycaddy_Documentation/docs/notificationsEnlist.en.md",
     "Paycaddy_Documentation/docs/JITflow.es.md",
     "Paycaddy_Documentation/docs/backoffice.es.md",

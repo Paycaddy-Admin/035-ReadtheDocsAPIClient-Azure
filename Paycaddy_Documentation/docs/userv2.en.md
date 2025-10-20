@@ -236,39 +236,39 @@ This call can be used to verify the user's status at any point in the flow.
 The creation of a new user for a legal entity begins with a POST call in which an endpoint is consumed for sending the basic data of the legal entity.
 
 === "Request"
-    ```json```
-        ```{
-		  "email": "string",
-		  "registeredName": "string",
-		  "taxId": "string",
-		  "legalRepresentation": "string",
-		  "kindOfBusiness": "string",
-		  "telephone": "string",
-		  "address": {
-		    "addressLine1": "string",
-		    "addressLine2": "string",
-		    "homeNumber": "string",
-		    "city": "string",
-		    "region": "string",
-		    "postalCode": "string",
-		    "country": "string"
-		  },
-		  "firstName": "string",
-		  "lastName": "string",
-		  "nationality": "string",
-		  "countryOfOperations": "string",
-		  "certificateOfGoodStanding": "string",
-		  "businessLicense": "string",
-		  "registerShareholder": "string",
-		  "idShareholders": "string",
-		  "addressVerificationShareholders": "string"
-		}```
+    ```json
+    {
+		"email": "string",
+		"registeredName": "string",
+		"taxId": "string",
+		"legalRepresentation": "string",
+		"kindOfBusiness": "string",
+		"telephone": "string",
+		"address": {
+			"addressLine1": "string",
+			"addressLine2": "string",
+			"homeNumber": "string",
+			"city": "string",
+			"region": "string",
+			"postalCode": "string",
+			"country": "string"
+		},
+		 "firstName": "string",
+		 "lastName": "string",
+		 "nationality": "string",
+		"countryOfOperations": "string",	
+		"certificateOfGoodStanding": "string",
+		"businessLicense": "string",
+		"registerShareholder": "string",
+		"idShareholders": "string",
+		"addressVerificationShareholders": "string"
+		}
+	```
 		
 
 === "Response"
-    ```json```
-    ```
-		{
+    ```json
+	{
 		  "id": "string",
 		  "email": "string",
 		  "registeredName": "string",
@@ -297,7 +297,8 @@ The creation of a new user for a legal entity begins with a POST call in which a
 		  "idShareholders": "string",
 		  "addressVerificationShareholders": "string",
 		  "creationDate": "2025-10-13T21:04:11.970Z"
-		}```
+		}
+	```
 
 
 
@@ -708,39 +709,39 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 >Previous to the release of our V2 branch for user creation, Merchant User SR was not available and all Merchant Users created followed a Delegated KYB flow. This differentiation is enforced since October 2025 with the launch of the V2 endpoints.
 
 === "Request"
-    ```json```
-        ```{
-		  "email": "string",
-		  "registeredName": "string",
-		  "taxId": "string",
-		  "legalRepresentation": "string",
-		  "kindOfBusiness": "string",
-		  "telephone": "string",
-		  "address": {
-		    "addressLine1": "string",
-		    "addressLine2": "string",
-		    "homeNumber": "string",
-		    "city": "string",
-		    "region": "string",
-		    "postalCode": "string",
-		    "country": "string"
-		  },
-		  "firstName": "string",
-		  "lastName": "string",
-		  "nationality": "string",
-		  "countryOfOperations": "string",
-		  "certificateOfGoodStanding": "string",
-		  "businessLicense": "string",
-		  "registerShareholder": "string",
-		  "idShareholders": "string",
-		  "addressVerificationShareholders": "string"
-		}```
+    ```json
+    {
+		"email": "string",
+		"registeredName": "string",
+		"taxId": "string",
+		"legalRepresentation": "string",
+		"kindOfBusiness": "string",
+		"telephone": "string",
+		"address": {
+			"addressLine1": "string",
+			"addressLine2": "string",
+			"homeNumber": "string",
+			"city": "string",
+			"region": "string",
+			"postalCode": "string",
+			"country": "string"
+		},
+		 "firstName": "string",
+		 "lastName": "string",
+		 "nationality": "string",
+		"countryOfOperations": "string",	
+		"certificateOfGoodStanding": "string",
+		"businessLicense": "string",
+		"registerShareholder": "string",
+		"idShareholders": "string",
+		"addressVerificationShareholders": "string"
+		}
+	```
 		
 
 === "Response"
-    ```json```
-    ```
-		{
+    ```json
+	{
 		  "id": "string",
 		  "email": "string",
 		  "registeredName": "string",
@@ -769,9 +770,8 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 		  "idShareholders": "string",
 		  "addressVerificationShareholders": "string",
 		  "creationDate": "2025-10-13T21:04:11.970Z"
-		}```
-
-
+		}
+	```
 
 >It should be noted that the responsibility for validating the **accuracy and format** of the entered data falls on the **PayCaddy client**, meaning that our API will return a successful response **as long as the following parameters are met**, regardless of the factual accuracy of the information or duplication of the shared data.
 
