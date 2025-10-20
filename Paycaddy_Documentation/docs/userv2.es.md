@@ -405,7 +405,8 @@ This call can be used to verify the user's status at any point in the flow.
      https://api.api-sandbox.paycaddy.dev/v2/merchantUsers/{MERCHANT_ID}
     ```
 === "Response"
-    ```json
+    ```json```
+    ```
     {
 		  "id": "string",
 		  "email": "string",
