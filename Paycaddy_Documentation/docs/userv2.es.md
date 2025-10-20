@@ -236,8 +236,7 @@ This call can be used to verify the user's status at any point in the flow.
 The creation of a new user for a legal entity begins with a POST call in which an endpoint is consumed for sending the basic data of the legal entity.
 
 === "Request"
-    ```json```
-    ```
+    ```json
         {
 		  "email": "string",
 		  "registeredName": "string",
@@ -268,8 +267,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 		
 
 === "Response"
-    ```json```
-    ```
+    ```json
 		{
 		  "id": "string",
 		  "email": "string",
@@ -299,7 +297,8 @@ The creation of a new user for a legal entity begins with a POST call in which a
 		  "idShareholders": "string",
 		  "addressVerificationShareholders": "string",
 		  "creationDate": "2025-10-13T21:04:11.970Z"
-		}```
+		}
+	```
 
 
 
