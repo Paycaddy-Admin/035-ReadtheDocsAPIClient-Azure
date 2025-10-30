@@ -42,7 +42,8 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 		  "idUrlFront": "string",
 		  "idUrlBack": "string",
 		  "residenceProofUrl": "string"
-		}```
+		}
+	```
 
 
 === "Response"
@@ -72,7 +73,8 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 		  "idUrlFront": "string",
 		  "idUrlBack": "string",
 		  "residenceProofUrl": "string"
-		}```
+		}
+	```
 
 > **Note:**
 > 
@@ -88,17 +90,17 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 ### Editable Fields
 
 |Field|Description|Editable|Notes|
-|---|---|---|
-|`email`|Contact email|Must follow RFC-5322 format|
+|---|---|---|---|
+|`email`|Contact email|✅|Must follow RFC-5322 format|
 |`firstName`, `lastName`|User's legal name|⚠️ Conditionally|Only allowed for compliance updates|
-|`alias`|Emboss alias|Must comply with ITU-T.50 and ≤ 22 chars|
-|`occupation`, `placeOfWork`|Job-related fields|May be required for updated KYC|
-|`pep`|Politically exposed person flag|Boolean|
-|`salary`|Updated salary in cents|Integer, USD cents|
-|`telephone`|E.164 format|Example: +50760001234|
-|`address.*`|All subfields|See creation schema|
-|`nationality`|ISO alpha-2 code||
-|`countryOfOperations`|ISO alpha-2, comma-separated||
+|`alias`|Emboss alias|✅|Must comply with ITU-T.50 and ≤ 22 chars|
+|`occupation`, `placeOfWork`|Job-related fields|✅|May be required for updated KYC|
+|`pep`|Politically exposed person flag|✅|Boolean|
+|`salary`|Updated salary in cents|✅|Integer, USD cents|
+|`telephone`|E.164 format|✅|Example: +50760001234|
+|`address.*`|All subfields|✅|See creation schema|
+|`nationality`|ISO alpha-2 code|✅||
+|`countryOfOperations`|ISO alpha-2, comma-separated|✅||
 
 ---
 
@@ -207,7 +209,7 @@ It allows for controlled modification of business or compliance information, mai
 |Field|Description|Editable|Notes|
 |---|---|---|---|
 |`email`|Business email|✅|RFC-5322 format|
-|`registeredName`|Legal entity name|⚠️|Requires compliance approval|
+|`registeredName`|Legal entity name|⚠️|Can trigger compliance check|
 |`legalRepresentation`|Legal representative|✅|Must match ITU-T.50|
 |`kindOfBusiness`|Business type or code|✅||
 |`telephone`|Contact phone|✅|E.164 format|
