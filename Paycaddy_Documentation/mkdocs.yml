@@ -14,6 +14,7 @@ nav:
       - Users:
           - User Creation & Retrieval: user.md #done
           - User Creation & Retrieval V2: userv2.md #done
+          - Edit or Update User Information: editUser.md
           - KYC Verification: kyc.md #done
       - Wallets:
           - Wallet Creation & Retrieval: wallet.md #done
