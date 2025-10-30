@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Paycaddy_Documentation/docs/userv2.en.md",
+                "file": "Paycaddy_Documentation/docs/editUser.en.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "userv2.en"
+              "title": "editUser.en"
             }
           }
         ],
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Paycaddy_Documentation/docs/userv2.en.md",
+                "file": "Paycaddy_Documentation/docs/editUser.en.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from userv2.en"
+              "title": "Outgoing links from editUser.en"
             }
           },
           {
@@ -184,8 +184,9 @@
   },
   "active": "ec5ed5239e7a7a85",
   "lastOpenFiles": [
-    "Paycaddy_Documentation/docs/userv2.es.md",
     "Paycaddy_Documentation/docs/userv2.en.md",
+    "Paycaddy_Documentation/docs/editUser.en.md",
+    "Paycaddy_Documentation/docs/userv2.es.md",
     "Paycaddy_Documentation/docs/user.es.md",
     "Paycaddy_Documentation/docs/user.en.md",
     "Paycaddy_Documentation/docs/prefundedFlow.en.md",
@@ -209,7 +210,6 @@
     "Paycaddy_Documentation/docs/creditFlow.en.md",
     "Paycaddy_Documentation/docs/creditCore.en.md",
     "notificationsEnlist.en.md",
-    "Mercurio.md",
     "Flujos PayCaddy Documentation.drawio",
     "Paycaddy_Documentation/docs/assets/imgs/kycflow.svg",
     "Paycaddy_Documentation/docs/assets/imgs/cardFlow.svg",
