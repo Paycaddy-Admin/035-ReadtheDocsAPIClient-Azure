@@ -34,9 +34,21 @@
               "icon": "lucide-file",
               "title": "editUser.en"
             }
+          },
+          {
+            "id": "15ebab9b8a6bb4e0",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.9.14"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.9.14"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -128,12 +140,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Paycaddy_Documentation/docs/editUser.en.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from editUser.en"
+              "title": "Outgoing links"
             }
           },
           {
@@ -182,7 +193,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ec5ed5239e7a7a85",
+  "active": "15ebab9b8a6bb4e0",
   "lastOpenFiles": [
     "Paycaddy_Documentation/docs/userv2.en.md",
     "Paycaddy_Documentation/docs/editUser.en.md",

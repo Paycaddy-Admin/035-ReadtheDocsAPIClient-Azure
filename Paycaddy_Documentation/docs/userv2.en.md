@@ -69,12 +69,12 @@
 PayCaddy validates the **format and presence** of key fields, while Business accuracy (e.g., “is this the person’s _real_ employer?”) and **deduplication across your own users** remain the client’s responsibility.
 
 - The API **will not** reject on business accuracy or duplicates.
-    
+
 - The API **will** reject when format/validation rules are not met (see "Field Requirements" section below).
-    
+
 If the request passes validation and is processed, the API responds with **HTTP 200 OK** and returns the created `userId`, its initial `walletId`, and control fields such as `isActive=false` until KYC is completed.
 
->**Deduplication is Not performed by PayCaddy.** 
+>**Deduplication is Not performed by PayCaddy.**
 >Multiple POSTs with identical data will create **distinct** `userId` values. If you need duplicate control, implement it on your side before calling the API.
 
 >**Spam Control**
@@ -84,20 +84,20 @@ If the request passes validation and is processed, the API responds with **HTTP 
 #### User Name & Embossing Rules
 
 1. **Sanitized character set**: `FirstName` and `LastName` **must** be sent already sanitized to [ITU-T50](https://www.itu.int/rec/T-REC-T.50/en).
-    
+
 2. **22-char emboss limit**: `(FirstName + LastName)` **without spaces** must be **≤ 22** **after** sanitization.
-    
-3. **Alias requirement when > 22**:  
+
+3. **Alias requirement when > 22**:
     If `(FirstName + LastName)` would exceed 22 after sanitization, you **must** provide an `alias` (max 22, ITU-T.50).
-    
+
     - When a valid `alias` is provided, it is used for the card name line.
-        
+
     - When the full name fits (≤ 22), `alias` is **not required** and may be ignored for embossing.
-        
+
 4. **No nicknames**: `alias` is strictly for embossing overflow cases; do **not** use unrelated nicknames as it may impact in-person acceptance.
-	
+
 5. **Real Name Utilization:** The fields of `FirstName` and `LastName` must match or resemble the real name found on IDs otherwise the KYC verification will fail repeatedly.
-    
+
 
 ---
 
@@ -185,7 +185,7 @@ For complete information on KYC, please find detailed information on this docume
 
 ---
 
-## **End User <font color="sky-blue">GET</font>** 
+## **End User <font color="sky-blue">GET</font>**
 
 **Request URL:** https://api.api-sandbox.paycaddy.dev/v2/endUsers/
 
@@ -229,7 +229,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 ---
 
-## **V2/Merchant User <font color="green">POST</font>** 
+## **V2/Merchant User <font color="green">POST</font>**
 
 **Request URL:** https://api.api-sandbox.paycaddy.dev/v2/merchantUsers
 
@@ -256,7 +256,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 		 "firstName": "string",
 		 "lastName": "string",
 		 "nationality": "string",
-		"countryOfOperations": "string",	
+		"countryOfOperations": "string",
 		"certificateOfGoodStanding": "string",
 		"businessLicense": "string",
 		"registerShareholder": "string",
@@ -264,7 +264,7 @@ The creation of a new user for a legal entity begins with a POST call in which a
 		"addressVerificationShareholders": "string"
 		}
 	```
-		
+
 
 === "Response"
     ```json
@@ -335,17 +335,17 @@ The creation of a new user for a legal entity begins with a POST call in which a
 In addition to the format verifications, it is important to highlight the responsibility of the client to **consistently send accurate and verifiable business information** for KYB compliance review:
 
 1. The **`taxId`** field must include the **official taxpayer identification number** of the entity (e.g., RUC, VATIN, CUIT, CNPJ, NIT, or RUT), depending on the jurisdiction.
-    
+
 2. The **`legalRepresentation`** field must contain the full legal name of the person authorized to represent the company, as registered in its incorporation or government record.
-    
+
 3. The fields **`firstName`** and **`lastName`** must correspond to the natural person associated with the **legal representation** or the individual aimed to become the cardholder. These must comply with the same ITU-T.50 sanitization and character restrictions used for natural persons. These will be the names printed in the card, so they must aim to identify the cardholder.
-    
+
 4. The fields **`certificateOfGoodStanding`**, **`businessLicense`**, **`registerShareholder`**, **`idShareholders`**, and **`addressVerificationShareholders`** should contain valid URLs or document references for the company’s compliance documentation.
-    
+
     - Each uploaded document must be instantly accessible for programatic capture, the expected files must be at least 5kb and no more than 10mb in size and either a PDF, JPG or PNG filetype.
-        
+
     - Missing or invalid links will result in a validation error and the user creation will fail.
-    
+
 5. PayCaddy's compliance team will review the shared information for approval and user activation. Ensuring the information is correctly shared diminishes rejection rates.
 
 
@@ -442,7 +442,7 @@ This call can be used to verify the user's status at any point in the flow.
 
 ## **V2/End User SR  <font color="green">POST</font>**
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/endUserSRs
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/SR/EndUserSRs
 
 ‍The creation of a new user with Delegated KYC type for a natural person begins with a POST call in which an endpoint is consumed for sending the user's basic information, in the case of End User SR (Subject to Regulation), users are created active by default.
 This endpoint is not openly available, it must have been enabled by PayCaddy's compliance team during the integration process
@@ -513,12 +513,12 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 PayCaddy validates the **format and presence** of key fields, while Business accuracy (e.g., “is this the person’s _real_ employer?”) and **deduplication across your own users** remain the client’s responsibility.
 
 - The API **will not** reject on business accuracy or duplicates.
-    
-- The API **will** reject when format/validation rules are not met (see "Field Requirements" section below).
-    
-If the request passes validation and is processed, the API responds with **HTTP 200 OK** and returns the created `userId`, its initial `walletId`, and control fields such as `isActive=true` for this type of user with Delegated KYC flow. 
 
->**Deduplication is Not performed by PayCaddy.** 
+- The API **will** reject when format/validation rules are not met (see "Field Requirements" section below).
+
+If the request passes validation and is processed, the API responds with **HTTP 200 OK** and returns the created `userId`, its initial `walletId`, and control fields such as `isActive=true` for this type of user with Delegated KYC flow.
+
+>**Deduplication is Not performed by PayCaddy.**
 >Multiple POSTs with identical data will create **distinct** `userId` values. If you need duplicate control, implement it on your side before calling the API.
 
 >**Spam Control**
@@ -528,20 +528,20 @@ If the request passes validation and is processed, the API responds with **HTTP 
 #### User Name & Embossing Rules
 
 1. **Sanitized character set**: `FirstName` and `LastName` **must** be sent already sanitized to ITU-T.50.
-    
+
 2. **22-char emboss limit**: `(FirstName + LastName)` **without spaces** must be **≤ 22** **after** sanitization.
-    
-3. **Alias requirement when > 22**:  
+
+3. **Alias requirement when > 22**:
     If `(FirstName + LastName)` would exceed 22 after sanitization, you **must** provide an `alias` (max 22, ITU-T.50).
-    
+
     - When a valid `alias` is provided, it is used for the card name line.
-        
+
     - When the full name fits (≤ 22), `alias` is **not required** and may be ignored for embossing.
-        
+
 4. **No nicknames**: `alias` is strictly for embossing overflow cases; do **not** use unrelated nicknames as it may impact in-person acceptance.
-	
+
 5. **Real Name Utilization:** The fields of `FirstName` and `LastName` must match or resemble the real name found on IDs to ensure future compliance checks don't flag users for misuse.
-    
+
 
 ---
 
@@ -639,13 +639,13 @@ In SR, there is **no `kycUrl`** for post-creation KYC verification. Instead, you
 ```
 
 - URLs **must be HTTPS** and **publicly reachable** by PayCaddy’s backend (accessible for at least 24hs, no IP-locked links).
-    
+
 - Content **must be** an image (`image/*`) or `application/pdf`.
-    
-- Ensure links remain valid for at least 24 hours. 
-    
+
+- Ensure links remain valid for at least 24 hours.
+
 - If any URL is invalid, unreachable, or file type is unsupported, the request will be rejected with **422**.
-    
+
 
 
 > **Activation:** SR users are created **`isActive=true`** immediately upon success. Downstream actions remain subject to standard compliance checks and ongoing monitoring.
@@ -653,7 +653,7 @@ In SR, there is **no `kycUrl`** for post-creation KYC verification. Instead, you
 
 ---
 
-## **End User SR <font color="sky-blue">GET</font>** 
+## **End User SR <font color="sky-blue">GET</font>**
 
 **Request URL:** https://api.api-sandbox.paycaddy.dev/v2/SR/EndUserSRs/
 
@@ -699,7 +699,7 @@ The GET call for an EndUserSR allows you to know the stored data of a particular
 
 ---
 
-## **V2/Merchant User SR <font color="green">POST</font>** 
+## **V2/Merchant User SR <font color="green">POST</font>**
 
 **Request URL:** https://api.api-sandbox.paycaddy.dev/v2/merchantUserSRs
 
@@ -729,7 +729,7 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 		 "firstName": "string",
 		 "lastName": "string",
 		 "nationality": "string",
-		"countryOfOperations": "string",	
+		"countryOfOperations": "string",
 		"certificateOfGoodStanding": "string",
 		"businessLicense": "string",
 		"registerShareholder": "string",
@@ -737,7 +737,7 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 		"addressVerificationShareholders": "string"
 		}
 	```
-		
+
 
 === "Response"
     ```json
@@ -806,17 +806,17 @@ This endpoint is not openly available, it must have been enabled by PayCaddy's c
 In addition to the format verifications, it is important to highlight the responsibility of the client to **consistently send accurate and verifiable business information** for KYB compliance review:
 
 1. The **`taxId`** field must include the **official taxpayer identification number** of the entity (e.g., RUC, VATIN, CUIT, CNPJ, NIT, or RUT), depending on the jurisdiction.
-    
+
 2. The **`legalRepresentation`** field must contain the full legal name of the person authorized to represent the company, as registered in its incorporation or government record.
-    
+
 3. The fields **`firstName`** and **`lastName`** must correspond to the natural person associated with the **legal representation** or the individual aimed to become the cardholder. These must comply with the same ITU-T.50 sanitization and character restrictions used for natural persons. These will be the names printed in the card, so they must aim to identify the cardholder.
-    
+
 4. The fields **`certificateOfGoodStanding`**, **`businessLicense`**, **`registerShareholder`**, **`idShareholders`**, and **`addressVerificationShareholders`** should contain valid URLs or document references for the company’s compliance documentation.
-    
+
     - Each uploaded document must be instantly accessible for programatic capture, the expected files must be at least 5kb and no more than 10mb in size and either a PDF, JPG or PNG filetype.
-        
+
     - Missing or invalid links will result in a validation error and the user creation will fail.
-    
+
 5. PayCaddy's compliance team will review the shared information for approval and user activation. Ensuring the information is correctly shared diminishes rejection rates.
 
 
@@ -866,7 +866,7 @@ In addition to the format verifications, it is important to highlight the respon
 
 ## **Merchant User SR <font color="sky-blue">GET</font>**
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/merchantUserSRs/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/SR/MerchantUserSRs/
 
 The GET call for a merchantUser allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
