@@ -36,15 +36,15 @@
             }
           },
           {
-            "id": "15ebab9b8a6bb4e0",
+            "id": "46fe29a8f76da8df",
             "type": "leaf",
             "state": {
               "type": "release-notes",
               "state": {
-                "currentVersion": "1.9.14"
+                "currentVersion": "1.10.3"
               },
               "icon": "lucide-book-up",
-              "title": "Release Notes 1.9.14"
+              "title": "Release Notes 1.10.3"
             }
           }
         ],
@@ -193,7 +193,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "15ebab9b8a6bb4e0",
+  "active": "46fe29a8f76da8df",
   "lastOpenFiles": [
     "Paycaddy_Documentation/docs/userv2.en.md",
     "Paycaddy_Documentation/docs/editUser.en.md",

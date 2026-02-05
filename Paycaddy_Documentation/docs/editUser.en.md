@@ -1,18 +1,18 @@
 # **User Update Data Endpoints**
 
 !!!info
-    **Purpose:**  
-    These endpoints allow PayCaddy clients to update the existing user data for both **natural persons** (`EndUser`, `EndUserSR`) and **legal entities** (`MerchantUser`, `MerchantUserSR`).  
-    They are primarily used to manage **compliance-related information**, **contact updates**, or **minor corrections** to existing records.  
+    **Purpose:**
+    These endpoints allow PayCaddy clients to update the existing user data for both **natural persons** (`EndUser`, `EndUserSR`) and **legal entities** (`MerchantUser`, `MerchantUserSR`).
+    They are primarily used to manage **compliance-related information**, **contact updates**, or **minor corrections** to existing records.
     Certain fields—such as identifiers, userId, and wallet relations—**cannot** be modified through this call.
 
 
 ## **V1/UserUpdateData <font color="green">POST</font>**
 
-**Request URL:**  
+**Request URL:**
 `https://api.api-sandbox.paycaddy.dev/v1/UserUpdateData`
 
-This endpoint updates user information for **EndUser** and **EndUserSR** records.  
+This endpoint updates user information for **EndUser** and **EndUserSR** records.
 The body replicates the schema of the creation endpoint but omits fields that cannot be modified (e.g., identifiers, wallet data, and creation timestamps).
 
 === "Request"
@@ -77,13 +77,13 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 	```
 
 > **Note:**
-> 
+>
 > - The update request only changes provided fields.
->     
+>
 > - Any omitted fields remain unchanged.
->     
+>
 > - The system validates each updated field according to the same format and type rules described in the [User Creation chapter](https://chatgpt.com/c/userv2.en).
->     
+>
 
 ---
 
@@ -142,16 +142,16 @@ Errors follow the same format as user creation. See “Field Requirements” in 
 
 ## **V1/MerchantUserUpdateData POST**
 
-**Request URL:**  
+**Request URL:**
 `https://api.api-sandbox.paycaddy.dev/v1/MerchantUserUpdateData`
 
-This endpoint updates user information for **MerchantUser** and **MerchantUserSR** (legal entity users).  
+This endpoint updates user information for **MerchantUser** and **MerchantUserSR** (legal entity users).
 It allows for controlled modification of business or compliance information, maintaining immutable identifiers and KYB-linked attributes.
 
 === "Request"
 	```json
 	{
-	  "merchantUserId": "string",
+	  "userId": "string",
 	  "email": "string",
 	  "registeredName": "string",
 	  "taxId": "string",
@@ -256,16 +256,16 @@ It allows for controlled modification of business or compliance information, mai
 ### Notes & Recommendations
 
 - Partial updates are allowed — only the provided keys are modified.
-    
+
 - Changes to **sensitive fields** (e.g., `registeredName`, `legalRepresentation`) may trigger **manual review** by PayCaddy’s compliance team.
-    
+
 - All updates are versioned internally and may be audited on request.
-    
+
 - Document URLs must remain valid for at least 24 hours post-update.
-    
+
 
 ---
 
-> **Compliance Reminder:**  
->  The purpose of these endpoints is to keep user data up-to-date for ongoing KYC/KYB compliance.  
+> **Compliance Reminder:**
+>  The purpose of these endpoints is to keep user data up-to-date for ongoing KYC/KYB compliance.
 > Any misuse or attempt to alter identity or ownership data outside authorized flows may result in rejection or account suspension.
