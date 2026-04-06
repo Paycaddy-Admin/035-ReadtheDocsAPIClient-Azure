@@ -75,7 +75,7 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c1Tipo": "TransaccionConfirmada",
         "c2CardId": "cardId",
         "c3CodigoProceso": "000000",
-        "c4ImporteTransaccion": "000000001617",
+        "c4ImporteTransaccion": "000000000000",
         "c7FechaHoraTransaccion": "20220429052901",
         "c11NumeroIdentificativoTransaccion": "000004339",
         "c18CodigoActividadEstablecimiento": "5999",
