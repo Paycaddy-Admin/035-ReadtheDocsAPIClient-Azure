@@ -10,7 +10,7 @@
 ## **V1/UserUpdateData <font color="green">POST</font>**
 
 **Request URL:**
-`https://api.api-sandbox.paycaddy.dev/v1/UserUpdateData`
+`https://api.api-sandbox.paycaddy.dev/v2/UserUpdateData`
 
 This endpoint updates user information for **EndUser** and **EndUserSR** records.
 The body replicates the schema of the creation endpoint but omits fields that cannot be modified (e.g., identifiers, wallet data, and creation timestamps).
@@ -82,7 +82,7 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 >
 > - Any omitted fields remain unchanged.
 >
-> - The system validates each updated field according to the same format and type rules described in the [User Creation chapter](https://chatgpt.com/c/userv2.en).
+> - The system validates each updated field according to the same format and type rules described in the [User Creation chapter](https://docs.paycaddy.com/es/userv2/).
 >
 
 ---
@@ -143,7 +143,7 @@ Errors follow the same format as user creation. See “Field Requirements” in 
 ## **V1/MerchantUserUpdateData POST**
 
 **Request URL:**
-`https://api.api-sandbox.paycaddy.dev/v1/MerchantUserUpdateData`
+`https://api.api-sandbox.paycaddy.dev/v2/MerchantUserUpdateData`
 
 This endpoint updates user information for **MerchantUser** and **MerchantUserSR** (legal entity users).
 It allows for controlled modification of business or compliance information, maintaining immutable identifiers and KYB-linked attributes.
