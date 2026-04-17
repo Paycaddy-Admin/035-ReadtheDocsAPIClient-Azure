@@ -7,7 +7,7 @@
     Certain fields—such as identifiers, userId, and wallet relations—**cannot** be modified through this call.
 
 
-## **V1/UserUpdateData <font color="green">POST</font>**
+## **V2/UserUpdateData <font color="green">POST</font>**
 
 **Request URL:**
 `https://api.api-sandbox.paycaddy.dev/v2/UserUpdateData`
@@ -140,7 +140,7 @@ Errors follow the same format as user creation. See “Field Requirements” in 
 
 ---
 
-## **V1/MerchantUserUpdateData POST**
+## **V2/MerchantUserUpdateData POST**
 
 **Request URL:**
 `https://api.api-sandbox.paycaddy.dev/v2/MerchantUserUpdateData`
