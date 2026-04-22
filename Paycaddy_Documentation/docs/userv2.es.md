@@ -700,7 +700,7 @@ The GET call for an EndUserSR allows you to know the stored data of a particular
 
 ## **V2/Merchant User SR <font color="green">POST</font>** 
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/merchantUserSRs
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/merchantUsersSR
 
 The creation of a new user for a legal entity with Delegated KYB begins with a POST call in which an endpoint is consumed for sending the basic data of the legal entity, in the case of Merchant User SR (Subject to Regulation), users are created active by default.
 This endpoint is not openly available, it must have been enabled by PayCaddy's compliance team during the integration process
