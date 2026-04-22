@@ -866,7 +866,7 @@ In addition to the format verifications, it is important to highlight the respon
 
 ## **Merchant User SR <font color="sky-blue">GET</font>**
 
-**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/SR/MerchantUserSRs/
+**Request URL:** https://api.api-sandbox.paycaddy.dev/v2/SR/MerchantUsersSR/
 
 The GET call for a merchantUser allows you to know the stored data of a particular userId, especially the walletId of their initial wallet and the activity status of this user in the "isActive" field. Both data are crucial for the other calls to the NeoBank API.
 
