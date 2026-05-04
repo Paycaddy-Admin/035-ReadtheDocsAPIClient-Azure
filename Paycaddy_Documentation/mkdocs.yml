@@ -28,6 +28,7 @@ nav:
           - Settlement: settlement.md #done
           - Other Transactions: otherTransactions.md #done
           - Transaction Data Retrieval: transactionLists.md #done
+      - Transactional Controls: transactionalControls.md
       - Webhooks: notificationsEnlist.md
   - Credit Core (beta):
       - Credit Flows: creditFlow.md
