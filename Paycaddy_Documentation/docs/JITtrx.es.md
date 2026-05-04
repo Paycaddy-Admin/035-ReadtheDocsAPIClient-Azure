@@ -1,3 +1,6 @@
+!!!Important
+    **Actualización de Esquema — 23 de junio de 2026:** Los webhooks de autorización ahora incluyen los campos `c22DatosPuntoServicio` y `c22Descripcion`. Consulta [Actualizaciones de Campos de Webhook](./webhookFieldUpdates.es.md) para más detalles.
+
 Este documento explica el flujo de **Just In Time Funding (JIT)** que utiliza PayCaddy para autorizar transacciones de tarjeta mediante un endpoint de autorización externo provisto por el cliente. Describe los distintos tipos de notificaciones de transacciones online, cómo procesar las solicitudes de autorización y cómo implementar la consulta de saldo dentro del mismo flujo.
 
 ## Solicitudes de autorización en el flujo JIT
@@ -30,7 +33,25 @@ Para las transacciones de tipo `PeticionAutorizacion`, PayCaddy enviará una sol
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725"
+  "IdCadena": "0102020963010037725",
+  "c22DatosPuntoServicio": "000580JA0001",
+  "c22Descripcion": {
+      "CapturaDatosTarjeta": "Sin especificar",
+      "AutenticacionCliente": "Sin capacidad de lectura",
+      "RetencionTarjeta": "Sin capacidad de Captura",
+      "TipoTerminal": "Terminal no atendido casa",
+      "PresenciaCliente": "Cliente electrónico no seguro",
+      "PresenciaTarjeta": "Tarjeta no presente",
+      "MetodoCapturaDatos": "Internet",
+      "MetodoAutenticacionCliente": "Datos 3D presentes",
+      "EntidadAutenticadora": "Dispositivo no autentica cliente",
+      "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+      "ImpresionOMensaje": "Capacidad de impresión desconocida",
+      "LongitudMaximaPIN": "Sin longitud máxima"
+  },
+  "isExpiration": false,
+  "isMulticlearing": false,
+  "multiclearingClose": false
 }
 ```
 
@@ -176,38 +197,146 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725"
+  "IdCadena": "0102020963010037725",
+  "c22DatosPuntoServicio": "000580JA0001",
+  "c22Descripcion": {
+      "CapturaDatosTarjeta": "Sin especificar",
+      "AutenticacionCliente": "Sin capacidad de lectura",
+      "RetencionTarjeta": "Sin capacidad de Captura",
+      "TipoTerminal": "Terminal no atendido casa",
+      "PresenciaCliente": "Cliente electrónico no seguro",
+      "PresenciaTarjeta": "Tarjeta no presente",
+      "MetodoCapturaDatos": "Internet",
+      "MetodoAutenticacionCliente": "Datos 3D presentes",
+      "EntidadAutenticadora": "Dispositivo no autentica cliente",
+      "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+      "ImpresionOMensaje": "Capacidad de impresión desconocida",
+      "LongitudMaximaPIN": "Sin longitud máxima"
+  },
+  "isExpiration": false,
+  "isMulticlearing": false,
+  "multiclearingClose": false
 }
 ```
-    
+
 2. **Comunicación Autorización**  
     Autorización automática que no requiere aprobación externa; también reduce el saldo disponible.
     
     ```json
-    {
-      "c1Tipo": "ComunicacionAutorizacion",
-      ...
-    }
+{
+  "password": "password",
+  "c1Tipo": "ComunicacionAutorizacion",
+  "c2CardId": "cardId",
+  "c3CodigoProceso": "000000",
+  "c4ImporteTransaccion": "000000001617",
+  "c7FechaHoraTransaccion": "20220429052901",
+  "c11NumeroIdentificativoTransaccion": "000004339",
+  "c18CodigoActividadEstablecimiento": "5999",
+  "c19CodigoPaisAdquirente": "442",
+  "c38NumeroAutorizacion": "040031",
+  "c41TerminalId": "00227759",
+  "c42Comercio": "227759000156182",
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+  "IdCadena": "0102020963010037725",
+  "c22DatosPuntoServicio": "000580JA0001",
+  "c22Descripcion": {
+      "CapturaDatosTarjeta": "Sin especificar",
+      "AutenticacionCliente": "Sin capacidad de lectura",
+      "RetencionTarjeta": "Sin capacidad de Captura",
+      "TipoTerminal": "Terminal no atendido casa",
+      "PresenciaCliente": "Cliente electrónico no seguro",
+      "PresenciaTarjeta": "Tarjeta no presente",
+      "MetodoCapturaDatos": "Internet",
+      "MetodoAutenticacionCliente": "Datos 3D presentes",
+      "EntidadAutenticadora": "Dispositivo no autentica cliente",
+      "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+      "ImpresionOMensaje": "Capacidad de impresión desconocida",
+      "LongitudMaximaPIN": "Sin longitud máxima"
+  },
+  "isExpiration": false,
+  "isMulticlearing": false,
+  "multiclearingClose": false
+}
     ```
     
 3. **Comunicación Anulación**  
     Aumenta el saldo disponible en la billetera.
     
     ```json
-    {
-      "c1Tipo": "ComunicacionAnulacion",
-      ...
-    }
+{
+  "password": "password",
+  "c1Tipo": "ComunicacionAnulacion",
+  "c2CardId": "cardId",
+  "c3CodigoProceso": "000000",
+  "c4ImporteTransaccion": "000000001617",
+  "c7FechaHoraTransaccion": "20220429052901",
+  "c11NumeroIdentificativoTransaccion": "000004339",
+  "c18CodigoActividadEstablecimiento": "5999",
+  "c19CodigoPaisAdquirente": "442",
+  "c38NumeroAutorizacion": "040031",
+  "c41TerminalId": "00227759",
+  "c42Comercio": "227759000156182",
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+  "IdCadena": "0102020963010037725",
+  "c22DatosPuntoServicio": "000580JA0001",
+  "c22Descripcion": {
+      "CapturaDatosTarjeta": "Sin especificar",
+      "AutenticacionCliente": "Sin capacidad de lectura",
+      "RetencionTarjeta": "Sin capacidad de Captura",
+      "TipoTerminal": "Terminal no atendido casa",
+      "PresenciaCliente": "Cliente electrónico no seguro",
+      "PresenciaTarjeta": "Tarjeta no presente",
+      "MetodoCapturaDatos": "Internet",
+      "MetodoAutenticacionCliente": "Datos 3D presentes",
+      "EntidadAutenticadora": "Dispositivo no autentica cliente",
+      "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+      "ImpresionOMensaje": "Capacidad de impresión desconocida",
+      "LongitudMaximaPIN": "Sin longitud máxima"
+  },
+  "isExpiration": false,
+  "isMulticlearing": false,
+  "multiclearingClose": false
+}
     ```
     
 4. **Petición Devolución**  
     Solicita un reembolso que se procesará offline mediante el proceso Batch. El importe declarado será “0”. Una vez confirmado por la red, el importe procesado se declarará en la `TransaccionCorregidaPositiva` correspondiente.
     
     ```json
-    {
-      "c1Tipo": "PeticionDevolucion",
-      ...
-    }
+{
+  "password": "password",
+  "c1Tipo": "PeticionDevolucion",
+  "c2CardId": "cardId",
+  "c3CodigoProceso": "000000",
+  "c4ImporteTransaccion": "000000001617",
+  "c7FechaHoraTransaccion": "20220429052901",
+  "c11NumeroIdentificativoTransaccion": "000004339",
+  "c18CodigoActividadEstablecimiento": "5999",
+  "c19CodigoPaisAdquirente": "442",
+  "c38NumeroAutorizacion": "040031",
+  "c41TerminalId": "00227759",
+  "c42Comercio": "227759000156182",
+  "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+  "IdCadena": "0102020963010037725",
+  "c22DatosPuntoServicio": "000580JA0001",
+  "c22Descripcion": {
+      "CapturaDatosTarjeta": "Sin especificar",
+      "AutenticacionCliente": "Sin capacidad de lectura",
+      "RetencionTarjeta": "Sin capacidad de Captura",
+      "TipoTerminal": "Terminal no atendido casa",
+      "PresenciaCliente": "Cliente electrónico no seguro",
+      "PresenciaTarjeta": "Tarjeta no presente",
+      "MetodoCapturaDatos": "Internet",
+      "MetodoAutenticacionCliente": "Datos 3D presentes",
+      "EntidadAutenticadora": "Dispositivo no autentica cliente",
+      "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+      "ImpresionOMensaje": "Capacidad de impresión desconocida",
+      "LongitudMaximaPIN": "Sin longitud máxima"
+  },
+  "isExpiration": false,
+  "isMulticlearing": false,
+  "multiclearingClose": false
+}
     ```
     
 

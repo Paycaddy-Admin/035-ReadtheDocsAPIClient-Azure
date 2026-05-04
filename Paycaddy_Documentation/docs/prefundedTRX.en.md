@@ -1,3 +1,6 @@
+!!!Important
+    **Schema Update — June 23, 2026:** Authorization webhooks now include `c22DatosPuntoServicio` and `c22Descripcion` fields. See [Webhook Field Updates](./webhookFieldUpdates.en.md) for details.
+
 In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s API makes a transaction on the Mastercard network, PayCaddy’s authorization engine reviews funds availability for the specific transaction. Based on this review if the transaction goes through, it sends a payload with one of four possible transaction types to a previously enlisted callback URL.
 
 === "AuthorizationRequest"
@@ -17,7 +20,25 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725"
+	    "IdCadena": "0102020963010037725",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
     }
     ```
 
@@ -38,7 +59,25 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0102020963010037725"
+        "IdCadena": "0102020963010037725",
+        "c22DatosPuntoServicio": "000580JA0001",
+        "c22Descripcion": {
+            "CapturaDatosTarjeta": "Sin especificar",
+            "AutenticacionCliente": "Sin capacidad de lectura",
+            "RetencionTarjeta": "Sin capacidad de Captura",
+            "TipoTerminal": "Terminal no atendido casa",
+            "PresenciaCliente": "Cliente electrónico no seguro",
+            "PresenciaTarjeta": "Tarjeta no presente",
+            "MetodoCapturaDatos": "Internet",
+            "MetodoAutenticacionCliente": "Datos 3D presentes",
+            "EntidadAutenticadora": "Dispositivo no autentica cliente",
+            "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+            "ImpresionOMensaje": "Capacidad de impresión desconocida",
+            "LongitudMaximaPIN": "Sin longitud máxima"
+        },
+        "isExpiration": false,
+        "isMulticlearing": false,
+        "multiclearingClose": false
     }
     ```
 === "CancellationComm"
@@ -58,7 +97,25 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0102020963010037725"
+        "IdCadena": "0102020963010037725",
+        "c22DatosPuntoServicio": "000580JA0001",
+        "c22Descripcion": {
+            "CapturaDatosTarjeta": "Sin especificar",
+            "AutenticacionCliente": "Sin capacidad de lectura",
+            "RetencionTarjeta": "Sin capacidad de Captura",
+            "TipoTerminal": "Terminal no atendido casa",
+            "PresenciaCliente": "Cliente electrónico no seguro",
+            "PresenciaTarjeta": "Tarjeta no presente",
+            "MetodoCapturaDatos": "Internet",
+            "MetodoAutenticacionCliente": "Datos 3D presentes",
+            "EntidadAutenticadora": "Dispositivo no autentica cliente",
+            "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+            "ImpresionOMensaje": "Capacidad de impresión desconocida",
+            "LongitudMaximaPIN": "Sin longitud máxima"
+        },
+        "isExpiration": false,
+        "isMulticlearing": false,
+        "multiclearingClose": false
     }
     ```
 
@@ -79,7 +136,25 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0102020963010037725"
+        "IdCadena": "0102020963010037725",
+        "c22DatosPuntoServicio": "000580JA0001",
+        "c22Descripcion": {
+            "CapturaDatosTarjeta": "Sin especificar",
+            "AutenticacionCliente": "Sin capacidad de lectura",
+            "RetencionTarjeta": "Sin capacidad de Captura",
+            "TipoTerminal": "Terminal no atendido casa",
+            "PresenciaCliente": "Cliente electrónico no seguro",
+            "PresenciaTarjeta": "Tarjeta no presente",
+            "MetodoCapturaDatos": "Internet",
+            "MetodoAutenticacionCliente": "Datos 3D presentes",
+            "EntidadAutenticadora": "Dispositivo no autentica cliente",
+            "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+            "ImpresionOMensaje": "Capacidad de impresión desconocida",
+            "LongitudMaximaPIN": "Sin longitud máxima"
+        },
+        "isExpiration": false,
+        "isMulticlearing": false,
+        "multiclearingClose": false
     }
     ```
 

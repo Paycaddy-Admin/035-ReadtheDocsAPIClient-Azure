@@ -1,4 +1,7 @@
-Existen **10 tipos adicionales de transacciones** que recibirás en línea a través de la URL registrada. Estos tipos **no afectan el saldo**: sirven únicamente como información sobre el uso de la tarjeta y explican las causas de los rechazos.
+!!!Important
+    **Actualización de Esquema — 23 de junio de 2026:** Se han añadido dos nuevos tipos de rechazo. Consulta [Actualizaciones de Campos de Webhook](./webhookFieldUpdates.es.md) para más detalles.
+
+Existen **12 tipos adicionales de transacciones** que recibirás en línea a través de la URL registrada. Estos tipos **no afectan el saldo**: sirven únicamente como información sobre el uso de la tarjeta y explican las causas de los rechazos.
 
 ## Notificaciones de Rechazo
 
@@ -23,6 +26,8 @@ Estos valores aparecerán en el campo **`"c1Tipo"`** del webhook de notificació
 9. **FECHA CADUCIDAD ERRONEO:** La transacción fue rechazada porque se ingresó una fecha de vencimiento incorrecta.
     
 10. **NotificacionDenegacion:** Normalmente no se recibe vía webhook; aparece cuando se utiliza el endpoint **TransactionDetailList** y representa una transacción rechazada por fondos insuficientes.
+11. **DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE:** La transacción fue rechazada porque el comercio ha sido bloqueado por el tarjetahabiente.
+12. **DENEGACION POR COMERCIO BLOQUEADO (GENERAL):** La transacción fue rechazada porque el comercio está bloqueado bajo una regla de bloqueo general.
     
 
 En el esquema JSON de la mayoría de estas notificaciones, los campos **`"c38NumeroAutorizacion"`** y **`"c11NumeroIdentificativoTransaccion"`** se incluyen para comodidad, pero pueden venir vacíos (`""`) si la red no provee esa información.
@@ -41,7 +46,25 @@ En el esquema JSON de la mayoría de estas notificaciones, los campos **`"c38Num
     "c38NumeroAutorizacion": "",
     "c41TerminalId": "00227759",
     "c42Comercio": "227759000156182",
-    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+    "c22DatosPuntoServicio": "000580JA0001",
+    "c22Descripcion": {
+        "CapturaDatosTarjeta": "Sin especificar",
+        "AutenticacionCliente": "Sin capacidad de lectura",
+        "RetencionTarjeta": "Sin capacidad de Captura",
+        "TipoTerminal": "Terminal no atendido casa",
+        "PresenciaCliente": "Cliente electrónico no seguro",
+        "PresenciaTarjeta": "Tarjeta no presente",
+        "MetodoCapturaDatos": "Internet",
+        "MetodoAutenticacionCliente": "Datos 3D presentes",
+        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+        "LongitudMaximaPIN": "Sin longitud máxima"
+    },
+    "isExpiration": false,
+    "isMulticlearing": false,
+    "multiclearingClose": false
 }
 ```
 
@@ -65,7 +88,25 @@ Para mantenerte informado sobre los detalles de una transacción **MoneySend** i
     "c38NumeroAutorizacion": "040031",
     "c41TerminalId": "00227759",
     "c42Comercio": "227759000156182",
-    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+    "c22DatosPuntoServicio": "000580JA0001",
+    "c22Descripcion": {
+        "CapturaDatosTarjeta": "Sin especificar",
+        "AutenticacionCliente": "Sin capacidad de lectura",
+        "RetencionTarjeta": "Sin capacidad de Captura",
+        "TipoTerminal": "Terminal no atendido casa",
+        "PresenciaCliente": "Cliente electrónico no seguro",
+        "PresenciaTarjeta": "Tarjeta no presente",
+        "MetodoCapturaDatos": "Internet",
+        "MetodoAutenticacionCliente": "Datos 3D presentes",
+        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+        "LongitudMaximaPIN": "Sin longitud máxima"
+    },
+    "isExpiration": false,
+    "isMulticlearing": false,
+    "multiclearingClose": false
 }
 ```
 

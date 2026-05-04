@@ -1,4 +1,7 @@
-There are 10 additional types of transactions that you will receive online through the enlisted URL. It should be noted that these types do not affect balance and are merely informative of the card usage and describe the cause for rejected transactions.
+!!!Important
+    **Schema Update — June 23, 2026:** Two new rejection types have been added. See [Webhook Field Updates](./webhookFieldUpdates.en.md) for details.
+
+There are 12 additional types of transactions that you will receive online through the enlisted URL. It should be noted that these types do not affect balance and are merely informative of the card usage and describe the cause for rejected transactions.
 
 ## Rejection Notifications
 
@@ -14,6 +17,8 @@ These types will be seen as values in the **"c1Tipo"** field of the webhook noti
 8. **EXCEDIDO NUMERO DE OPERACION DIARIO:** The transaction was declined because the maximum number of daily operations allowed for the card has been exceeded.
 9. **FECHA CADUCIDAD ERRONEO:** The transaction was declined because an incorrect expiration date was entered.
 10. **NotificacionDenegacion:** These won't typically be seen in received webhooks but instead will be found when using the **TransactionDetailList** endpoint. They represent a transaction that has been declined due to insufficient funds.
+11. **DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE:** The transaction was declined because the merchant has been blocked by the cardholder.
+12. **DENEGACION POR COMERCIO BLOQUEADO (GENERAL):** The transaction was declined because the merchant is blocked under a general blocking rule.
 
 In the schema of the JSON sent in these most of these additional types of notifications, the fields **"c38NumeroAutorizacion"** and **"c11NumeroIdentificativoTransaccion"** are present for customer convenience, however, it is important to mention that these fields will not always contain information and, therefore, will be presented as empty strings ("").
 
@@ -31,7 +36,25 @@ In the schema of the JSON sent in these most of these additional types of notifi
         "c38NumeroAutorizacion": "",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "c22DatosPuntoServicio": "000580JA0001",
+        "c22Descripcion": {
+            "CapturaDatosTarjeta": "Sin especificar",
+            "AutenticacionCliente": "Sin capacidad de lectura",
+            "RetencionTarjeta": "Sin capacidad de Captura",
+            "TipoTerminal": "Terminal no atendido casa",
+            "PresenciaCliente": "Cliente electrónico no seguro",
+            "PresenciaTarjeta": "Tarjeta no presente",
+            "MetodoCapturaDatos": "Internet",
+            "MetodoAutenticacionCliente": "Datos 3D presentes",
+            "EntidadAutenticadora": "Dispositivo no autentica cliente",
+            "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+            "ImpresionOMensaje": "Capacidad de impresión desconocida",
+            "LongitudMaximaPIN": "Sin longitud máxima"
+        },
+        "isExpiration": false,
+        "isMulticlearing": false,
+        "multiclearingClose": false
     }
 ```
 
@@ -55,7 +78,25 @@ To stay informed about the specifics of an initiated MoneySend transaction, PayC
         "c38NumeroAutorizacion": "040031",
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
-        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+        "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+        "c22DatosPuntoServicio": "000580JA0001",
+        "c22Descripcion": {
+            "CapturaDatosTarjeta": "Sin especificar",
+            "AutenticacionCliente": "Sin capacidad de lectura",
+            "RetencionTarjeta": "Sin capacidad de Captura",
+            "TipoTerminal": "Terminal no atendido casa",
+            "PresenciaCliente": "Cliente electrónico no seguro",
+            "PresenciaTarjeta": "Tarjeta no presente",
+            "MetodoCapturaDatos": "Internet",
+            "MetodoAutenticacionCliente": "Datos 3D presentes",
+            "EntidadAutenticadora": "Dispositivo no autentica cliente",
+            "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+            "ImpresionOMensaje": "Capacidad de impresión desconocida",
+            "LongitudMaximaPIN": "Sin longitud máxima"
+        },
+        "isExpiration": false,
+        "isMulticlearing": false,
+        "multiclearingClose": false
     }
 ```
 

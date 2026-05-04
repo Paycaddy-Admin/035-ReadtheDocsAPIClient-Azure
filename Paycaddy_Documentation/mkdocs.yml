@@ -27,6 +27,7 @@ nav:
           - Just-In-Time Funding: JITtrx.md #done
           - Settlement: settlement.md #done
           - Other Transactions: otherTransactions.md #done
+          - Webhook Field Updates: webhookFieldUpdates.md
           - Transaction Data Retrieval: transactionLists.md #done
       - Webhooks: notificationsEnlist.md
   - Credit Core (beta):

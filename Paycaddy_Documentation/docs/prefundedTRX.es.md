@@ -1,3 +1,6 @@
+!!!Important
+    **Actualización de Esquema — 23 de junio de 2026:** Los webhooks de autorización ahora incluyen los campos `c22DatosPuntoServicio` y `c22Descripcion`. Consulta [Actualizaciones de Campos de Webhook](./webhookFieldUpdates.es.md) para más detalles.
+
 En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida mediante la API de PayCaddy realiza una transacción en la red Mastercard, el motor de autorización de PayCaddy revisa la disponibilidad de fondos para esa transacción específica. Si, tras esta revisión, la operación procede, se envía un payload con uno de los cuatro tipos de transacción posibles a la URL de callback previamente registrada.
 
 === "PeticionAutorizacion"
@@ -17,7 +20,25 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725"
+	    "IdCadena": "0102020963010037725",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 
@@ -38,7 +59,25 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725"
+	    "IdCadena": "0102020963010037725",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 
@@ -59,7 +98,25 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725"
+	    "IdCadena": "0102020963010037725",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 
@@ -80,7 +137,25 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725"
+	    "IdCadena": "0102020963010037725",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 

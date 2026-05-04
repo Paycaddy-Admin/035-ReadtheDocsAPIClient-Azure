@@ -1,3 +1,6 @@
+!!!Important
+    **Actualización de Esquema — 23 de junio de 2026:** Los webhooks de liquidación ahora incluyen los campos `isExpiration`, `isMulticlearing` y `multiclearingClose`. Consulta [Actualizaciones de Campos de Webhook](./webhookFieldUpdates.es.md) para más detalles.
+
 Para manejar la finalización del ciclo de vida de una transacción, utilizamos un **Proceso Batch** para actualizar y cerrar cada transacción aprobada, lo que permite visibilidad rápida de los datos reales de liquidación de cada transacción en tu programa de emisión de tarjetas.
 
 PayCaddy aprovecha este procesamiento por lotes para enviar notificaciones a través de la ruta convencional de webhooks transaccionales (consulta [**NotificationEnlist POST**](/.notificationsEnlist.es.md)) como parte de un proceso diario destinado a confirmar y/o ajustar el monto previamente aprobado para cada transacción.
@@ -47,7 +50,26 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 
@@ -66,7 +88,26 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 
@@ -85,7 +126,26 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 	    "c38NumeroAutorizacion": "040031",
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
-	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES"
+	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
+	    "IdCadena": "0",
+	    "c22DatosPuntoServicio": "000580JA0001",
+	    "c22Descripcion": {
+	        "CapturaDatosTarjeta": "Sin especificar",
+	        "AutenticacionCliente": "Sin capacidad de lectura",
+	        "RetencionTarjeta": "Sin capacidad de Captura",
+	        "TipoTerminal": "Terminal no atendido casa",
+	        "PresenciaCliente": "Cliente electrónico no seguro",
+	        "PresenciaTarjeta": "Tarjeta no presente",
+	        "MetodoCapturaDatos": "Internet",
+	        "MetodoAutenticacionCliente": "Datos 3D presentes",
+	        "EntidadAutenticadora": "Dispositivo no autentica cliente",
+	        "ActualizacionTarjeta": "Capacidad de actualización desconocida",
+	        "ImpresionOMensaje": "Capacidad de impresión desconocida",
+	        "LongitudMaximaPIN": "Sin longitud máxima"
+	    },
+	    "isExpiration": false,
+	    "isMulticlearing": false,
+	    "multiclearingClose": false
 	}
 	```
 
