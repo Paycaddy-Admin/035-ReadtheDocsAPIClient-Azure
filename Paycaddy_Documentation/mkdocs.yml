@@ -27,7 +27,6 @@ nav:
           - Just-In-Time Funding: JITtrx.md #done
           - Settlement: settlement.md #done
           - Other Transactions: otherTransactions.md #done
-          - Webhook Field Updates: webhookFieldUpdates.md
           - Transaction Data Retrieval: transactionLists.md #done
       - Webhooks: notificationsEnlist.md
   - Credit Core (beta):
@@ -36,7 +35,9 @@ nav:
   - Interfaces:
       - WhatsApp Chatbot: chatbot.md
       - CPM Backoffice: backoffice.md
-  - Changelog: changelog.md
+  - Changelog:
+      - Overview: changelog.md
+      - 'June 23, 2026 - Webhook Schema Update': webhookFieldUpdates.md
 
 theme:
   name: material

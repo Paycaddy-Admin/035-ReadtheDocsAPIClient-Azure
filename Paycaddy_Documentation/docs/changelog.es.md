@@ -1,10 +1,16 @@
 
-All notable changes in our API documentation, such as releases, deprecations and updates will be documented in this file.
+Todos los cambios notables en la documentación de nuestra API, como lanzamientos, deprecaciones y actualizaciones, se registrarán en este archivo.
+
+## 1.0.3 - 2026-06-23
+
+#### Añadido
+- Actualización del esquema de webhooks: los payloads de webhooks transaccionales ahora incluyen los nuevos campos `c22DatosPuntoServicio`, `c22Descripcion`, `isExpiration`, `isMulticlearing` y `multiclearingClose`. Consulta [23 de junio de 2026 - Actualización del Esquema de Webhooks](./webhookFieldUpdates.es.md) para conocer todos los detalles.
+
 ## 1.0.2 - 2025-01-29
 
-#### Added
-- Implemented changelog to improve control of releases, deprecations and updates over our API documentation
-#### Removed
+#### Añadido
+- Se implementó el changelog para mejorar el control de lanzamientos, deprecaciones y actualizaciones sobre la documentación de nuestra API.
+#### Eliminado
 * 
-#### Deprecated
+#### Obsoleto
 * 
