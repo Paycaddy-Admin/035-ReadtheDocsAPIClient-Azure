@@ -7,7 +7,7 @@ Two new values have been added for the `c1Tipo` field in rejection notifications
 
 |**c1Tipo Value**|**Description**|
 |---|---|
-|`DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE`|The transaction was declined because the merchant has been blocked by the cardholder.|
+|`DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE`|The transaction was declined because the merchant has been blocked by the Card Program Manager.|
 |`DENEGACION POR COMERCIO BLOQUEADO (GENERAL)`|The transaction was declined because the merchant is blocked under a general blocking rule.|
 
 > These rejection types follow the same webhook schema as existing rejection notifications described in [Other Transactions](./otherTransactions.en.md).
