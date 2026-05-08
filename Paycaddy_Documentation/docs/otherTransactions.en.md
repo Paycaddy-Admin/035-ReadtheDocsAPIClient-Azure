@@ -17,7 +17,7 @@ These types will be seen as values in the **"c1Tipo"** field of the webhook noti
 8. **EXCEDIDO NUMERO DE OPERACION DIARIO:** The transaction was declined because the maximum number of daily operations allowed for the card has been exceeded.
 9. **FECHA CADUCIDAD ERRONEO:** The transaction was declined because an incorrect expiration date was entered.
 10. **NotificacionDenegacion:** These won't typically be seen in received webhooks but instead will be found when using the **TransactionDetailList** endpoint. They represent a transaction that has been declined due to insufficient funds.
-11. **DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE:** The transaction was declined because the merchant has been blocked by the cardholder.
+11. **DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE:** The transaction was declined because the merchant has been blocked by the Card Program Manager.
 12. **DENEGACION POR COMERCIO BLOQUEADO (GENERAL):** The transaction was declined because the merchant is blocked under a general blocking rule.
 
 In the schema of the JSON sent in these most of these additional types of notifications, the fields **"c38NumeroAutorizacion"** and **"c11NumeroIdentificativoTransaccion"** are present for customer convenience, however, it is important to mention that these fields will not always contain information and, therefore, will be presented as empty strings ("").
