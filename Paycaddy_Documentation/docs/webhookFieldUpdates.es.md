@@ -7,7 +7,7 @@ Se han añadido dos nuevos valores para el campo `c1Tipo` en las notificaciones 
 
 |**Valor de c1Tipo**|**Descripción**|
 |---|---|
-|`DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE`|La transacción fue rechazada porque el comercio ha sido bloqueado por el tarjetahabiente.|
+|`DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE`|La transacción fue rechazada porque el comercio ha sido bloqueado por el Card Program Manager.|
 |`DENEGACION POR COMERCIO BLOQUEADO (GENERAL)`|La transacción fue rechazada porque el comercio está bloqueado bajo una regla de bloqueo general.|
 
 > Estos tipos de rechazo siguen el mismo esquema de webhook que las notificaciones de rechazo existentes descritas en [Otras Transacciones](./otherTransactions.es.md).
