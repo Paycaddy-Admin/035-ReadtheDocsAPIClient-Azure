@@ -26,7 +26,7 @@ Estos valores aparecerán en el campo **`"c1Tipo"`** del webhook de notificació
 9. **FECHA CADUCIDAD ERRONEO:** La transacción fue rechazada porque se ingresó una fecha de vencimiento incorrecta.
     
 10. **NotificacionDenegacion:** Normalmente no se recibe vía webhook; aparece cuando se utiliza el endpoint **TransactionDetailList** y representa una transacción rechazada por fondos insuficientes.
-11. **DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE:** La transacción fue rechazada porque el comercio ha sido bloqueado por el tarjetahabiente.
+11. **DENEGACION POR COMERCIO BLOQUEADO POR CLIENTE:** La transacción fue rechazada porque el comercio ha sido bloqueado por el Card Program Manager.
 12. **DENEGACION POR COMERCIO BLOQUEADO (GENERAL):** La transacción fue rechazada porque el comercio está bloqueado bajo una regla de bloqueo general.
     
 
