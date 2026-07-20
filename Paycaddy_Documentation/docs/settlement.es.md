@@ -7,9 +7,9 @@ PayCaddy aprovecha este procesamiento por lotes para enviar notificaciones a tra
 
 Nuestro sistema emplea tres tipos clave de notificaciones webhook para gestionar los distintos resultados posibles:
 
-1. **TransaccionCorregidaPositiva:** Se envía cuando la liquidación final produce un ajuste **positivo** al monto inicialmente autorizado, añadiendo fondos a la billetera del usuario.
+1. **TransaccionCorregidaPositiva:** Se envía cuando la liquidación final resulta **menor** al monto inicialmente autorizado; la diferencia se **acredita** a la billetera del usuario (se le devuelven los fondos retenidos de más).
     
-2. **TransaccionCorregidaNegativa:** Se envía cuando la liquidación final produce un ajuste **negativo**, deduciendo fondos de la billetera del usuario.
+2. **TransaccionCorregidaNegativa:** Se envía cuando la liquidación final resulta **mayor** al monto inicialmente autorizado; la diferencia se **debita** de la billetera del usuario.
     
 3. **TransaccionConfirmada:** Se envía para confirmar que la transacción se liquidó exactamente por el monto autorizado inicialmente, brindando una confirmación clara y precisa del resultado.
     

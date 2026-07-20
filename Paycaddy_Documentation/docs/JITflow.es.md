@@ -34,9 +34,9 @@ En esta sección encontrarás una descripción de alto nivel del flujo de decisi
 6. **Procesamiento por lotes y liquidación**  
     Más adelante, si corresponde, puede llegar un lote de liquidación con correcciones:
     
-    - `TransaccionCorregidaPositiva`: se requiere más dinero que el inicialmente autorizado.
+    - `TransaccionCorregidaPositiva`: la liquidación final fue **menor** a la autorizada; se **acredita** la diferencia a la billetera.
         
-    - `TransaccionCorregidaNegativa`: el monto final fue menor; se libera el excedente.
+    - `TransaccionCorregidaNegativa`: la liquidación final fue **mayor** a la autorizada; se **debita** la diferencia.
         
     - `TransaccionConfirmada`: la autorización original se igualó y confirmó.
         

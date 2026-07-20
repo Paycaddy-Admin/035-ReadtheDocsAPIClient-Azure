@@ -44,9 +44,9 @@ Find in this section a high-level explanation of the decision flow for a transac
 6. **Batch Processing & Settlement**  
     Later, if applicable, a settlement batch may arrive with corrections:
     
-    - `TransaccionCorregidaPositiva`: more funds are needed than initially authorized.
+    - `TransaccionCorregidaPositiva`: the final settlement was **lower** than authorized; the difference is **credited** to the wallet.
         
-    - `TransaccionCorregidaNegativa`: the final amount was lower; excess is released.
+    - `TransaccionCorregidaNegativa`: the final settlement was **higher** than authorized; the difference is **debited**.
         
     - `TransaccionConfirmada`: original authorization was matched and confirmed.
 

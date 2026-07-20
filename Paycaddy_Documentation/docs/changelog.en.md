@@ -1,6 +1,11 @@
 
 All notable changes in our API documentation, such as releases, deprecations and updates will be documented in this file.
 
+## 1.0.4 - 2026-07-20
+
+#### Fixed
+- Corrected an inverted credit/debit direction for `TransaccionCorregidaPositiva` and `TransaccionCorregidaNegativa` in the JIT and prefunded transaction chapters. **Positiva** credits the wallet (final settlement lower than authorized); **Negativa** debits it (final higher). The previous text stated the opposite.
+
 ## 1.0.3 - 2026-06-23
 
 #### Added

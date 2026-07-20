@@ -1,6 +1,11 @@
 
 Todos los cambios notables en la documentación de nuestra API, como lanzamientos, deprecaciones y actualizaciones, se registrarán en este archivo.
 
+## 1.0.4 - 2026-07-20
+
+#### Corregido
+- Se corrigió una dirección crédito/débito invertida de `TransaccionCorregidaPositiva` y `TransaccionCorregidaNegativa` en los capítulos de transacciones JIT y prefondeadas. **Positiva** acredita la billetera (liquidación final menor a la autorizada); **Negativa** la debita (final mayor). El texto anterior indicaba lo contrario.
+
 ## 1.0.3 - 2026-06-23
 
 #### Añadido
