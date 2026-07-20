@@ -7,8 +7,8 @@ PayCaddy leverages this batch processing to deliver notifications through the co
 
 Our system utilizes three key types of webhook notifications to manage various transaction outcomes:
 
-1. **TransaccionCorregidaPositiva:** Issued when the final settlement results in a positive adjustment to the initially authorized amount, thereby adding funds to the user’s wallet.
-2. **TransaccionCorregidaNegativa:** Issued when the final settlement results in a negative adjustment, thereby deducting funds from the user's wallet.
+1. **TransaccionCorregidaPositiva:** Issued when the final settlement is **lower** than the initially authorized amount; the difference is **credited** to the user’s wallet (the over-held funds are returned).
+2. **TransaccionCorregidaNegativa:** Issued when the final settlement is **higher** than the initially authorized amount; the difference is **debited** from the user's wallet.
 3. **TransaccionConfirmada:** Introduced to confirm that the transaction has settled exactly at the amount authorized initially, providing clear and precise confirmation of the transaction outcome.
 
 

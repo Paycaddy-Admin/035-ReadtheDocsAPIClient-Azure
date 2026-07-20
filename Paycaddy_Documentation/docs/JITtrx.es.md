@@ -353,10 +353,10 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
 Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden reportarse mediante el [Proceso Batch](./settlement.es) con los siguientes tipos de corrección:
 
 1. **TransaccionCorregidaPositiva**  
-    Ajuste que confirma un importe mayor al autorizado inicialmente. El monto adicional se debita de la cuenta del titular.
+    Corrección en la que la liquidación final resulta **menor** al monto autorizado. La diferencia se **acredita** al saldo disponible de la billetera.
     
 2. **TransaccionCorregidaNegativa**  
-    Ajuste que resulta en un importe final menor al autorizado. El excedente se libera al saldo disponible de la billetera.
+    Ajuste en el que la liquidación final resulta **mayor** al monto autorizado. El monto adicional se **debita** de la cuenta del titular.
     
 3. **TransaccionConfirmada**  
     Indica que la autorización original coincidió y se confirmó durante la liquidación sin necesidad de ajuste.

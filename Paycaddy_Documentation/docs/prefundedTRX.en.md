@@ -188,10 +188,10 @@ The transaction type is indicated in the **"c1Tipo"** field of the webhook. For 
 Once online transactions are processed, they are reconciled with the settlement files received from the network. Discrepancies or adjustments to the original transaction may be reported through the [batch process](./settlement.en.md) using the following correction types:
 
 1. **TransaccionCorregidaPositiva**
-	Indicates an adjustment that confirms a transaction amount higher than initially authorized. The additional amount will be debited from the cardholder's account.
+	Indicates a correction where the final settlement is **lower** than the authorized amount. The difference is **credited** (released) back to the cardholder's available balance.
 
 2. **TransaccionCorregidaNegativa**
-	Indicates a correction that results in a lower final amount than originally authorized. The excess amount will be released back to the cardholder's available balance.
+	Indicates an adjustment where the final settlement is **higher** than the authorized amount. The additional amount is **debited** from the cardholder's account.
 
 3. **TransaccionConfirmada**
 	Indicates that the original authorization was matched and confirmed during settlement without requiring adjustment.
