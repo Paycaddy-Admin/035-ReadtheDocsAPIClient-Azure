@@ -77,7 +77,7 @@ Se usa cuando tu sistema (o el de tu cliente) ya gestiona el proceso KYC de form
     
     - Al ser verificación delegada, PayCaddy no realiza más KYC.
         
-    - Periódicamente se requerirá actualización de la información KYC. Revisa [Edit User Data](editUserData.es.md).
+    - Periódicamente se requerirá actualización de la información KYC. Revisa [Edit User Data](editUser.es.md).
         
 
 Diagrama de este flujo:
@@ -114,7 +114,7 @@ Este tipo de usuario representa una entidad empresarial. El KYB es completamente
     
     - Al ser verificación delegada, PayCaddy no realiza más KYC.
         
-    - Periódicamente se requerirá actualización de la información KYC. Revisa [Edit User Data](editUserData.es.md).
+    - Periódicamente se requerirá actualización de la información KYC. Revisa [Edit User Data](editUser.es.md).
         
 
 > - Para detalles de qué verificaciones se realizan, consúltalo con el equipo de Compliance en el onboarding.  

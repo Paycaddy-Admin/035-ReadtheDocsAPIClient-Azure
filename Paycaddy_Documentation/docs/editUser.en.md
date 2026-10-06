@@ -13,16 +13,17 @@
 `https://api.api-sandbox.paycaddy.dev/v2/UserUpdateData`
 
 This endpoint updates user information for **EndUser** and **EndUserSR** records.
-The body replicates the schema of the creation endpoint but omits fields that cannot be modified (e.g., identifiers, wallet data, and creation timestamps).
+The body accepts only the editable fields listed below; identifiers, wallet data, creation timestamps and the user's legal name cannot be modified through this call.
+
+!!!warning
+    **Legal name is not editable:**
+    `firstName` and `lastName` are **not** accepted by `V2/UserUpdateData`. Both fields are returned in the response for reference only. If a legal-name correction is required, contact the PayCaddy support team.
 
 === "Request"
 	```json
 		{
 		  "userId": "string",
 		  "email": "string",
-		  "firstName": "string",
-		  "lastName": "string",
-		  "alias": "string",
 		  "occupation": "string",
 		  "placeOfWork": "string",
 		  "pep": false,
@@ -37,8 +38,7 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 		    "postalCode": "000000",
 		    "country": "PA"
 		  },
-		  "nationality": "PA",
-		  "countryOfOperations": "PA, US"
+		  "countryOfOperations": "PA, US",
 		  "idUrlFront": "string",
 		  "idUrlBack": "string",
 		  "residenceProofUrl": "string"
@@ -49,11 +49,9 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 === "Response"
 	```json
 		{
-		  "userId": "string",
-		  "email": "string",
 		  "firstName": "string",
 		  "lastName": "string",
-		  "alias": "string",
+		  "email": "string",
 		  "occupation": "string",
 		  "placeOfWork": "string",
 		  "pep": false,
@@ -68,8 +66,7 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 		    "postalCode": "000000",
 		    "country": "PA"
 		  },
-		  "nationality": "PA",
-		  "countryOfOperations": "PA, US"
+		  "countryOfOperations": "PA, US",
 		  "idUrlFront": "string",
 		  "idUrlBack": "string",
 		  "residenceProofUrl": "string"
@@ -82,7 +79,7 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 >
 > - Any omitted fields remain unchanged.
 >
-> - The system validates each updated field according to the same format and type rules described in the [User Creation chapter](https://docs.paycaddy.com/es/userv2/).
+> - The system validates each updated field according to the same format and type rules described in the [User Creation chapter](userv2.en.md).
 >
 
 ---
@@ -92,14 +89,11 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 |Field|Description|Editable|Notes|
 |---|---|---|---|
 |`email`|Contact email|✅|Must follow RFC-5322 format|
-|`firstName`, `lastName`|User's legal name|⚠️ Conditionally|Only allowed for compliance updates|
-|`alias`|Emboss alias|✅|Must comply with ITU-T.50 and ≤ 22 chars|
 |`occupation`, `placeOfWork`|Job-related fields|✅|May be required for updated KYC|
 |`pep`|Politically exposed person flag|✅|Boolean|
 |`salary`|Updated salary in cents|✅|Integer, USD cents|
 |`telephone`|E.164 format|✅|Example: +50760001234|
 |`address.*`|All subfields|✅|See creation schema|
-|`nationality`|ISO alpha-2 code|✅||
 |`countryOfOperations`|ISO alpha-2, comma-separated|✅||
 
 ---
@@ -109,6 +103,8 @@ The body replicates the schema of the creation endpoint but omits fields that ca
 |Field|Reason|
 |---|---|
 |`userId`|Immutable primary key|
+|`firstName`, `lastName`|Legal name; not accepted by this endpoint (returned read-only in the response)|
+|`alias`, `nationality`|Not accepted by this endpoint|
 |`walletId`|System-generated|
 |`kycUrl`|Tied to KYC process|
 |`isActive`|Controlled by compliance logic|
@@ -140,20 +136,19 @@ Errors follow the same format as user creation. See “Field Requirements” in 
 
 ---
 
-## **V2/MerchantUserUpdateData POST**
+## **V2/MerchantUserUpdateData <font color="green">POST</font>**
 
 **Request URL:**
 `https://api.api-sandbox.paycaddy.dev/v2/MerchantUserUpdateData`
 
 This endpoint updates user information for **MerchantUser** and **MerchantUserSR** (legal entity users).
-It allows for controlled modification of business or compliance information, maintaining immutable identifiers and KYB-linked attributes.
+It allows for controlled modification of business or compliance information, maintaining immutable identifiers and KYB-linked attributes. The legal entity name (`registeredName`) cannot be modified through this call; it is returned in the response for reference only.
 
 === "Request"
 	```json
 	{
 	  "userId": "string",
 	  "email": "string",
-	  "registeredName": "string",
 	  "taxId": "string",
 	  "legalRepresentation": "string",
 	  "kindOfBusiness": "string",
@@ -168,19 +163,20 @@ It allows for controlled modification of business or compliance information, mai
 	  },
 	  "firstName": "John",
 	  "lastName": "Smith",
-	  "nationality": "PA",
 	  "countryOfOperations": "PA, US",
+	  "certificateOfGoodStanding": "https://cdn.server.com/docs/certificateOfGoodStanding.pdf",
 	  "businessLicense": "https://cdn.server.com/docs/businessLicense.pdf",
-	  "registerShareholder": "https://cdn.server.com/docs/registerShareholder.pdf"
+	  "registerShareholder": "https://cdn.server.com/docs/registerShareholder.pdf",
+	  "idShareholders": "https://cdn.server.com/docs/idShareholders.pdf",
+	  "addressVerificationShareholders": "https://cdn.server.com/docs/addressVerificationShareholders.pdf"
 	}
 	```
 
 === "Response"
 	```json
 	{
-	  "merchantUserId": "string",
-	  "email": "string",
 	  "registeredName": "string",
+	  "email": "string",
 	  "taxId": "string",
 	  "legalRepresentation": "string",
 	  "kindOfBusiness": "string",
@@ -195,10 +191,12 @@ It allows for controlled modification of business or compliance information, mai
 	  },
 	  "firstName": "John",
 	  "lastName": "Smith",
-	  "nationality": "PA",
 	  "countryOfOperations": "PA, US",
+	  "certificateOfGoodStanding": "https://cdn.server.com/docs/certificateOfGoodStanding.pdf",
 	  "businessLicense": "https://cdn.server.com/docs/businessLicense.pdf",
-	  "registerShareholder": "https://cdn.server.com/docs/registerShareholder.pdf"
+	  "registerShareholder": "https://cdn.server.com/docs/registerShareholder.pdf",
+	  "idShareholders": "https://cdn.server.com/docs/idShareholders.pdf",
+	  "addressVerificationShareholders": "https://cdn.server.com/docs/addressVerificationShareholders.pdf"
 	}
 	```
 
@@ -209,13 +207,12 @@ It allows for controlled modification of business or compliance information, mai
 |Field|Description|Editable|Notes|
 |---|---|---|---|
 |`email`|Business email|✅|RFC-5322 format|
-|`registeredName`|Legal entity name|⚠️|Can trigger compliance check|
 |`legalRepresentation`|Legal representative|✅|Must match ITU-T.50|
 |`kindOfBusiness`|Business type or code|✅||
 |`telephone`|Contact phone|✅|E.164 format|
 |`address.*`|Address components|✅||
 |`firstName`, `lastName`|Natural representative|✅|Same rules as creation|
-|`nationality`, `countryOfOperations`|Country data|✅|ISO alpha-2 format|
+|`countryOfOperations`|Country data|✅|ISO alpha-2, comma-separated|
 |`businessLicense`, `registerShareholder`, `certificateOfGoodStanding`, `idShareholders`, `addressVerificationShareholders`|Document URLs|✅|HTTPS URLs (PDF/JPG/PNG) between 5kb–10mb|
 
 ---
@@ -224,7 +221,9 @@ It allows for controlled modification of business or compliance information, mai
 
 |Field|Reason|
 |---|---|
-|`merchantUserId`|Immutable primary key|
+|`userId`|Immutable primary key|
+|`registeredName`|Legal entity name; not accepted by this endpoint (returned read-only in the response)|
+|`nationality`|Not accepted by this endpoint|
 |`walletId`|System-generated|
 |`isActive`|Controlled by KYB compliance|
 |`creationDate`|Immutable timestamp|
@@ -245,7 +244,7 @@ It allows for controlled modification of business or compliance information, mai
 ```json
 {
   "type": "https://docs.paycaddy.com/errors/PC-422-READONLY",
-  "title": "Attempted update of read-only field: taxId",
+  "title": "Attempted update of read-only field: registeredName",
   "status": 422,
   "traceId": "00-77aa4e5b7f1e3b45c92f91f77aa4e5b-1a140dcbf259a24d-00"
 }
@@ -257,7 +256,7 @@ It allows for controlled modification of business or compliance information, mai
 
 - Partial updates are allowed — only the provided keys are modified.
 
-- Changes to **sensitive fields** (e.g., `registeredName`, `legalRepresentation`) may trigger **manual review** by PayCaddy’s compliance team.
+- Changes to **sensitive fields** (e.g., `legalRepresentation`) may trigger **manual review** by PayCaddy’s compliance team.
 
 - All updates are versioned internally and may be audited on request.
 

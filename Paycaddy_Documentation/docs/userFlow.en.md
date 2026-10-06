@@ -77,7 +77,7 @@ Used when your system (or your client’s) already handles the KYC process indep
 3. **User becomes active immediately**
     
     - Since verification is delegated, no further KYC is needed from PayCaddy.
-    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.en.md)
+    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUser.en.md)
 
 A visualization of the above described steps can be seen in the following flow:
 
@@ -113,7 +113,7 @@ This user type represents a business entity. KYB is fully delegated.
 4. **Merchant becomes active**
     
     - Since verification is delegated, no further KYC is needed from PayCaddy.
-    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUserData.en.md)
+    - Periodically KYC information will be required to be updated. Review [Edit User Data](editUser.en.md)
 
 >* For specifics on which verification checks are done, review with Compliance team during onboarding process.
 >
