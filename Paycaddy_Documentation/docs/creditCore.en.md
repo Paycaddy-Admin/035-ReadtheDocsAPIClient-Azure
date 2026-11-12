@@ -77,7 +77,7 @@ The **total balance** is reflected in the "balance" field of the successful 200 
 
 All amounts are reflected in cents, meaning USD 1,000.00 would be represented as 100000.
 
-To a recently created wallet, the fields **internalWalletLimit** and **amountSpentMonth** comes by default with value 0.  To change the **internalWalletLimit** check **[Change Internal Wallet Limit POST](wallet.en.md#change-internal-card-limit-post).**
+To a recently created wallet, the fields **internalWalletLimit** and **amountSpentMonth** comes by default with value 0.  To change the **internalWalletLimit** check **[Change Internal Wallet Limit POST](#change-wallet-limit-post).**
 
 The call may fail if an incorrect walletId is provided, in which case the NeoBank API would respond with a HTTP 400 error.
 

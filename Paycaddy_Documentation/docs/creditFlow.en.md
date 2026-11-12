@@ -97,7 +97,7 @@ With this method, interest is calculated based solely on the balance owed at the
 ---
 ## Credit Notifications
 
-Notifications from PayCaddy's credit core are sent via webhooks. These events allow clients to stay in sync with changes to wallet balances, interest, limits, and more. To receive these events, register a callback URL via the [`NotificationsEnlist`](./notificationsEnlist.en) endpoint.
+Notifications from PayCaddy's credit core are sent via webhooks. These events allow clients to stay in sync with changes to wallet balances, interest, limits, and more. To receive these events, register a callback URL via the [`NotificationsEnlist`](./notificationsEnlist.en.md) endpoint.
 
 !!!Warning
 	We highly recommend to use a different **URL** for credit notifications 

@@ -12,7 +12,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c3CodigoProceso": "000000",
 	    "c4ImporteTransaccion": "000000001617",
 	    "c7FechaHoraTransaccion": "20220429052901",
-	    "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+	    "bDateUtcCreate": " YYYYMMDDHHMMSS ",
 	    "c11NumeroIdentificativoTransaccion": "000004339",
 	    "c18CodigoActividadEstablecimiento": "5999",
 	    "c19CodigoPaisAdquirente": "442",
@@ -20,7 +20,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725",
+	    "idCadena": "0102020963010037725",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -51,7 +51,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c3CodigoProceso": "000000",
 	    "c4ImporteTransaccion": "000000001617",
 	    "c7FechaHoraTransaccion": "20220429052901",
-	    "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+	    "bDateUtcCreate": " YYYYMMDDHHMMSS ",
 	    "c11NumeroIdentificativoTransaccion": "000004339",
 	    "c18CodigoActividadEstablecimiento": "5999",
 	    "c19CodigoPaisAdquirente": "442",
@@ -59,7 +59,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725",
+	    "idCadena": "0102020963010037725",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -90,7 +90,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c3CodigoProceso": "000000",
 	    "c4ImporteTransaccion": "000000001617",
 	    "c7FechaHoraTransaccion": "20220429052901",
-	    "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+	    "bDateUtcCreate": " YYYYMMDDHHMMSS ",
 	    "c11NumeroIdentificativoTransaccion": "000004339",
 	    "c18CodigoActividadEstablecimiento": "5999",
 	    "c19CodigoPaisAdquirente": "442",
@@ -98,7 +98,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725",
+	    "idCadena": "0102020963010037725",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -126,10 +126,10 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "password": "password",
 	    "c1Tipo": "PeticionDevolucion",
 	    "c2CardId": "cardId",
-	    "c3CodigoProceso": "000000",
-	    "c4ImporteTransaccion": "000000001617",
+	    "c3CodigoProceso": "200000",
+	    "c4ImporteTransaccion": "0",
 	    "c7FechaHoraTransaccion": "20220429052901",
-	    "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+	    "bDateUtcCreate": " YYYYMMDDHHMMSS ",
 	    "c11NumeroIdentificativoTransaccion": "000004339",
 	    "c18CodigoActividadEstablecimiento": "5999",
 	    "c19CodigoPaisAdquirente": "442",
@@ -137,7 +137,7 @@ En nuestro [Flujo Prefunded](./prefundedFlow.es.md), cuando una tarjeta emitida 
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725",
+	    "idCadena": "0102020963010037725",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -179,15 +179,15 @@ El tipo de transacción se indica en el campo **“c1Tipo”** del webhook. Por 
 
 > El campo **“c7FechaHoraTransaccion”** representa la fecha y hora de la transacción en la zona donde se adquirió, con el formato “YYYYMMDDhhmmss”.
 
-> El campo **“BDateUtcCreate”** representa la misma fecha y hora, pero en UTC, siguiendo el mismo formato que **c7FechaHoraTransaccion**.
+> El campo **“bDateUtcCreate”** representa la misma fecha y hora, pero en UTC, siguiendo el mismo formato que **c7FechaHoraTransaccion**.
 
->El campo **"IdCadena"** sirve para asociar las notificaciones de 'ComunicacionAnulacion' con su respectiva 'PeticionAutorizacion'. Una **PeticionAutorizacion** que reciba una **ComunicacionAnulacion** asociada se considerará una transacción confirmada o conciliada. Por lo tanto, no recibirá ninguna notificación posterior por conciliación via el Proceso Batch.
+>El campo **"idCadena"** sirve para asociar las notificaciones de 'ComunicacionAnulacion' con su respectiva 'PeticionAutorizacion'. Una **PeticionAutorizacion** que reciba una **ComunicacionAnulacion** asociada se considerará una transacción confirmada o conciliada. Por lo tanto, no recibirá ninguna notificación posterior por conciliación via el Proceso Batch.
 
 ---
 
 ## Conciliación y Correcciones del Proceso Batch
 
-Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden comunicarse mediante el [proceso batch](/settlement.es.md) usando los siguientes tipos de corrección:
+Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden comunicarse mediante el [proceso batch](./settlement.es.md) usando los siguientes tipos de corrección:
 
 1. **TransaccionCorregidaPositiva**  
     Indica una corrección en la que la liquidación final resulta **menor** al monto autorizado. La diferencia se **acredita** (se libera) al saldo disponible de la billetera del titular.

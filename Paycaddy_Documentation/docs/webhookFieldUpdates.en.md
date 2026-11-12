@@ -77,13 +77,13 @@ All transactional webhooks now include three boolean fields that provide visibil
 
 |**Field**|**Type**|**Description**|
 |---|---|---|
-|`isExpiration`|bool|`true` if the settlement was triggered by automatic expiration. This occurs when 30 days pass without the transaction receiving any settlement messages from the network.|
+|`isExpiration`|bool|`true` if the settlement was triggered by automatic expiration. This occurs when 33 days pass without the transaction receiving any settlement messages from the network.|
 |`isMulticlearing`|bool|`true` if the transaction is a Multiclearing type, meaning it can receive more than one settlement message before being finalized.|
 |`multiclearingClose`|bool|`true` if this settlement message closes the Multiclearing cycle. After receiving a message where this field is `true`, no further settlement messages should be expected for the same authorization.|
 
 ### Expiration
 
-When an authorized transaction does not receive any settlement confirmation from the network within 30 days, the system automatically generates a settlement notification with `isExpiration: true`. This mechanism ensures that all authorized transactions eventually reach a terminal state, even when the network does not send a settlement file.
+When an authorized transaction does not receive any settlement confirmation from the network within 33 days, the system automatically generates a settlement notification with `isExpiration: true`. This mechanism ensures that all authorized transactions eventually reach a terminal state, even when the network does not send a settlement file.
 
 ### Multiclearing
 

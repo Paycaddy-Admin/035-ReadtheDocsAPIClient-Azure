@@ -36,7 +36,7 @@ For transactions of type `PeticionAutorizacion`, a POST request will be made to 
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -224,7 +224,7 @@ All online transactions are notified via webhook to the callback URL configured 
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -264,7 +264,7 @@ All online transactions are notified via webhook to the callback URL configured 
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -304,7 +304,7 @@ All online transactions are notified via webhook to the callback URL configured 
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -344,7 +344,7 @@ All online transactions are notified via webhook to the callback URL configured 
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -370,7 +370,7 @@ All online transactions are notified via webhook to the callback URL configured 
 
 >In Just In Time Funding operations, Transaction Notifications can be the result of an approval or denial in the Authorization Request in JIT Flow.
 
->The **"IdCadena"** field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. An authorization request (PeticionAutorizacion) that receives an associated cancellation communication will be considered a confirmed or reconciled transaction. Therefore, it will not receive any subsequent batch notification of any kind.
+>The **"idCadena"** field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. An authorization request (PeticionAutorizacion) that receives an associated cancellation communication will be considered a confirmed or reconciled transaction. Therefore, it will not receive any subsequent batch notification of any kind.
 
 ---
 ## Settlement and Batch Process Corrections

@@ -1,6 +1,12 @@
 
 Todos los cambios notables en la documentación de nuestra API, como lanzamientos, deprecaciones y actualizaciones, se registrarán en este archivo.
 
+## 1.0.6 - 2026-11-12
+
+#### Corregido
+- Se corrigieron enlaces rotos entre capítulos.
+- Se alinearon varios ejemplos y descripciones de webhooks de transacciones con el comportamiento actual de la plataforma.
+
 ## 1.0.5 - 2026-10-06
 
 #### Corregido

@@ -102,8 +102,10 @@ To stay informed about the specifics of an initiated MoneySend transaction, PayC
 
 When handling MoneySend webhook notifications, store them like any other transaction notification. The main difference is in how you process the transaction.
 
->MoneySend transactions with **c1Tipo** equals to **“PeticionAutorizacion”** must be handled as **positive** transactions by adding funds to the recipient's wallet balance instead of deducting funds.
+>MoneySend transactions with **c1Tipo** equals to **“PeticionAutorizacion”** announce an **incoming** credit. Record it as **pending**: the funds are not yet part of the recipient's available balance.
 
->MoneySend transactions with **c1Tipo** equals to **“ComunicacionAnulacion”** must be handled as **negative** transactions by subtracting funds from the recipient's wallet balance instead of deducting funds.
+>The credit is applied when the matching **“TransaccionConfirmada”** arrives through the settlement process. At that point, add the funds to the recipient's wallet balance instead of deducting them.
+
+>MoneySend transactions with **c1Tipo** equals to **“ComunicacionAnulacion”** cancel the pending incoming credit, which will not be applied.
 
 When enlisting card or wallet transactions on the front-end, this should be reflected by showcasing the amount of said transactions as inputs to the wallets funds instead of charges.
