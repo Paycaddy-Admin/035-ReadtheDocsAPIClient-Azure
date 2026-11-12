@@ -77,13 +77,13 @@ Todos los webhooks transaccionales ahora incluyen tres campos booleanos que prop
 
 |**Campo**|**Tipo**|**Descripción**|
 |---|---|---|
-|`isExpiration`|bool|`true` si la liquidación fue generada por expiración automática. Esto ocurre cuando transcurren 30 días sin que la transacción reciba mensajes de liquidación de la red.|
+|`isExpiration`|bool|`true` si la liquidación fue generada por expiración automática. Esto ocurre cuando transcurren 33 días sin que la transacción reciba mensajes de liquidación de la red.|
 |`isMulticlearing`|bool|`true` si la transacción es de tipo Multiclearing, lo que significa que puede recibir más de un mensaje de liquidación antes de ser finalizada.|
 |`multiclearingClose`|bool|`true` si este mensaje de liquidación cierra el ciclo de Multiclearing. Después de recibir un mensaje donde este campo es `true`, no se deben esperar más mensajes de liquidación para la misma autorización.|
 
 ### Expiración
 
-Cuando una transacción autorizada no recibe confirmación de liquidación de la red dentro de 30 días, el sistema genera automáticamente una notificación de liquidación con `isExpiration: true`. Este mecanismo asegura que todas las transacciones autorizadas alcancen un estado terminal, incluso cuando la red no envía un archivo de liquidación.
+Cuando una transacción autorizada no recibe confirmación de liquidación de la red dentro de 33 días, el sistema genera automáticamente una notificación de liquidación con `isExpiration: true`. Este mecanismo asegura que todas las transacciones autorizadas alcancen un estado terminal, incluso cuando la red no envía un archivo de liquidación.
 
 ### Multiclearing
 

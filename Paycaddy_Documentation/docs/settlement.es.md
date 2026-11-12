@@ -3,7 +3,7 @@
 
 Para manejar la finalización del ciclo de vida de una transacción, utilizamos un **Proceso Batch** para actualizar y cerrar cada transacción aprobada, lo que permite visibilidad rápida de los datos reales de liquidación de cada transacción en tu programa de emisión de tarjetas.
 
-PayCaddy aprovecha este procesamiento por lotes para enviar notificaciones a través de la ruta convencional de webhooks transaccionales (consulta [**NotificationEnlist POST**](/.notificationsEnlist.es.md)) como parte de un proceso diario destinado a confirmar y/o ajustar el monto previamente aprobado para cada transacción.
+PayCaddy aprovecha este procesamiento por lotes para enviar notificaciones a través de la ruta convencional de webhooks transaccionales (consulta [**NotificationEnlist POST**](./notificationsEnlist.es.md)) como parte de un proceso diario destinado a confirmar y/o ajustar el monto previamente aprobado para cada transacción.
 
 Nuestro sistema emplea tres tipos clave de notificaciones webhook para gestionar los distintos resultados posibles:
 
@@ -51,7 +51,7 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0",
+	    "idCadena": "0",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -89,7 +89,7 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0",
+	    "idCadena": "0",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -127,7 +127,7 @@ La liquidación de transacciones se notificará mediante un webhook con uno de l
 	    "c41TerminalId": "00227759",
 	    "c42Comercio": "227759000156182",
 	    "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0",
+	    "idCadena": "0",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",

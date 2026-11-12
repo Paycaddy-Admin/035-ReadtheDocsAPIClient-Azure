@@ -33,7 +33,7 @@ Para las transacciones de tipo `PeticionAutorizacion`, PayCaddy enviará una sol
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -197,7 +197,7 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -237,7 +237,7 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -277,7 +277,7 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -317,7 +317,7 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
   "c41TerminalId": "00227759",
   "c42Comercio": "227759000156182",
   "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-  "IdCadena": "0102020963010037725",
+  "idCadena": "0102020963010037725",
   "c22DatosPuntoServicio": "000580JA0001",
   "c22Descripcion": {
       "CapturaDatosTarjeta": "Sin especificar",
@@ -343,14 +343,14 @@ Todas las transacciones online se notifican mediante webhook a la URL configurad
 > Las notificaciones de transacciones online no esperan respuesta; son avisos de eventos que pueden afectar el saldo.  
 > En operaciones JIT, estas notificaciones pueden originarse tras la aprobación o el rechazo de la Autorización JIT.
 
->El campo **"IdCadena"** sirve para asociar las notificaciones de 'ComunicacionAnulacion' con su respectiva 'PeticionAutorizacion'. Una **PeticionAutorizacion** que reciba una **ComunicacionAnulacion** asociada se considerará una transacción confirmada o conciliada. Por lo tanto, no recibirá ninguna notificación posterior por conciliación via el Proceso Batch.
+>El campo **"idCadena"** sirve para asociar las notificaciones de 'ComunicacionAnulacion' con su respectiva 'PeticionAutorizacion'. Una **PeticionAutorizacion** que reciba una **ComunicacionAnulacion** asociada se considerará una transacción confirmada o conciliada. Por lo tanto, no recibirá ninguna notificación posterior por conciliación via el Proceso Batch.
 
 
 ---
 
 ## Conciliación y correcciones del proceso Batch
 
-Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden reportarse mediante el [Proceso Batch](./settlement.es) con los siguientes tipos de corrección:
+Una vez procesadas las transacciones online, se concilian con los archivos de liquidación recibidos de la red. Las discrepancias o ajustes a la transacción original pueden reportarse mediante el [Proceso Batch](./settlement.es.md) con los siguientes tipos de corrección:
 
 1. **TransaccionCorregidaPositiva**  
     Corrección en la que la liquidación final resulta **menor** al monto autorizado. La diferencia se **acredita** al saldo disponible de la billetera.

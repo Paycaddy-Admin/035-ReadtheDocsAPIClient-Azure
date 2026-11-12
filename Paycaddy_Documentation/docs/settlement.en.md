@@ -49,7 +49,7 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0",
+        "idCadena": "0",
         "c22DatosPuntoServicio": "000580JA0001",
         "c22Descripcion": {
             "CapturaDatosTarjeta": "Sin especificar",
@@ -86,7 +86,7 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0",
+        "idCadena": "0",
         "c22DatosPuntoServicio": "000580JA0001",
         "c22Descripcion": {
             "CapturaDatosTarjeta": "Sin especificar",
@@ -123,7 +123,7 @@ Settlement of transactions will be notified through a webhook that carries one o
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0",
+        "idCadena": "0",
         "c22DatosPuntoServicio": "000580JA0001",
         "c22Descripcion": {
             "CapturaDatosTarjeta": "Sin especificar",
@@ -153,7 +153,7 @@ Settlement of transactions will be notified through a webhook that carries one o
 
 
 
->The "IdCadena" field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. Within the context of Settlement notifications, this field will remain as "0"
+>The "idCadena" field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. Within the context of Settlement notifications, this field will remain as "0"
 
 
 >Although it is less common, it can also occur that a charge arrives only in the batch process and not online. If this is the case, the webhook may arrive with less information. It should be noted that this information is according to the network's protocol for handles these confirmations and does not depend on PayCaddy.

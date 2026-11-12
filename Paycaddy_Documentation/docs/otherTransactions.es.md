@@ -112,8 +112,10 @@ Para mantenerte informado sobre los detalles de una transacción **MoneySend** i
 
 Al manejar los webhooks de MoneySend, almacénalos igual que cualquier otra notificación de transacción; la diferencia radica en cómo procesas el movimiento:
 
-> Las transacciones MoneySend con **`c1Tipo = "PeticionAutorizacion"`** deben tratarse como **positivas**, es decir, **añaden fondos** al saldo de la billetera del destinatario en lugar de deducirlos.
+> Las transacciones MoneySend con **`c1Tipo = "PeticionAutorizacion"`** anuncian un crédito **entrante**. Regístralas como **pendientes**: los fondos todavía no forman parte del saldo disponible del destinatario.
 > 
-> Las transacciones MoneySend con **`c1Tipo = "ComunicacionAnulacion"`** deben tratarse como **negativas**, es decir, **restan fondos** del saldo de la billetera del destinatario.
+> El crédito se aplica cuando llega la **`TransaccionConfirmada`** correspondiente por el proceso de liquidación. En ese momento **añade los fondos** al saldo de la billetera del destinatario en lugar de deducirlos.
+> 
+> Las transacciones MoneySend con **`c1Tipo = "ComunicacionAnulacion"`** cancelan el crédito entrante pendiente, que no llegará a aplicarse.
 
 Cuando muestres las transacciones de la tarjeta o billetera en el front-end, refleja esta lógica visualizando estos importes como entradas (cargos positivos) en lugar de débitos.

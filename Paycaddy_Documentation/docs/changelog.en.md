@@ -1,6 +1,12 @@
 
 All notable changes in our API documentation, such as releases, deprecations and updates will be documented in this file.
 
+## 1.0.6 - 2026-11-12
+
+#### Fixed
+- Corrected broken links between chapters.
+- Aligned several transaction webhook examples and descriptions with current platform behavior.
+
 ## 1.0.5 - 2026-10-06
 
 #### Fixed

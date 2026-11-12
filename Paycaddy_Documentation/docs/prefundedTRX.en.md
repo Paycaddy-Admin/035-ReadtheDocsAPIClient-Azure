@@ -12,7 +12,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c3CodigoProceso": "000000",
         "c4ImporteTransaccion": "000000001617",
         "c7FechaHoraTransaccion": "20220429052901",
-        "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+        "bDateUtcCreate": " YYYYMMDDHHMMSS ",
         "c11NumeroIdentificativoTransaccion": "000004339",
         "c18CodigoActividadEstablecimiento": "5999",
         "c19CodigoPaisAdquirente": "442",
@@ -20,7 +20,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-	    "IdCadena": "0102020963010037725",
+	    "idCadena": "0102020963010037725",
 	    "c22DatosPuntoServicio": "000580JA0001",
 	    "c22Descripcion": {
 	        "CapturaDatosTarjeta": "Sin especificar",
@@ -51,7 +51,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c3CodigoProceso": "000000",
         "c4ImporteTransaccion": "000000001617",
         "c7FechaHoraTransaccion": "20220429052901",
-        "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+        "bDateUtcCreate": " YYYYMMDDHHMMSS ",
         "c11NumeroIdentificativoTransaccion": "000004339",
         "c18CodigoActividadEstablecimiento": "5999",
         "c19CodigoPaisAdquirente": "442",
@@ -59,7 +59,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0102020963010037725",
+        "idCadena": "0102020963010037725",
         "c22DatosPuntoServicio": "000580JA0001",
         "c22Descripcion": {
             "CapturaDatosTarjeta": "Sin especificar",
@@ -89,7 +89,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c3CodigoProceso": "000000",
         "c4ImporteTransaccion": "000000001617",
         "c7FechaHoraTransaccion": "20220429052901",
-        "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+        "bDateUtcCreate": " YYYYMMDDHHMMSS ",
         "c11NumeroIdentificativoTransaccion": "000004339",
         "c18CodigoActividadEstablecimiento": "5999",
         "c19CodigoPaisAdquirente": "442",
@@ -97,7 +97,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0102020963010037725",
+        "idCadena": "0102020963010037725",
         "c22DatosPuntoServicio": "000580JA0001",
         "c22Descripcion": {
             "CapturaDatosTarjeta": "Sin especificar",
@@ -125,10 +125,10 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "password": "password",
         "c1Tipo": "PeticionDevolucion",
         "c2CardId": "cardId",
-        "c3CodigoProceso": "000000",
-        "c4ImporteTransaccion": "000000001617",
+        "c3CodigoProceso": "200000",
+        "c4ImporteTransaccion": "0",
         "c7FechaHoraTransaccion": "20220429052901",
-        "BDateUtcCreate": " YYYYMMDDHHMMSS ",
+        "bDateUtcCreate": " YYYYMMDDHHMMSS ",
         "c11NumeroIdentificativoTransaccion": "000004339",
         "c18CodigoActividadEstablecimiento": "5999",
         "c19CodigoPaisAdquirente": "442",
@@ -136,7 +136,7 @@ In our [Prefunded Flow](prefundedFlow.en.md), when a card issued in PayCaddy’s
         "c41TerminalId": "00227759",
         "c42Comercio": "227759000156182",
         "c43IdentificadorComercio": "AMZN Mktp ES             Amazon.ES",
-        "IdCadena": "0102020963010037725",
+        "idCadena": "0102020963010037725",
         "c22DatosPuntoServicio": "000580JA0001",
         "c22Descripcion": {
             "CapturaDatosTarjeta": "Sin especificar",
@@ -176,9 +176,9 @@ The transaction type is indicated in the **"c1Tipo"** field of the webhook. For 
 
 >The field **"c7FechaHoraTransaccion"** represents the transaction time information in the timezone where the transaction was acquired in the format "YYYYMMDDhhmmss"
 
->The field **"BDateUtcCreate"** represents the transaction time information in UTC timezone following the same format as the **c7FechaHoraTransaccion**
+>The field **"bDateUtcCreate"** represents the transaction time information in UTC timezone following the same format as the **c7FechaHoraTransaccion**
 
->The **"IdCadena"** field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. An authorization request (PeticionAutorizacion) that receives an associated cancellation communication will be considered a confirmed or reconciled transaction. Therefore, it will not receive any subsequent batch notification of any kind.
+>The **"idCadena"** field serves to associate 'ComunicacionAnulacion' notifications with their respective 'PeticionAutorizacion'. An authorization request (PeticionAutorizacion) that receives an associated cancellation communication will be considered a confirmed or reconciled transaction. Therefore, it will not receive any subsequent batch notification of any kind.
 
 
 ---
